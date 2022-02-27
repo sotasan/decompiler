@@ -32,4 +32,8 @@ repositories {
 
 dependencies {
     implementation(project("fernflower"))
+    implementation("org.fxmisc.richtext:richtextfx:0.10.7")
+    implementation("org.kordamp.ikonli:ikonli-core:12.3.0")
+    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.0")
+    implementation("org.kordamp.ikonli:ikonli-fontawesome-pack:12.3.0")
 }
