@@ -8,7 +8,7 @@
 
 ## Build
 
-```
+```bash
 $ git clone --recursive https://github.com/PryosCode/Decompiler.git
 $ chmod +x gradlew
 $ ./gradlew build
