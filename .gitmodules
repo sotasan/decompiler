@@ -1,0 +1,3 @@
+[submodule "Fernflower"]
+	path = fernflower
+	url = https://github.com/fesh0r/fernflower.git
