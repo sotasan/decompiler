@@ -4,7 +4,8 @@
     <a href="https://github.com/PryosCode/Decompiler/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/PryosCode/Decompiler?label=License"></a>
 </p>
 
-# Decompiler
+
+# <a href="https://github.com/PryosCode/Decompiler/blob/master/src/main/resources/logo.png"><img src="https://github.com/PryosCode/Decompiler/raw/master/src/main/resources/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
 
 ## Build
 

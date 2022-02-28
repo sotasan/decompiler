@@ -1,13 +1,15 @@
 package net.pryoscode.decompiler.windows
 
 import javafx.scene.Scene
+import javafx.scene.image.Image
 import javafx.scene.input.TransferMode
 import javafx.scene.layout.BorderPane
 import javafx.stage.Stage
 import net.pryoscode.decompiler.windows.components.Container
 import net.pryoscode.decompiler.windows.components.Sidebar
+import java.io.File
 
-class Window : Stage() {
+class Window(args: Array<String>) : Stage() {
 
     init {
         val root = BorderPane()
@@ -27,8 +29,13 @@ class Window : Stage() {
                 sidebar.open(it.dragboard.files[0])
         }
 
-        title = "Decompiler v" + javaClass.`package`.implementationVersion
-        scene = Scene(root, 848.0, 480.0)
+        title = "Decompiler v" + javaClass.`package`.specificationVersion
+        scene = Scene(root, 896.0, 560.0)
+        icons.add(Image(javaClass.classLoader.getResourceAsStream("logo.png")))
+        show()
+
+        if (args.isNotEmpty())
+            sidebar.open(File(args[0]))
     }
 
 }

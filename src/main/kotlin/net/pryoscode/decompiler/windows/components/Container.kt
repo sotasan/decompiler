@@ -12,15 +12,17 @@ class Container : TabPane() {
         tabClosingPolicy = TabClosingPolicy.ALL_TABS
     }
 
-    fun open(path: String, text: String) {
-        tabs.add(Preview(text))
+    fun open(entry: Sidebar.Entry) {
+        val tab = Preview(entry.path)
+        tabs.add(tab)
+        selectionModel.select(tab)
     }
 
     class Preview(text: String) : Tab() {
 
         init {
             val codeArea = CodeArea(text)
-            codeArea.editableProperty().set(false)
+            codeArea.isEditable = false
             codeArea.paragraphGraphicFactory = LineNumberFactory.get(codeArea)
             content = codeArea
         }

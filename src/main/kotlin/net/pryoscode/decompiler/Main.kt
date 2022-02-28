@@ -4,7 +4,6 @@ package net.pryoscode.decompiler
 import javafx.application.Platform
 import net.pryoscode.decompiler.windows.Window
 
-fun main() {
-    Platform.startup {}
-    Platform.runLater { Window().show() }
+fun main(args: Array<String>) {
+    Platform.startup { Window(args) }
 }

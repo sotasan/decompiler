@@ -18,11 +18,10 @@ javafx {
 }
 
 tasks.jar {
-    archiveFileName.set(project.name + ".jar")
+    archiveFileName.set("${project.name}-v${project.version}.jar")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest.attributes["Implementation-Title"] = project.name
-    manifest.attributes["Implementation-Version"] = project.version
-    manifest.attributes["Main-Class"] = project.group.toString() + "." + project.name.toLowerCase() + ".Main"
+    manifest.attributes["Specification-Version"] = project.version
+    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
 
@@ -35,5 +34,5 @@ dependencies {
     implementation("org.fxmisc.richtext:richtextfx:0.10.7")
     implementation("org.kordamp.ikonli:ikonli-core:12.3.0")
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.0")
-    implementation("org.kordamp.ikonli:ikonli-fontawesome-pack:12.3.0")
+    implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.0")
 }
