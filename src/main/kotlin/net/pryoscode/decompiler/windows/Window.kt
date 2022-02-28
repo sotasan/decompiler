@@ -20,7 +20,7 @@ class Window(args: Array<String>) : Stage() {
         root.left = sidebar
 
         root.setOnDragOver {
-            if (it.dragboard.hasFiles() && it.dragboard.files[0].extension.equals("jar", ignoreCase = true))
+            if (it.dragboard.hasFiles() && it.dragboard.files[0].extension.equals("jar", true))
                 it.acceptTransferModes(TransferMode.LINK)
             it.consume()
         }

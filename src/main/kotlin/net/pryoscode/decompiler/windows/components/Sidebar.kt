@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent
 import org.kordamp.ikonli.feather.Feather
 import org.kordamp.ikonli.javafx.FontIcon
 import java.io.File
+import java.util.jar.JarEntry
 import java.util.jar.JarFile
 
 class Sidebar(private val container: Container) : TreeView<Sidebar.Entry>() {
@@ -18,25 +19,44 @@ class Sidebar(private val container: Container) : TreeView<Sidebar.Entry>() {
 
     fun open(file: File) {
         if (!file.exists()) return
-        root = Item(Entry(file.name, file.absolutePath, Type.ARCHIVE))
-        val entries = JarFile(file).entries()
-        while (entries.hasMoreElements()) {
-            val entry = entries.nextElement()
-            if (entry.isDirectory)
-                root.children.add(Item(Entry(entry.name, entry.name, Type.PACKAGE)))
-        }
         container.tabs.clear()
+        val entries = ArrayList<JarEntry>()
+        val jar = JarFile(file).entries()
+        while (jar.hasMoreElements())
+            entries.add(jar.nextElement())
+        root = Item(entries, Entry(file.name, file.absolutePath, Type.ARCHIVE))
+        selectionModel.select(root)
     }
 
 
     class Entry(val name: String, val path: String, val type: Type)
-    enum class Type { ARCHIVE, PACKAGE, CLASS, FILE  }
+    enum class Type { ARCHIVE, PACKAGE, CLASS, FILE }
 
-    class Item(entry: Entry) : TreeItem<Entry>() {
+    class Item(entries: ArrayList<JarEntry>, entry: Entry) : TreeItem<Entry>() {
 
         init {
             value = entry
             isExpanded = entry.type == Type.ARCHIVE
+
+            if (entry.type == Type.ARCHIVE) {
+                val control = ArrayList<String>()
+                val dirs = ArrayList<Entry>()
+                val files = ArrayList<Entry>()
+                for (e in entries) {
+                    if (e.isDirectory || !e.name.contains("/")) {
+                        val name = e.name.split("/")[0]
+                        if (!control.contains(name)) {
+                            control.add(name)
+                            val t = Entry(name, e.name, if (e.isDirectory) Type.PACKAGE else if (name.endsWith(".class", true)) Type.CLASS else Type.FILE)
+                            if (e.isDirectory) dirs.add(t) else files.add(t)
+                        }
+                    }
+                }
+                dirs.sortWith { e1, e2 -> e1.name.compareTo(e2.name) }
+                files.sortWith { e1, e2 -> e1.name.compareTo(e2.name) }
+                for (e in dirs) children.add(Item(entries, e))
+                for (e in files) children.add(Item(entries, e))
+            }
         }
 
     }
@@ -77,7 +97,7 @@ class Sidebar(private val container: Container) : TreeView<Sidebar.Entry>() {
 
         private fun mousePressed(event: MouseEvent) {
             if (event.clickCount % 2 == 0 && event.button == MouseButton.PRIMARY)
-                event.consume();
+                event.consume()
         }
 
     }
