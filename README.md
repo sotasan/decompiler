@@ -7,10 +7,13 @@
 
 # <a href="https://github.com/PryosCode/Decompiler/blob/master/src/main/resources/logo.png"><img src="https://github.com/PryosCode/Decompiler/raw/master/src/main/resources/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
 
+Java Decompiler Gui
+
 ## Build
 
 ```bash
 $ git clone --recursive https://github.com/PryosCode/Decompiler.git
+$ cd Decompiler
 $ chmod +x gradlew
 $ ./gradlew build
 ```
