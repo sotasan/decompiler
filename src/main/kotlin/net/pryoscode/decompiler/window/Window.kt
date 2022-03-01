@@ -1,12 +1,12 @@
-package net.pryoscode.decompiler.windows
+package net.pryoscode.decompiler.window
 
 import javafx.scene.Scene
 import javafx.scene.image.Image
 import javafx.scene.input.TransferMode
 import javafx.scene.layout.BorderPane
 import javafx.stage.Stage
-import net.pryoscode.decompiler.windows.components.Container
-import net.pryoscode.decompiler.windows.components.Sidebar
+import net.pryoscode.decompiler.window.code.Container
+import net.pryoscode.decompiler.window.sidebar.Sidebar
 import java.io.File
 
 class Window(args: Array<String>) : Stage() {
@@ -16,7 +16,7 @@ class Window(args: Array<String>) : Stage() {
 
         val container = Container()
         val sidebar = Sidebar(container)
-        root.center = container
+        root.right = container
         root.left = sidebar
 
         root.setOnDragOver {

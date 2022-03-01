@@ -18,7 +18,7 @@ javafx {
 }
 
 tasks.jar {
-    archiveFileName.set("${project.name}-v${project.version}.jar")
+    archiveBaseName.set(project.name.toLowerCase())
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest.attributes["Specification-Version"] = project.version
     manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
