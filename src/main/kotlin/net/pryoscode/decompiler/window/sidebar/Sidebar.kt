@@ -24,7 +24,11 @@ class Sidebar(private val container: Container) : BorderPane() {
         val jar = JarFile(file).entries()
         while (jar.hasMoreElements())
             entries.add(jar.nextElement())
-        tree.root = Item(entries, Entry(file.name, file.absolutePath, Type.ARCHIVE))
+        val entry = Entry(null)
+        entry.name = file.name
+        entry.path = file.absolutePath
+        entry.type = Type.ARCHIVE
+        tree.root = Item(entries, entry)
         tree.selectionModel.select(tree.root)
     }
 

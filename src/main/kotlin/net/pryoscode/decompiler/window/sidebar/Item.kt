@@ -3,7 +3,7 @@ package net.pryoscode.decompiler.window.sidebar
 import javafx.scene.control.TreeItem
 import java.util.jar.JarEntry
 
-class Item(entries: ArrayList<JarEntry>, entry: Entry) : TreeItem<Entry>() {
+class Item(entries: ArrayList<JarEntry>, private val entry: Entry) : TreeItem<Entry>() {
 
     init {
         value = entry
@@ -18,8 +18,7 @@ class Item(entries: ArrayList<JarEntry>, entry: Entry) : TreeItem<Entry>() {
                     val name = e.name.split("/")[0]
                     if (!control.contains(name)) {
                         control.add(name)
-                        val t = Entry(name, e.name, if (e.isDirectory) Type.PACKAGE else if (name.endsWith(".class", true)) Type.CLASS else Type.FILE)
-                        if (e.isDirectory) dirs.add(t) else files.add(t)
+                        if (e.isDirectory) dirs.add(Entry(e)) else files.add(Entry(e))
                     }
                 }
             }
@@ -28,6 +27,29 @@ class Item(entries: ArrayList<JarEntry>, entry: Entry) : TreeItem<Entry>() {
             for (e in dirs) children.add(Item(entries, e))
             for (e in files) children.add(Item(entries, e))
         }
+
+        if (entry.type == Type.PACKAGE) {
+            val dirs = ArrayList<Entry>()
+            val files = ArrayList<Entry>()
+            for (e in entries) {
+                if (e.name.startsWith(entry.path) && !e.name.equals(entry.path)) {
+                    val sub = e.name.substring(entry.path.length)
+                    if (e.isDirectory && !sub.substringBeforeLast("/").contains("/")) {
+                        println(sub)
+                        dirs.add(Entry(e))
+                    }else if (!sub.contains("/"))
+                        files.add(Entry(e))
+                }
+            }
+            dirs.sortWith { e1, e2 -> e1.name.compareTo(e2.name) }
+            files.sortWith { e1, e2 -> e1.name.compareTo(e2.name) }
+            for (e in dirs) children.add(Item(entries, e))
+            for (e in files) children.add(Item(entries, e))
+        }
+    }
+
+    override fun isLeaf(): Boolean {
+        return entry.type != Type.ARCHIVE && entry.type != Type.PACKAGE
     }
 
 }

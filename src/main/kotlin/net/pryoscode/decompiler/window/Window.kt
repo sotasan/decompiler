@@ -16,12 +16,12 @@ class Window(args: Array<String>) : Stage() {
 
         val container = Container()
         val sidebar = Sidebar(container)
-        root.right = container
+        root.center = container
         root.left = sidebar
 
         root.setOnDragOver {
             if (it.dragboard.hasFiles() && it.dragboard.files[0].extension.equals("jar", true))
-                it.acceptTransferModes(TransferMode.LINK)
+                it.acceptTransferModes(TransferMode.MOVE)
             it.consume()
         }
         root.setOnDragDropped {

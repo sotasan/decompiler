@@ -16,7 +16,6 @@ class Cell(private val container: Container) : TreeCell<Entry>() {
 
     override fun updateItem(item: Entry?, empty: Boolean) {
         super.updateItem(item, empty)
-        disclosureNode = null
         if (empty || item == null) {
             text = ""
             graphic = null
