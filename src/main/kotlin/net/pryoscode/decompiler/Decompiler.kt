@@ -2,17 +2,18 @@ package net.pryoscode.decompiler
 
 import org.jetbrains.java.decompiler.main.Fernflower
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider
+import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences
 import org.jetbrains.java.decompiler.main.extern.IResultSaver
 import java.util.jar.Manifest
 
 class Decompiler : IBytecodeProvider, IResultSaver {
 
     init {
-        Fernflower(this, this, null, null)
+        Fernflower(this, this, IFernflowerPreferences.DEFAULTS, null)
     }
 
     override fun getBytecode(externalPath: String?, internalPath: String?): ByteArray {
-        TODO("Not yet implemented")
+        return ByteArray(0)
     }
 
     override fun saveFolder(path: String?) {}

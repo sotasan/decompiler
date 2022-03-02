@@ -9,11 +9,6 @@ import net.pryoscode.decompiler.window.code.Container
 
 class Cell(private val container: Container) : TreeCell<Entry>() {
 
-    private val ARCHIVE = Image(javaClass.classLoader.getResourceAsStream("archive.png"))
-    private val PACKAGE = Image(javaClass.classLoader.getResourceAsStream("package.png"))
-    private val CLASS = Image(javaClass.classLoader.getResourceAsStream("class.png"))
-    private val FILE = Image(javaClass.classLoader.getResourceAsStream("file.png"))
-
     init {
         addEventHandler(MouseEvent.MOUSE_CLICKED, ::mouseClicked)
         addEventHandler(MouseEvent.MOUSE_PRESSED, ::mousePressed)
@@ -26,12 +21,7 @@ class Cell(private val container: Container) : TreeCell<Entry>() {
             graphic = null
         } else {
             text = item.name
-            graphic = when (item.type) {
-                Type.ARCHIVE -> ImageView(ARCHIVE)
-                Type.PACKAGE -> ImageView(PACKAGE)
-                Type.CLASS -> ImageView(CLASS)
-                Type.FILE -> ImageView(FILE)
-            }
+            graphic = ImageView(item.type.icon)
         }
     }
 

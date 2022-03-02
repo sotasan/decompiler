@@ -1,10 +1,14 @@
 package net.pryoscode.decompiler.window.sidebar
 
-enum class Type {
+import javafx.scene.image.Image
 
-    ARCHIVE,
-    PACKAGE,
-    CLASS,
-    FILE
+enum class Type(icon: String) {
+
+    ARCHIVE("archive.png"),
+    PACKAGE("package.png"),
+    CLASS("class.png"),
+    FILE("file.png");
+
+    val icon = Image(javaClass.classLoader.getResourceAsStream(icon))
 
 }
