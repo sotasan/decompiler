@@ -1,6 +1,7 @@
 package net.pryoscode.decompiler.window.code
 
 import javafx.scene.control.TabPane
+import net.pryoscode.decompiler.Decompiler
 import net.pryoscode.decompiler.window.sidebar.Entry
 
 class Container : TabPane() {
@@ -11,9 +12,7 @@ class Container : TabPane() {
     }
 
     fun open(entry: Entry) {
-        val tab = Preview(entry)
-        tabs.add(tab)
-        selectionModel.select(tab)
+        Decompiler(this, entry)
     }
 
 }

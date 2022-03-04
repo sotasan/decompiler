@@ -10,7 +10,7 @@ class Bar(private val tree: TreeView<Entry>) : Pane() {
     init {
         prefWidth = 5.0
         prefHeight = Double.MAX_VALUE
-        cursor = Cursor.E_RESIZE
+        cursor = Cursor.H_RESIZE
         addEventHandler(MouseEvent.MOUSE_DRAGGED, ::mouseDragged)
     }
 

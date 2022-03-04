@@ -14,6 +14,7 @@ class Sidebar(private val container: Container) : BorderPane() {
     init {
         tree.setCellFactory { Cell(container) }
         center = tree
+        tree.minWidth = 50.0
         right = Bar(tree)
     }
 
@@ -21,10 +22,11 @@ class Sidebar(private val container: Container) : BorderPane() {
         if (!file.exists()) return
         container.tabs.clear()
         val entries = ArrayList<JarEntry>()
-        val jar = JarFile(file).entries()
-        while (jar.hasMoreElements())
-            entries.add(jar.nextElement())
-        val entry = Entry(null)
+        val jar = JarFile(file)
+        val jarEntries = jar.entries()
+        while (jarEntries.hasMoreElements())
+            entries.add(jarEntries.nextElement())
+        val entry = Entry(jar, null)
         entry.name = file.name
         entry.path = file.absolutePath
         entry.type = Type.ARCHIVE

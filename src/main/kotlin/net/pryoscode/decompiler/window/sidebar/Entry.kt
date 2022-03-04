@@ -1,8 +1,9 @@
 package net.pryoscode.decompiler.window.sidebar
 
 import java.util.jar.JarEntry
+import java.util.jar.JarFile
 
-class Entry(entry: JarEntry?) {
+class Entry(val file: JarFile?, val entry: JarEntry?) {
 
     lateinit var name: String
     lateinit var path: String

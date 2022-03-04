@@ -18,7 +18,7 @@ class Item(entries: ArrayList<JarEntry>, private val entry: Entry) : TreeItem<En
                     val name = e.name.split("/")[0]
                     if (!control.contains(name)) {
                         control.add(name)
-                        if (e.isDirectory) dirs.add(Entry(e)) else files.add(Entry(e))
+                        if (e.isDirectory) dirs.add(Entry(entry.file, e)) else files.add(Entry(entry.file, e))
                     }
                 }
             }
@@ -36,9 +36,9 @@ class Item(entries: ArrayList<JarEntry>, private val entry: Entry) : TreeItem<En
                     val sub = e.name.substring(entry.path.length)
                     if (e.isDirectory && !sub.substringBeforeLast("/").contains("/")) {
                         println(sub)
-                        dirs.add(Entry(e))
+                        dirs.add(Entry(entry.file, e))
                     }else if (!sub.contains("/"))
-                        files.add(Entry(e))
+                        files.add(Entry(entry.file, e))
                 }
             }
             dirs.sortWith { e1, e2 -> e1.name.compareTo(e2.name) }
