@@ -14,6 +14,8 @@ import org.jetbrains.java.decompiler.struct.StructContext
 import org.jetbrains.java.decompiler.struct.lazy.LazyLoader
 import org.jetbrains.java.decompiler.util.DataInputFullStream
 import org.jetbrains.java.decompiler.util.InterpreterUtil
+import java.io.File
+import java.util.HashMap
 import java.util.jar.Manifest
 
 class Decompiler(private val tabPane: TabPane, private val entry: Entry) : IBytecodeProvider, IResultSaver, IFernflowerLogger() {
@@ -22,23 +24,29 @@ class Decompiler(private val tabPane: TabPane, private val entry: Entry) : IByte
 
     init {
         val fernflower = Fernflower(this, this, IFernflowerPreferences.DEFAULTS, this)
+        fernflower.addLibrary(File("null.class"))
 
         val structContextField = fernflower.javaClass.getDeclaredField("structContext")
         structContextField.isAccessible = true
         val structContext = structContextField.get(fernflower) as StructContext
-
-        val unitsField = structContext.javaClass.getDeclaredField("units")
-        unitsField.isAccessible = true
-        val units = unitsField.get(structContext) as Map<String, ContextUnit>
 
         val loaderField = structContext.javaClass.getDeclaredField("loader")
         loaderField.isAccessible = true
         val loader = loaderField.get(structContext) as LazyLoader
 
         val structClass = StructClass.create(DataInputFullStream(bytes), true, loader)
-        structClass.qualifiedName
-        structContext.classes["null.class"] = structClass
-        units[""]?.addClass(structClass, "null.class")
+        structContext.classes.put(entry.name, structClass)
+
+        val path = File("null.class").absolutePath
+        val contextUnit = ContextUnit(ContextUnit.TYPE_FOLDER, null, path, true, this, fernflower)
+        contextUnit.addClass(structClass, "null.class")
+
+        val unitsField = structContext.javaClass.getDeclaredField("units")
+        unitsField.isAccessible = true
+        val units = unitsField.get(structContext) as HashMap<String, ContextUnit>
+
+        units.put(path, contextUnit)
+        loader.addClassLink(entry.name, LazyLoader.Link(path, null))
 
         fernflower.decompileContext()
     }
