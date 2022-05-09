@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.pryoscode"
-version = "0.1.2"
+version = "0.1.3"
 
 kotlin {
     jvmToolchain {
@@ -14,7 +14,7 @@ kotlin {
 
 javafx {
     version = JavaVersion.VERSION_17.toString()
-    modules("javafx.base", "javafx.controls")
+    modules("javafx.base", "javafx.controls", "javafx.graphics")
 }
 
 tasks.jar {
@@ -38,4 +38,7 @@ dependencies {
     implementation("org.openjfx:javafx-controls:${javafx.version}:win")
     implementation("org.openjfx:javafx-controls:${javafx.version}:mac")
     implementation("org.openjfx:javafx-controls:${javafx.version}:linux")
+    implementation("org.openjfx:javafx-graphics:${javafx.version}:win")
+    implementation("org.openjfx:javafx-graphics:${javafx.version}:linux")
+    implementation("org.openjfx:javafx-graphics:${javafx.version}:mac")
 }
