@@ -45,7 +45,7 @@ class Decompiler(private val tabPane: TabPane, private val entry: Entry) : IByte
         unitsField.isAccessible = true
         val units = unitsField.get(structContext) as HashMap<String, ContextUnit>
 
-        units.put(path, contextUnit)
+        units[path] = contextUnit
         loader.addClassLink(entry.name, LazyLoader.Link(path, null))
 
         fernflower.decompileContext()
