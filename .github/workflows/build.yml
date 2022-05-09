@@ -37,6 +37,5 @@ jobs:
           files: build/libs/*.jar
           tag_name: v${{ env.VERSION }}
           fail_on_unmatched_files: true
-          draft: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
