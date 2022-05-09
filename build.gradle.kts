@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm") version "1.6.10"
-    id("org.openjfx.javafxplugin") version "0.0.12"
+    kotlin("jvm") version "1.6.21"
+    id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
 group = "net.pryoscode"
-version = "0.1.1"
+version = "0.1.2"
 
 kotlin {
     jvmToolchain {
@@ -14,7 +14,7 @@ kotlin {
 
 javafx {
     version = JavaVersion.VERSION_17.toString()
-    modules("javafx.controls")
+    modules("javafx.base", "javafx.controls")
 }
 
 tasks.jar {
@@ -22,7 +22,7 @@ tasks.jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest.attributes["Specification-Version"] = project.version
     manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
-    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
 
 repositories {
@@ -32,4 +32,10 @@ repositories {
 dependencies {
     implementation(project("fernflower"))
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
+    implementation("org.openjfx:javafx-base:${javafx.version}:win")
+    implementation("org.openjfx:javafx-base:${javafx.version}:mac")
+    implementation("org.openjfx:javafx-base:${javafx.version}:linux")
+    implementation("org.openjfx:javafx-controls:${javafx.version}:win")
+    implementation("org.openjfx:javafx-controls:${javafx.version}:mac")
+    implementation("org.openjfx:javafx-controls:${javafx.version}:linux")
 }
