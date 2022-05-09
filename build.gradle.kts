@@ -31,5 +31,5 @@ repositories {
 
 dependencies {
     implementation(project("fernflower"))
-    implementation("org.fxmisc.richtext:richtextfx:0.10.7")
+    implementation("org.fxmisc.richtext:richtextfx:0.10.9")
 }
