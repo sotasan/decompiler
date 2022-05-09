@@ -10,6 +10,10 @@
 
 Java Decompiler Gui
 
+## Download
+
+[Releases](https://github.com/PryosCode/Decompiler/releases)
+
 ## Build
 
 ```bash
