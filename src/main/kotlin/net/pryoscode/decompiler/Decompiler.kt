@@ -56,9 +56,9 @@ class Decompiler(private val tabPane: TabPane, private val entry: Entry) : IByte
     }
 
     override fun saveClassFile(path: String?, qualifiedName: String?, entryName: String?, content: String?, mapping: IntArray?) {
-        val tab = content?.let { Preview(entry, it) }
-        tabPane.tabs.add(tab)
-        tabPane.selectionModel.select(tab)
+        content?.let {
+            Preview(tabPane, entry, it)
+        }
     }
 
     override fun saveFolder(path: String?) {}
