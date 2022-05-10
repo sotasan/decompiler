@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.pryoscode"
-version = "0.1.4"
+version = "0.1.5"
 
 kotlin {
     jvmToolchain {
@@ -25,6 +25,11 @@ tasks.jar {
     from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
 
+tasks.register<Jar>("testJar") {
+    archiveFileName.set("test.jar")
+    from(sourceSets.test.get().output)
+}
+
 repositories {
     mavenCentral()
 }
@@ -39,6 +44,6 @@ dependencies {
     implementation("org.openjfx:javafx-controls:${javafx.version}:mac")
     implementation("org.openjfx:javafx-controls:${javafx.version}:linux")
     implementation("org.openjfx:javafx-graphics:${javafx.version}:win")
-    implementation("org.openjfx:javafx-graphics:${javafx.version}:linux")
     implementation("org.openjfx:javafx-graphics:${javafx.version}:mac")
+    implementation("org.openjfx:javafx-graphics:${javafx.version}:linux")
 }

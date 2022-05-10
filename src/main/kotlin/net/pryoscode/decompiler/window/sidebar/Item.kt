@@ -34,10 +34,9 @@ class Item(entries: ArrayList<JarEntry>, private val entry: Entry) : TreeItem<En
             for (e in entries) {
                 if (e.name.startsWith(entry.path) && !e.name.equals(entry.path)) {
                     val sub = e.name.substring(entry.path.length)
-                    if (e.isDirectory && !sub.substringBeforeLast("/").contains("/")) {
-                        println(sub)
+                    if (e.isDirectory && !sub.substringBeforeLast("/").contains("/"))
                         dirs.add(Entry(entry.file, e))
-                    }else if (!sub.contains("/"))
+                    else if (!sub.contains("/"))
                         files.add(Entry(entry.file, e))
                 }
             }
