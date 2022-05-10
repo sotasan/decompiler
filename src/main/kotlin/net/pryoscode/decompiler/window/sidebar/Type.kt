@@ -9,6 +9,6 @@ enum class Type(icon: String) {
     CLASS("class.png"),
     FILE("file.png");
 
-    val icon = Image(javaClass.classLoader.getResourceAsStream(icon))
+    val icon = Image(javaClass.classLoader.getResourceAsStream("icons/$icon"))
 
 }

@@ -6,7 +6,7 @@
     <a href="https://github.com/PryosCode/Decompiler/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/PryosCode/Decompiler?label=License"></a>
 </p>
 
-# <a href="https://github.com/PryosCode/Decompiler/blob/master/src/main/resources/logo.png"><img src="https://github.com/PryosCode/Decompiler/raw/master/src/main/resources/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
+# <a href="https://github.com/PryosCode/Decompiler/blob/master/src/main/resources/icons/logo.png"><img src="https://github.com/PryosCode/Decompiler/raw/master/src/main/resources/icons/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
 
 Java Decompiler Gui
 
