@@ -10,7 +10,7 @@ import org.fxmisc.flowless.VirtualizedScrollPane
 import org.fxmisc.richtext.CodeArea
 import org.fxmisc.richtext.LineNumberFactory
 
-class Preview(tabPane: TabPane, entry: Entry, code: String) : Tab() {
+class Preview(tabPane: TabPane, val entry: Entry, code: String) : Tab() {
 
     init {
         text = entry.name

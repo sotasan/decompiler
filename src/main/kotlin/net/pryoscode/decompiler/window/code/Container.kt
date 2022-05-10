@@ -12,7 +12,14 @@ class Container : TabPane() {
     }
 
     fun open(entry: Entry) {
-        Decompiler(this, entry)
+        var found = false
+        for (tab in tabs) {
+            val preview = tab as Preview
+            if (preview.entry == entry)
+                found = true
+        }
+        if (!found)
+            Decompiler(this, entry)
     }
 
 }
