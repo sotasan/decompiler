@@ -43,7 +43,7 @@ class Window(args: Array<String>) : Stage() {
                 "}"
         ).toByteArray()))
 
-        title = "Decompiler v" + javaClass.`package`.specificationVersion
+        title = "Decompiler v" + (javaClass.`package`.specificationVersion ?: "0.0.0")
         scene = Scene(root, 896.0, 560.0)
         icons.add(Image(javaClass.classLoader.getResourceAsStream("icons/logo.png")))
         show()
