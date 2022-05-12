@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.pryoscode"
-version = "0.1.8"
+version = "0.2.0"
 
 kotlin {
     jvmToolchain {
@@ -14,7 +14,7 @@ kotlin {
 
 javafx {
     version = JavaVersion.VERSION_17.toString()
-    modules("javafx.base", "javafx.controls", "javafx.graphics")
+    modules("javafx.base", "javafx.controls", "javafx.graphics", "javafx.swing")
 }
 
 tasks.jar {
@@ -27,6 +27,7 @@ tasks.jar {
 
 tasks.register<Jar>("testJar") {
     archiveFileName.set("test.jar")
+    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
     from(sourceSets.test.get().output)
 }
 
@@ -37,6 +38,7 @@ repositories {
 dependencies {
     implementation(project("fernflower"))
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
+    implementation("com.github.sommeri:less4j:1.17.2")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac")
     implementation("org.openjfx:javafx-base:${javafx.version}:linux")
@@ -46,4 +48,7 @@ dependencies {
     implementation("org.openjfx:javafx-graphics:${javafx.version}:win")
     implementation("org.openjfx:javafx-graphics:${javafx.version}:mac")
     implementation("org.openjfx:javafx-graphics:${javafx.version}:linux")
+    implementation("org.openjfx:javafx-swing:${javafx.version}:win")
+    implementation("org.openjfx:javafx-swing:${javafx.version}:mac")
+    implementation("org.openjfx:javafx-swing:${javafx.version}:linux")
 }

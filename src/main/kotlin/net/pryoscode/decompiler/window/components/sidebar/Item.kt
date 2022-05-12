@@ -1,4 +1,4 @@
-package net.pryoscode.decompiler.window.sidebar
+package net.pryoscode.decompiler.window.components.sidebar
 
 import javafx.scene.control.TreeItem
 import java.util.jar.JarEntry

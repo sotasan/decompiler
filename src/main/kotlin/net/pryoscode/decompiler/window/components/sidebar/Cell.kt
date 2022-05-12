@@ -1,10 +1,10 @@
-package net.pryoscode.decompiler.window.sidebar
+package net.pryoscode.decompiler.window.components.sidebar
 
 import javafx.scene.control.TreeCell
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
-import net.pryoscode.decompiler.window.code.Container
+import net.pryoscode.decompiler.window.components.code.Container
 
 class Cell(private val container: Container) : TreeCell<Entry>() {
 

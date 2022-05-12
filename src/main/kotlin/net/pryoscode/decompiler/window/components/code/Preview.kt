@@ -1,11 +1,11 @@
-package net.pryoscode.decompiler.window.code
+package net.pryoscode.decompiler.window.components.code
 
 import javafx.collections.ListChangeListener
 import javafx.scene.control.ContextMenu
 import javafx.scene.control.MenuItem
 import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
-import net.pryoscode.decompiler.window.sidebar.Entry
+import net.pryoscode.decompiler.window.components.sidebar.Entry
 import org.fxmisc.flowless.VirtualizedScrollPane
 import org.fxmisc.richtext.CodeArea
 import org.fxmisc.richtext.LineNumberFactory

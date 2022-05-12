@@ -1,8 +1,8 @@
-package net.pryoscode.decompiler.window.sidebar
+package net.pryoscode.decompiler.window.components.sidebar
 
 import javafx.scene.control.TreeView
 import javafx.scene.layout.BorderPane
-import net.pryoscode.decompiler.window.code.Container
+import net.pryoscode.decompiler.window.components.code.Container
 import java.io.File
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
@@ -18,8 +18,8 @@ class Sidebar(private val container: Container) : BorderPane() {
         right = Bar(tree)
     }
 
-    fun open(file: File) {
-        if (!file.exists()) return
+    fun open(file: File?) {
+        if (file == null || !file.exists()) return
         container.tabs.clear()
         val entries = ArrayList<JarEntry>()
         val jar = JarFile(file)

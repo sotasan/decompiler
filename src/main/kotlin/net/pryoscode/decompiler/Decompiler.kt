@@ -1,8 +1,8 @@
 package net.pryoscode.decompiler
 
 import javafx.scene.control.TabPane
-import net.pryoscode.decompiler.window.code.Preview
-import net.pryoscode.decompiler.window.sidebar.Entry
+import net.pryoscode.decompiler.window.components.code.Preview
+import net.pryoscode.decompiler.window.components.sidebar.Entry
 import org.jetbrains.java.decompiler.main.Fernflower
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger

@@ -1,4 +1,4 @@
-package net.pryoscode.decompiler.window.sidebar
+package net.pryoscode.decompiler.window.components.sidebar
 
 import java.util.jar.JarEntry
 import java.util.jar.JarFile

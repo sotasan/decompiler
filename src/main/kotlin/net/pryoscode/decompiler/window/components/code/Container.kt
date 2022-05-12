@@ -1,8 +1,8 @@
-package net.pryoscode.decompiler.window.code
+package net.pryoscode.decompiler.window.components.code
 
 import javafx.scene.control.TabPane
 import net.pryoscode.decompiler.Decompiler
-import net.pryoscode.decompiler.window.sidebar.Entry
+import net.pryoscode.decompiler.window.components.sidebar.Entry
 
 class Container : TabPane() {
 
