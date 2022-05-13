@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.text.Font
 import javafx.stage.FileChooser
 import javafx.stage.FileChooser.ExtensionFilter
-import net.pryoscode.decompiler.window.components.code.Container
+import net.pryoscode.decompiler.window.components.container.Container
 import net.pryoscode.decompiler.window.components.sidebar.Sidebar
 import net.pryoscode.decompiler.window.style
 import java.awt.datatransfer.DataFlavor

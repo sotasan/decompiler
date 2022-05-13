@@ -6,11 +6,10 @@ enum class Type(icon: String) {
 
     ARCHIVE("archive.png"),
     PACKAGE("package.png"),
-    META("meta.png"),
     CLASS("class.png"),
-    MANIFEST("manifest.png"),
     FILE("file.png"),
-    TEXT("text.png");
+    TEXT("text.png"),
+    MANIFEST("manifest.png");
 
     val icon = Image(javaClass.classLoader.getResourceAsStream("icons/$icon"))
 

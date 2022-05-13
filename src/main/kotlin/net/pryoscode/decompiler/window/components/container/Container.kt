@@ -1,4 +1,4 @@
-package net.pryoscode.decompiler.window.components.code
+package net.pryoscode.decompiler.window.components.container
 
 import javafx.scene.control.TabPane
 import net.pryoscode.decompiler.Decompiler
@@ -12,9 +12,9 @@ class Container : TabPane() {
     }
 
     fun open(entry: Entry) {
-        var tab: Preview? = null
+        var tab: Code? = null
         for (t in tabs) {
-            if ((t as Preview).entry == entry) {
+            if ((t as Code).entry == entry) {
                 tab = t
                 break
             }

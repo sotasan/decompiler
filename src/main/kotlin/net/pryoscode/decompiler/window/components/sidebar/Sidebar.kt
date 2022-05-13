@@ -2,7 +2,7 @@ package net.pryoscode.decompiler.window.components.sidebar
 
 import javafx.scene.control.TreeView
 import javafx.scene.layout.BorderPane
-import net.pryoscode.decompiler.window.components.code.Container
+import net.pryoscode.decompiler.window.components.container.Container
 import java.io.File
 import java.util.jar.JarEntry
 import java.util.jar.JarFile

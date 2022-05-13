@@ -1,7 +1,7 @@
 package net.pryoscode.decompiler
 
 import javafx.scene.control.TabPane
-import net.pryoscode.decompiler.window.components.code.Preview
+import net.pryoscode.decompiler.window.components.container.Code
 import net.pryoscode.decompiler.window.components.sidebar.Entry
 import org.jetbrains.java.decompiler.main.Fernflower
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider
@@ -57,7 +57,7 @@ class Decompiler(private val tabPane: TabPane, private val entry: Entry) : IByte
 
     override fun saveClassFile(path: String?, qualifiedName: String?, entryName: String?, content: String?, mapping: IntArray?) {
         content?.let {
-            Preview(tabPane, entry, it)
+            Code(tabPane, entry, it)
         }
     }
 

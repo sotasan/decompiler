@@ -4,7 +4,7 @@ import javafx.scene.control.TreeCell
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
-import net.pryoscode.decompiler.window.components.code.Container
+import net.pryoscode.decompiler.window.components.container.Container
 
 class Cell(private val container: Container) : TreeCell<Entry>() {
 

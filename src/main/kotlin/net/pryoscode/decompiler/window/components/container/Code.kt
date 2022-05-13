@@ -1,19 +1,21 @@
-package net.pryoscode.decompiler.window.components.code
+package net.pryoscode.decompiler.window.components.container
 
 import javafx.collections.ListChangeListener
 import javafx.scene.control.ContextMenu
 import javafx.scene.control.MenuItem
 import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
+import javafx.scene.image.ImageView
 import net.pryoscode.decompiler.window.components.sidebar.Entry
 import org.fxmisc.flowless.VirtualizedScrollPane
 import org.fxmisc.richtext.CodeArea
 import org.fxmisc.richtext.LineNumberFactory
 
-class Preview(tabPane: TabPane, val entry: Entry, code: String) : Tab() {
+class Code(tabPane: TabPane, val entry: Entry, code: String) : Tab() {
 
     init {
         text = entry.name
+        graphic = ImageView(entry.type.icon)
 
         val codeArea = CodeArea(code)
         codeArea.isEditable = false
