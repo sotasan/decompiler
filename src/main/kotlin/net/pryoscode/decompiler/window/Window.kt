@@ -1,4 +1,4 @@
-package net.pryoscode.decompiler.window.windows
+package net.pryoscode.decompiler.window
 
 import com.sun.javafx.tk.Toolkit
 import javafx.application.Platform
@@ -8,9 +8,10 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.text.Font
 import javafx.stage.FileChooser
 import javafx.stage.FileChooser.ExtensionFilter
-import net.pryoscode.decompiler.window.components.container.Container
-import net.pryoscode.decompiler.window.components.sidebar.Sidebar
-import net.pryoscode.decompiler.window.style
+import net.pryoscode.decompiler.window.container.Container
+import net.pryoscode.decompiler.window.sidebar.Sidebar
+import net.pryoscode.decompiler.window.popup.About
+import net.pryoscode.decompiler.window.utils.style
 import java.awt.datatransfer.DataFlavor
 import java.awt.dnd.*
 import java.awt.event.MouseAdapter
@@ -20,7 +21,7 @@ import javax.swing.*
 
 object Window : JFrame() {
 
-    private val FONTS = arrayOf(
+    private val fonts = arrayOf(
         "JetBrainsMono-Bold", "JetBrainsMono-BoldItalic", "JetBrainsMono-ExtraBold", "JetBrainsMono-ExtraBoldItalic",
         "JetBrainsMono-ExtraLight", "JetBrainsMono-ExtraLightItalic", "JetBrainsMono-Italic", "JetBrainsMono-Light",
         "JetBrainsMono-LightItalic", "JetBrainsMono-Medium", "JetBrainsMono-MediumItalic", "JetBrainsMono-Regular",
@@ -34,17 +35,13 @@ object Window : JFrame() {
         "OpenSans-SemiBold", "OpenSans-SemiBoldItalic"
     )
 
-    private val sidebar: Sidebar
-
     init {
         val panel = JFXPanel()
         val root = BorderPane()
-        val container = Container()
-        sidebar = Sidebar(container)
-        root.center = container
-        root.left = sidebar
+        root.center = Container
+        root.left = Sidebar
 
-        for (font in FONTS)
+        for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
         root.stylesheets.add(style("base.less"))
 
@@ -60,7 +57,7 @@ object Window : JFrame() {
                 val fileChooser = FileChooser()
                 fileChooser.extensionFilters.add(ExtensionFilter("Java Archive", "*.jar"))
                 val file = fileChooser.showOpenDialog(panel.scene.window)
-                sidebar.open(file)
+                Sidebar.open(file)
             }
         }
         fileClose.isEnabled = false
@@ -101,7 +98,7 @@ object Window : JFrame() {
                 event?.acceptDrop(DnDConstants.ACTION_MOVE)
                 val files = event?.transferable?.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
                 if (files[0].extension.equals("jar", true))
-                    Platform.runLater { sidebar.open(files[0]) }
+                    Platform.runLater { Sidebar.open(files[0]) }
             }
         })
 
@@ -117,7 +114,7 @@ object Window : JFrame() {
         isVisible = true
         Platform.runLater {
             if (args.isNotEmpty())
-                sidebar.open(File(args[0]))
+                Sidebar.open(File(args[0]))
         }
     }
 

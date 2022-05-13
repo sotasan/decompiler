@@ -1,11 +1,10 @@
-package net.pryoscode.decompiler.window.windows
+package net.pryoscode.decompiler.window.popup
 
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.layout.VBox
-import net.pryoscode.decompiler.window.Popup
-import net.pryoscode.decompiler.window.components.Link
+import net.pryoscode.decompiler.window.utils.Link
 
 class About : Popup("About") {
 

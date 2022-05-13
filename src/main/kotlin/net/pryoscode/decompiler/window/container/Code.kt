@@ -1,17 +1,16 @@
-package net.pryoscode.decompiler.window.components.container
+package net.pryoscode.decompiler.window.container
 
 import javafx.collections.ListChangeListener
 import javafx.scene.control.ContextMenu
 import javafx.scene.control.MenuItem
 import javafx.scene.control.Tab
-import javafx.scene.control.TabPane
 import javafx.scene.image.ImageView
-import net.pryoscode.decompiler.window.components.sidebar.Entry
+import net.pryoscode.decompiler.window.sidebar.Entry
 import org.fxmisc.flowless.VirtualizedScrollPane
 import org.fxmisc.richtext.CodeArea
 import org.fxmisc.richtext.LineNumberFactory
 
-class Code(tabPane: TabPane, val entry: Entry, code: String) : Tab() {
+class Code(val entry: Entry, code: String) : Tab() {
 
     init {
         text = entry.name
@@ -26,25 +25,25 @@ class Code(tabPane: TabPane, val entry: Entry, code: String) : Tab() {
         val close = MenuItem("Close")
         val closeOthers = MenuItem("Close Others")
         val closeAll = MenuItem("Close All")
-        tabPane.tabs.addListener(ListChangeListener {
-            val multiple = tabPane.tabs.size == 1
+        Container.tabs.addListener(ListChangeListener {
+            val multiple = Container.tabs.size == 1
             closeOthers.isDisable = multiple
             closeAll.isDisable = multiple
         })
-        close.setOnAction { tabPane.tabs.remove(this) }
+        close.setOnAction { Container.tabs.remove(this) }
         closeOthers.setOnAction {
-            val tabs = tabPane.tabs.iterator()
+            val tabs = Container.tabs.iterator()
             while (tabs.hasNext()) {
                 if (!tabs.next().equals(this))
                     tabs.remove()
             }
         }
-        closeAll.setOnAction { tabPane.tabs.clear() }
+        closeAll.setOnAction { Container.tabs.clear() }
         menu.items.addAll(close, closeOthers, closeAll)
         contextMenu = menu
 
-        tabPane.tabs.add(this)
-        tabPane.selectionModel.select(this)
+        Container.tabs.add(this)
+        Container.selectionModel.select(this)
     }
 
 }

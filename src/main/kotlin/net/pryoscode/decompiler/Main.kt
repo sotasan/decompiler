@@ -1,7 +1,7 @@
 @file:JvmName("Main")
 package net.pryoscode.decompiler
 
-import net.pryoscode.decompiler.window.windows.Window
+import net.pryoscode.decompiler.window.Window
 import javax.swing.UIManager
 
 fun main(args: Array<String>) {

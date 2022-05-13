@@ -1,7 +1,7 @@
-package net.pryoscode.decompiler.window
+package net.pryoscode.decompiler.window.utils
 
 import com.github.sommeri.less4j.core.ThreadUnsafeLessCompiler
-import net.pryoscode.decompiler.window.windows.Window
+import net.pryoscode.decompiler.window.Window
 import java.util.*
 
 fun style(file: String): String {

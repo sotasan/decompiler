@@ -1,9 +1,10 @@
-package net.pryoscode.decompiler.window
+package net.pryoscode.decompiler.window.popup
 
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Parent
 import javafx.scene.Scene
-import net.pryoscode.decompiler.window.windows.Window
+import net.pryoscode.decompiler.window.Window
+import net.pryoscode.decompiler.window.utils.style
 import java.awt.event.KeyEvent
 import javax.swing.ImageIcon
 import javax.swing.JComponent

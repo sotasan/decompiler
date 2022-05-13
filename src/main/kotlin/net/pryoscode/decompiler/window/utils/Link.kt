@@ -1,4 +1,4 @@
-package net.pryoscode.decompiler.window.components
+package net.pryoscode.decompiler.window.utils
 
 import javafx.scene.control.Hyperlink
 import java.awt.Desktop

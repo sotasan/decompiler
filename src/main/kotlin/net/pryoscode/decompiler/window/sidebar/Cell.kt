@@ -1,12 +1,12 @@
-package net.pryoscode.decompiler.window.components.sidebar
+package net.pryoscode.decompiler.window.sidebar
 
 import javafx.scene.control.TreeCell
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
-import net.pryoscode.decompiler.window.components.container.Container
+import net.pryoscode.decompiler.window.container.Container
 
-class Cell(private val container: Container) : TreeCell<Entry>() {
+class Cell : TreeCell<Entry>() {
 
     init {
         addEventHandler(MouseEvent.MOUSE_CLICKED, ::mouseClicked)
@@ -26,8 +26,8 @@ class Cell(private val container: Container) : TreeCell<Entry>() {
 
     private fun mouseClicked(event: MouseEvent) {
         if (item != null && event.button == MouseButton.PRIMARY) {
-            if (item.type == Type.CLASS)
-                container.open(item)
+            if (item.type != Type.ARCHIVE && item.type != Type.PACKAGE && item.type != Type.FILE)
+                Container.open(item)
             if (item.type == Type.PACKAGE)
                 treeItem.isExpanded = !treeItem.isExpanded
         }

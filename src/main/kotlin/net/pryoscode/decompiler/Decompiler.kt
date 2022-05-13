@@ -1,8 +1,7 @@
 package net.pryoscode.decompiler
 
-import javafx.scene.control.TabPane
-import net.pryoscode.decompiler.window.components.container.Code
-import net.pryoscode.decompiler.window.components.sidebar.Entry
+import net.pryoscode.decompiler.window.container.Code
+import net.pryoscode.decompiler.window.sidebar.Entry
 import org.jetbrains.java.decompiler.main.Fernflower
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger
@@ -15,10 +14,9 @@ import org.jetbrains.java.decompiler.struct.lazy.LazyLoader
 import org.jetbrains.java.decompiler.util.DataInputFullStream
 import org.jetbrains.java.decompiler.util.InterpreterUtil
 import java.io.File
-import java.util.HashMap
 import java.util.jar.Manifest
 
-class Decompiler(private val tabPane: TabPane, private val entry: Entry) : IBytecodeProvider, IResultSaver, IFernflowerLogger() {
+class Decompiler(private val entry: Entry) : IBytecodeProvider, IResultSaver, IFernflowerLogger() {
 
     private val bytes = InterpreterUtil.getBytes(entry.file, entry.entry)
 
@@ -57,7 +55,7 @@ class Decompiler(private val tabPane: TabPane, private val entry: Entry) : IByte
 
     override fun saveClassFile(path: String?, qualifiedName: String?, entryName: String?, content: String?, mapping: IntArray?) {
         content?.let {
-            Code(tabPane, entry, it)
+            Code(entry, it)
         }
     }
 
