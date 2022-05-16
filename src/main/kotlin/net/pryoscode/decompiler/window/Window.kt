@@ -12,10 +12,9 @@ import net.pryoscode.decompiler.window.container.Container
 import net.pryoscode.decompiler.window.sidebar.Sidebar
 import net.pryoscode.decompiler.window.popup.About
 import net.pryoscode.decompiler.window.utils.style
+import java.awt.Taskbar
 import java.awt.datatransfer.DataFlavor
 import java.awt.dnd.*
-import java.awt.event.MouseAdapter
-import java.awt.event.MouseEvent
 import java.io.File
 import javax.swing.*
 
@@ -36,6 +35,12 @@ object Window : JFrame() {
     )
 
     init {
+        title = "Decompiler"
+        defaultCloseOperation = DISPOSE_ON_CLOSE
+        val icon = ImageIcon(javaClass.classLoader.getResourceAsStream("icons/logo.png")?.readAllBytes()).image
+        Taskbar.getTaskbar().iconImage = icon
+        iconImage = icon
+
         val panel = JFXPanel()
         val root = BorderPane()
         root.center = Container
@@ -44,8 +49,6 @@ object Window : JFrame() {
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
         root.stylesheets.add(style("base.less"))
-
-        panel.scene = Scene(root, 896.0, 560.0)
 
         jMenuBar = JMenuBar()
         val file = JMenu("File")
@@ -66,17 +69,11 @@ object Window : JFrame() {
         file.add(fileClose)
         file.add(fileExit)
         jMenuBar.add(file)
-        val search = JMenu("Search")
-        search.isEnabled = false
-        jMenuBar.add(search)
-        val about = JMenu("About")
-        about.addMouseListener(object : MouseAdapter() {
-            override fun mousePressed(e: MouseEvent?) {
-                about.isSelected = false
-                About()
-            }
-        })
-        jMenuBar.add(about)
+        val help = JMenu("Help")
+        val helpAbout = JMenuItem("About")
+        helpAbout.addActionListener { About() }
+        help.add(helpAbout)
+        jMenuBar.add(help)
 
         dropTarget = DropTarget(panel, object : DropTargetListener {
             override fun dropActionChanged(event: DropTargetDragEvent?) {}
@@ -102,9 +99,8 @@ object Window : JFrame() {
             }
         })
 
-        title = "Decompiler"
-        iconImage = ImageIcon(javaClass.classLoader.getResourceAsStream("icons/logo.png")?.readAllBytes()).image
-        defaultCloseOperation = DISPOSE_ON_CLOSE
+        panel.scene = Scene(root, 896.0, 560.0)
+
         add(panel)
         pack()
         setLocationRelativeTo(null)

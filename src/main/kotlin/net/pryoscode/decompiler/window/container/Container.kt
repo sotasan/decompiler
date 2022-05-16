@@ -1,7 +1,7 @@
 package net.pryoscode.decompiler.window.container
 
 import javafx.scene.control.TabPane
-import net.pryoscode.decompiler.Decompiler
+import net.pryoscode.decompiler.Fernflower
 import net.pryoscode.decompiler.window.sidebar.Entry
 import net.pryoscode.decompiler.window.sidebar.Type
 import org.jetbrains.java.decompiler.util.InterpreterUtil
@@ -23,7 +23,7 @@ object Container : TabPane() {
         }
         if (tab == null) {
             if (entry.type == Type.CLASS)
-                Decompiler(entry)
+                Fernflower(entry)
             else
                 Code(entry, String(InterpreterUtil.getBytes(entry.file, entry.entry)))
         } else

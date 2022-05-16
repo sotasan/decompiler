@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.pryoscode"
-version = "0.2.2"
+version = "0.2.3"
 
 kotlin {
     jvmToolchain {
@@ -13,7 +13,7 @@ kotlin {
 }
 
 javafx {
-    version = JavaVersion.VERSION_17.toString()
+    version = JavaVersion.VERSION_18.toString()
     modules("javafx.base", "javafx.controls", "javafx.graphics", "javafx.swing")
 }
 
@@ -21,7 +21,7 @@ tasks.jar {
     archiveBaseName.set(project.name.toLowerCase())
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest.attributes["Specification-Version"] = project.version
-    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
+    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Decompiler"
     from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
 
@@ -40,15 +40,15 @@ dependencies {
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
     implementation("com.github.sommeri:less4j:1.17.2")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
-    implementation("org.openjfx:javafx-base:${javafx.version}:mac")
+    implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-base:${javafx.version}:linux")
     implementation("org.openjfx:javafx-controls:${javafx.version}:win")
-    implementation("org.openjfx:javafx-controls:${javafx.version}:mac")
+    implementation("org.openjfx:javafx-controls:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-controls:${javafx.version}:linux")
     implementation("org.openjfx:javafx-graphics:${javafx.version}:win")
-    implementation("org.openjfx:javafx-graphics:${javafx.version}:mac")
+    implementation("org.openjfx:javafx-graphics:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-graphics:${javafx.version}:linux")
     implementation("org.openjfx:javafx-swing:${javafx.version}:win")
-    implementation("org.openjfx:javafx-swing:${javafx.version}:mac")
+    implementation("org.openjfx:javafx-swing:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-swing:${javafx.version}:linux")
 }
