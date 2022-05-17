@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.pryoscode"
-version = "0.2.3"
+version = "0.2.4"
 
 kotlin {
     jvmToolchain {
@@ -38,6 +38,9 @@ repositories {
 dependencies {
     implementation(project("fernflower"))
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
+    implementation("org.kordamp.ikonli:ikonli-core:12.3.1")
+    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
+    implementation("org.kordamp.ikonli:ikonli-fontawesome5-pack:12.3.1")
     implementation("com.github.sommeri:less4j:1.17.2")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")

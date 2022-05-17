@@ -1,6 +1,48 @@
 * {
   -fx-font-family: "Open Sans";
 }
-.tab-content-area * {
-  -fx-font-family: "JetBrains Mono";
+
+.tree-view {
+  -fx-padding: 0;
+  -fx-background-color: none;
+
+  .tree-cell {
+    -fx-text-fill: black;
+    -fx-background-color: none;
+
+    &:focused {
+      -fx-text-fill: white;
+      -fx-background-color: #0196c9;
+
+      .tree-disclosure-node .arrow {
+        -fx-background-color: white;
+      }
+    }
+
+    .tree-disclosure-node .arrow {
+      -fx-background-color: black;
+    }
+  }
+}
+
+.tab-pane {
+  .tab-header-area {
+    .tab-header-background  {
+      -fx-background-color: none;
+    }
+    .tab {
+      -fx-background-color: white;
+    }
+  }
+
+  .tab-content-area {
+    * {
+      -fx-font-family: "JetBrains Mono";
+    }
+
+    .virtualized-scroll-pane .styled-text-area .lineno {
+      -fx-font-style: normal;
+      -fx-background-color: none;
+    }
+  }
 }

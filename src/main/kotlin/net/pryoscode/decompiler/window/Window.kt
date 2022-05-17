@@ -9,12 +9,10 @@ import javafx.scene.text.Font
 import javafx.stage.FileChooser
 import javafx.stage.FileChooser.ExtensionFilter
 import net.pryoscode.decompiler.window.container.Container
-import net.pryoscode.decompiler.window.sidebar.Sidebar
 import net.pryoscode.decompiler.window.popup.About
+import net.pryoscode.decompiler.window.sidebar.Sidebar
 import net.pryoscode.decompiler.window.utils.style
 import java.awt.Taskbar
-import java.awt.datatransfer.DataFlavor
-import java.awt.dnd.*
 import java.io.File
 import javax.swing.*
 
@@ -75,7 +73,9 @@ object Window : JFrame() {
         help.add(helpAbout)
         jMenuBar.add(help)
 
-        dropTarget = DropTarget(panel, object : DropTargetListener {
+        /*
+        val drop = DropTarget()
+        drop.addDropTargetListener(object : DropTargetListener {
             override fun dropActionChanged(event: DropTargetDragEvent?) {}
             override fun dragExit(event: DropTargetEvent?) {}
 
@@ -92,14 +92,32 @@ object Window : JFrame() {
             }
 
             override fun drop(event: DropTargetDropEvent?) {
-                event?.acceptDrop(DnDConstants.ACTION_MOVE)
+                println("test")
+                event?.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE)
                 val files = event?.transferable?.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
-                if (files[0].extension.equals("jar", true))
-                    Platform.runLater { Sidebar.open(files[0]) }
+                if (files[0].extension.equals("jar", true)) {
+                    Platform.runLater {
+                        Sidebar.open(files[0])
+                        SwingUtilities.invokeLater { event.dropComplete(true) }
+                    }
+                }
             }
         })
+        dropTarget = drop
+         */
 
         panel.scene = Scene(root, 896.0, 560.0)
+        /*
+        panel.scene.setOnDragOver {
+            it.acceptTransferModes(*TransferMode.COPY_OR_MOVE)
+            it.consume()
+        }
+        panel.scene.setOnDragDropped {
+            println(it.dragboard.files.size)
+            it.isDropCompleted = true
+            it.consume()
+        }
+         */
 
         add(panel)
         pack()
