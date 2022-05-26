@@ -1,21 +1,30 @@
 package net.pryoscode.decompiler.window.sidebar
 
 import javafx.scene.control.TreeView
-import javafx.scene.layout.BorderPane
+import javafx.scene.layout.AnchorPane
 import net.pryoscode.decompiler.window.container.Container
 import java.io.File
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 
-object Sidebar : BorderPane() {
+object Sidebar : AnchorPane() {
 
     private val tree = TreeView<Entry>()
 
     init {
         tree.setCellFactory { Cell() }
-        center = tree
         tree.minWidth = 50.0
-        right = Bar(tree)
+        setTopAnchor(tree, 0.0)
+        setRightAnchor(tree, 0.0)
+        setBottomAnchor(tree, 0.0)
+        setLeftAnchor(tree, 0.0)
+
+        val bar = Bar(tree)
+        setTopAnchor(bar, 0.0)
+        setRightAnchor(bar, 0.0)
+        setBottomAnchor(bar, 0.0)
+
+        children.addAll(tree, bar)
     }
 
     fun open(file: File?) {

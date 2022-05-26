@@ -4,6 +4,7 @@ import com.sun.javafx.tk.Toolkit
 import javafx.application.Platform
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
+import javafx.scene.input.TransferMode
 import javafx.scene.layout.BorderPane
 import javafx.scene.text.Font
 import javafx.stage.FileChooser
@@ -36,7 +37,7 @@ object Window : JFrame() {
         title = "Decompiler"
         defaultCloseOperation = DISPOSE_ON_CLOSE
         val icon = ImageIcon(javaClass.classLoader.getResourceAsStream("icons/logo.png")?.readAllBytes()).image
-        Taskbar.getTaskbar().iconImage = icon
+        if (Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE)) Taskbar.getTaskbar().iconImage = icon
         iconImage = icon
 
         val panel = JFXPanel()
@@ -46,7 +47,7 @@ object Window : JFrame() {
 
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
-        root.stylesheets.add(style("base.less"))
+        root.stylesheets.add(style("global.less"))
 
         jMenuBar = JMenuBar()
         val file = JMenu("File")
@@ -73,51 +74,18 @@ object Window : JFrame() {
         help.add(helpAbout)
         jMenuBar.add(help)
 
-        /*
-        val drop = DropTarget()
-        drop.addDropTargetListener(object : DropTargetListener {
-            override fun dropActionChanged(event: DropTargetDragEvent?) {}
-            override fun dragExit(event: DropTargetEvent?) {}
-
-            override fun dragEnter(event: DropTargetDragEvent?) {
-                val files = event?.transferable?.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
-                if (files[0].extension.equals("jar", true))
-                    event?.acceptDrag(DnDConstants.ACTION_MOVE)
-                else
-                    event?.rejectDrag()
-            }
-
-            override fun dragOver(event: DropTargetDragEvent?) {
-                dragEnter(event)
-            }
-
-            override fun drop(event: DropTargetDropEvent?) {
-                println("test")
-                event?.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE)
-                val files = event?.transferable?.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
-                if (files[0].extension.equals("jar", true)) {
-                    Platform.runLater {
-                        Sidebar.open(files[0])
-                        SwingUtilities.invokeLater { event.dropComplete(true) }
-                    }
-                }
-            }
-        })
-        dropTarget = drop
-         */
-
         panel.scene = Scene(root, 896.0, 560.0)
-        /*
         panel.scene.setOnDragOver {
             it.acceptTransferModes(*TransferMode.COPY_OR_MOVE)
             it.consume()
         }
         panel.scene.setOnDragDropped {
-            println(it.dragboard.files.size)
-            it.isDropCompleted = true
+            if (it.dragboard.files.size > 0 && it.dragboard.files[0].extension.equals("jar", true)) {
+                Sidebar.open(it.dragboard.files[0])
+                it.isDropCompleted = true
+            }
             it.consume()
         }
-         */
 
         add(panel)
         pack()
