@@ -13,7 +13,7 @@ object Sidebar : AnchorPane() {
 
     init {
         tree.setCellFactory { Cell() }
-        tree.minWidth = 50.0
+        tree.minWidth = 100.0
         setTopAnchor(tree, 0.0)
         setRightAnchor(tree, 0.0)
         setBottomAnchor(tree, 0.0)

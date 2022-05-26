@@ -11,6 +11,7 @@ object Container : TabPane() {
     init {
         tabDragPolicy = TabDragPolicy.REORDER
         tabClosingPolicy = TabClosingPolicy.ALL_TABS
+        minWidth = 300.0
     }
 
     fun open(entry: Entry) {
