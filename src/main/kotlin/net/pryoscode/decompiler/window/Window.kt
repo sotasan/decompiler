@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.text.Font
 import javafx.stage.FileChooser
 import javafx.stage.FileChooser.ExtensionFilter
+import net.pryoscode.decompiler.Decompiler
 import net.pryoscode.decompiler.window.container.Container
 import net.pryoscode.decompiler.window.popup.About
 import net.pryoscode.decompiler.window.sidebar.Sidebar
@@ -16,6 +17,7 @@ import net.pryoscode.decompiler.window.utils.styles
 import java.awt.Taskbar
 import java.awt.event.KeyEvent
 import java.io.File
+import java.lang.management.ManagementFactory
 import javax.swing.*
 
 object Window : JFrame() {
@@ -53,14 +55,16 @@ object Window : JFrame() {
 
         jMenuBar = JMenuBar()
         val file = JMenu("File")
-        val fileOpen = JMenuItem("Open", KeyEvent.VK_O)
-        val fileClose = JMenuItem("Close", KeyEvent.VK_C)
+        val fileOpenFile = JMenuItem("Open File", KeyEvent.VK_O)
+        val fileCloseFile = JMenuItem("Close File", KeyEvent.VK_C)
+        val fileNewWindow = JMenuItem("New Window", KeyEvent.VK_N)
         val fileExit = JMenuItem("Exit", KeyEvent.VK_Q)
         file.mnemonic = KeyEvent.VK_F
-        fileOpen.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK)
-        fileClose.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK)
+        fileOpenFile.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK)
+        fileCloseFile.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK)
+        fileNewWindow.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK)
         fileExit.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK)
-        fileOpen.addActionListener {
+        fileOpenFile.addActionListener {
             Platform.runLater {
                 val fileChooser = FileChooser()
                 fileChooser.extensionFilters.add(ExtensionFilter("Java Archive", "*.jar"))
@@ -68,12 +72,44 @@ object Window : JFrame() {
                 Sidebar.open(file)
             }
         }
-        fileClose.isEnabled = false
+        fileCloseFile.isEnabled = false
+        fileNewWindow.addActionListener { Runtime.getRuntime().exec("${ProcessHandle.current().info().command().get()} -cp ${ManagementFactory.getRuntimeMXBean().classPath} ${Decompiler.javaClass.declaringClass.canonicalName}") }
         fileExit.addActionListener { dispose() }
-        file.add(fileOpen)
-        file.add(fileClose)
+        file.add(fileOpenFile)
+        file.add(fileCloseFile)
+        file.add(fileNewWindow)
         file.add(fileExit)
         jMenuBar.add(file)
+        val edit = JMenu("Edit")
+        val editCopy = JMenuItem("Copy", KeyEvent.VK_C)
+        val editSelectAll = JMenuItem("Select All", KeyEvent.VK_A)
+        val editFind = JMenuItem("Find", KeyEvent.VK_F)
+        edit.mnemonic = KeyEvent.VK_E
+        editCopy.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK)
+        editSelectAll.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_DOWN_MASK)
+        editFind.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK)
+        editCopy.isEnabled = false
+        editSelectAll.isEnabled = false
+        editFind.isEnabled = false
+        edit.add(editCopy)
+        edit.add(editSelectAll)
+        edit.add(editFind)
+        jMenuBar.add(edit)
+        val view = JMenu("View")
+        val viewZoomIn = JMenuItem("Zoom In", KeyEvent.VK_PLUS)
+        val viewZoomOut = JMenuItem("Zoom Out", KeyEvent.VK_MINUS)
+        val viewZoomReset = JMenuItem("Zoom Reset", KeyEvent.VK_0)
+        view.mnemonic = KeyEvent.VK_V
+        viewZoomIn.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, KeyEvent.CTRL_DOWN_MASK)
+        viewZoomOut.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, KeyEvent.CTRL_DOWN_MASK)
+        viewZoomReset.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_0, KeyEvent.CTRL_DOWN_MASK)
+        viewZoomIn.isEnabled = false
+        viewZoomOut.isEnabled = false
+        viewZoomReset.isEnabled = false
+        view.add(viewZoomIn)
+        view.add(viewZoomOut)
+        view.add(viewZoomReset)
+        jMenuBar.add(view)
         val help = JMenu("Help")
         val helpAbout = JMenuItem("About", KeyEvent.VK_A)
         help.mnemonic = KeyEvent.VK_H

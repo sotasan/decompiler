@@ -26,10 +26,10 @@ class Cell : TreeCell<Entry>() {
 
     private fun mouseClicked(event: MouseEvent) {
         if (item != null && event.button == MouseButton.PRIMARY) {
-            if (item.type != Type.ARCHIVE && item.type != Type.PACKAGE && item.type != Type.FILE)
-                Container.open(item)
-            if (item.type == Type.PACKAGE)
+            if (item.type == Type.ARCHIVE || item.type == Type.PACKAGE)
                 treeItem.isExpanded = !treeItem.isExpanded
+            else if (item.type != Type.FILE)
+                Container.open(item)
         }
         event.consume()
     }

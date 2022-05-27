@@ -5,14 +5,16 @@ import javafx.scene.control.ContextMenu
 import javafx.scene.control.MenuItem
 import javafx.scene.control.Tab
 import javafx.scene.image.ImageView
+import javafx.scene.input.ScrollEvent
 import net.pryoscode.decompiler.window.sidebar.Entry
 import net.pryoscode.decompiler.window.sidebar.Type
+import org.fxmisc.flowless.ScaledVirtualized
 import org.fxmisc.flowless.VirtualizedScrollPane
 import org.fxmisc.richtext.CodeArea
 import org.fxmisc.richtext.LineNumberFactory
 import org.fxmisc.richtext.model.StyleSpans
 import org.fxmisc.richtext.model.StyleSpansBuilder
-import java.util.Collections
+import java.util.*
 import java.util.regex.Pattern
 
 class Code(val entry: Entry, private val code: String) : Tab() {
@@ -56,7 +58,15 @@ class Code(val entry: Entry, private val code: String) : Tab() {
         codeArea.isEditable = false
         codeArea.paragraphGraphicFactory = LineNumberFactory.get(codeArea)
         if (entry.type == Type.CLASS) codeArea.setStyleSpans(0, highlighting())
-        content = VirtualizedScrollPane(codeArea)
+        val scaled = ScaledVirtualized(codeArea)
+        content = VirtualizedScrollPane(scaled)
+        codeArea.addEventFilter(ScrollEvent.ANY) {
+            if (it.isControlDown) {
+                val scale = if (it.deltaY < 0) scaled.zoom.y * 0.9 else scaled.zoom.y / 0.9
+                scaled.zoom.x = scale
+                scaled.zoom.y = scale
+            }
+        }
 
         val menu = ContextMenu()
         val close = MenuItem("Close")
