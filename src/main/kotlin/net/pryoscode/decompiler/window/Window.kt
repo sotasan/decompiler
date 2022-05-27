@@ -12,7 +12,7 @@ import javafx.stage.FileChooser.ExtensionFilter
 import net.pryoscode.decompiler.window.container.Container
 import net.pryoscode.decompiler.window.popup.About
 import net.pryoscode.decompiler.window.sidebar.Sidebar
-import net.pryoscode.decompiler.window.utils.style
+import net.pryoscode.decompiler.window.utils.styles
 import java.awt.Taskbar
 import java.io.File
 import javax.swing.*
@@ -47,7 +47,7 @@ object Window : JFrame() {
 
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
-        root.stylesheets.add(style("global.less"))
+        root.stylesheets.add(styles("global.less"))
 
         jMenuBar = JMenuBar()
         val file = JMenu("File")
@@ -74,7 +74,7 @@ object Window : JFrame() {
         help.add(helpAbout)
         jMenuBar.add(help)
 
-        panel.scene = Scene(root, 896.0, 560.0)
+        panel.scene = Scene(root, 894.0, 506.0)
         panel.scene.setOnDragOver {
             it.acceptTransferModes(*TransferMode.COPY_OR_MOVE)
             it.consume()

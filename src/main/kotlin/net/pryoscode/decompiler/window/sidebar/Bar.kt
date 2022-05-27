@@ -1,13 +1,12 @@
 package net.pryoscode.decompiler.window.sidebar
 
 import javafx.scene.Cursor
-import javafx.scene.control.TreeView
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.Pane
 import net.pryoscode.decompiler.window.Window
 import net.pryoscode.decompiler.window.container.Container
 
-class Bar(private val tree: TreeView<Entry>) : Pane() {
+class Bar : Pane() {
 
     init {
         prefWidth = 5.0
@@ -18,7 +17,7 @@ class Bar(private val tree: TreeView<Entry>) : Pane() {
 
     private fun mouseDragged(event: MouseEvent) {
         if (event.sceneX < Window.width - Container.minWidth)
-            tree.prefWidth = event.sceneX
+            Sidebar.prefWidth = event.sceneX
     }
 
 }

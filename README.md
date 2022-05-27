@@ -1,4 +1,4 @@
-<a href="https://github.com/PryosCode/Decompiler/blob/master/src/main/resources/screenshot.png"><img align="center" width="100%" alt="Screenshot" src="https://github.com/PryosCode/Decompiler/raw/master/src/main/resources/screenshot.png"></a>
+<a href="https://github.com/PryosCode/Decompiler/blob/master/src/test/java/net/pryoscode/decompiler/Main.java"><img align="center" width="100%" alt="Screenshot" src="https://github.com/PryosCode/Decompiler/raw/master/src/main/resources/screenshot.png"></a>
 
 <p align="center">
     <a href="https://github.com/PryosCode/Decompiler/tags"><img alt="Version" src="https://img.shields.io/github/v/release/PryosCode/Decompiler?label=Version"></a>

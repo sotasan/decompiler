@@ -12,14 +12,15 @@ object Sidebar : AnchorPane() {
     private val tree = TreeView<Entry>()
 
     init {
+        minWidth = 100.0
+
         tree.setCellFactory { Cell() }
-        tree.minWidth = 100.0
         setTopAnchor(tree, 0.0)
         setRightAnchor(tree, 0.0)
         setBottomAnchor(tree, 0.0)
         setLeftAnchor(tree, 0.0)
 
-        val bar = Bar(tree)
+        val bar = Bar()
         setTopAnchor(bar, 0.0)
         setRightAnchor(bar, 0.0)
         setBottomAnchor(bar, 0.0)

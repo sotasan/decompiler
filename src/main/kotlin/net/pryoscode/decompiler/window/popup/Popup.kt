@@ -4,7 +4,7 @@ import javafx.embed.swing.JFXPanel
 import javafx.scene.Parent
 import javafx.scene.Scene
 import net.pryoscode.decompiler.window.Window
-import net.pryoscode.decompiler.window.utils.style
+import net.pryoscode.decompiler.window.utils.styles
 import java.awt.event.KeyEvent
 import javax.swing.ImageIcon
 import javax.swing.JComponent
@@ -17,7 +17,7 @@ open class Popup(title: String) : JDialog(Window, title, true) {
 
     fun run(root: Parent) {
         val panel = JFXPanel()
-        root.stylesheets.add(style("global.less"))
+        root.stylesheets.add(styles("global.less"))
         panel.scene = Scene(root)
 
         val jroot = JRootPane()
