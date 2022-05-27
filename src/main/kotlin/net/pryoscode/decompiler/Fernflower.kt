@@ -55,7 +55,7 @@ class Fernflower(private val entry: Entry) : IBytecodeProvider, IResultSaver, IF
 
     override fun saveClassFile(path: String?, qualifiedName: String?, entryName: String?, content: String?, mapping: IntArray?) {
         content?.let {
-            Code(entry, it)
+            Code(entry, it.trimIndent())
         }
     }
 

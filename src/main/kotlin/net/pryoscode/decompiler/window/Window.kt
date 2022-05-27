@@ -14,6 +14,7 @@ import net.pryoscode.decompiler.window.popup.About
 import net.pryoscode.decompiler.window.sidebar.Sidebar
 import net.pryoscode.decompiler.window.utils.styles
 import java.awt.Taskbar
+import java.awt.event.KeyEvent
 import java.io.File
 import javax.swing.*
 
@@ -48,12 +49,17 @@ object Window : JFrame() {
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
         root.stylesheets.add(styles("global.less"))
+        root.stylesheets.add(styles("syntax.less"))
 
         jMenuBar = JMenuBar()
         val file = JMenu("File")
-        val fileOpen = JMenuItem("Open")
-        val fileClose = JMenuItem("Close")
-        val fileExit = JMenuItem("Exit")
+        val fileOpen = JMenuItem("Open", KeyEvent.VK_O)
+        val fileClose = JMenuItem("Close", KeyEvent.VK_C)
+        val fileExit = JMenuItem("Exit", KeyEvent.VK_Q)
+        file.mnemonic = KeyEvent.VK_F
+        fileOpen.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK)
+        fileClose.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK)
+        fileExit.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK)
         fileOpen.addActionListener {
             Platform.runLater {
                 val fileChooser = FileChooser()
@@ -69,7 +75,8 @@ object Window : JFrame() {
         file.add(fileExit)
         jMenuBar.add(file)
         val help = JMenu("Help")
-        val helpAbout = JMenuItem("About")
+        val helpAbout = JMenuItem("About", KeyEvent.VK_A)
+        help.mnemonic = KeyEvent.VK_H
         helpAbout.addActionListener { About() }
         help.add(helpAbout)
         jMenuBar.add(help)
