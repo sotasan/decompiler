@@ -1,8 +1,8 @@
 package net.pryoscode.decompiler.window.menu.edit
 
-import net.pryoscode.decompiler.window.menu.edit.menus.Copy
-import net.pryoscode.decompiler.window.menu.edit.menus.Find
-import net.pryoscode.decompiler.window.menu.edit.menus.SelectAll
+import net.pryoscode.decompiler.window.menu.edit.items.Copy
+import net.pryoscode.decompiler.window.menu.edit.items.Find
+import net.pryoscode.decompiler.window.menu.edit.items.SelectAll
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
 

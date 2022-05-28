@@ -1,6 +1,6 @@
 package net.pryoscode.decompiler.window.menu.help
 
-import net.pryoscode.decompiler.window.menu.help.menus.About
+import net.pryoscode.decompiler.window.menu.help.items.About
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
 

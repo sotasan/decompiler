@@ -1,4 +1,4 @@
-package net.pryoscode.decompiler.window.menu.help.menus
+package net.pryoscode.decompiler.window.menu.help.items
 
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent

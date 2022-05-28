@@ -1,4 +1,4 @@
-package net.pryoscode.decompiler.window.menu.file.menus
+package net.pryoscode.decompiler.window.menu.file.items
 
 import net.pryoscode.decompiler.window.Window
 import java.awt.event.ActionEvent

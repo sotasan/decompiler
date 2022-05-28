@@ -1,8 +1,8 @@
 package net.pryoscode.decompiler.window.menu.view
 
-import net.pryoscode.decompiler.window.menu.view.menus.ZoomIn
-import net.pryoscode.decompiler.window.menu.view.menus.ZoomOut
-import net.pryoscode.decompiler.window.menu.view.menus.ZoomReset
+import net.pryoscode.decompiler.window.menu.view.items.ZoomIn
+import net.pryoscode.decompiler.window.menu.view.items.ZoomOut
+import net.pryoscode.decompiler.window.menu.view.items.ZoomReset
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
 
