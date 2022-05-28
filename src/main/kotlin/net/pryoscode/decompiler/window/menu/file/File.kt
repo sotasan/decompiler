@@ -6,6 +6,7 @@ import net.pryoscode.decompiler.window.menu.file.items.NewWindow
 import net.pryoscode.decompiler.window.menu.file.items.OpenFile
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
+import javax.swing.JSeparator
 
 class File : JMenu("File") {
 
@@ -13,6 +14,7 @@ class File : JMenu("File") {
         mnemonic = KeyEvent.VK_F
         add(OpenFile())
         add(CloseFile())
+        add(JSeparator())
         add(NewWindow())
         add(Exit())
     }

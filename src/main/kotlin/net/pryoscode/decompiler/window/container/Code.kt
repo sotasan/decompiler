@@ -70,7 +70,7 @@ class Code(val entry: Entry, private val code: String) : Tab() {
             }
         }
 
-        val menu = ContextMenu()
+        contextMenu = ContextMenu()
         val close = MenuItem("Close")
         val closeOthers = MenuItem("Close Others")
         val closeAll = MenuItem("Close All")
@@ -88,8 +88,7 @@ class Code(val entry: Entry, private val code: String) : Tab() {
             }
         }
         closeAll.setOnAction { Container.tabs.clear() }
-        menu.items.addAll(close, closeOthers, closeAll)
-        contextMenu = menu
+        contextMenu.items.addAll(close, closeOthers, closeAll)
 
         Container.tabs.add(this)
         Container.selectionModel.select(this)

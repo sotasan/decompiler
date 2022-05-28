@@ -1,5 +1,7 @@
 package net.pryoscode.decompiler.window.sidebar
 
+import javafx.scene.control.ContextMenu
+import javafx.scene.control.MenuItem
 import javafx.scene.control.TreeCell
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
@@ -18,9 +20,16 @@ class Cell : TreeCell<Entry>() {
         if (empty || item == null) {
             text = ""
             graphic = null
+            contextMenu = null
         } else {
             text = item.name
             graphic = ImageView(item.type.icon)
+            if (item.type != Type.ARCHIVE && item.type != Type.PACKAGE && item.type != Type.FILE) {
+                contextMenu = ContextMenu()
+                val open = MenuItem("Open")
+                open.setOnAction { Container.open(item) }
+                contextMenu.items.add(open)
+            }
         }
     }
 
