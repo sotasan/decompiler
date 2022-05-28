@@ -12,13 +12,13 @@ import net.pryoscode.decompiler.window.container.Container
 import net.pryoscode.decompiler.window.popup.About
 import net.pryoscode.decompiler.window.sidebar.Sidebar
 import net.pryoscode.decompiler.window.utils.styles
-import java.awt.FileDialog
 import java.awt.Taskbar
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.io.File
 import java.lang.management.ManagementFactory
 import javax.swing.*
+import javax.swing.filechooser.FileNameExtensionFilter
 
 object Window : JFrame() {
 
@@ -65,11 +65,12 @@ object Window : JFrame() {
         fileNewWindow.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK)
         fileExit.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK)
         fileOpenFile.addActionListener {
-            val fileDialog = FileDialog(this)
-            fileDialog.setFilenameFilter { _, name -> name.endsWith(".jar", true) }
-            fileDialog.isVisible = true
-            if (fileDialog.file != null)
-                Platform.runLater { Sidebar.open(File(fileDialog.directory, fileDialog.file)) }
+            val fileChooser = JFileChooser()
+            fileChooser.dialogTitle = fileOpenFile.text
+            fileChooser.fileFilter = FileNameExtensionFilter("Java Archive", "jar")
+            fileChooser.isAcceptAllFileFilterUsed = false
+            fileChooser.showOpenDialog(this)
+            Platform.runLater { Sidebar.open(fileChooser.selectedFile) }
         }
         fileCloseFile.isEnabled = false
         val function: (e: ActionEvent) -> Unit = {
