@@ -1,6 +1,7 @@
 package net.pryoscode.decompiler.window.menu.file.items
 
 import javafx.application.Platform
+import net.pryoscode.decompiler.window.Window
 import net.pryoscode.decompiler.window.sidebar.Sidebar
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
@@ -21,7 +22,7 @@ class OpenFile : JMenuItem("Open File", KeyEvent.VK_O) {
         fileChooser.dialogTitle = text
         fileChooser.fileFilter = FileNameExtensionFilter("Java Archive", "jar")
         fileChooser.isAcceptAllFileFilterUsed = false
-        val option = fileChooser.showOpenDialog(this)
+        val option = fileChooser.showOpenDialog(Window)
         if (option == JFileChooser.APPROVE_OPTION)
             Platform.runLater { Sidebar.open(fileChooser.selectedFile) }
     }

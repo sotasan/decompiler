@@ -63,8 +63,10 @@ class Code(val entry: Entry, private val code: String) : Tab() {
         codeArea.addEventFilter(ScrollEvent.ANY) {
             if (it.isControlDown) {
                 val scale = if (it.deltaY < 0) scaled.zoom.y * 0.9 else scaled.zoom.y / 0.9
-                scaled.zoom.x = scale
-                scaled.zoom.y = scale
+                if (scale > 0.5 && scale < 5) {
+                    scaled.zoom.x = scale
+                    scaled.zoom.y = scale
+                }
             }
         }
 
