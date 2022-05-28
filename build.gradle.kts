@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.pryoscode"
-version = "0.3.1"
+version = "0.3.2"
 
 kotlin {
     jvmToolchain {
@@ -21,7 +21,7 @@ tasks.jar {
     archiveBaseName.set(project.name.toLowerCase())
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest.attributes["Specification-Version"] = project.version
-    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Decompiler"
+    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
     from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
 

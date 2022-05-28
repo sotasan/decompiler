@@ -7,14 +7,14 @@ import javafx.scene.Scene
 import javafx.scene.input.TransferMode
 import javafx.scene.layout.BorderPane
 import javafx.scene.text.Font
-import javafx.stage.FileChooser
-import javafx.stage.FileChooser.ExtensionFilter
-import net.pryoscode.decompiler.Decompiler
+import net.pryoscode.decompiler.Main
 import net.pryoscode.decompiler.window.container.Container
 import net.pryoscode.decompiler.window.popup.About
 import net.pryoscode.decompiler.window.sidebar.Sidebar
 import net.pryoscode.decompiler.window.utils.styles
+import java.awt.FileDialog
 import java.awt.Taskbar
+import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.io.File
 import java.lang.management.ManagementFactory
@@ -65,15 +65,20 @@ object Window : JFrame() {
         fileNewWindow.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK)
         fileExit.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK)
         fileOpenFile.addActionListener {
-            Platform.runLater {
-                val fileChooser = FileChooser()
-                fileChooser.extensionFilters.add(ExtensionFilter("Java Archive", "*.jar"))
-                val file = fileChooser.showOpenDialog(panel.scene.window)
-                Sidebar.open(file)
-            }
+            val fileDialog = FileDialog(this)
+            fileDialog.setFilenameFilter { _, name -> name.endsWith(".jar", true) }
+            fileDialog.isVisible = true
+            if (fileDialog.file != null)
+                Platform.runLater { Sidebar.open(File(fileDialog.directory, fileDialog.file)) }
         }
         fileCloseFile.isEnabled = false
-        fileNewWindow.addActionListener { Runtime.getRuntime().exec("${ProcessHandle.current().info().command().get()} -cp ${ManagementFactory.getRuntimeMXBean().classPath} ${Decompiler.javaClass.declaringClass.canonicalName}") }
+        val function: (e: ActionEvent) -> Unit = {
+            val java = ProcessHandle.current().info().command().get()
+            val classPath = ManagementFactory.getRuntimeMXBean().classPath
+            val main = Main.javaClass.declaringClass.canonicalName
+            ProcessBuilder(java, "-cp", classPath, main).start()
+        }
+        fileNewWindow.addActionListener(function)
         fileExit.addActionListener { dispose() }
         file.add(fileOpenFile)
         file.add(fileCloseFile)
