@@ -1,7 +1,7 @@
 package net.pryoscode.decompiler
 
+import com.formdev.flatlaf.FlatLightLaf
 import net.pryoscode.decompiler.window.Window
-import javax.swing.UIManager
 
 class Main {
 
@@ -11,7 +11,7 @@ class Main {
         fun main(args: Array<String>) {
             System.setProperty("apple.laf.useScreenMenuBar", "true")
             System.setProperty("apple.awt.application.name", "Decompiler")
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+            FlatLightLaf.setup()
             Window.run(args)
         }
 

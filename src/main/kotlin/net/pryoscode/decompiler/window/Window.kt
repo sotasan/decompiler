@@ -48,7 +48,7 @@ object Window : JFrame() {
         root.stylesheets.add(styles("global.less"))
         root.stylesheets.add(styles("syntax.less"))
 
-        panel.scene = Scene(root, 894.0, 506.0)
+        panel.scene = Scene(root, 894.0, 528.0)
         panel.scene.setOnDragOver {
             it.acceptTransferModes(*TransferMode.COPY_OR_MOVE)
             it.consume()

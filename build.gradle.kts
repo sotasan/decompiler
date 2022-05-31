@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.pryoscode"
-version = "0.3.8"
+version = "0.4.0"
 
 kotlin {
     jvmToolchain {
@@ -37,6 +37,7 @@ repositories {
 
 dependencies {
     implementation(project("fernflower"))
+    implementation("com.formdev:flatlaf:2.3")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
     implementation("org.kordamp.ikonli:ikonli-core:12.3.1")
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
