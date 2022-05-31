@@ -4,8 +4,8 @@ import com.sun.javafx.tk.Toolkit
 import javafx.application.Platform
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
+import javafx.scene.control.SplitPane
 import javafx.scene.input.TransferMode
-import javafx.scene.layout.BorderPane
 import javafx.scene.text.Font
 import net.pryoscode.decompiler.window.container.Container
 import net.pryoscode.decompiler.window.menu.Menu
@@ -40,9 +40,8 @@ object Window : JFrame() {
         jMenuBar = Menu()
 
         val panel = JFXPanel()
-        val root = BorderPane()
-        root.center = Container
-        root.left = Sidebar
+        val root = SplitPane(Sidebar, Container)
+        root.setDividerPositions(Sidebar.minWidth / (Sidebar.minWidth + Container.minWidth), Container.minWidth / (Sidebar.minWidth + Container.minWidth))
 
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
