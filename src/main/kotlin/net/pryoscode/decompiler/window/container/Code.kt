@@ -19,36 +19,40 @@ import java.util.regex.Pattern
 
 class Code(val entry: Entry, private val code: String) : Tab() {
 
-    private val keywords = arrayOf(
-        "abstract", "assert", "boolean", "break", "byte",
-        "case", "catch", "char", "class", "const",
-        "continue", "default", "do", "double", "else",
-        "enum", "extends", "final", "finally", "float",
-        "for", "goto", "if", "implements", "import",
-        "instanceof", "int", "interface", "long", "native",
-        "new", "package", "private", "protected", "public",
-        "return", "short", "static", "strictfp", "super",
-        "switch", "synchronized", "this", "throw", "throws",
-        "transient", "try", "void", "volatile", "while"
-    )
+    companion object {
 
-    private val keyword     = "\\b(${keywords.joinToString("|")})\\b"
-    private val paren       = "\\(|\\)"
-    private val brace       = "\\{|\\}"
-    private val bracket     = "\\[|\\]"
-    private val semicolon   = "\\;"
-    private val string      = "\"([^\"\\\\]|\\\\.)*\""
-    private val comment     = "//[^\\n]*|/\\\\*(.|\\\\R)*?\\\\*/|/\\\\*[^\\\\v]*|^\\\\h*\\\\*([^\\\\v]*|/)"
+        private val keywords = arrayOf(
+            "abstract", "assert", "boolean", "break", "byte",
+            "case", "catch", "char", "class", "const",
+            "continue", "default", "do", "double", "else",
+            "enum", "extends", "final", "finally", "float",
+            "for", "goto", "if", "implements", "import",
+            "instanceof", "int", "interface", "long", "native",
+            "new", "package", "private", "protected", "public",
+            "return", "short", "static", "strictfp", "super",
+            "switch", "synchronized", "this", "throw", "throws",
+            "transient", "try", "void", "volatile", "while"
+        )
 
-    private val pattern = Pattern.compile(
-        "(?<KEYWORD>$keyword)" +
-        "|(?<PAREN>$paren)" +
-        "|(?<BRACE>$brace)" +
-        "|(?<BRACKET>$bracket)" +
-        "|(?<SEMICOLON>$semicolon)" +
-        "|(?<STRING>$string)" +
-        "|(?<COMMENT>$comment)"
-    )
+        private val keyword = "\\b(${keywords.joinToString("|")})\\b"
+        private val paren = "\\(|\\)"
+        private val brace = "\\{|\\}"
+        private val bracket = "\\[|\\]"
+        private val semicolon = "\\;"
+        private val string = "\"([^\"\\\\]|\\\\.)*\""
+        private val comment = "//[^\\n]*|/\\\\*(.|\\\\R)*?\\\\*/|/\\\\*[^\\\\v]*|^\\\\h*\\\\*([^\\\\v]*|/)"
+
+        private val pattern = Pattern.compile(
+            "(?<KEYWORD>$keyword)" +
+            "|(?<PAREN>$paren)" +
+            "|(?<BRACE>$brace)" +
+            "|(?<BRACKET>$bracket)" +
+            "|(?<SEMICOLON>$semicolon)" +
+            "|(?<STRING>$string)" +
+            "|(?<COMMENT>$comment)"
+        )
+
+    }
 
     init {
         text = entry.name
@@ -74,11 +78,7 @@ class Code(val entry: Entry, private val code: String) : Tab() {
         val close = MenuItem("Close")
         val closeOthers = MenuItem("Close Others")
         val closeAll = MenuItem("Close All")
-        Container.tabs.addListener(ListChangeListener {
-            val multiple = Container.tabs.size == 1
-            closeOthers.isDisable = multiple
-            closeAll.isDisable = multiple
-        })
+        Container.tabs.addListener(ListChangeListener { closeOthers.isDisable = Container.tabs.size == 1 })
         close.setOnAction { Container.tabs.remove(this) }
         closeOthers.setOnAction {
             val tabs = Container.tabs.iterator()

@@ -42,6 +42,7 @@ object Window : JFrame() {
         val panel = JFXPanel()
         val root = SplitPane(Sidebar, Container)
         root.setDividerPositions(Sidebar.minWidth / (Sidebar.minWidth + Container.minWidth), Container.minWidth / (Sidebar.minWidth + Container.minWidth))
+        SplitPane.setResizableWithParent(Sidebar, false)
 
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
