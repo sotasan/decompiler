@@ -12,7 +12,7 @@ import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 import javax.swing.filechooser.FileNameExtensionFilter
 
-class OpenArchive : JMenuItem("Open Archive", KeyEvent.VK_O), ActionListener {
+class OpenFile : JMenuItem("Open File", KeyEvent.VK_O), ActionListener {
 
     init {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)

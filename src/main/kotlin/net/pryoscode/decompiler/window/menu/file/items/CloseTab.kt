@@ -10,7 +10,7 @@ import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 import javax.swing.SwingUtilities
 
-class CloseFile : JMenuItem("Close File", KeyEvent.VK_W), ActionListener {
+class CloseTab : JMenuItem("Close Tab", KeyEvent.VK_W), ActionListener {
 
     init {
         isEnabled = false
