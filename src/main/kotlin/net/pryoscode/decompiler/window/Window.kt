@@ -14,6 +14,7 @@ import net.pryoscode.decompiler.window.utils.styles
 import java.awt.Taskbar
 import java.io.File
 import javax.swing.*
+import kotlin.system.exitProcess
 
 object Window : JFrame() {
 
@@ -65,6 +66,11 @@ object Window : JFrame() {
         add(panel)
         pack()
         setLocationRelativeTo(null)
+    }
+
+    override fun dispose() {
+        super.dispose()
+        exitProcess(0)
     }
 
     fun run(args: Array<String>) {

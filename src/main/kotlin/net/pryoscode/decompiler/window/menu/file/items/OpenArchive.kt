@@ -3,6 +3,7 @@ package net.pryoscode.decompiler.window.menu.file.items
 import javafx.application.Platform
 import net.pryoscode.decompiler.window.Window
 import net.pryoscode.decompiler.window.sidebar.Sidebar
+import java.awt.Toolkit
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
@@ -11,10 +12,10 @@ import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 import javax.swing.filechooser.FileNameExtensionFilter
 
-class OpenFile : JMenuItem("Open File", KeyEvent.VK_O), ActionListener {
+class OpenArchive : JMenuItem("Open Archive", KeyEvent.VK_O), ActionListener {
 
     init {
-        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK)
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         addActionListener(this)
     }
 

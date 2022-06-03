@@ -1,5 +1,6 @@
 package net.pryoscode.decompiler.window.menu.edit.items
 
+import java.awt.Toolkit
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
@@ -10,7 +11,7 @@ class SelectAll : JMenuItem("Select All", KeyEvent.VK_A), ActionListener {
 
     init {
         isEnabled = false
-        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_DOWN_MASK)
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         addActionListener(this)
     }
 

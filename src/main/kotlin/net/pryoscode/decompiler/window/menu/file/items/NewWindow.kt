@@ -1,6 +1,7 @@
 package net.pryoscode.decompiler.window.menu.file.items
 
 import net.pryoscode.decompiler.Main
+import java.awt.Toolkit
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
@@ -11,7 +12,7 @@ import javax.swing.KeyStroke
 class NewWindow : JMenuItem("New Window", KeyEvent.VK_N), ActionListener {
 
     init {
-        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK)
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         addActionListener(this)
     }
 

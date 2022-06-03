@@ -1,5 +1,6 @@
 package net.pryoscode.decompiler.window.menu.view.items
 
+import java.awt.Toolkit
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
@@ -10,7 +11,7 @@ class ZoomReset : JMenuItem("Zoom Reset", KeyEvent.VK_0), ActionListener {
 
     init {
         isEnabled = false
-        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_0, KeyEvent.CTRL_DOWN_MASK)
+        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_0, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         addActionListener(this)
     }
 

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.pryoscode"
-version = "0.4.1"
+version = "0.4.2"
 
 kotlin {
     jvmToolchain {
