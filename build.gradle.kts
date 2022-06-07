@@ -3,8 +3,8 @@ plugins {
     id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
-group = "net.pryoscode"
-version = "0.4.4"
+group = "dev.shota"
+version = "0.4.5"
 
 kotlin {
     jvmToolchain {
