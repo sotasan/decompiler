@@ -1,5 +1,8 @@
 package net.pryoscode.decompiler.window.menu.edit.items
 
+import javafx.application.Platform
+import net.pryoscode.decompiler.window.container.Code
+import net.pryoscode.decompiler.window.container.Container
 import java.awt.Toolkit
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -13,8 +16,17 @@ class SelectAll : JMenuItem("Select All", KeyEvent.VK_A), ActionListener {
         isEnabled = false
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         addActionListener(this)
+
+        Container.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            isEnabled = newValue != null
+        }
     }
 
-    override fun actionPerformed(e: ActionEvent?) {}
+    override fun actionPerformed(e: ActionEvent?) {
+        Platform.runLater {
+            val tab = Container.selectionModel.selectedItem as Code
+            tab.codeArea.selectAll()
+        }
+    }
 
 }

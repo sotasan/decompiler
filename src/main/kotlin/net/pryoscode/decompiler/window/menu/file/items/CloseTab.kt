@@ -8,7 +8,6 @@ import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
-import javax.swing.SwingUtilities
 
 class CloseTab : JMenuItem("Close Tab", KeyEvent.VK_W), ActionListener {
 
@@ -17,12 +16,8 @@ class CloseTab : JMenuItem("Close Tab", KeyEvent.VK_W), ActionListener {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         addActionListener(this)
 
-        Platform.runLater {
-            Container.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
-                SwingUtilities.invokeLater {
-                    isEnabled = newValue != null
-                }
-            }
+        Container.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            isEnabled = newValue != null
         }
     }
 

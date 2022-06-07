@@ -54,18 +54,19 @@ class Code(val entry: Entry, private val code: String) : Tab() {
 
     }
 
+    val codeArea = CodeArea(code)
+
     init {
         text = entry.name
         graphic = ImageView(entry.type.icon)
 
-        val codeArea = CodeArea(code)
         codeArea.isEditable = false
         codeArea.paragraphGraphicFactory = LineNumberFactory.get(codeArea)
         if (entry.type == Type.CLASS) codeArea.setStyleSpans(0, highlighting())
         val scaled = ScaledVirtualized(codeArea)
         content = VirtualizedScrollPane(scaled)
         codeArea.addEventFilter(ScrollEvent.ANY) {
-            if (it.isControlDown) {
+            if (it.isShortcutDown) {
                 val scale = if (it.deltaY < 0) scaled.zoom.y * 0.9 else scaled.zoom.y / 0.9
                 if (scale > 0.5 && scale < 5) {
                     scaled.zoom.x = scale
