@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.shota"
-version = "0.4.5"
+version = "0.4.6"
 
 kotlin {
     jvmToolchain {
@@ -37,6 +37,7 @@ repositories {
 
 dependencies {
     implementation(project("fernflower"))
+    implementation("dev.shota:stylus4j:0.1.0")
     implementation("com.formdev:flatlaf:2.3")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
     implementation("org.kordamp.ikonli:ikonli-core:12.3.1")

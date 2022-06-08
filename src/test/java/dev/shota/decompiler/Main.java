@@ -1,4 +1,4 @@
-package dev.shota.decompiler;
+package net.pryoscode.decompiler;
 
 public class Main {
 

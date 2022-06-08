@@ -1,0 +1,78 @@
+* {
+  -fx-font-family: "Open Sans"
+}
+
+.split-pane  {
+  -fx-padding: 0
+  -fx-background-insets: 0
+
+  .split-pane-divider {
+    -fx-padding: 0
+  }
+}
+
+.tree-view {
+  -fx-padding: 0
+  -fx-background-color: none
+
+  .tree-cell {
+    -fx-text-fill: black
+    -fx-background-color: none
+
+    &:focused {
+      -fx-text-fill: white
+      -fx-background-color: #0196c9
+
+      .tree-disclosure-node .arrow {
+        -fx-background-color: white
+      }
+    }
+
+    .tree-disclosure-node .arrow {
+      -fx-background-color: derive(black, 50%)
+    }
+  }
+}
+
+.tab-pane {
+  .tab-header-area {
+    -fx-padding: 0
+
+    .tab-header-background  {
+      -fx-background-color: none
+    }
+
+    .tab {
+      -fx-background-color: white
+      -fx-border-color: white
+      -fx-background-radius: 0
+      -fx-background-insets: 0
+      -fx-border-width: 0 0 1 0
+
+      &:selected {
+        -fx-border-color: #0196c9
+      }
+
+      .focus-indicator {
+        -fx-border-width: 0
+      }
+    }
+  }
+
+  .tab-content-area .virtualized-scroll-pane .styled-text-area {
+    * {
+      -fx-font-family: "JetBrains Mono"
+      -fx-font-size: 16
+    }
+
+    .selection {
+      -fx-fill: #0196c9
+    }
+
+    .lineno {
+      -fx-text-fill: derive(black, 50%)
+      -fx-font-style: normal
+      -fx-background-color: white
+    }
+  }
+}

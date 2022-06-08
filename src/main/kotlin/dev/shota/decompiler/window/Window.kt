@@ -47,8 +47,8 @@ object Window : JFrame() {
 
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
-        root.stylesheets.add(styles("global.less"))
-        root.stylesheets.add(styles("syntax.less"))
+        root.stylesheets.add(styles("global.styl"))
+        root.stylesheets.add(styles("syntax.styl"))
 
         panel.scene = Scene(root, 894.0, 528.0)
         panel.scene.setOnDragOver {

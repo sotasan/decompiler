@@ -17,7 +17,7 @@ open class Popup(title: String) : JDialog(Window, title, true) {
 
     fun run(root: Parent) {
         val panel = JFXPanel()
-        root.stylesheets.add(styles("global.less"))
+        root.stylesheets.add(styles("global.styl"))
         panel.scene = Scene(root)
 
         val jroot = JRootPane()
