@@ -18,11 +18,15 @@ class Copy : JMenuItem("Copy", KeyEvent.VK_C), ActionListener {
         addActionListener(this)
 
         Container.selectionModel.selectedItemProperty().addListener { _, _, item ->
-            isEnabled = false
-            if (item != null) {
-                (item as Code).codeArea.selectedTextProperty().addListener { _, _, text ->
-                    isEnabled = text.isNotEmpty()
-                }
+            if (item == null) {
+                isEnabled = false
+                return@addListener
+            }
+
+            val tab = (item as Code)
+            isEnabled = tab.codeArea.selectedText.isNotEmpty()
+            tab.codeArea.selectedTextProperty().addListener { _, _, text ->
+                isEnabled = text.isNotEmpty()
             }
         }
     }

@@ -1,14 +1,14 @@
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.0"
     id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
 group = "dev.shota"
-version = "0.4.7"
+version = "0.4.8"
 
 kotlin {
     jvmToolchain {
-        (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.toString()))
+        languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.toString()))
     }
 }
 
@@ -37,13 +37,12 @@ repositories {
 
 dependencies {
     implementation(project("fernflower"))
-    implementation("dev.shota:stylus4j:0.1.1")
+    implementation("dev.shota:stylus4j:0.1.2")
     implementation("com.formdev:flatlaf:2.3")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
     implementation("org.kordamp.ikonli:ikonli-core:12.3.1")
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
     implementation("org.kordamp.ikonli:ikonli-fontawesome5-pack:12.3.1")
-    implementation("com.github.sommeri:less4j:1.17.2")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-base:${javafx.version}:linux")
