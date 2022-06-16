@@ -18,7 +18,7 @@ Java Decompiler Gui
 
 ```bash
 $ git clone --recursive https://github.com/shotadotdev/Decompiler.git
-$ cd decompiler
+$ cd Decompiler
 $ chmod +x gradlew
 $ ./gradlew build
 ```
