@@ -1,14 +1,14 @@
 package dev.shota.decompiler.window.menu.help.items
 
 import dev.shota.decompiler.window.popup.About
-import dev.shota.decompiler.window.utils.language
+import dev.shota.decompiler.window.utils.translate
 import java.awt.Desktop
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
 import javax.swing.JMenuItem
 
-class About : JMenuItem(language("help.about"), KeyEvent.VK_A), ActionListener {
+class About : JMenuItem(translate("help.about"), KeyEvent.VK_A), ActionListener {
 
     init {
         addActionListener(this)

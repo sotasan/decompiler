@@ -1,7 +1,7 @@
 package dev.shota.decompiler.window.menu.file.items
 
 import com.sun.tools.attach.VirtualMachine
-import dev.shota.decompiler.window.utils.language
+import dev.shota.decompiler.window.utils.translate
 import java.awt.Toolkit
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
-class OpenProcess : JMenuItem(language("file.openProcess"), KeyEvent.VK_O), ActionListener {
+class OpenProcess : JMenuItem(translate("file.openProcess"), KeyEvent.VK_O), ActionListener {
 
     init {
         isEnabled = false

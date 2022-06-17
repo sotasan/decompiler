@@ -1,7 +1,7 @@
 package dev.shota.decompiler.window.menu.file.items
 
 import dev.shota.decompiler.Main
-import dev.shota.decompiler.window.utils.language
+import dev.shota.decompiler.window.utils.translate
 import java.awt.Toolkit
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -10,7 +10,7 @@ import java.lang.management.ManagementFactory
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
-class NewWindow : JMenuItem(language("file.newWindow"), KeyEvent.VK_N), ActionListener {
+class NewWindow : JMenuItem(translate("file.newWindow"), KeyEvent.VK_N), ActionListener {
 
     init {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)

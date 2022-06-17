@@ -1,12 +1,12 @@
 package dev.shota.decompiler.window.menu.file
 
 import dev.shota.decompiler.window.menu.file.items.*
-import dev.shota.decompiler.window.utils.language
+import dev.shota.decompiler.window.utils.translate
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
 import javax.swing.JSeparator
 
-class File : JMenu(language("file")) {
+class File : JMenu(translate("file")) {
 
     init {
         mnemonic = KeyEvent.VK_F
