@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
-class Find : JMenuItem(translate("edit.find"), KeyEvent.VK_F), ActionListener {
+class Find : JMenuItem("${translate("edit.find")}...", KeyEvent.VK_F), ActionListener {
 
     init {
         isEnabled = false

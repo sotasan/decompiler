@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
-class OpenProcess : JMenuItem(translate("file.openProcess"), KeyEvent.VK_O), ActionListener {
+class OpenProcess : JMenuItem("${translate("file.openProcess")}...", KeyEvent.VK_O), ActionListener {
 
     init {
         isEnabled = false

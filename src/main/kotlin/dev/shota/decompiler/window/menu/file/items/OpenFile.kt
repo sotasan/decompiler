@@ -13,7 +13,7 @@ import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 import javax.swing.filechooser.FileNameExtensionFilter
 
-class OpenFile : JMenuItem(translate("file.openFile"), KeyEvent.VK_O), ActionListener {
+class OpenFile : JMenuItem("${translate("file.openFile")}...", KeyEvent.VK_O), ActionListener {
 
     init {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
