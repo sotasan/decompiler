@@ -13,7 +13,7 @@ class About : Popup("About") {
         root.alignment = Pos.CENTER
         root.children.add(Label("Decompiler"))
         root.children.add(Label("Version ${javaClass.`package`.specificationVersion ?: "0.0.0"}"))
-        root.children.add(Link("https://github.com/shotadotdev/Decompiler"))
+        root.children.add(Link("https://github.com/shotav/Decompiler"))
         val button = Button("OK")
         button.setOnAction { dispose() }
         root.children.add(button)
