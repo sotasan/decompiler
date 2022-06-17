@@ -3,6 +3,7 @@ package dev.shota.decompiler.window.menu.file.items
 import javafx.application.Platform
 import dev.shota.decompiler.window.Window
 import dev.shota.decompiler.window.sidebar.Sidebar
+import dev.shota.decompiler.window.utils.language
 import java.awt.Toolkit
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -12,7 +13,7 @@ import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 import javax.swing.filechooser.FileNameExtensionFilter
 
-class OpenFile : JMenuItem("Open File", KeyEvent.VK_O), ActionListener {
+class OpenFile : JMenuItem(language("file.openFile"), KeyEvent.VK_O), ActionListener {
 
     init {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
@@ -22,7 +23,7 @@ class OpenFile : JMenuItem("Open File", KeyEvent.VK_O), ActionListener {
     override fun actionPerformed(e: ActionEvent?) {
         val fileChooser = JFileChooser()
         fileChooser.dialogTitle = text
-        fileChooser.fileFilter = FileNameExtensionFilter("Java Archive", "jar")
+        fileChooser.fileFilter = FileNameExtensionFilter(language("file.openFile.archive"), "jar")
         fileChooser.isAcceptAllFileFilterUsed = false
         val option = fileChooser.showOpenDialog(Window)
         if (option == JFileChooser.APPROVE_OPTION)

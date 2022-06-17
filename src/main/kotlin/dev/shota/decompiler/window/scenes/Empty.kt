@@ -1,4 +1,4 @@
-package dev.shota.decompiler.window
+package dev.shota.decompiler.window.scenes
 
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane

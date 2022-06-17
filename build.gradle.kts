@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.shota"
-version = "0.4.9"
+version = "0.5.0"
 
 kotlin {
     jvmToolchain {

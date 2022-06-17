@@ -2,6 +2,7 @@ package dev.shota.decompiler.window.menu.edit.items
 
 import dev.shota.decompiler.window.container.Code
 import dev.shota.decompiler.window.container.Container
+import dev.shota.decompiler.window.utils.language
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.awt.event.ActionEvent
@@ -10,7 +11,7 @@ import java.awt.event.KeyEvent
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
-class Copy : JMenuItem("Copy", KeyEvent.VK_C), ActionListener {
+class Copy : JMenuItem(language("edit.copy"), KeyEvent.VK_C), ActionListener {
 
     init {
         isEnabled = false

@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView
 import javafx.scene.input.ScrollEvent
 import dev.shota.decompiler.window.sidebar.Entry
 import dev.shota.decompiler.window.sidebar.Type
+import dev.shota.decompiler.window.utils.language
 import org.fxmisc.flowless.ScaledVirtualized
 import org.fxmisc.flowless.VirtualizedScrollPane
 import org.fxmisc.richtext.CodeArea
@@ -76,9 +77,9 @@ class Code(val entry: Entry, private val code: String) : Tab() {
         }
 
         contextMenu = ContextMenu()
-        val close = MenuItem("Close")
-        val closeOthers = MenuItem("Close Others")
-        val closeAll = MenuItem("Close All")
+        val close = MenuItem(language("tab.close"))
+        val closeOthers = MenuItem(language("tab.closeOthers"))
+        val closeAll = MenuItem(language("tab.closeAll"))
         Container.tabs.addListener(ListChangeListener { closeOthers.isDisable = Container.tabs.size == 1 })
         close.setOnAction { Container.tabs.remove(this) }
         closeOthers.setOnAction {

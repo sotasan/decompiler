@@ -1,4 +1,4 @@
-<a href="https://github.com/shotadotdev/Decompiler/blob/master/src/test/java/dev/shota/decompiler/Main.java"><img align="center" width="100%" alt="Screenshot" src="https://github.com/shotadotdev/Decompiler/raw/master/src/main/resources/screenshot.png"></a>
+<a href="https://github.com/shotadotdev/Decompiler/blob/master/src/test/java/dev/shota/decompiler/Main.java"><img align="center" width="100%" alt="Screenshot" src="https://github.com/shotadotdev/Decompiler/raw/master/assets/screenshot.png"></a>
 
 <p align="center">
     <a href="https://github.com/shotadotdev/Decompiler/tags"><img alt="Version" src="https://img.shields.io/github/v/release/shotadotdev/Decompiler?label=Version"></a>
