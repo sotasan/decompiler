@@ -1,5 +1,7 @@
 package dev.shota.decompiler.window.menu.view.items
 
+import dev.shota.decompiler.window.container.Code
+import dev.shota.decompiler.window.container.Container
 import dev.shota.decompiler.window.utils.language
 import java.awt.Toolkit
 import java.awt.event.ActionEvent
@@ -14,8 +16,14 @@ class ZoomReset : JMenuItem(language("view.zoomReset"), KeyEvent.VK_0), ActionLi
         isEnabled = false
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_0, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         addActionListener(this)
+
+        Container.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            isEnabled = newValue != null
+        }
     }
 
-    override fun actionPerformed(e: ActionEvent?) {}
+    override fun actionPerformed(e: ActionEvent?) {
+        Code.setZoom(1.0)
+    }
 
 }

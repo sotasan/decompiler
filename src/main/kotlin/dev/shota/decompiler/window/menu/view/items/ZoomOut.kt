@@ -1,5 +1,7 @@
 package dev.shota.decompiler.window.menu.view.items
 
+import dev.shota.decompiler.window.container.Code
+import dev.shota.decompiler.window.container.Container
 import dev.shota.decompiler.window.utils.language
 import java.awt.Toolkit
 import java.awt.event.ActionEvent
@@ -14,8 +16,14 @@ class ZoomOut : JMenuItem(language("view.zoomOut"), KeyEvent.VK_MINUS), ActionLi
         isEnabled = false
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         addActionListener(this)
+
+        Container.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            isEnabled = newValue != null
+        }
     }
 
-    override fun actionPerformed(e: ActionEvent?) {}
+    override fun actionPerformed(e: ActionEvent?) {
+        Code.changeZoom(-0.25)
+    }
 
 }

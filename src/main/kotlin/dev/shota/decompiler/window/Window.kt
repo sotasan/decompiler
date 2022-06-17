@@ -40,7 +40,6 @@ object Window : JFrame() {
         iconImage = icon
         jMenuBar = Menu()
 
-        val panel = JFXPanel()
         val root = SplitPane(Sidebar, Container)
         root.setDividerPositions(Sidebar.minWidth / (Sidebar.minWidth + Container.minWidth), Container.minWidth / (Sidebar.minWidth + Container.minWidth))
         SplitPane.setResizableWithParent(Sidebar, false)
@@ -50,6 +49,7 @@ object Window : JFrame() {
         root.stylesheets.add(styles("global.styl"))
         root.stylesheets.add(styles("syntax.styl"))
 
+        val panel = JFXPanel()
         panel.scene = Scene(root, 894.0, 528.0)
         panel.scene.setOnDragOver {
             it.acceptTransferModes(*TransferMode.COPY_OR_MOVE)

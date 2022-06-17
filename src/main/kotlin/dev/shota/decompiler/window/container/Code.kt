@@ -9,6 +9,7 @@ import javafx.scene.input.ScrollEvent
 import dev.shota.decompiler.window.sidebar.Entry
 import dev.shota.decompiler.window.sidebar.Type
 import dev.shota.decompiler.window.utils.language
+import javafx.beans.property.SimpleDoubleProperty
 import org.fxmisc.flowless.ScaledVirtualized
 import org.fxmisc.flowless.VirtualizedScrollPane
 import org.fxmisc.richtext.CodeArea
@@ -21,6 +22,8 @@ import java.util.regex.Pattern
 class Code(val entry: Entry, private val code: String) : Tab() {
 
     companion object {
+
+        private val zoom = SimpleDoubleProperty(1.0)
 
         private val keywords = arrayOf(
             "abstract", "assert", "boolean", "break", "byte",
@@ -53,6 +56,15 @@ class Code(val entry: Entry, private val code: String) : Tab() {
             "|(?<COMMENT>$comment)"
         )
 
+        fun changeZoom(scale: Double) {
+            setZoom(zoom.get() + scale)
+        }
+
+        fun setZoom(scale: Double) {
+            if (scale in 0.5..5.0)
+                zoom.set(scale)
+        }
+
     }
 
     val codeArea = CodeArea(code)
@@ -65,15 +77,12 @@ class Code(val entry: Entry, private val code: String) : Tab() {
         codeArea.paragraphGraphicFactory = LineNumberFactory.get(codeArea)
         if (entry.type == Type.CLASS) codeArea.setStyleSpans(0, highlighting())
         val scaled = ScaledVirtualized(codeArea)
+        scaled.zoom.xProperty().bind(zoom)
+        scaled.zoom.yProperty().bind(zoom)
         content = VirtualizedScrollPane(scaled)
         codeArea.addEventFilter(ScrollEvent.ANY) {
-            if (it.isShortcutDown) {
-                val scale = if (it.deltaY < 0) scaled.zoom.y * 0.9 else scaled.zoom.y / 0.9
-                if (scale > 0.5 && scale < 5) {
-                    scaled.zoom.x = scale
-                    scaled.zoom.y = scale
-                }
-            }
+            if (it.isShortcutDown)
+                setZoom(if (it.deltaY < 0) scaled.zoom.y * 0.9 else scaled.zoom.y / 0.9)
         }
 
         contextMenu = ContextMenu()

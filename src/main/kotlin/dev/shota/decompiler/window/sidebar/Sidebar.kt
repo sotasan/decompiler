@@ -31,8 +31,8 @@ object Sidebar : BorderPane() {
         }
     }
 
-    fun open(file: File?) {
-        if (file == null || !file.exists()) return
+    fun open(file: File) {
+        if (!file.exists()) return
         Container.tabs.clear()
         val entries = ArrayList<JarEntry>()
         val jar = JarFile(file)
