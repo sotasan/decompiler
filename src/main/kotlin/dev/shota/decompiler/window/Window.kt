@@ -8,7 +8,7 @@ import javafx.scene.control.SplitPane
 import javafx.scene.input.TransferMode
 import javafx.scene.text.Font
 import dev.shota.decompiler.window.container.Container
-import dev.shota.decompiler.window.menu.Menu
+import dev.shota.decompiler.window.menu.MenuBar
 import dev.shota.decompiler.window.sidebar.Sidebar
 import dev.shota.decompiler.window.utils.styles
 import java.awt.Taskbar
@@ -38,7 +38,7 @@ object Window : JFrame() {
         val icon = ImageIcon(javaClass.classLoader.getResourceAsStream("icons/logo.png")?.readAllBytes()).image
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE)) Taskbar.getTaskbar().iconImage = icon
         iconImage = icon
-        jMenuBar = Menu()
+        jMenuBar = MenuBar()
 
         val root = SplitPane(Sidebar, Container)
         root.setDividerPositions(Sidebar.minWidth / (Sidebar.minWidth + Container.minWidth), Container.minWidth / (Sidebar.minWidth + Container.minWidth))

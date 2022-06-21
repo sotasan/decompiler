@@ -1,18 +1,15 @@
 package dev.shota.decompiler.window.menu
 
-import dev.shota.decompiler.window.menu.edit.Edit
-import dev.shota.decompiler.window.menu.file.File
-import dev.shota.decompiler.window.menu.help.Help
-import dev.shota.decompiler.window.menu.view.View
-import javax.swing.JMenuBar
+import dev.shota.decompiler.window.menu.view.items.Language
+import javax.swing.JMenu
 
-class Menu : JMenuBar() {
+abstract class Menu(displayText: String, keyCode: Int) : JMenu() {
 
     init {
-        add(File())
-        add(Edit())
-        add(View())
-        add(Help())
+        val translation = Language.get(displayText)
+        text = translation.value
+        translation.addListener { _, _, value -> text = value }
+        mnemonic = keyCode
     }
 
 }

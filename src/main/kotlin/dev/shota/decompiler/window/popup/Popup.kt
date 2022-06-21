@@ -4,6 +4,7 @@ import javafx.embed.swing.JFXPanel
 import javafx.scene.Parent
 import javafx.scene.Scene
 import dev.shota.decompiler.window.Window
+import dev.shota.decompiler.window.menu.view.items.Language
 import dev.shota.decompiler.window.utils.styles
 import java.awt.event.KeyEvent
 import javax.swing.ImageIcon
@@ -13,7 +14,7 @@ import javax.swing.JRootPane
 import javax.swing.KeyStroke
 import javax.swing.SwingUtilities
 
-open class Popup(title: String) : JDialog(Window, title, true) {
+open class Popup(title: String) : JDialog(Window, Language.get(title).value, true) {
 
     fun run(root: Parent) {
         val panel = JFXPanel()

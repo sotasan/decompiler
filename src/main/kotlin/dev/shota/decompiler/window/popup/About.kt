@@ -5,9 +5,8 @@ import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.layout.VBox
 import dev.shota.decompiler.window.utils.Link
-import dev.shota.decompiler.window.utils.translate
 
-class About : Popup(translate("help.about")) {
+class About : Popup("help.about") {
 
     init {
         val root = VBox()

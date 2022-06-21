@@ -2,22 +2,16 @@ package dev.shota.decompiler.window.menu.edit.items
 
 import dev.shota.decompiler.window.container.Code
 import dev.shota.decompiler.window.container.Container
-import dev.shota.decompiler.window.utils.translate
+import dev.shota.decompiler.window.menu.MenuItem
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
-import javax.swing.JMenuItem
-import javax.swing.KeyStroke
 
-class Copy : JMenuItem(translate("edit.copy"), KeyEvent.VK_C), ActionListener {
+class Copy : MenuItem("edit.copy", KeyEvent.VK_C) {
 
     init {
         isEnabled = false
-        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
-        addActionListener(this)
-
         Container.selectionModel.selectedItemProperty().addListener { _, _, item ->
             if (item == null) {
                 isEnabled = false

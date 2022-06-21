@@ -1,5 +1,6 @@
 package dev.shota.decompiler.window.container
 
+import dev.shota.decompiler.window.menu.view.items.Language
 import javafx.collections.ListChangeListener
 import javafx.scene.control.ContextMenu
 import javafx.scene.control.MenuItem
@@ -8,7 +9,6 @@ import javafx.scene.image.ImageView
 import javafx.scene.input.ScrollEvent
 import dev.shota.decompiler.window.sidebar.Entry
 import dev.shota.decompiler.window.sidebar.Type
-import dev.shota.decompiler.window.utils.translate
 import javafx.beans.property.SimpleDoubleProperty
 import org.fxmisc.flowless.ScaledVirtualized
 import org.fxmisc.flowless.VirtualizedScrollPane
@@ -86,9 +86,12 @@ class Code(val entry: Entry, private val code: String) : Tab() {
         }
 
         contextMenu = ContextMenu()
-        val close = MenuItem(translate("tab.close"))
-        val closeOthers = MenuItem(translate("tab.closeOthers"))
-        val closeAll = MenuItem(translate("tab.closeAll"))
+        val close = MenuItem()
+        val closeOthers = MenuItem()
+        val closeAll = MenuItem()
+        close.textProperty().bind(Language.get("tab.close"))
+        closeOthers.textProperty().bind(Language.get("tab.closeOthers"))
+        closeAll.textProperty().bind(Language.get("tab.closeAll"))
         Container.tabs.addListener(ListChangeListener { closeOthers.isDisable = Container.tabs.size == 1 })
         close.setOnAction { Container.tabs.remove(this) }
         closeOthers.setOnAction {

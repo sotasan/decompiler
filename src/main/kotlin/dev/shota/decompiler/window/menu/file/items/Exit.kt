@@ -1,21 +1,14 @@
 package dev.shota.decompiler.window.menu.file.items
 
 import dev.shota.decompiler.window.Window
-import dev.shota.decompiler.window.utils.translate
+import dev.shota.decompiler.window.menu.MenuItem
 import java.awt.Desktop
-import java.awt.Toolkit
 import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
-import javax.swing.JMenuItem
-import javax.swing.KeyStroke
 
-class Exit : JMenuItem(translate("file.exit"), KeyEvent.VK_Q), ActionListener {
+class Exit : MenuItem("file.exit", KeyEvent.VK_Q) {
 
     init {
-        accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
-        addActionListener(this)
-
         if (Desktop.getDesktop().isSupported(Desktop.Action.APP_QUIT_HANDLER)) {
             Desktop.getDesktop().setQuitHandler { _, _ -> actionPerformed(null) }
             isVisible = false
