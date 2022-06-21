@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.shota"
-version = "0.5.1"
+version = "0.5.2"
 
 kotlin {
     jvmToolchain {
@@ -40,9 +40,6 @@ dependencies {
     implementation("dev.shota:stylus4j:0.1.2")
     implementation("com.formdev:flatlaf:2.3")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
-    implementation("org.kordamp.ikonli:ikonli-core:12.3.1")
-    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
-    implementation("org.kordamp.ikonli:ikonli-fontawesome5-pack:12.3.1")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-base:${javafx.version}:linux")
