@@ -1,4 +1,5 @@
 plugins {
+    java
     kotlin("jvm") version "1.7.0"
     id("org.openjfx.javafxplugin") version "0.0.13"
 }
@@ -6,10 +7,13 @@ plugins {
 group = "dev.shota"
 version = "0.6.0"
 
-kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.toString()))
-    }
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 javafx {
@@ -17,26 +21,8 @@ javafx {
     modules("javafx.base", "javafx.controls", "javafx.graphics", "javafx.swing")
 }
 
-tasks.jar {
-    archiveBaseName.set(project.name.toLowerCase())
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest.attributes["Specification-Version"] = project.version
-    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
-    from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-}
-
-tasks.register<Jar>("testJar") {
-    archiveFileName.set("test.jar")
-    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
-    from(sourceSets.test.get().output)
-}
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    implementation(project("fernflower"))
+    implementation(project(":fernflower"))
     implementation("dev.shota:stylus4j:0.1.2")
     implementation("com.formdev:flatlaf:2.3")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
@@ -52,4 +38,30 @@ dependencies {
     implementation("org.openjfx:javafx-swing:${javafx.version}:win")
     implementation("org.openjfx:javafx-swing:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-swing:${javafx.version}:linux")
+}
+
+tasks {
+    jar {
+        archiveBaseName.set(project.name.toLowerCase())
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        manifest.attributes["Specification-Version"] = project.version
+        manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
+        from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_17.toString()
+        }
+    }
+
+    register<Jar>("testJar") {
+        archiveFileName.set("test.jar")
+        manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
+        from(sourceSets.test.get().output)
+    }
+
+    clean {
+        dependsOn(":fernflower:clean")
+    }
 }
