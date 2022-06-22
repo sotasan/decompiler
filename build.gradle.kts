@@ -46,6 +46,7 @@ tasks {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         manifest.attributes["Specification-Version"] = project.version
         manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
+        manifest.attributes["Agent-Class"] = "${project.group}.${project.name.toLowerCase()}.Agent"
         from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     }
 
