@@ -7,8 +7,11 @@ import javafx.scene.control.Button
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
 import javafx.scene.layout.VBox
+import java.io.BufferedReader
 import java.io.File
+import java.io.InputStreamReader
 import java.lang.management.ManagementFactory
+import java.net.ServerSocket
 
 class Processes : Popup("file.openProcess") {
 
@@ -29,9 +32,17 @@ class Processes : Popup("file.openProcess") {
 
         val button = Button("Open")
         button.setOnAction {
+            button.isDisable = true
+            val server = ServerSocket(0)
             val vm = VirtualMachine.attach(table.selectionModel.selectedItem)
-            vm.loadAgent(File(javaClass.protectionDomain.codeSource.location.path).path)
+            vm.loadAgent(File(javaClass.protectionDomain.codeSource.location.path).path, server.localPort.toString())
             vm.detach()
+
+            val client = server.accept()
+            val response = BufferedReader(InputStreamReader(client.getInputStream())).readLine()
+            println(response)
+            server.close()
+            dispose()
         }
         root.children.add(button)
 
