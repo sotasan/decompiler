@@ -59,20 +59,28 @@
     }
   }
 
-  .tab-content-area .virtualized-scroll-pane .styled-text-area {
-    * {
-      -fx-font-family: "JetBrains Mono"
-      -fx-font-size: 16
-    }
+  .tab-content-area .virtualized-scroll-pane {
+    -fx-background-color: white
 
-    .selection {
-      -fx-fill: #0196c9
-    }
-
-    .lineno {
-      -fx-text-fill: derive(black, 50%)
-      -fx-font-style: normal
+    .scroll-bar {
       -fx-background-color: white
+    }
+
+    .styled-text-area {
+      * {
+        -fx-font-family: "JetBrains Mono"
+        -fx-font-size: 16
+      }
+
+      .selection {
+        -fx-fill: #0196c9
+      }
+
+      .lineno {
+        -fx-text-fill: derive(black, 50%)
+        -fx-font-style: normal
+        -fx-background-color: white
+      }
     }
   }
 }
