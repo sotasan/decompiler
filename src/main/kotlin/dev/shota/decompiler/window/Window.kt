@@ -1,5 +1,6 @@
 package dev.shota.decompiler.window
 
+import com.formdev.flatlaf.util.SystemInfo
 import com.sun.javafx.tk.Toolkit
 import javafx.application.Platform
 import javafx.embed.swing.JFXPanel
@@ -39,6 +40,12 @@ object Window : JFrame() {
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE)) Taskbar.getTaskbar().iconImage = icon
         iconImage = icon
         jMenuBar = MenuBar()
+
+        if (SystemInfo.isMacFullWindowContentSupported) {
+            getRootPane().putClientProperty("apple.awt.fullWindowContent", true)
+            getRootPane().putClientProperty("apple.awt.transparentTitleBar", true)
+            getRootPane().putClientProperty("apple.awt.windowTitleVisible", false)
+        }
 
         val root = SplitPane(Sidebar, Container)
         root.setDividerPositions(Sidebar.minWidth / (Sidebar.minWidth + Container.minWidth), Container.minWidth / (Sidebar.minWidth + Container.minWidth))

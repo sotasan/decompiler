@@ -1,10 +1,12 @@
 package dev.shota.decompiler.window.sidebar
 
+import com.formdev.flatlaf.util.SystemInfo
 import javafx.scene.control.TreeView
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyEvent
 import javafx.scene.layout.BorderPane
 import dev.shota.decompiler.window.container.Container
+import javafx.scene.layout.Pane
 import java.io.File
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
@@ -15,6 +17,12 @@ object Sidebar : BorderPane() {
 
     init {
         minWidth = 100.0
+
+        if (SystemInfo.isMacFullWindowContentSupported) {
+            val space = Pane()
+            space.prefHeight = 25.0
+            top = space
+        }
 
         center = tree
         tree.setCellFactory { Cell() }

@@ -1,5 +1,6 @@
 package dev.shota.decompiler.window.container
 
+import com.formdev.flatlaf.util.SystemInfo
 import javafx.scene.control.TabPane
 import dev.shota.decompiler.Decompiler
 import dev.shota.decompiler.window.sidebar.Entry
@@ -9,9 +10,9 @@ import org.jetbrains.java.decompiler.util.InterpreterUtil
 object Container : TabPane() {
 
     init {
-        tabDragPolicy = TabDragPolicy.REORDER
-        tabClosingPolicy = TabClosingPolicy.ALL_TABS
         minWidth = 300.0
+        tabClosingPolicy = TabClosingPolicy.ALL_TABS
+        tabDragPolicy = if (SystemInfo.isMacFullWindowContentSupported) TabDragPolicy.FIXED else TabDragPolicy.REORDER
     }
 
     fun open(entry: Entry) {
