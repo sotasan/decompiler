@@ -36,7 +36,7 @@ object Window : JFrame() {
     init {
         title = "Decompiler"
         defaultCloseOperation = DISPOSE_ON_CLOSE
-        val icon = ImageIcon(javaClass.classLoader.getResourceAsStream("icons/logo.png")?.readAllBytes()).image
+        val icon = ImageIcon(javaClass.classLoader.getResourceAsStream("logo/logo.png")?.readAllBytes()).image
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE)) Taskbar.getTaskbar().iconImage = icon
         iconImage = icon
         jMenuBar = MenuBar()

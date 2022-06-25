@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aeda, 2022-05-15)"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="logo.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="0.37676605"
+     inkscape:cx="771.03549"
+     inkscape:cy="599.84173"
+     inkscape:window-width="1728"
+     inkscape:window-height="966"
+     inkscape:window-x="-1"
+     inkscape:window-y="39"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="85.963434"
+       y="72.591344"
+       width="593.14769"
+       height="475.66433"
+       id="rect169" />
+    <inkscape:path-effect
+       effect="fill_between_many"
+       method="originald"
+       linkedpaths="#rect61,0,1|"
+       id="path-effect482" />
+  </defs>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       class="UnoptimicedTransforms"
+       inkscape:original-d="M 0,0"
+       inkscape:path-effect="#path-effect482"
+       d="M 98.50164,24 H 413.49836 C 454.77227,24 488,57.227732 488,98.50164 V 413.49836 C 488,454.77227 454.77227,488 413.49836,488 H 98.50164 C 57.227732,488 24,454.77227 24,413.49836 V 98.50164 C 24,57.227732 57.227732,24 98.50164,24 Z"
+       id="path484"
+       style="stroke-width:25;stroke-dasharray:none" />
+    <rect
+       style="fill:#ffffff;stroke-width:25;stroke:#0196c9;stroke-opacity:1;stroke-dasharray:none"
+       id="rect61"
+       width="464"
+       height="464"
+       x="24"
+       y="24"
+       ry="74.50164"
+       class="UnoptimicedTransforms" />
+    <text
+       xml:space="preserve"
+       id="text167"
+       style="font-size:233.333px;white-space:pre;shape-inside:url(#rect169);display:inline;fill:#000000;stroke-width:25;stroke-dasharray:none"
+       transform="translate(-39.462865,54.197824)"><tspan
+         x="85.962891"
+         y="285.46856"
+         id="tspan13906"><tspan
+           style="font-weight:bold;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono Bold'"
+           id="tspan13904">{D}</tspan></tspan></text>
+  </g>
+</svg>

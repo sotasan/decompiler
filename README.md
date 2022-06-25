@@ -1,4 +1,4 @@
-<a href="https://github.com/shotav/Decompiler/blob/master/src/test/java/dev/shota/decompiler/Main.java"><img align="center" width="100%" alt="Screenshot" src="https://github.com/shotav/Decompiler/raw/master/assets/screenshot.png"></a>
+<a href="https://github.com/shotav/Decompiler/blob/master/src/test/java/dev/shota/decompiler/Main.java"><img align="center" width="100%" alt="Screenshot" src="https://github.com/shotav/Decompiler/raw/master/src/main/resources/screenshot.png"></a>
 
 <p align="center">
     <a href="https://github.com/shotav/Decompiler/tags"><img alt="Version" src="https://img.shields.io/github/v/release/shotav/Decompiler?label=Version"></a>
@@ -6,7 +6,7 @@
     <a href="https://github.com/shotav/Decompiler/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/shotav/Decompiler?label=License"></a>
 </p>
 
-# <a href="https://github.com/shotav/Decompiler/blob/master/src/main/resources/icons/logo.png"><img src="https://github.com/shotav/Decompiler/raw/master/src/main/resources/icons/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
+# <a href="https://github.com/shotav/Decompiler/blob/master/src/main/resources/logo/logo.png"><img src="https://github.com/shotav/Decompiler/raw/master/src/main/resources/icons/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
 
 Java Decompiler Gui
 

@@ -26,7 +26,7 @@ open class Popup(title: String) : JDialog(Window, Language.get(title).value, tru
         jroot.registerKeyboardAction({ dispose() }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW)
         add(jroot)
 
-        setIconImage(ImageIcon(javaClass.classLoader.getResourceAsStream("icons/logo.png")?.readAllBytes()).image)
+        setIconImage(ImageIcon(javaClass.classLoader.getResourceAsStream("logo/logo.png")?.readAllBytes()).image)
         isResizable = false
         SwingUtilities.invokeLater {
             pack()
