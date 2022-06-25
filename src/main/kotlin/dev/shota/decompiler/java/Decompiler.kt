@@ -19,7 +19,8 @@ class Decompiler(private val data: ByteArray) : IBytecodeProvider, IResultSaver,
 
     init {
         val fernflower = Fernflower(this, this, IFernflowerPreferences.DEFAULTS, this)
-        fernflower.addLibrary(File("null.class"))
+        val file = File("null.class")
+        fernflower.addSource(file)
 
         val structContextField = fernflower.javaClass.getDeclaredField("structContext")
         structContextField.isAccessible = true
@@ -28,20 +29,11 @@ class Decompiler(private val data: ByteArray) : IBytecodeProvider, IResultSaver,
         val loaderField = structContext.javaClass.getDeclaredField("loader")
         loaderField.isAccessible = true
         val loader = loaderField.get(structContext) as LazyLoader
+        loader.addClassLink("null.class", LazyLoader.Link(file.absolutePath, null))
 
         val structClass = StructClass.create(DataInputFullStream(data), true, loader)
-        structContext.classes.put("null.class", structClass)
-
-        val path = File("null.class").absolutePath
-        val contextUnit = ContextUnit(ContextUnit.TYPE_FOLDER, null, path, true, this, fernflower)
+        val contextUnit = ContextUnit(ContextUnit.TYPE_FOLDER, null, file.absolutePath, true, this, fernflower)
         contextUnit.addClass(structClass, "null.class")
-
-        val unitsField = structContext.javaClass.getDeclaredField("units")
-        unitsField.isAccessible = true
-        val units = unitsField.get(structContext) as HashMap<String, ContextUnit>
-
-        units[path] = contextUnit
-        loader.addClassLink("null.class", LazyLoader.Link(path, null))
 
         fernflower.decompileContext()
     }

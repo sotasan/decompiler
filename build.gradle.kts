@@ -5,10 +5,11 @@ plugins {
 }
 
 group = "dev.shota"
-version = "0.6.5"
+version = "0.7.0"
 
 repositories {
     mavenCentral()
+    maven("https://maven.quiltmc.org/repository/release/")
 }
 
 java {
@@ -22,8 +23,8 @@ javafx {
 }
 
 dependencies {
-    implementation(project(":fernflower"))
     implementation("dev.shota:stylus4j:0.1.4")
+    implementation("org.quiltmc:quiltflower:1.8.1")
     implementation("org.ow2.asm:asm:9.3")
     implementation("org.ow2.asm:asm-util:9.3")
     implementation("com.formdev:flatlaf:2.3")
