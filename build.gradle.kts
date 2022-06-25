@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "dev.shota"
-version = "0.6.2"
+version = "0.6.3"
 
 repositories {
     mavenCentral()
@@ -24,6 +24,8 @@ javafx {
 dependencies {
     implementation(project(":fernflower"))
     implementation("dev.shota:stylus4j:0.1.4")
+    implementation("org.ow2.asm:asm:9.3")
+    implementation("org.ow2.asm:asm-util:9.3")
     implementation("com.formdev:flatlaf:2.3")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")

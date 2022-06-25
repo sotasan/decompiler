@@ -1,7 +1,5 @@
-package dev.shota.decompiler
+package dev.shota.decompiler.java
 
-import dev.shota.decompiler.window.container.Code
-import dev.shota.decompiler.window.sidebar.Entry
 import org.jetbrains.java.decompiler.main.Fernflower
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger
@@ -12,13 +10,12 @@ import org.jetbrains.java.decompiler.struct.StructClass
 import org.jetbrains.java.decompiler.struct.StructContext
 import org.jetbrains.java.decompiler.struct.lazy.LazyLoader
 import org.jetbrains.java.decompiler.util.DataInputFullStream
-import org.jetbrains.java.decompiler.util.InterpreterUtil
 import java.io.File
 import java.util.jar.Manifest
 
-class Decompiler(private val entry: Entry) : IBytecodeProvider, IResultSaver, IFernflowerLogger() {
+class Decompiler(private val data: ByteArray) : IBytecodeProvider, IResultSaver, IFernflowerLogger() {
 
-    private val bytes = InterpreterUtil.getBytes(entry.file, entry.entry)
+    lateinit var code: String
 
     init {
         val fernflower = Fernflower(this, this, IFernflowerPreferences.DEFAULTS, this)
@@ -32,8 +29,8 @@ class Decompiler(private val entry: Entry) : IBytecodeProvider, IResultSaver, IF
         loaderField.isAccessible = true
         val loader = loaderField.get(structContext) as LazyLoader
 
-        val structClass = StructClass.create(DataInputFullStream(bytes), true, loader)
-        structContext.classes.put(entry.name, structClass)
+        val structClass = StructClass.create(DataInputFullStream(data), true, loader)
+        structContext.classes.put("null.class", structClass)
 
         val path = File("null.class").absolutePath
         val contextUnit = ContextUnit(ContextUnit.TYPE_FOLDER, null, path, true, this, fernflower)
@@ -44,19 +41,17 @@ class Decompiler(private val entry: Entry) : IBytecodeProvider, IResultSaver, IF
         val units = unitsField.get(structContext) as HashMap<String, ContextUnit>
 
         units[path] = contextUnit
-        loader.addClassLink(entry.name, LazyLoader.Link(path, null))
+        loader.addClassLink("null.class", LazyLoader.Link(path, null))
 
         fernflower.decompileContext()
     }
 
     override fun getBytecode(externalPath: String?, internalPath: String?): ByteArray {
-        return bytes
+        return data
     }
 
     override fun saveClassFile(path: String?, qualifiedName: String?, entryName: String?, content: String?, mapping: IntArray?) {
-        content?.let {
-            Code(entry, it.trimIndent())
-        }
+        code = content!!
     }
 
     override fun saveFolder(path: String?) {}

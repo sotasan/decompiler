@@ -1,25 +1,28 @@
 package dev.shota.decompiler.window.container
 
+import dev.shota.decompiler.java.Decompiler
 import dev.shota.decompiler.window.menu.view.items.Language
+import dev.shota.decompiler.window.sidebar.Entry
+import dev.shota.decompiler.window.sidebar.Type
+import javafx.beans.property.SimpleDoubleProperty
 import javafx.collections.ListChangeListener
 import javafx.scene.control.ContextMenu
 import javafx.scene.control.MenuItem
 import javafx.scene.control.Tab
 import javafx.scene.image.ImageView
 import javafx.scene.input.ScrollEvent
-import dev.shota.decompiler.window.sidebar.Entry
-import dev.shota.decompiler.window.sidebar.Type
-import javafx.beans.property.SimpleDoubleProperty
+import javafx.scene.layout.BorderPane
 import org.fxmisc.flowless.ScaledVirtualized
 import org.fxmisc.flowless.VirtualizedScrollPane
 import org.fxmisc.richtext.CodeArea
 import org.fxmisc.richtext.LineNumberFactory
 import org.fxmisc.richtext.model.StyleSpans
 import org.fxmisc.richtext.model.StyleSpansBuilder
+import org.jetbrains.java.decompiler.util.InterpreterUtil
 import java.util.*
 import java.util.regex.Pattern
 
-class Code(val entry: Entry, private val code: String) : Tab() {
+class Code(val entry: Entry) : Tab() {
 
     companion object {
 
@@ -44,7 +47,7 @@ class Code(val entry: Entry, private val code: String) : Tab() {
         private val bracket = "\\[|\\]"
         private val semicolon = "\\;"
         private val string = "\"([^\"\\\\]|\\\\.)*\""
-        private val comment = "//[^\\n]*|/\\\\*(.|\\\\R)*?\\\\*/|/\\\\*[^\\\\v]*|^\\\\h*\\\\*([^\\\\v]*|/)"
+        private val comment = "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/"
 
         private val pattern = Pattern.compile(
             "(?<KEYWORD>$keyword)" +
@@ -67,19 +70,28 @@ class Code(val entry: Entry, private val code: String) : Tab() {
 
     }
 
-    val codeArea = CodeArea(code)
+    val codeArea = CodeArea()
+    val data = InterpreterUtil.getBytes(entry.file, entry.entry)!!
+    var type = CodeType.JAVA
 
     init {
+        val code = if (entry.type == Type.CLASS) Decompiler(data).code else String(data)
+
         text = entry.name
         graphic = ImageView(entry.type.icon)
+        val root = BorderPane()
+        content = root
 
         codeArea.isEditable = false
         codeArea.paragraphGraphicFactory = LineNumberFactory.get(codeArea)
-        if (entry.type == Type.CLASS) codeArea.setStyleSpans(0, highlighting())
+        if (entry.type == Type.CLASS)
+            codeArea.textProperty().addListener { _, _, _ -> codeArea.setStyleSpans(0, highlighting()) }
+        codeArea.replaceText(code)
+
         val scaled = ScaledVirtualized(codeArea)
         scaled.zoom.xProperty().bind(zoom)
         scaled.zoom.yProperty().bind(zoom)
-        content = VirtualizedScrollPane(scaled)
+        root.center = VirtualizedScrollPane(scaled)
         codeArea.addEventFilter(ScrollEvent.ANY) {
             if (it.isShortcutDown)
                 setZoom(if (it.deltaY < 0) scaled.zoom.y * 0.9 else scaled.zoom.y / 0.9)
@@ -109,7 +121,7 @@ class Code(val entry: Entry, private val code: String) : Tab() {
     }
 
     private fun highlighting(): StyleSpans<Collection<String>>? {
-        val matcher = pattern.matcher(code)
+        val matcher = pattern.matcher(codeArea.text)
         val builder = StyleSpansBuilder<Collection<String>>()
         var end = 0
         while (matcher.find()) {
@@ -127,8 +139,14 @@ class Code(val entry: Entry, private val code: String) : Tab() {
             builder.add(Collections.singleton(style), matcher.end() - matcher.start())
             end = matcher.end()
         }
-        builder.add(Collections.emptyList(), code.length - end)
+        builder.add(Collections.emptyList(), codeArea.text.length - end)
         return builder.create()
+    }
+
+    enum class CodeType {
+
+        JAVA, BYTECODE
+
     }
 
 }
