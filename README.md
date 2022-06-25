@@ -6,7 +6,7 @@
     <a href="https://github.com/shotav/Decompiler/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/shotav/Decompiler?label=License"></a>
 </p>
 
-# <a href="https://github.com/shotav/Decompiler/blob/master/src/main/resources/logo/logo.png"><img src="https://github.com/shotav/Decompiler/raw/master/src/main/resources/logo/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
+# <a href="https://github.com/shotav/Decompiler/blob/master/src/main/resources/logo/logo.svg"><img src="https://github.com/shotav/Decompiler/raw/master/src/main/resources/logo/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
 
 Java Decompiler Gui
 
