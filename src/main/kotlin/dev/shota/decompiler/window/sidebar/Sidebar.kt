@@ -18,7 +18,7 @@ object Sidebar : BorderPane() {
     init {
         minWidth = 100.0
 
-        if (SystemInfo.isMacFullWindowContentSupported) {
+        if (SystemInfo.isMacOS && SystemInfo.isMacFullWindowContentSupported) {
             val space = Pane()
             space.prefHeight = 25.0
             top = space

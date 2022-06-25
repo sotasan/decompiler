@@ -9,7 +9,7 @@ object Container : TabPane() {
     init {
         minWidth = 300.0
         tabClosingPolicy = TabClosingPolicy.ALL_TABS
-        tabDragPolicy = if (SystemInfo.isMacFullWindowContentSupported) TabDragPolicy.FIXED else TabDragPolicy.REORDER
+        tabDragPolicy = if (SystemInfo.isMacOS && SystemInfo.isMacFullWindowContentSupported) TabDragPolicy.FIXED else TabDragPolicy.REORDER
     }
 
     fun open(entry: Entry) {

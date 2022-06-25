@@ -41,7 +41,7 @@ object Window : JFrame() {
         iconImage = icon
         jMenuBar = MenuBar()
 
-        if (SystemInfo.isMacFullWindowContentSupported) {
+        if (SystemInfo.isMacOS && SystemInfo.isMacFullWindowContentSupported) {
             getRootPane().putClientProperty("apple.awt.fullWindowContent", true)
             getRootPane().putClientProperty("apple.awt.transparentTitleBar", true)
             getRootPane().putClientProperty("apple.awt.windowTitleVisible", false)
