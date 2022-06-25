@@ -7,7 +7,7 @@
    viewBox="0 0 512 512"
    version="1.1"
    id="svg5"
-   inkscape:version="1.2 (dc2aeda, 2022-05-15)"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
    sodipodi:docname="logo.svg"
    inkscape:export-filename="logo.png"
    inkscape:export-xdpi="96"
@@ -27,14 +27,14 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="0.37676605"
-     inkscape:cx="771.03549"
-     inkscape:cy="599.84173"
-     inkscape:window-width="1728"
-     inkscape:window-height="966"
-     inkscape:window-x="-1"
-     inkscape:window-y="39"
-     inkscape:window-maximized="0"
+     inkscape:zoom="0.7535321"
+     inkscape:cx="277.36045"
+     inkscape:cy="256.12711"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
      id="defs2">
@@ -58,27 +58,28 @@
        class="UnoptimicedTransforms"
        inkscape:original-d="M 0,0"
        inkscape:path-effect="#path-effect482"
-       d="M 98.50164,24 H 413.49836 C 454.77227,24 488,57.227732 488,98.50164 V 413.49836 C 488,454.77227 454.77227,488 413.49836,488 H 98.50164 C 57.227732,488 24,454.77227 24,413.49836 V 98.50164 C 24,57.227732 57.227732,24 98.50164,24 Z"
+       d="m 106.56847,35.863496 h 298.94606 c 39.1708,0 70.70541,31.535766 70.70541,70.707994 v 298.957 c 0,39.17223 -31.53461,70.708 -70.70541,70.708 H 106.56847 c -39.170795,0 -70.705407,-31.53577 -70.705407,-70.708 v -298.957 c 0,-39.172228 31.534612,-70.707994 70.705407,-70.707994 z"
        id="path484"
        style="stroke-width:25;stroke-dasharray:none" />
     <rect
-       style="fill:#ffffff;stroke-width:25;stroke:#0196c9;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffffff;stroke:#0196c9;stroke-width:50.57623427;stroke-dasharray:none;stroke-opacity:1"
        id="rect61"
        width="464"
        height="464"
        x="24"
        y="24"
        ry="74.50164"
-       class="UnoptimicedTransforms" />
+       class="UnoptimicedTransforms"
+       transform="matrix(0.94904499,0,0,0.94907972,13.085983,13.085583)" />
     <text
        xml:space="preserve"
        id="text167"
-       style="font-size:233.333px;white-space:pre;shape-inside:url(#rect169);display:inline;fill:#000000;stroke-width:25;stroke-dasharray:none"
-       transform="translate(-39.462865,54.197824)"><tspan
+       style="font-size:400px;white-space:pre;shape-inside:url(#rect169);display:inline;fill:#000000;stroke-width:25;stroke-dasharray:none"
+       transform="translate(48.037109,-34.54187)"><tspan
          x="85.962891"
-         y="285.46856"
-         id="tspan13906"><tspan
+         y="436.54187"
+         id="tspan1147"><tspan
            style="font-weight:bold;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono Bold'"
-           id="tspan13904">{D}</tspan></tspan></text>
+           id="tspan1145">D</tspan></tspan></text>
   </g>
 </svg>
