@@ -15,7 +15,7 @@ class OpenFile : MenuItem("file.openFile", KeyEvent.VK_O) {
     override fun actionPerformed(e: ActionEvent?) {
         val fileChooser = JFileChooser()
         fileChooser.dialogTitle = text
-        fileChooser.fileFilter = FileNameExtensionFilter(Language.get("file.openFile.archive").value, "jar")
+        fileChooser.fileFilter = FileNameExtensionFilter(Language.get("file.openFile.archive").value, "jar", "war", "zip")
         fileChooser.isAcceptAllFileFilterUsed = false
         val option = fileChooser.showOpenDialog(Window)
         if (option == JFileChooser.APPROVE_OPTION)

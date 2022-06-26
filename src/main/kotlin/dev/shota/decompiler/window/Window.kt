@@ -63,9 +63,14 @@ object Window : JFrame() {
             it.consume()
         }
         panel.scene.setOnDragDropped {
-            if (it.dragboard.files.size > 0 && it.dragboard.files[0].extension.equals("jar", true)) {
-                Sidebar.open(it.dragboard.files[0])
-                it.isDropCompleted = true
+            if (it.dragboard.files.size > 0) {
+                val extension = it.dragboard.files[0].extension
+                if (extension.equals("jar", true) ||
+                    extension.equals("war", true) ||
+                    extension.equals("zip", true)) {
+                    Sidebar.open(it.dragboard.files[0])
+                    it.isDropCompleted = true
+                }
             }
             it.consume()
         }

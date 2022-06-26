@@ -48,7 +48,6 @@ class Bytecode : JRadioButtonMenuItem(), ActionListener {
         Platform.runLater {
             val code = Container.selectionModel.selectedItem as Code
             code.type = Code.CodeType.BYTECODE
-            code.codeArea.clear()
             code.codeArea.replaceText(Disassembler(code.data).code)
         }
     }

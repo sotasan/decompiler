@@ -48,7 +48,6 @@ class Java : JRadioButtonMenuItem(), ActionListener {
         Platform.runLater {
             val code = Container.selectionModel.selectedItem as Code
             code.type = Code.CodeType.JAVA
-            code.codeArea.clear()
             code.codeArea.replaceText(Decompiler(code.data).code)
         }
     }

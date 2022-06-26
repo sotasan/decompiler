@@ -4,6 +4,7 @@ import dev.shota.decompiler.java.Decompiler
 import dev.shota.decompiler.window.menu.view.items.Language
 import dev.shota.decompiler.window.sidebar.Entry
 import dev.shota.decompiler.window.sidebar.Type
+import javafx.application.Platform
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.collections.ListChangeListener
 import javafx.scene.control.ContextMenu
@@ -84,8 +85,16 @@ class Code(val entry: Entry) : Tab() {
 
         codeArea.isEditable = false
         codeArea.paragraphGraphicFactory = LineNumberFactory.get(codeArea)
-        if (entry.type == Type.CLASS)
-            codeArea.textProperty().addListener { _, _, _ -> codeArea.setStyleSpans(0, highlighting()) }
+        if (entry.type == Type.CLASS) {
+            codeArea.visibleParagraphs.addModificationObserver {
+                if (it.addedSize > 0) {
+                    val paragraph = (codeArea.firstVisibleParToAllParIndex() + it.from).coerceAtMost(codeArea.paragraphs.size - 1)
+                    val text = codeArea.getText(paragraph, 0, paragraph, codeArea.getParagraphLength(paragraph))
+                    val start = codeArea.getAbsolutePosition(paragraph, 0)
+                    Platform.runLater { codeArea.setStyleSpans(start, highlight(text)) }
+                }
+            }
+        }
         codeArea.replaceText(code)
 
         val scaled = ScaledVirtualized(codeArea)
@@ -120,8 +129,8 @@ class Code(val entry: Entry) : Tab() {
         Container.selectionModel.select(this)
     }
 
-    private fun highlighting(): StyleSpans<Collection<String>>? {
-        val matcher = pattern.matcher(codeArea.text)
+    private fun highlight(text: String): StyleSpans<Collection<String>>? {
+        val matcher = pattern.matcher(text)
         val builder = StyleSpansBuilder<Collection<String>>()
         var end = 0
         while (matcher.find()) {
@@ -139,7 +148,7 @@ class Code(val entry: Entry) : Tab() {
             builder.add(Collections.singleton(style), matcher.end() - matcher.start())
             end = matcher.end()
         }
-        builder.add(Collections.emptyList(), codeArea.text.length - end)
+        builder.add(Collections.emptyList(), text.length - end)
         return builder.create()
     }
 

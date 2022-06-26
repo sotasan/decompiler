@@ -29,11 +29,11 @@ class Decompiler(private val data: ByteArray) : IBytecodeProvider, IResultSaver,
         val loaderField = structContext.javaClass.getDeclaredField("loader")
         loaderField.isAccessible = true
         val loader = loaderField.get(structContext) as LazyLoader
-        loader.addClassLink("null.class", LazyLoader.Link(file.absolutePath, null))
+        loader.addClassLink(file.name, LazyLoader.Link(file.absolutePath, null))
 
         val structClass = StructClass.create(DataInputFullStream(data), true, loader)
         val contextUnit = ContextUnit(ContextUnit.TYPE_FOLDER, null, file.absolutePath, true, this, fernflower)
-        contextUnit.addClass(structClass, "null.class")
+        contextUnit.addClass(structClass, file.name)
 
         fernflower.decompileContext()
     }
