@@ -64,8 +64,4 @@ tasks {
         manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
         from(sourceSets.test.get().output)
     }
-
-    clean {
-        dependsOn(":fernflower:clean")
-    }
 }
