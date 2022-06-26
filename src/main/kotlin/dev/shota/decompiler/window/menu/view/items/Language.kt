@@ -19,6 +19,7 @@ object Language : JMenu() {
     init {
         add(Translation(Locale.ENGLISH, true))
         add(Translation(Locale.GERMAN))
+        generate()
 
         val translation = get("view.language")
         text = translation.value
@@ -32,24 +33,28 @@ object Language : JMenu() {
         return property
     }
 
+    private fun generate() {
+        for (i in 0 until itemCount) {
+            val translation = getItem(i) as Translation
+            if (translation.language.language == Locale.getDefault().language)
+                translation.isSelected = true
+        }
+        ResourceBundle.clearCache()
+        bundle = ResourceBundle.getBundle("language", Locale.getDefault())
+        for (property in properties)
+            property.value.value = bundle.getString(property.key)
+    }
+
     private class Translation(val language: Locale, default: Boolean = false) : JRadioButtonMenuItem(language.getDisplayName(language), default), ActionListener {
 
         init {
             group.add(this)
             addActionListener(this)
-            if (Locale.getDefault().language.equals(language.language)) {
-                group.clearSelection()
-                isSelected = true
-                actionPerformed(null)
-            }
         }
 
         override fun actionPerformed(e: ActionEvent?) {
             Locale.setDefault(language)
-            ResourceBundle.clearCache()
-            bundle = ResourceBundle.getBundle("language", language)
-            for (property in properties)
-                property.value.value = bundle.getString(property.key)
+            generate()
         }
 
     }
