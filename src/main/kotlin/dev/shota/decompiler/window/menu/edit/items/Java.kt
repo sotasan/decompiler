@@ -2,6 +2,7 @@ package dev.shota.decompiler.window.menu.edit.items
 
 import dev.shota.decompiler.java.Decompiler
 import dev.shota.decompiler.window.container.Code
+import dev.shota.decompiler.window.container.CodeType
 import dev.shota.decompiler.window.container.Container
 import dev.shota.decompiler.window.menu.edit.Edit
 import dev.shota.decompiler.window.menu.view.items.Language
@@ -29,7 +30,7 @@ class Java : JRadioButtonMenuItem(), ActionListener {
             val code = item as Code
             if (code.entry.type == Type.CLASS) {
                 isEnabled = true
-                isSelected = code.type == Code.CodeType.JAVA
+                isSelected = code.type == CodeType.JAVA
             } else {
                 isEnabled = false
                 Edit.group.clearSelection()
@@ -47,8 +48,11 @@ class Java : JRadioButtonMenuItem(), ActionListener {
     override fun actionPerformed(e: ActionEvent?) {
         Platform.runLater {
             val code = Container.selectionModel.selectedItem as Code
-            code.type = Code.CodeType.JAVA
+            code.type = CodeType.JAVA
+            code.codeArea.clear()
             code.codeArea.replaceText(Decompiler(code.data).code)
+            code.codeArea.moveTo(0)
+            code.codeArea.requestFollowCaret()
         }
     }
 

@@ -43,7 +43,7 @@ class Decompiler(private val data: ByteArray) : IBytecodeProvider, IResultSaver,
     }
 
     override fun saveClassFile(path: String?, qualifiedName: String?, entryName: String?, content: String?, mapping: IntArray?) {
-        code = content!!
+        code = content!!.trimEnd()
     }
 
     override fun saveFolder(path: String?) {}

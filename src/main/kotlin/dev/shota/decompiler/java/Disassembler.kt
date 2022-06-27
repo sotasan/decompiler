@@ -13,9 +13,9 @@ class Disassembler(data: ByteArray) {
     init {
         val reader = ClassReader(ByteArrayInputStream(data))
         val writer = StringWriter()
-        val tcv = TraceClassVisitor(PrintWriter(writer))
-        reader.accept(tcv, 0)
-        code = writer.toString()
+        val visitor = TraceClassVisitor(PrintWriter(writer))
+        reader.accept(visitor, ClassReader.SKIP_DEBUG)
+        code = writer.toString().trimEnd()
     }
 
 }
