@@ -1,13 +1,19 @@
 package dev.shota.decompiler.window.sidebar
 
 import com.formdev.flatlaf.util.SystemInfo
+import dev.shota.decompiler.window.Window
 import dev.shota.decompiler.window.container.Container
+import javafx.application.Platform
 import javafx.scene.control.TreeView
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyEvent
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Pane
+import java.awt.GraphicsEnvironment
+import java.awt.event.ComponentAdapter
+import java.awt.event.ComponentEvent
 import java.io.File
+import java.util.*
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 
@@ -22,6 +28,15 @@ object Sidebar : BorderPane() {
             val space = Pane()
             space.prefHeight = 25.0
             top = space
+
+            Window.addComponentListener(object : ComponentAdapter() {
+                override fun componentResized(e: ComponentEvent?) {
+                    Platform.runLater {
+                        val bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().maximumWindowBounds
+                        top = if (Window.width == bounds.width && Window.height >= bounds.height) null else space
+                    }
+                }
+            })
         }
 
         center = tree

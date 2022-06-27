@@ -42,9 +42,9 @@ object Window : JFrame() {
         jMenuBar = MenuBar()
 
         if (SystemInfo.isMacOS && SystemInfo.isMacFullWindowContentSupported) {
-            getRootPane().putClientProperty("apple.awt.fullWindowContent", true)
-            getRootPane().putClientProperty("apple.awt.transparentTitleBar", true)
-            getRootPane().putClientProperty("apple.awt.windowTitleVisible", false)
+            rootPane.putClientProperty("apple.awt.fullWindowContent", true)
+            rootPane.putClientProperty("apple.awt.transparentTitleBar", true)
+            rootPane.putClientProperty("apple.awt.windowTitleVisible", false)
         }
 
         val root = SplitPane(Sidebar, Container)
