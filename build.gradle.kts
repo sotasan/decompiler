@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "dev.shota"
-version = "0.7.2"
+version = "0.7.3"
 
 repositories {
     mavenCentral()
@@ -26,8 +26,10 @@ dependencies {
     implementation("dev.shota:stylus4j:0.1.4")
     implementation("org.quiltmc:quiltflower:1.8.1")
     implementation("org.ow2.asm:asm:9.3")
+    implementation("org.ow2.asm:asm-tree:9.3")
     implementation("org.ow2.asm:asm-util:9.3")
     implementation("com.formdev:flatlaf:2.3")
+    implementation("org.controlsfx:controlsfx:11.1.1")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")

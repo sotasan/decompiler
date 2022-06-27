@@ -1,11 +1,11 @@
 package dev.shota.decompiler.window.sidebar
 
 import com.formdev.flatlaf.util.SystemInfo
+import dev.shota.decompiler.window.container.Container
 import javafx.scene.control.TreeView
 import javafx.scene.input.KeyCode
 import javafx.scene.input.KeyEvent
 import javafx.scene.layout.BorderPane
-import dev.shota.decompiler.window.container.Container
 import javafx.scene.layout.Pane
 import java.io.File
 import java.util.jar.JarEntry
@@ -40,7 +40,6 @@ object Sidebar : BorderPane() {
     }
 
     fun open(file: File) {
-        if (!file.exists()) return
         Container.tabs.clear()
         val entries = ArrayList<JarEntry>()
         val jar = JarFile(file)

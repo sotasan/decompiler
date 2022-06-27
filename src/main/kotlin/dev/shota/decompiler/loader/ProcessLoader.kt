@@ -1,0 +1,1 @@
+package dev.shota.decompiler.loader
