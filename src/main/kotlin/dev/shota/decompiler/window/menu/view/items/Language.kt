@@ -1,5 +1,6 @@
 package dev.shota.decompiler.window.menu.view.items
 
+import dev.shota.decompiler.window.utils.preferences
 import javafx.beans.property.Property
 import javafx.beans.property.SimpleStringProperty
 import java.awt.event.ActionEvent
@@ -34,6 +35,9 @@ object Language : JMenu() {
     }
 
     private fun generate() {
+        val language = preferences.get("language", Locale.getDefault().language)
+        Locale.setDefault(Locale(language))
+
         for (i in 0 until itemCount) {
             val translation = getItem(i) as Translation
             if (translation.language.language == Locale.getDefault().language)
@@ -53,7 +57,8 @@ object Language : JMenu() {
         }
 
         override fun actionPerformed(e: ActionEvent?) {
-            Locale.setDefault(language)
+            preferences.put("language", language.language)
+            preferences.flush()
             generate()
         }
 
