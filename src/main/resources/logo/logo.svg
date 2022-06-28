@@ -7,7 +7,7 @@
    viewBox="0 0 512 512"
    version="1.1"
    id="svg5"
-   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   inkscape:version="1.2 (dc2aeda, 2022-05-15)"
    sodipodi:docname="logo.svg"
    inkscape:export-filename="logo.png"
    inkscape:export-xdpi="96"
@@ -28,12 +28,12 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="0.7535321"
-     inkscape:cx="277.36045"
+     inkscape:cx="278.02399"
      inkscape:cy="256.12711"
-     inkscape:window-width="2560"
-     inkscape:window-height="1369"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="1728"
+     inkscape:window-height="966"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -62,7 +62,7 @@
        id="path484"
        style="stroke-width:25;stroke-dasharray:none" />
     <rect
-       style="fill:#ffffff;stroke:#0196c9;stroke-width:50.57623427;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;stroke:#0096c9;stroke-width:50.57623427;stroke-dasharray:none;stroke-opacity:1"
        id="rect61"
        width="464"
        height="464"
@@ -77,9 +77,9 @@
        style="font-size:400px;white-space:pre;shape-inside:url(#rect169);display:inline;fill:#000000;stroke-width:25;stroke-dasharray:none"
        transform="translate(48.037109,-34.54187)"><tspan
          x="85.962891"
-         y="436.54187"
-         id="tspan1147"><tspan
+         y="437.52392"
+         id="tspan4507"><tspan
            style="font-weight:bold;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono Bold'"
-           id="tspan1145">D</tspan></tspan></text>
+           id="tspan4505">D</tspan></tspan></text>
   </g>
 </svg>

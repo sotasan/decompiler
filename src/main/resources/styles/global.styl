@@ -17,23 +17,22 @@
 
 .tree-view {
   -fx-padding: 0
-  -fx-background-color: none
+  -fx-background-color: transparent
 
   .tree-cell {
-    -fx-text-fill: black
-    -fx-background-color: none
+    -fx-background-color: transparent
 
     &:focused {
-      -fx-text-fill: white
-      -fx-background-color: #0196c9
+      -fx-text-fill: -fx-light-text-color
+      -fx-background-color: -fx-accent
 
       .tree-disclosure-node .arrow {
-        -fx-background-color: white
+        -fx-background-color: -fx-light-text-color
       }
     }
 
     .tree-disclosure-node .arrow {
-      -fx-background-color: black
+      -fx-background-color: -fx-mark-color
     }
   }
 }
@@ -43,18 +42,18 @@
     -fx-padding: 0
 
     .tab-header-background  {
-      -fx-background-color: none
+      -fx-background-color: transparent
     }
 
     .tab {
-      -fx-background-color: white
-      -fx-border-color: white
+      -fx-background-color: -fx-control-inner-background
+      -fx-border-color: -fx-control-inner-background
       -fx-background-radius: 0
       -fx-background-insets: 0
       -fx-border-width: 0 0 1 0
 
       &:selected {
-        -fx-border-color: #0196c9
+        -fx-border-color: -fx-accent
       }
 
       .focus-indicator {
@@ -64,7 +63,7 @@
   }
 
   .tab-content-area .virtualized-scroll-pane {
-    -fx-background-color: white
+    -fx-background-color: -fx-control-inner-background
 
     .styled-text-area {
       * {
@@ -73,13 +72,13 @@
       }
 
       .selection {
-        -fx-fill: #0196c9
+        -fx-fill: -fx-accent
       }
 
       .lineno {
-        -fx-text-fill: black
+        -fx-text-fill: -fx-mark-color
         -fx-font-style: normal
-        -fx-background-color: white
+        -fx-background-color: -fx-control-inner-background
       }
     }
   }
