@@ -6,12 +6,15 @@ import dev.shota.decompiler.window.container.Container
 import dev.shota.decompiler.window.menu.MenuBar
 import dev.shota.decompiler.window.sidebar.Sidebar
 import dev.shota.decompiler.window.utils.styles
+import javafx.application.Platform
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
 import javafx.scene.control.SplitPane
-import javafx.scene.input.TransferMode
 import javafx.scene.text.Font
 import java.awt.Taskbar
+import java.awt.datatransfer.DataFlavor
+import java.awt.dnd.*
+import java.io.File
 import javax.swing.ImageIcon
 import javax.swing.JFrame
 import kotlin.system.exitProcess
@@ -46,6 +49,30 @@ object Window : JFrame() {
             rootPane.putClientProperty("apple.awt.windowTitleVisible", false)
         }
 
+        dropTarget = object : DropTarget() {
+            override fun dragOver(event: DropTargetDragEvent?) {
+                event!!.acceptDrag(DnDConstants.ACTION_COPY)
+            }
+
+            override fun drop(event: DropTargetDropEvent?) {
+                event!!.acceptDrop(DnDConstants.ACTION_COPY)
+                if (event.transferable.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+                    val files = event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<*>
+                    if (files.isNotEmpty()) {
+                        val file = files.first() as File
+                        if (file.extension.equals("jar", true) ||
+                            file.extension.equals("war", true) ||
+                            file.extension.equals("zip", true)) {
+                            Platform.runLater { Sidebar.open(file) }
+                            event.dropComplete(true)
+                            return
+                        }
+                    }
+                }
+                event.dropComplete(false)
+            }
+        }
+
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
 
@@ -56,25 +83,9 @@ object Window : JFrame() {
             stylesheets.add(styles("syntax.styl"))
         }
 
-        val panel = JFXPanel()
-        panel.scene = Scene(root, 894.0, 528.0).apply {
-            setOnDragOver {
-                it.acceptTransferModes(*TransferMode.COPY_OR_MOVE)
-                it.consume()
-            }
-
-            setOnDragDropped {
-                if (it.dragboard.files.size > 0) {
-                    val extension = it.dragboard.files[0].extension
-                    if (extension.equals("jar", true) ||
-                        extension.equals("war", true) ||
-                        extension.equals("zip", true)) {
-                        Sidebar.open(it.dragboard.files[0])
-                        it.isDropCompleted = true
-                    }
-                }
-                it.consume()
-            }
+        val panel = JFXPanel().apply {
+            scene = Scene(root, 894.0, 528.0)
+            dropTarget.isActive = false
         }
 
         add(panel)
