@@ -32,8 +32,7 @@ object Sidebar : BorderPane() {
             Window.addComponentListener(object : ComponentAdapter() {
                 override fun componentResized(e: ComponentEvent?) {
                     Platform.runLater {
-                        val bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().maximumWindowBounds
-                        top = if (Window.width == bounds.width && Window.height >= bounds.height) null else space
+                        top = if (Window.height >= GraphicsEnvironment.getLocalGraphicsEnvironment().maximumWindowBounds.height) null else space
                     }
                 }
             })
