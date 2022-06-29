@@ -12,7 +12,7 @@ class File : Menu("file", KeyEvent.VK_F) {
         add(OpenProcess())
         add(CloseTab())
         add(JSeparator())
-        add(NewWindow())
+        add(NewInstance())
         add(Exit())
     }
 

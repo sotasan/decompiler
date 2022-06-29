@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.lang.management.ManagementFactory
 
-class NewWindow : MenuItem("file.newWindow", KeyEvent.VK_N) {
+class NewInstance : MenuItem("file.newInstance", KeyEvent.VK_N) {
 
     override fun actionPerformed(e: ActionEvent?) {
         val java = ProcessHandle.current().info().command().get()

@@ -34,7 +34,7 @@ class About : Popup("help.about") {
             children.addAll(
                 Label("Decompiler").apply { id = "title" },
                 Label("${Language.get("about.version").value} ${javaClass.`package`.specificationVersion ?: "0.0.0"}"),
-                Label("Copyright 2022 shota")
+                Label("${Language.get("about.copyright").value} 2022 shota")
             )
         }
 
@@ -42,7 +42,7 @@ class About : Popup("help.about") {
         GridPane.setHalignment(controls, HPos.RIGHT)
         root.add(controls, 1, 1)
 
-        Button("GitHub").run {
+        Button(Language.get("about.github").value).run {
             controls.children.add(this)
             setOnAction {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))

@@ -20,6 +20,9 @@ object Language : JMenu() {
     init {
         add(Translation(Locale.ENGLISH, true))
         add(Translation(Locale.GERMAN))
+        add(Translation(Locale.JAPANESE))
+        add(Translation(Locale.SIMPLIFIED_CHINESE))
+        add(Translation(Locale("ru")))
         generate()
 
         val translation = get("view.language")
@@ -44,7 +47,7 @@ object Language : JMenu() {
                 translation.isSelected = true
         }
         ResourceBundle.clearCache()
-        bundle = ResourceBundle.getBundle("language", Locale.getDefault())
+        bundle = ResourceBundle.getBundle("lang/language", Locale.getDefault())
         for (property in properties)
             property.value.value = bundle.getString(property.key)
     }

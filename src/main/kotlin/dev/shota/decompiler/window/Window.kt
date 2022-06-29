@@ -47,6 +47,7 @@ object Window : JFrame() {
             rootPane.putClientProperty("apple.awt.fullWindowContent", true)
             rootPane.putClientProperty("apple.awt.transparentTitleBar", true)
             rootPane.putClientProperty("apple.awt.windowTitleVisible", false)
+            rootPane.putClientProperty("apple.awt.fullscreenable", true)
         }
 
         dropTarget = object : DropTarget() {
