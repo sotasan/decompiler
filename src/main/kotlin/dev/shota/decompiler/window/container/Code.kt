@@ -98,8 +98,10 @@ class Code(val entry: Entry) : Tab() {
         scaled.zoom.yProperty().bind(zoom)
         root.center = VirtualizedScrollPane(scaled)
         codeArea.addEventFilter(ScrollEvent.ANY) {
-            if (it.isShortcutDown)
+            if (it.isShortcutDown) {
                 setZoom(if (it.deltaY < 0) scaled.zoom.y * 0.9 else scaled.zoom.y / 0.9)
+                it.consume()
+            }
         }
 
         contextMenu = ContextMenu()
