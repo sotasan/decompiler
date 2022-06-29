@@ -18,11 +18,12 @@ class Copy : MenuItem("edit.copy", KeyEvent.VK_C) {
                 return@addListener
             }
 
-            val tab = (item as Code)
-            isEnabled = tab.codeArea.selectedText.isNotEmpty()
-            tab.codeArea.selectedTextProperty().addListener { _, _, text ->
-                isEnabled = text.isNotEmpty()
+            val tab = (item as Code).apply {
+                codeArea.selectedTextProperty().addListener { _, _, text ->
+                    isEnabled = text.isNotEmpty()
+                }
             }
+            isEnabled = tab.codeArea.selectedText.isNotEmpty()
         }
     }
 

@@ -18,8 +18,9 @@ class SelectAll : MenuItem("edit.selectAll", KeyEvent.VK_A) {
 
     override fun actionPerformed(e: ActionEvent?) {
         Platform.runLater {
-            val tab = Container.selectionModel.selectedItem as Code
-            tab.codeArea.selectAll()
+            (Container.selectionModel.selectedItem as Code).run {
+                codeArea.selectAll()
+            }
         }
     }
 

@@ -47,12 +47,13 @@ class Java : JRadioButtonMenuItem(), ActionListener {
 
     override fun actionPerformed(e: ActionEvent?) {
         Platform.runLater {
-            val code = Container.selectionModel.selectedItem as Code
-            code.type = CodeType.JAVA
-            code.codeArea.clear()
-            code.codeArea.replaceText(Decompiler(code.data).code)
-            code.codeArea.moveTo(0)
-            code.codeArea.requestFollowCaret()
+            (Container.selectionModel.selectedItem as Code).run {
+                type = CodeType.JAVA
+                codeArea.clear()
+                codeArea.replaceText(Decompiler(data).code)
+                codeArea.moveTo(0)
+                codeArea.requestFollowCaret()
+            }
         }
     }
 

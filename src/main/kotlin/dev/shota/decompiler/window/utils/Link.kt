@@ -10,7 +10,8 @@ class Link(url: String) : Hyperlink(url) {
     init {
         setOnAction {
             SwingUtilities.invokeLater {
-                Desktop.getDesktop().browse(URI(text))
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
+                    Desktop.getDesktop().browse(URI(text))
             }
         }
     }

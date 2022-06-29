@@ -42,12 +42,12 @@ class Code(val entry: Entry) : Tab() {
         )
 
         private val keyword = "\\b(${keywords.joinToString("|")})\\b"
-        private val paren = "\\(|\\)"
-        private val brace = "\\{|\\}"
-        private val bracket = "\\[|\\]"
-        private val semicolon = "\\;"
-        private val string = "\"([^\"\\\\]|\\\\.)*\""
-        private val comment = "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/"
+        private const val paren = "\\(|\\)"
+        private const val brace = "\\{|\\}"
+        private const val bracket = "\\[|\\]"
+        private const val semicolon = "\\;"
+        private const val string = "\"([^\"\\\\]|\\\\.)*\""
+        private const val comment = "//.*|(\"(?:\\\\[^\"]|\\\\\"|.)*?\")|(?s)/\\*.*?\\*/"
 
         private val pattern = Pattern.compile(
             "(?<KEYWORD>$keyword)" +

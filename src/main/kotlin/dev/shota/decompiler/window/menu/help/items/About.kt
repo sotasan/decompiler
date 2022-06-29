@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent
 class About : MenuItem("help.about", KeyEvent.VK_A, 0, false) {
 
     init {
-        if (Desktop.getDesktop().isSupported(Desktop.Action.APP_ABOUT)) {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.APP_ABOUT)) {
             Desktop.getDesktop().setAboutHandler { actionPerformed(null) }
             isVisible = false
         }

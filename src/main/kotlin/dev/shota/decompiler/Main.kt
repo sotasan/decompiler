@@ -3,6 +3,8 @@ package dev.shota.decompiler
 import com.formdev.flatlaf.FlatLightLaf
 import javafx.application.Platform
 import dev.shota.decompiler.window.Window
+import dev.shota.decompiler.window.sidebar.Sidebar
+import java.io.File
 
 class Main {
 
@@ -15,7 +17,8 @@ class Main {
             System.setProperty("apple.awt.application.appearance", "NSAppearanceNameAqua")
             FlatLightLaf.setup()
             Platform.startup {}
-            Window.run(args)
+            Window.isVisible = true
+            if (args.isNotEmpty()) Platform.runLater { Sidebar.open(File(args[0])) }
         }
 
     }

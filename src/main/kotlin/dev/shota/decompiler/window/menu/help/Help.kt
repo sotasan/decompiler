@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent
 class Help : Menu("help", KeyEvent.VK_H) {
 
     init {
-        isVisible = !Desktop.getDesktop().isSupported(Desktop.Action.APP_ABOUT)
+        isVisible = Desktop.isDesktopSupported() && !Desktop.getDesktop().isSupported(Desktop.Action.APP_ABOUT)
 
         add(About())
     }

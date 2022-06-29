@@ -47,12 +47,13 @@ class Bytecode : JRadioButtonMenuItem(), ActionListener {
 
     override fun actionPerformed(e: ActionEvent?) {
         Platform.runLater {
-            val code = Container.selectionModel.selectedItem as Code
-            code.type = CodeType.BYTECODE
-            code.codeArea.clear()
-            code.codeArea.replaceText(Disassembler(code.data).code)
-            code.codeArea.moveTo(0)
-            code.codeArea.requestFollowCaret()
+            (Container.selectionModel.selectedItem as Code).run {
+                type = CodeType.BYTECODE
+                codeArea.clear()
+                codeArea.replaceText(Disassembler(data).code)
+                codeArea.moveTo(0)
+                codeArea.requestFollowCaret()
+            }
         }
     }
 
