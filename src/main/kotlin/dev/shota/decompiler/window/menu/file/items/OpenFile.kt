@@ -1,11 +1,10 @@
 package dev.shota.decompiler.window.menu.file.items
 
 import com.formdev.flatlaf.util.SystemInfo
+import dev.shota.decompiler.loader.fileLoader
 import dev.shota.decompiler.window.Window
 import dev.shota.decompiler.window.menu.MenuItem
 import dev.shota.decompiler.window.menu.view.items.Language
-import dev.shota.decompiler.window.sidebar.Sidebar
-import javafx.application.Platform
 import java.awt.FileDialog
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
@@ -44,7 +43,7 @@ class OpenFile : MenuItem("file.openFile", KeyEvent.VK_O) {
         }
 
         if (f != null)
-            Platform.runLater { Sidebar.open(f) }
+            fileLoader(f)
     }
 
 }

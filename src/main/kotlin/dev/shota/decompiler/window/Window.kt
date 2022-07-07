@@ -2,11 +2,11 @@ package dev.shota.decompiler.window
 
 import com.formdev.flatlaf.util.SystemInfo
 import com.sun.javafx.tk.Toolkit
+import dev.shota.decompiler.loader.fileLoader
 import dev.shota.decompiler.window.container.Container
 import dev.shota.decompiler.window.menu.MenuBar
 import dev.shota.decompiler.window.sidebar.Sidebar
 import dev.shota.decompiler.window.utils.styles
-import javafx.application.Platform
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
 import javafx.scene.control.SplitPane
@@ -35,6 +35,8 @@ object Window : JFrame() {
         "OpenSans-SemiBold", "OpenSans-SemiBoldItalic"
     )
 
+    val root: SplitPane
+
     init {
         title = "Decompiler"
         defaultCloseOperation = DISPOSE_ON_CLOSE
@@ -61,13 +63,8 @@ object Window : JFrame() {
                     val files = event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<*>
                     if (files.isNotEmpty()) {
                         val file = files.first() as File
-                        if (file.extension.equals("jar", true) ||
-                            file.extension.equals("war", true) ||
-                            file.extension.equals("zip", true)) {
-                            Platform.runLater { Sidebar.open(file) }
-                            event.dropComplete(true)
-                            return
-                        }
+                        event.dropComplete(fileLoader(file))
+                        return
                     }
                 }
                 event.dropComplete(false)
@@ -77,7 +74,7 @@ object Window : JFrame() {
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
 
-        val root = SplitPane(Sidebar, Container).apply {
+        root = SplitPane().apply {
             setDividerPositions(Sidebar.minWidth / (Sidebar.minWidth + Container.minWidth), Container.minWidth / (Sidebar.minWidth + Container.minWidth))
             SplitPane.setResizableWithParent(Sidebar, false)
             stylesheets.add(styles("global.styl"))

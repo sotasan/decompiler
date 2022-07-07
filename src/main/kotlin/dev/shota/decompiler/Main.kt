@@ -1,9 +1,9 @@
 package dev.shota.decompiler
 
 import com.formdev.flatlaf.FlatLightLaf
+import dev.shota.decompiler.loader.fileLoader
 import javafx.application.Platform
 import dev.shota.decompiler.window.Window
-import dev.shota.decompiler.window.sidebar.Sidebar
 import java.io.File
 
 class Main {
@@ -18,7 +18,7 @@ class Main {
             FlatLightLaf.setup()
             Platform.startup {}
             Window.isVisible = true
-            if (args.isNotEmpty()) Platform.runLater { Sidebar.open(File(args[0])) }
+            if (args.isNotEmpty()) fileLoader(File(args[0]))
         }
 
     }

@@ -2,7 +2,6 @@ package dev.shota.decompiler.window.container
 
 import dev.shota.decompiler.java.Decompiler
 import dev.shota.decompiler.window.menu.view.items.Language
-import dev.shota.decompiler.window.sidebar.Entry
 import dev.shota.decompiler.window.sidebar.Type
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.collections.ListChangeListener
@@ -18,11 +17,10 @@ import org.fxmisc.richtext.CodeArea
 import org.fxmisc.richtext.LineNumberFactory
 import org.fxmisc.richtext.model.StyleSpans
 import org.fxmisc.richtext.model.StyleSpansBuilder
-import org.jetbrains.java.decompiler.util.InterpreterUtil
 import java.util.*
 import java.util.regex.Pattern
 
-class Code(val entry: Entry) : Tab() {
+class Code(name: String, val data: ByteArray, val clazz: Boolean) : Tab() {
 
     companion object {
 
@@ -71,20 +69,19 @@ class Code(val entry: Entry) : Tab() {
     }
 
     val codeArea = CodeArea()
-    val data = InterpreterUtil.getBytes(entry.file, entry.entry)!!
     var type = CodeType.JAVA
 
     init {
-        val code = if (entry.type == Type.CLASS) Decompiler(data).code else String(data)
+        val code = if (clazz) Decompiler(data).code else String(data)
 
-        text = entry.name
-        graphic = ImageView(entry.type.icon)
+        text = name
+        graphic = ImageView(if (clazz) Type.CLASS.icon else Type.TEXT.icon)
         val root = BorderPane()
         content = root
 
         codeArea.isEditable = false
         codeArea.paragraphGraphicFactory = LineNumberFactory.get(codeArea)
-        if (entry.type == Type.CLASS) {
+        if (clazz) {
             codeArea.textProperty().addListener { _, _, _ ->
                 codeArea.setStyleSpans(0, highlight())
             }

@@ -6,7 +6,6 @@ import dev.shota.decompiler.window.container.CodeType
 import dev.shota.decompiler.window.container.Container
 import dev.shota.decompiler.window.menu.edit.Edit
 import dev.shota.decompiler.window.menu.view.items.Language
-import dev.shota.decompiler.window.sidebar.Type
 import javafx.application.Platform
 import java.awt.Toolkit
 import java.awt.event.ActionEvent
@@ -28,7 +27,7 @@ class Java : JRadioButtonMenuItem(), ActionListener {
             }
 
             val code = item as Code
-            if (code.entry.type == Type.CLASS) {
+            if (code.clazz) {
                 isEnabled = true
                 isSelected = code.type == CodeType.JAVA
             } else {

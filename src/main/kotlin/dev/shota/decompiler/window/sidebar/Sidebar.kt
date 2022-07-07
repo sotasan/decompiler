@@ -2,7 +2,6 @@ package dev.shota.decompiler.window.sidebar
 
 import com.formdev.flatlaf.util.SystemInfo
 import dev.shota.decompiler.window.Window
-import dev.shota.decompiler.window.container.Container
 import javafx.application.Platform
 import javafx.scene.control.TreeView
 import javafx.scene.input.KeyCode
@@ -12,10 +11,6 @@ import javafx.scene.layout.Pane
 import java.awt.GraphicsEnvironment
 import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent
-import java.io.File
-import java.util.*
-import java.util.jar.JarEntry
-import java.util.jar.JarFile
 
 object Sidebar : BorderPane() {
 
@@ -46,26 +41,11 @@ object Sidebar : BorderPane() {
                 if (item != null) {
                     if (item.value.type == Type.ARCHIVE || item.value.type == Type.PACKAGE)
                         item.isExpanded = !item.isExpanded
-                    else if (item.value.type != Type.FILE)
-                        Container.open(item.value)
+                    // else if (item.value.type != Type.FILE)
+                        // Container.open(item.value)
                 }
             }
         }
-    }
-
-    fun open(file: File) {
-        Container.tabs.clear()
-        val entries = ArrayList<JarEntry>()
-        val jar = JarFile(file)
-        val jarEntries = jar.entries()
-        while (jarEntries.hasMoreElements())
-            entries.add(jarEntries.nextElement())
-        val entry = Entry(jar, null)
-        entry.name = file.name
-        entry.path = file.absolutePath
-        entry.type = Type.ARCHIVE
-        tree.root = Item(entries, entry)
-        tree.selectionModel.select(tree.root)
     }
 
 }
