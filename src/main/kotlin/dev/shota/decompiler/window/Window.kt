@@ -74,7 +74,7 @@ object Window : JFrame() {
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
 
-        root = SplitPane().apply {
+        root = SplitPane(Sidebar, Container).apply {
             setDividerPositions(Sidebar.minWidth / (Sidebar.minWidth + Container.minWidth), Container.minWidth / (Sidebar.minWidth + Container.minWidth))
             SplitPane.setResizableWithParent(Sidebar, false)
             stylesheets.add(styles("global.styl"))
