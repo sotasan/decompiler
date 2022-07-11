@@ -1,4 +1,4 @@
-package dev.shota.decompiler.window.popup
+package dev.shota.decompiler.window.dialogs
 
 import dev.shota.decompiler.window.menu.view.items.Language
 import dev.shota.decompiler.window.utils.styles
@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox
 import java.awt.Desktop
 import java.net.URI
 
-class About : Popup("help.about") {
+class About : Dialog("help.about") {
 
     init {
         val root = GridPane().apply {

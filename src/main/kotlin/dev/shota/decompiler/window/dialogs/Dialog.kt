@@ -1,4 +1,4 @@
-package dev.shota.decompiler.window.popup
+package dev.shota.decompiler.window.dialogs
 
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Parent
@@ -14,7 +14,7 @@ import javax.swing.JRootPane
 import javax.swing.KeyStroke
 import javax.swing.SwingUtilities
 
-open class Popup(title: String) : JDialog(Window, Language.get(title).value, true) {
+open class Dialog(title: String) : JDialog(Window, Language.get(title).value, true) {
 
     fun run(root: Parent) {
         val panel = JFXPanel()

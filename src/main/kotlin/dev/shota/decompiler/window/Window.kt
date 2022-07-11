@@ -35,8 +35,6 @@ object Window : JFrame() {
         "OpenSans-SemiBold", "OpenSans-SemiBoldItalic"
     )
 
-    val root: SplitPane
-
     init {
         title = "Decompiler"
         defaultCloseOperation = DISPOSE_ON_CLOSE
@@ -74,7 +72,7 @@ object Window : JFrame() {
         for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
 
-        root = SplitPane(Sidebar, Container).apply {
+        val root = SplitPane(Sidebar, Container).apply {
             setDividerPositions(Sidebar.minWidth / (Sidebar.minWidth + Container.minWidth), Container.minWidth / (Sidebar.minWidth + Container.minWidth))
             SplitPane.setResizableWithParent(Sidebar, false)
             stylesheets.add(styles("global.styl"))

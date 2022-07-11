@@ -1,4 +1,4 @@
-package dev.shota.decompiler.window.popup
+package dev.shota.decompiler.window.dialogs
 
 import com.sun.tools.attach.VirtualMachine
 import com.sun.tools.attach.VirtualMachineDescriptor
@@ -13,7 +13,7 @@ import java.io.InputStreamReader
 import java.lang.management.ManagementFactory
 import java.net.ServerSocket
 
-class Processes : Popup("file.openProcess") {
+class Processes : Dialog("file.openProcess") {
 
     init {
         val root = VBox()

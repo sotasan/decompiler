@@ -1,7 +1,7 @@
 package dev.shota.decompiler.window.menu.help.items
 
 import dev.shota.decompiler.window.menu.MenuItem
-import dev.shota.decompiler.window.popup.About
+import dev.shota.decompiler.window.dialogs.About
 import java.awt.Desktop
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
