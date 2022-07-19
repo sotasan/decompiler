@@ -46,7 +46,7 @@ class About : Dialog("help.about") {
             controls.children.add(this)
             setOnAction {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
-                    Desktop.getDesktop().browse(URI("https://github.com/shotav/Decompiler"))
+                    Desktop.getDesktop().browse(URI("https://github.com/sho7a/Decompiler"))
             }
         }
 
