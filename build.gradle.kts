@@ -23,7 +23,7 @@ javafx {
 }
 
 dependencies {
-    implementation("dev.shota:stylus4j:0.1.4")
+    implementation(project(":theme"))
     implementation("org.quiltmc:quiltflower:1.8.1")
     implementation("org.ow2.asm:asm:9.3")
     implementation("org.ow2.asm:asm-tree:9.3")
@@ -64,5 +64,9 @@ tasks {
         archiveFileName.set("test.jar")
         manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
         from(sourceSets.test.get().output)
+    }
+
+    clean {
+        dependsOn(":theme:clean")
     }
 }
