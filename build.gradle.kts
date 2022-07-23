@@ -1,7 +1,8 @@
 plugins {
     java
-    kotlin("jvm") version "1.7.0"
+    kotlin("jvm") version "1.7.10"
     id("org.openjfx.javafxplugin") version "0.0.13"
+    id("org.panteleyev.jpackageplugin") version "1.3.1"
 }
 
 group = "dev.shota"
@@ -28,7 +29,7 @@ dependencies {
     implementation("org.ow2.asm:asm:9.3")
     implementation("org.ow2.asm:asm-tree:9.3")
     implementation("org.ow2.asm:asm-util:9.3")
-    implementation("com.formdev:flatlaf:2.3")
+    implementation("com.formdev:flatlaf:2.4")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
@@ -45,6 +46,12 @@ dependencies {
 }
 
 tasks {
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_17.toString()
+        }
+    }
+
     jar {
         archiveBaseName.set(project.name.toLowerCase())
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -54,9 +61,24 @@ tasks {
         from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     }
 
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17.toString()
+    jpackage {
+        appName = rootProject.name
+        copyright = "Copyright 2022 shota"
+        appDescription = "Java Decompiler Gui"
+        vendor = "shota"
+        input = jar.get().destinationDirectory.get().asFile.path
+        mainJar = jar.get().archiveFileName.get()
+        destination = "${buildDir.path}/jpackage"
+        licenseFile = "${sourceSets["main"].resources.srcDirs.first().path}/license.txt"
+
+        windows {
+            icon = "${sourceSets["main"].resources.srcDirs.first().path}/logo/logo.ico"
+            winMenu = true
+            winDirChooser = true
+            winUpgradeUuid = "880be177-032d-496e-8d92-cefa555b2c88"
+            winMenuGroup = "shota"
+            winShortcut = true
+            winPerUserInstall = true
         }
     }
 
