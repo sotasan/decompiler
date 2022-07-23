@@ -1,6 +1,8 @@
 package dev.shota.decompiler.window.sidebar
 
+import dev.shota.decompiler.window.utils.assets
 import javafx.scene.image.Image
+import java.io.ByteArrayInputStream
 
 enum class Type(icon: String) {
 
@@ -11,6 +13,6 @@ enum class Type(icon: String) {
     TEXT("text.png"),
     MANIFEST("manifest.png");
 
-    val icon = Image(javaClass.classLoader.getResourceAsStream("icons/$icon"))
+    val icon = Image(ByteArrayInputStream(assets("icons/$icon")))
 
 }

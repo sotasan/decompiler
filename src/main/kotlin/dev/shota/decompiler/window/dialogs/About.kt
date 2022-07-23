@@ -1,6 +1,7 @@
 package dev.shota.decompiler.window.dialogs
 
 import dev.shota.decompiler.window.menu.view.items.Language
+import dev.shota.decompiler.window.utils.assets
 import dev.shota.decompiler.window.utils.styles
 import javafx.geometry.HPos
 import javafx.geometry.VPos
@@ -12,6 +13,7 @@ import javafx.scene.layout.GridPane
 import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import java.awt.Desktop
+import java.io.ByteArrayInputStream
 import java.net.URI
 
 class About : Dialog("help.about") {
@@ -19,10 +21,10 @@ class About : Dialog("help.about") {
     init {
         val root = GridPane().apply {
             id = "root"
-            stylesheets.add(styles("about.styl"))
+            stylesheets.add(styles("about"))
         }
 
-        ImageView(Image(javaClass.classLoader.getResourceAsStream("logo/logo.png"))).run {
+        ImageView(Image(ByteArrayInputStream(assets("logo/logo.png")))).run {
             GridPane.setValignment(this, VPos.TOP)
             root.add(this, 0, 0)
             isPreserveRatio = true

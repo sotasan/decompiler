@@ -5,6 +5,7 @@ import javafx.scene.Parent
 import javafx.scene.Scene
 import dev.shota.decompiler.window.Window
 import dev.shota.decompiler.window.menu.view.items.Language
+import dev.shota.decompiler.window.utils.assets
 import dev.shota.decompiler.window.utils.styles
 import java.awt.event.KeyEvent
 import javax.swing.ImageIcon
@@ -18,7 +19,7 @@ open class Dialog(title: String) : JDialog(Window, Language.get(title).value, tr
 
     fun run(root: Parent) {
         val panel = JFXPanel()
-        root.stylesheets.add(styles("global.styl"))
+        root.stylesheets.add(styles("main"))
         panel.scene = Scene(root)
 
         val jroot = JRootPane()
@@ -26,7 +27,7 @@ open class Dialog(title: String) : JDialog(Window, Language.get(title).value, tr
         jroot.registerKeyboardAction({ dispose() }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW)
         add(jroot)
 
-        setIconImage(ImageIcon(javaClass.classLoader.getResourceAsStream("logo/logo.png")?.readAllBytes()).image)
+        setIconImage(ImageIcon(assets("logo/logo.png")).image)
         isResizable = false
         SwingUtilities.invokeLater {
             pack()

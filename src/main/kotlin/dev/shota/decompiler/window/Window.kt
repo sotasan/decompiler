@@ -6,6 +6,7 @@ import dev.shota.decompiler.loader.fileLoader
 import dev.shota.decompiler.window.container.Container
 import dev.shota.decompiler.window.menu.MenuBar
 import dev.shota.decompiler.window.sidebar.Sidebar
+import dev.shota.decompiler.window.utils.assets
 import dev.shota.decompiler.window.utils.styles
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
@@ -13,12 +14,14 @@ import javafx.scene.control.SplitPane
 import javafx.scene.text.Font
 import java.awt.Taskbar
 import java.awt.datatransfer.DataFlavor
-import java.awt.dnd.*
+import java.awt.dnd.DnDConstants
+import java.awt.dnd.DropTarget
+import java.awt.dnd.DropTargetDragEvent
+import java.awt.dnd.DropTargetDropEvent
 import java.io.File
 import javax.swing.ImageIcon
 import javax.swing.JFrame
 import kotlin.system.exitProcess
-
 object Window : JFrame() {
 
     private val fonts = arrayOf(
@@ -38,7 +41,7 @@ object Window : JFrame() {
     init {
         title = "Decompiler"
         defaultCloseOperation = DISPOSE_ON_CLOSE
-        val icon = ImageIcon(javaClass.classLoader.getResourceAsStream("logo/logo.png")?.readAllBytes()).image
+        val icon = ImageIcon(assets("logo/logo.png")).image
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE)) Taskbar.getTaskbar().iconImage = icon
         iconImage = icon
         jMenuBar = MenuBar()
@@ -75,8 +78,8 @@ object Window : JFrame() {
         val root = SplitPane(Sidebar, Container).apply {
             setDividerPositions(Sidebar.minWidth / (Sidebar.minWidth + Container.minWidth), Container.minWidth / (Sidebar.minWidth + Container.minWidth))
             SplitPane.setResizableWithParent(Sidebar, false)
-            stylesheets.add(styles("global.styl"))
-            stylesheets.add(styles("syntax.styl"))
+            stylesheets.add(styles("main"))
+            stylesheets.add(styles("code"))
         }
 
         val panel = JFXPanel().apply {

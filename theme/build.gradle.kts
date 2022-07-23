@@ -22,6 +22,12 @@ repositories {
 tasks {
     jar {
         dependsOn("assembleFrontend")
+
+        sourceSets.main {
+            resources {
+                setSrcDirs(listOf("$buildDir/css"))
+            }
+        }
     }
 
     clean {
