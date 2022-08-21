@@ -22,6 +22,7 @@ import java.io.File
 import javax.swing.ImageIcon
 import javax.swing.JFrame
 import kotlin.system.exitProcess
+
 object Window : JFrame() {
 
     private val fonts = arrayOf(
