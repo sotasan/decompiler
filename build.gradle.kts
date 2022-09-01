@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.shota"
-version = "0.8.0"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -81,6 +81,10 @@ tasks {
             winMenuGroup = "shota"
             winShortcut = true
             winPerUserInstall = true
+        }
+
+        mac {
+            icon = "${sourceSets["main"].resources.srcDirs.first().path}/logo/logo.icns"
         }
     }
 
