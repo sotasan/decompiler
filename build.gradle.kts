@@ -85,6 +85,7 @@ tasks {
 
         mac {
             icon = "${sourceSets["main"].resources.srcDirs.first().path}/logo/logo.icns"
+            macPackageIdentifier = "${project.group}.${project.name}"
         }
     }
 
