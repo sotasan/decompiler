@@ -1,8 +1,8 @@
 plugins {
-    java
-    kotlin("jvm") version "1.7.10"
-    id("org.openjfx.javafxplugin") version "0.0.13"
-    id("org.panteleyev.jpackageplugin") version "1.3.1"
+    id "java"
+    id "org.jetbrains.kotlin.jvm" version "1.7.10"
+    id "org.openjfx.javafxplugin" version "0.0.13"
+    id "org.panteleyev.jpackageplugin" version "1.3.1"
 }
 
 group = "dev.shota"
@@ -10,7 +10,7 @@ version = "1.0.0"
 
 repositories {
     mavenCentral()
-    maven("https://maven.quiltmc.org/repository/release/")
+    maven { url "https://maven.quiltmc.org/repository/release/" }
 }
 
 java {
@@ -59,7 +59,7 @@ tasks {
         manifest.attributes["Specification-Version"] = project.version
         manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
         manifest.attributes["Agent-Class"] = "${project.group}.${project.name.toLowerCase()}.Agent"
-        from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+        from { configurations.compileClasspath.filter{ it.exists() }.collect { it.isDirectory() ? it : zipTree(it) } }
     }
 
     jpackage {
@@ -67,8 +67,8 @@ tasks {
         copyright = "Copyright 2022 shota"
         appDescription = "Java Decompiler Gui"
         vendor = "shota"
-        input = jar.get().destinationDirectory.get().asFile.path
-        mainJar = jar.get().archiveFileName.get()
+        input = jar.getDestinationDirectory().asFile.get().path
+        mainJar = jar.archiveFileName.get()
         destination = "${buildDir.path}/jpackage"
         licenseFile = "${sourceSets["main"].resources.srcDirs.first().path}/license.txt"
 
@@ -88,9 +88,9 @@ tasks {
         }
     }
 
-    register<Jar>("testJar") {
+    task testJar(type: Jar, dependsOn: testClasses) {
         archiveFileName.set("test.jar")
         manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
-        from(sourceSets.test.get().output)
+        from sourceSets.getByName("test").output
     }
 }
