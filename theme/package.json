@@ -1,9 +1,0 @@
-{
-  "packageManager": "yarn@1.22.19",
-  "scripts": {
-    "build": "stylus src --out build/css"
-  },
-  "devDependencies": {
-    "stylus": "^0.58.1"
-  }
-}

@@ -24,7 +24,6 @@ javafx {
 }
 
 dependencies {
-    implementation(project(":theme"))
     implementation("org.jetbrains:annotations:23.0.0")
     implementation("com.rainerhahnekamp:sneakythrow:1.2.0")
     implementation("org.quiltmc:quiltflower:1.8.1")
@@ -93,9 +92,5 @@ tasks {
         archiveFileName.set("test.jar")
         manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
         from(sourceSets.test.get().output)
-    }
-
-    clean {
-        dependsOn(":theme:clean")
     }
 }

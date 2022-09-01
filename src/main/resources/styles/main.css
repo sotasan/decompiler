@@ -1,3 +1,71 @@
 * {
     -fx-font-family: "Open Sans"
 }
+
+.split-pane  {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+.split-pane .split-pane-divider {
+    -fx-padding: 0;
+}
+
+.scroll-bar, .corner {
+    -fx-background-color: transparent;
+}
+
+.tree-view {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+.tree-view .tree-cell {
+    -fx-background-color: transparent;
+}
+.tree-view .tree-cell:focused {
+    -fx-text-fill: -fx-light-text-color;
+    -fx-background-color: -fx-accent;
+}
+.tree-view .tree-cell:focused .tree-disclosure-node .arrow {
+    -fx-background-color: -fx-light-text-color;
+}
+.tree-view .tree-cell .tree-disclosure-node .arrow {
+    -fx-background-color: -fx-mark-color;
+}
+
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0;
+}
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent
+}
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-border-color: -fx-control-inner-background;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-width: 0 0 1 0;
+}
+.tab-pane .tab-header-area .tab:selected {
+    -fx-border-color: -fx-accent;
+}
+.tab-pane .tab-header-area .focus-indicator {
+    -fx-border-width: 0;
+}
+.tab-pane .tab-content-area .virtualized-scroll-pane {
+    -fx-background-color: -fx-control-inner-background;
+}
+.tab-pane .tab-content-area .virtualized-scroll-pane .styled-text-area * {
+    -fx-font-family: "JetBrains Mono";
+    -fx-font-size: 16;
+
+}
+.tab-pane .tab-content-area .virtualized-scroll-pane .styled-text-area .selection {
+    -fx-fill: -fx-accent;
+
+}
+.tab-pane .tab-content-area .virtualized-scroll-pane .styled-text-area .lineno {
+    -fx-text-fill: -fx-mark-color;
+    -fx-font-style: normal;
+    -fx-background-color: -fx-control-inner-background;
+}
