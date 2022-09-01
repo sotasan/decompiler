@@ -1,7 +1,7 @@
 package dev.shota.decompiler.window.menu.file.items
 
 import com.formdev.flatlaf.util.SystemInfo
-import dev.shota.decompiler.loader.fileLoader
+import dev.shota.decompiler.loader.FileLoader
 import dev.shota.decompiler.window.Window
 import dev.shota.decompiler.window.menu.MenuItem
 import dev.shota.decompiler.window.menu.view.items.Language
@@ -42,7 +42,7 @@ class OpenFile : MenuItem("file.openFile", KeyEvent.VK_O) {
             }
 
             if (f != null)
-                fileLoader(f)
+                FileLoader.load(f)
         }
     }
 

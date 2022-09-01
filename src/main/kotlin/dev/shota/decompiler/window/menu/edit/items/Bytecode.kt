@@ -1,6 +1,6 @@
 package dev.shota.decompiler.window.menu.edit.items
 
-import dev.shota.decompiler.java.Disassembler
+import dev.shota.decompiler.jvm.Disassembler
 import dev.shota.decompiler.window.container.Code
 import dev.shota.decompiler.window.container.CodeType
 import dev.shota.decompiler.window.container.Container

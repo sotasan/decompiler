@@ -1,6 +1,6 @@
 package dev.shota.decompiler.window.container
 
-import dev.shota.decompiler.java.Decompiler
+import dev.shota.decompiler.jvm.Decompiler
 import dev.shota.decompiler.window.menu.view.items.Language
 import dev.shota.decompiler.window.sidebar.Type
 import javafx.beans.property.SimpleDoubleProperty

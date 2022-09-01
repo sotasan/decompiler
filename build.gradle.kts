@@ -25,6 +25,8 @@ javafx {
 
 dependencies {
     implementation(project(":theme"))
+    implementation("org.jetbrains:annotations:23.0.0")
+    implementation("com.rainerhahnekamp:sneakythrow:1.2.0")
     implementation("org.quiltmc:quiltflower:1.8.1")
     implementation("org.ow2.asm:asm:9.3")
     implementation("org.ow2.asm:asm-tree:9.3")
