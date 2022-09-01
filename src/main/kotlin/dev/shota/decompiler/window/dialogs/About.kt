@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox
 import java.awt.Desktop
 import java.io.ByteArrayInputStream
 import java.net.URI
+import java.util.Properties
 
 class About : Dialog("help.about") {
 
@@ -33,9 +34,11 @@ class About : Dialog("help.about") {
 
         VBox().run {
             root.add(this, 1, 0)
+            val properties = Properties()
+            properties.load(javaClass.classLoader.getResourceAsStream("application.properties"))
             children.addAll(
                 Label("Decompiler").apply { id = "title" },
-                Label("${Language.get("about.version").value} ${javaClass.`package`.specificationVersion ?: "0.0.0"}"),
+                Label("${Language.get("about.version").value} ${properties["version"]}"),
                 Label("${Language.get("about.copyright").value} 2022 shota")
             )
         }

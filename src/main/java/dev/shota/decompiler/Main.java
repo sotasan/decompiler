@@ -16,6 +16,7 @@ public class Main {
         FlatLightLaf.setup();
         Platform.startup(() -> {});
         Window.INSTANCE.setVisible(true);
+        new Updater().start();
         if (args.length != 0)
             FileLoader.load(new File(args[0]));
     }

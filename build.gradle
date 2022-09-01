@@ -19,31 +19,33 @@ java {
 }
 
 javafx {
-    version = JavaVersion.VERSION_18.toString()
-    modules("javafx.base", "javafx.controls", "javafx.graphics", "javafx.swing")
+    version = JavaVersion.VERSION_18
+    modules "javafx.base", "javafx.controls", "javafx.graphics", "javafx.swing"
 }
 
 dependencies {
-    implementation("org.jetbrains:annotations:23.0.0")
-    implementation("com.rainerhahnekamp:sneakythrow:1.2.0")
-    implementation("org.quiltmc:quiltflower:1.8.1")
-    implementation("org.ow2.asm:asm:9.3")
-    implementation("org.ow2.asm:asm-tree:9.3")
-    implementation("org.ow2.asm:asm-util:9.3")
-    implementation("com.formdev:flatlaf:2.4")
-    implementation("org.fxmisc.richtext:richtextfx:0.10.9")
-    implementation("org.openjfx:javafx-base:${javafx.version}:win")
-    implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
-    implementation("org.openjfx:javafx-base:${javafx.version}:linux")
-    implementation("org.openjfx:javafx-controls:${javafx.version}:win")
-    implementation("org.openjfx:javafx-controls:${javafx.version}:mac-aarch64")
-    implementation("org.openjfx:javafx-controls:${javafx.version}:linux")
-    implementation("org.openjfx:javafx-graphics:${javafx.version}:win")
-    implementation("org.openjfx:javafx-graphics:${javafx.version}:mac-aarch64")
-    implementation("org.openjfx:javafx-graphics:${javafx.version}:linux")
-    implementation("org.openjfx:javafx-swing:${javafx.version}:win")
-    implementation("org.openjfx:javafx-swing:${javafx.version}:mac-aarch64")
-    implementation("org.openjfx:javafx-swing:${javafx.version}:linux")
+    implementation group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.13.3"
+    implementation group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.13.3"
+    implementation group: "org.jetbrains", name: "annotations", version: "23.0.0"
+    implementation group: "com.rainerhahnekamp", name: "sneakythrow", version: "1.2.0"
+    implementation group: "org.quiltmc", name: "quiltflower", version: "1.8.1"
+    implementation group: "org.ow2.asm", name: "asm", version: "9.3"
+    implementation group: "org.ow2.asm", name: "asm-tree", version: "9.3"
+    implementation group: "org.ow2.asm", name: "asm-util", version: "9.3"
+    implementation group: "com.formdev", name: "flatlaf", version: "2.4"
+    implementation group: "org.fxmisc.richtext", name: "richtextfx", version: "0.10.9"
+    implementation group: "org.openjfx", name: "javafx-base", version: "${javafx.version}:win"
+    implementation group: "org.openjfx", name: "javafx-base", version: "${javafx.version}:mac-aarch64"
+    implementation group: "org.openjfx", name: "javafx-base", version: "${javafx.version}:linux"
+    implementation group: "org.openjfx", name: "javafx-controls", version: "${javafx.version}:win"
+    implementation group: "org.openjfx", name: "javafx-controls", version: "${javafx.version}:mac-aarch64"
+    implementation group: "org.openjfx", name: "javafx-controls", version: "${javafx.version}:linux"
+    implementation group: "org.openjfx", name: "javafx-graphics", version: "${javafx.version}:win"
+    implementation group: "org.openjfx", name: "javafx-graphics", version: "${javafx.version}:mac-aarch64"
+    implementation group: "org.openjfx", name: "javafx-graphics", version: "${javafx.version}:linux"
+    implementation group: "org.openjfx", name: "javafx-swing", version: "${javafx.version}:win"
+    implementation group: "org.openjfx", name: "javafx-swing", version: "${javafx.version}:mac-aarch64"
+    implementation group: "org.openjfx", name: "javafx-swing", version: "${javafx.version}:linux"
 }
 
 tasks {
@@ -52,11 +54,15 @@ tasks {
             jvmTarget = JavaVersion.VERSION_17.toString()
         }
     }
+    processResources {
+        filesMatching("application.properties") {
+            expand project.properties
+        }
+    }
 
     jar {
         archiveBaseName.set(project.name.toLowerCase())
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        manifest.attributes["Specification-Version"] = project.version
         manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
         manifest.attributes["Agent-Class"] = "${project.group}.${project.name.toLowerCase()}.Agent"
         from { configurations.compileClasspath.filter{ it.exists() }.collect { it.isDirectory() ? it : zipTree(it) } }
@@ -91,6 +97,6 @@ tasks {
     task testJar(type: Jar, dependsOn: testClasses) {
         archiveFileName.set("test.jar")
         manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
-        from sourceSets.getByName("test").output
+        from sourceSets.test.output
     }
 }
