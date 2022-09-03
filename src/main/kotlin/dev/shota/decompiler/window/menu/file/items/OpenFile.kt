@@ -2,7 +2,7 @@ package dev.shota.decompiler.window.menu.file.items
 
 import com.formdev.flatlaf.util.SystemInfo
 import dev.shota.decompiler.loader.FileLoader
-import dev.shota.decompiler.window.Window
+import dev.shota.decompiler.window.WindowOld
 import dev.shota.decompiler.window.menu.MenuItem
 import dev.shota.decompiler.window.menu.view.items.Language
 import java.awt.FileDialog
@@ -20,7 +20,7 @@ class OpenFile : MenuItem("file.openFile", KeyEvent.VK_O) {
             val f: File?
 
             if (SystemInfo.isMacOS) {
-                f = FileDialog(Window, text).run {
+                f = FileDialog(WindowOld, text).run {
                     setFilenameFilter { dir, name ->
                         val extension = File(dir, name).extension
                         extension.equals("jar", true) ||
@@ -36,7 +36,7 @@ class OpenFile : MenuItem("file.openFile", KeyEvent.VK_O) {
                     dialogTitle = text
                     fileFilter = FileNameExtensionFilter(Language.get("file.openFile.archive").value, "jar", "war", "zip")
                     isAcceptAllFileFilterUsed = false
-                    val option = showOpenDialog(Window)
+                    val option = showOpenDialog(WindowOld)
                     if (option == JFileChooser.APPROVE_OPTION) selectedFile else null
                 }
             }

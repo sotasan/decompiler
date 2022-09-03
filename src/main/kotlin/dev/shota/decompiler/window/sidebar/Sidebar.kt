@@ -1,7 +1,7 @@
 package dev.shota.decompiler.window.sidebar
 
 import com.formdev.flatlaf.util.SystemInfo
-import dev.shota.decompiler.window.Window
+import dev.shota.decompiler.window.WindowOld
 import javafx.application.Platform
 import javafx.scene.control.TreeView
 import javafx.scene.input.KeyCode
@@ -24,10 +24,10 @@ object Sidebar : BorderPane() {
             space.prefHeight = 25.0
             top = space
 
-            Window.addComponentListener(object : ComponentAdapter() {
+            WindowOld.addComponentListener(object : ComponentAdapter() {
                 override fun componentResized(e: ComponentEvent?) {
                     Platform.runLater {
-                        top = if (Window.height > GraphicsEnvironment.getLocalGraphicsEnvironment().maximumWindowBounds.height) null else space
+                        top = if (WindowOld.height > GraphicsEnvironment.getLocalGraphicsEnvironment().maximumWindowBounds.height) null else space
                     }
                 }
             })

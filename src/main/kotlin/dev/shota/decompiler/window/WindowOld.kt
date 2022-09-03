@@ -4,7 +4,7 @@ import com.formdev.flatlaf.util.SystemInfo
 import com.sun.javafx.tk.Toolkit
 import dev.shota.decompiler.loader.FileLoader
 import dev.shota.decompiler.window.container.Container
-import dev.shota.decompiler.window.menu.MenuBar
+import dev.shota.decompiler.window.menu.MenuBarOld
 import dev.shota.decompiler.window.sidebar.Sidebar
 import dev.shota.decompiler.window.utils.assets
 import dev.shota.decompiler.window.utils.styles
@@ -23,7 +23,7 @@ import javax.swing.ImageIcon
 import javax.swing.JFrame
 import kotlin.system.exitProcess
 
-object Window : JFrame() {
+object WindowOld : JFrame() {
 
     private val fonts = arrayOf(
         "JetBrainsMono-Bold", "JetBrainsMono-BoldItalic", "JetBrainsMono-ExtraBold", "JetBrainsMono-ExtraBoldItalic",
@@ -45,7 +45,7 @@ object Window : JFrame() {
         val icon = ImageIcon(assets("logo/logo.png")).image
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE)) Taskbar.getTaskbar().iconImage = icon
         iconImage = icon
-        jMenuBar = MenuBar()
+        jMenuBar = MenuBarOld()
 
         if (SystemInfo.isMacOS && SystemInfo.isMacFullWindowContentSupported) {
             rootPane.putClientProperty("apple.awt.fullWindowContent", true)

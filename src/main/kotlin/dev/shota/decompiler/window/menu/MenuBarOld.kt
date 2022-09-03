@@ -6,7 +6,7 @@ import dev.shota.decompiler.window.menu.help.Help
 import dev.shota.decompiler.window.menu.view.View
 import javax.swing.JMenuBar
 
-class MenuBar : JMenuBar() {
+class MenuBarOld : JMenuBar() {
 
     init {
         add(File())

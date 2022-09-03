@@ -3,7 +3,7 @@ package dev.shota.decompiler.window.dialogs
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Parent
 import javafx.scene.Scene
-import dev.shota.decompiler.window.Window
+import dev.shota.decompiler.window.WindowOld
 import dev.shota.decompiler.window.menu.view.items.Language
 import dev.shota.decompiler.window.utils.assets
 import dev.shota.decompiler.window.utils.styles
@@ -15,7 +15,7 @@ import javax.swing.JRootPane
 import javax.swing.KeyStroke
 import javax.swing.SwingUtilities
 
-open class Dialog(title: String) : JDialog(Window, Language.get(title).value, true) {
+open class Dialog(title: String) : JDialog(WindowOld, Language.get(title).value, true) {
 
     fun run(root: Parent) {
         val panel = JFXPanel()
