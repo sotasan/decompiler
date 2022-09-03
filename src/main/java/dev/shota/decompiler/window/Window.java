@@ -39,7 +39,7 @@ public class Window extends JFrame implements DropTargetListener {
         BorderPane sidebar = new BorderPane(Explorer.getInstance());
         SplitPane root = new SplitPane(sidebar, Viewer.getInstance());
         SplitPane.setResizableWithParent(sidebar, false);
-        root.getStylesheets().addAll(new Style("main").getData(), new Style("code").getData());
+        root.getStylesheets().addAll(new Style("main").getData(), new Style("code").getData(), new Style("theme").getData());
         root.setDividerPositions(
                 Explorer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth()),
                 Viewer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth())

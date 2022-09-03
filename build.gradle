@@ -57,6 +57,7 @@ tasks {
             jvmTarget = JavaVersion.VERSION_17.toString()
         }
     }
+
     processResources {
         filesMatching("application.properties") {
             expand project.properties
