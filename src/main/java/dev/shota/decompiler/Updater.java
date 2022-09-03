@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.shota.decompiler.window.utils.PreferencesKt;
 import javafx.application.Platform;
+import lombok.SneakyThrows;
 import org.controlsfx.control.Notifications;
 import java.awt.*;
 import java.io.IOException;
@@ -17,16 +18,16 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Properties;
-import static com.rainerhahnekamp.sneakythrow.Sneaky.sneak;
 
 public class Updater extends Thread {
 
     @Override
+    @SneakyThrows
     public void run() {
         String lastChecked = PreferencesKt.getPreferences().get("updaterLastChecked", null);
         if (LocalDate.now().toString().equals(lastChecked)) return;
 
-        URLConnection connection = sneak(() -> new URL("https://api.github.com/repos/sho7a/Decompiler/releases").openConnection());
+        URLConnection connection = new URL("https://api.github.com/repos/sho7a/Decompiler/releases").openConnection();
 
         try {
             connection.connect();
@@ -34,8 +35,8 @@ public class Updater extends Thread {
             return;
         }
 
-        InputStream inputStream = sneak(connection::getInputStream);
-        Release[] releases = sneak(() -> new ObjectMapper().readValue(inputStream, Release[].class));
+        InputStream inputStream = connection.getInputStream();
+        Release[] releases = new ObjectMapper().readValue(inputStream, Release[].class);
         Optional<Release> release = Arrays.stream(releases).findFirst();
         if (release.isEmpty()) return;
 

@@ -1,5 +1,6 @@
 package dev.shota.decompiler.jvm;
 
+import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.java.decompiler.main.Fernflower;
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider;
@@ -14,13 +15,13 @@ import org.jetbrains.java.decompiler.util.DataInputFullStream;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.jar.Manifest;
-import static com.rainerhahnekamp.sneakythrow.Sneaky.sneak;
 
 public class Decompiler extends IFernflowerLogger implements IDestructure, IBytecodeProvider, IResultSaver {
 
     private final byte[] bytes;
     private String code;
 
+    @SneakyThrows
     public Decompiler(byte[] bytes) {
         this.bytes = bytes;
 
@@ -28,16 +29,16 @@ public class Decompiler extends IFernflowerLogger implements IDestructure, IByte
         File file = new File("null.class");
         fernflower.addSource(file);
 
-        Field structContextField = sneak(() -> fernflower.getClass().getDeclaredField("structContext"));
+        Field structContextField = fernflower.getClass().getDeclaredField("structContext");
         structContextField.setAccessible(true);
-        StructContext structContext = (StructContext) sneak(() -> structContextField.get(fernflower));
+        StructContext structContext = (StructContext) structContextField.get(fernflower);
 
-        Field loaderField = sneak(() -> structContext.getClass().getDeclaredField("loader"));
+        Field loaderField = structContext.getClass().getDeclaredField("loader");
         loaderField.setAccessible(true);
-        LazyLoader loader = (LazyLoader) sneak(() -> loaderField.get(structContext));
+        LazyLoader loader = (LazyLoader) loaderField.get(structContext);
         loader.addClassLink(file.getName(), new LazyLoader.Link(file.getAbsolutePath(), null));
 
-        StructClass structClass = sneak(() -> StructClass.create(new DataInputFullStream(bytes), true, loader));
+        StructClass structClass = StructClass.create(new DataInputFullStream(bytes), true, loader);
         ContextUnit contextUnit = new ContextUnit(ContextUnit.TYPE_FOLDER, null, file.getAbsolutePath(), true, this, fernflower);
         contextUnit.addClass(structClass, file.getName());
 
