@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.shota.decompiler.window.utils.PreferencesKt;
+import javafx.application.Platform;
+import org.controlsfx.control.Notifications;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,13 +61,18 @@ public class Updater extends Thread {
         if (current.compareTo(origin) >= 0)
             return;
 
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            try {
-                Desktop.getDesktop().browse(new URI(release.get().htmlUrl));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        Platform.runLater(() -> Notifications.create()
+                .title("Decompiler")
+                .text("An update is available.")
+                .onAction(event -> {
+                    try {
+                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
+                            Desktop.getDesktop().browse(new URI(release.get().htmlUrl));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                })
+                .show());
 
         PreferencesKt.getPreferences().put("updaterLastChecked", LocalDate.now().toString());
     }

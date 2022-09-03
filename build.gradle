@@ -24,6 +24,7 @@ javafx {
 }
 
 dependencies {
+    implementation group: "org.controlsfx", name: "controlsfx", version: "11.1.1"
     implementation group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.13.3"
     implementation group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.13.3"
     implementation group: "org.jetbrains", name: "annotations", version: "23.0.0"
