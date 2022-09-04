@@ -14,12 +14,11 @@ public class Decompiler extends IFernflowerLogger implements IDestructure, IByte
     private final byte[] bytes;
     private String code;
 
-    @SuppressWarnings("ConstantConditions")
     public Decompiler(byte[] bytes) {
         this.bytes = bytes;
 
         Fernflower fernflower = new Fernflower(this, this, IFernflowerPreferences.getDefaults(), this);
-        fernflower.addSource(new File("null.class"));
+        fernflower.addSource(new File(".class"));
 
         fernflower.decompileContext();
     }
