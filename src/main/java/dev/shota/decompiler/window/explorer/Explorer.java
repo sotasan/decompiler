@@ -10,7 +10,7 @@ public class Explorer extends TreeView<String> {
         setMinWidth(100);
     }
 
-    public static Explorer getInstance() {
+    public static synchronized Explorer getInstance() {
         if (INSTANCE == null)
             INSTANCE = new Explorer();
         return INSTANCE;

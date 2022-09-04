@@ -10,7 +10,7 @@ public class Viewer extends TabPane {
         setMinWidth(300);
     }
 
-    public static Viewer getInstance() {
+    public static synchronized Viewer getInstance() {
         if (INSTANCE == null)
             INSTANCE = new Viewer();
         return INSTANCE;

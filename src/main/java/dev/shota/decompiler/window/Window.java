@@ -75,7 +75,7 @@ public class Window extends JFrame implements DropTargetListener {
         setLocationRelativeTo(null);
     }
 
-    public static Window getInstance() {
+    public static synchronized Window getInstance() {
         if (INSTANCE == null)
             INSTANCE = new Window();
         return INSTANCE;
