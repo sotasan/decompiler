@@ -1,7 +1,7 @@
 package dev.shota.decompiler.old.menu.file.items
 
-import dev.shota.decompiler.window.menu.MenuItem
-import dev.shota.decompiler.window.dialogs.Processes
+import dev.shota.decompiler.old.menu.MenuItem
+import dev.shota.decompiler.old.dialogs.Processes
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 

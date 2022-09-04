@@ -1,6 +1,6 @@
 package dev.shota.decompiler.old.menu.view.items
 
-import dev.shota.decompiler.window.utils.preferences
+import dev.shota.decompiler.old.utils.preferences
 import javafx.beans.property.Property
 import javafx.beans.property.SimpleStringProperty
 import java.awt.event.ActionEvent

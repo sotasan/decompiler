@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.shota.decompiler.window.utils.PreferencesKt;
+import dev.shota.decompiler.old.utils.PreferencesKt;
 import javafx.application.Platform;
 import lombok.SneakyThrows;
 import org.controlsfx.control.Notifications;

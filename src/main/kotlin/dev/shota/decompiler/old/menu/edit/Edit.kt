@@ -1,7 +1,7 @@
 package dev.shota.decompiler.old.menu.edit
 
-import dev.shota.decompiler.window.menu.Menu
-import dev.shota.decompiler.window.menu.edit.items.*
+import dev.shota.decompiler.old.menu.Menu
+import dev.shota.decompiler.old.menu.edit.items.*
 import java.awt.event.KeyEvent
 import javax.swing.ButtonGroup
 import javax.swing.JSeparator

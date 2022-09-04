@@ -1,9 +1,9 @@
 package dev.shota.decompiler.old.menu
 
-import dev.shota.decompiler.window.menu.edit.Edit
-import dev.shota.decompiler.window.menu.file.File
-import dev.shota.decompiler.window.menu.help.Help
-import dev.shota.decompiler.window.menu.view.View
+import dev.shota.decompiler.old.menu.edit.Edit
+import dev.shota.decompiler.old.menu.file.File
+import dev.shota.decompiler.old.menu.help.Help
+import dev.shota.decompiler.old.menu.view.View
 import javax.swing.JMenuBar
 
 class MenuBarOld : JMenuBar() {

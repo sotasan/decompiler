@@ -2,7 +2,7 @@ package dev.shota.decompiler.loader;
 
 import dev.shota.decompiler.Main;
 import dev.shota.decompiler.reflection.Instance;
-import dev.shota.decompiler.window.container.Code;
+import dev.shota.decompiler.old.container.Code;
 import dev.shota.decompiler.window.viewer.Viewer;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;

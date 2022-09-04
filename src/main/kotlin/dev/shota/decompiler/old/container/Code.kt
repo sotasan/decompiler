@@ -1,8 +1,8 @@
 package dev.shota.decompiler.old.container
 
 import dev.shota.decompiler.jvm.Decompiler
-import dev.shota.decompiler.window.menu.view.items.Language
-import dev.shota.decompiler.window.sidebar.Type
+import dev.shota.decompiler.old.menu.view.items.Language
+import dev.shota.decompiler.old.sidebar.Type
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.collections.ListChangeListener
 import javafx.scene.control.ContextMenu

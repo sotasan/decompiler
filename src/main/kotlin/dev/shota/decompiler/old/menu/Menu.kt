@@ -1,6 +1,6 @@
 package dev.shota.decompiler.old.menu
 
-import dev.shota.decompiler.window.menu.view.items.Language
+import dev.shota.decompiler.old.menu.view.items.Language
 import javax.swing.JMenu
 
 abstract class Menu(displayText: String, keyCode: Int) : JMenu() {

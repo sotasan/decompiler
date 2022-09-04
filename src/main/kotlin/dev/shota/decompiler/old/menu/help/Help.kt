@@ -1,7 +1,7 @@
 package dev.shota.decompiler.old.menu.help
 
-import dev.shota.decompiler.window.menu.Menu
-import dev.shota.decompiler.window.menu.help.items.About
+import dev.shota.decompiler.old.menu.Menu
+import dev.shota.decompiler.old.menu.help.items.About
 import java.awt.Desktop
 import java.awt.event.KeyEvent
 

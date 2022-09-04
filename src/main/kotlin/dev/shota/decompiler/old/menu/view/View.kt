@@ -1,10 +1,10 @@
 package dev.shota.decompiler.old.menu.view
 
-import dev.shota.decompiler.window.menu.Menu
-import dev.shota.decompiler.window.menu.view.items.Language
-import dev.shota.decompiler.window.menu.view.items.ZoomIn
-import dev.shota.decompiler.window.menu.view.items.ZoomOut
-import dev.shota.decompiler.window.menu.view.items.ZoomReset
+import dev.shota.decompiler.old.menu.Menu
+import dev.shota.decompiler.old.menu.view.items.Language
+import dev.shota.decompiler.old.menu.view.items.ZoomIn
+import dev.shota.decompiler.old.menu.view.items.ZoomOut
+import dev.shota.decompiler.old.menu.view.items.ZoomReset
 import java.awt.event.KeyEvent
 import javax.swing.JSeparator
 

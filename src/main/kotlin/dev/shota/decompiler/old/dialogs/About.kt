@@ -1,8 +1,8 @@
 package dev.shota.decompiler.old.dialogs
 
-import dev.shota.decompiler.window.menu.view.items.Language
-import dev.shota.decompiler.window.utils.assets
-import dev.shota.decompiler.window.utils.styles
+import dev.shota.decompiler.old.menu.view.items.Language
+import dev.shota.decompiler.old.utils.assets
+import dev.shota.decompiler.old.utils.styles
 import javafx.geometry.HPos
 import javafx.geometry.VPos
 import javafx.scene.control.Button

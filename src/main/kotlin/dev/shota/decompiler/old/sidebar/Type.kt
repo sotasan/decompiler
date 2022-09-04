@@ -1,6 +1,6 @@
 package dev.shota.decompiler.old.sidebar
 
-import dev.shota.decompiler.window.utils.assets
+import dev.shota.decompiler.old.utils.assets
 import javafx.scene.image.Image
 import java.io.ByteArrayInputStream
 

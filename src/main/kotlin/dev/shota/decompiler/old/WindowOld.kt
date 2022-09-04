@@ -3,11 +3,11 @@ package dev.shota.decompiler.old
 import com.formdev.flatlaf.util.SystemInfo
 import com.sun.javafx.tk.Toolkit
 import dev.shota.decompiler.loader.FileLoader
-import dev.shota.decompiler.window.container.Container
-import dev.shota.decompiler.window.menu.MenuBarOld
-import dev.shota.decompiler.window.sidebar.Sidebar
-import dev.shota.decompiler.window.utils.assets
-import dev.shota.decompiler.window.utils.styles
+import dev.shota.decompiler.old.container.Container
+import dev.shota.decompiler.old.menu.MenuBarOld
+import dev.shota.decompiler.old.sidebar.Sidebar
+import dev.shota.decompiler.old.utils.assets
+import dev.shota.decompiler.old.utils.styles
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
 import javafx.scene.control.SplitPane
@@ -73,7 +73,7 @@ object WindowOld : JFrame() {
             }
         }
 
-        for (font in dev.shota.decompiler.old.WindowOld.fonts)
+        for (font in fonts)
             Font.loadFont(javaClass.classLoader.getResourceAsStream("fonts/${font.split("-")[0]}/$font.ttf"), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
 
         val root = SplitPane(Sidebar, Container).apply {

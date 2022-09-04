@@ -1,6 +1,6 @@
 package dev.shota.decompiler.old.menu.edit.items
 
-import dev.shota.decompiler.window.menu.MenuItem
+import dev.shota.decompiler.old.menu.MenuItem
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 
