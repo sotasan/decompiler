@@ -119,9 +119,6 @@ class Code(name: String, val data: ByteArray, val clazz: Boolean) : Tab() {
         }
         closeAll.setOnAction { Container.tabs.clear() }
         contextMenu.items.addAll(close, closeOthers, closeAll)
-
-        Container.tabs.add(this)
-        Container.selectionModel.select(this)
     }
 
     private fun highlight(): StyleSpans<Collection<String>> {

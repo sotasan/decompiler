@@ -4,6 +4,7 @@ import dev.shota.decompiler.Main;
 import dev.shota.decompiler.reflection.Instance;
 import dev.shota.decompiler.old.container.Code;
 import dev.shota.decompiler.window.viewer.Viewer;
+import javafx.application.Platform;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import lombok.SneakyThrows;
@@ -26,14 +27,17 @@ public class FileLoader implements Runnable {
     @SneakyThrows
     public void run() {
         if (file.getName().toLowerCase().endsWith(".class")) {
-            Tab tab = new Code(file.getName(), Files.readAllBytes(file.toPath()), true);
-            TabPane viewer = Instance.get(Viewer.class);
-            if (!viewer.getTabs().contains(tab))
+            byte[] bytes = Files.readAllBytes(file.toPath());
+            Platform.runLater(() -> {
+                Tab tab = new Code(file.getName(), bytes, true);
+                TabPane viewer = Instance.get(Viewer.class);
                 viewer.getTabs().add(tab);
+                viewer.getSelectionModel().select(tab);
+            });
             return;
         }
 
-        Instance.get(Viewer.class).getTabs().clear();
+        Platform.runLater(() -> Instance.get(Viewer.class).getTabs().clear());
         try (JarFile jar = new JarFile(file)) {
             for (Iterator<JarEntry> it = jar.entries().asIterator(); it.hasNext(); ) {
                 JarEntry entry = it.next();
