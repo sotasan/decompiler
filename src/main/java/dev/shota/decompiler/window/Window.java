@@ -39,7 +39,7 @@ public class Window extends JFrame implements DropTargetListener {
         BorderPane sidebar = new BorderPane(Explorer.getInstance());
         SplitPane root = new SplitPane(sidebar, Viewer.getInstance());
         SplitPane.setResizableWithParent(sidebar, false);
-        root.getStylesheets().addAll(new Style("main").getData(), new Style("code").getData(), new Style("theme").getData());
+        root.getStylesheets().addAll(new Style("main").getData(), new Style("code").getData());
         root.setDividerPositions(
                 Explorer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth()),
                 Viewer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth())
@@ -66,6 +66,7 @@ public class Window extends JFrame implements DropTargetListener {
 
         JFXPanel panel = new JFXPanel();
         panel.setScene(new Scene(root, 894, 528));
+        panel.getDropTarget().setActive(false);
         add(panel);
         pack();
         setTitle("Decompiler");
@@ -97,8 +98,11 @@ public class Window extends JFrame implements DropTargetListener {
         if (!event.getTransferable().isDataFlavorSupported(DataFlavor.javaFileListFlavor)) return;
         Object data = event.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
         List<?> files = (List<?>) data;
+        boolean complete = false;
         for (Object file : files)
-            FileLoader.load((File) file);
+            if (FileLoader.load((File) file))
+                complete = true;
+        event.dropComplete(complete);
     }
 
     @Override

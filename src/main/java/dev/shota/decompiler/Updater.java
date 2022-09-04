@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.Properties;
 
-public class Updater extends Thread {
+public class Updater implements Runnable {
 
     @Override
     @SneakyThrows
@@ -41,11 +41,7 @@ public class Updater extends Thread {
         if (release.isEmpty()) return;
 
         Properties properties = new Properties();
-        try {
-            properties.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        properties.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
 
         String[] currentArray = properties.get("version").toString().split("\\.");
         int currentMajor = Integer.parseInt(currentArray[0]);

@@ -1,5 +1,6 @@
 package dev.shota.decompiler.loader;
 
+import dev.shota.decompiler.Main;
 import dev.shota.decompiler.window.container.Code;
 import dev.shota.decompiler.window.container.Container;
 import javafx.scene.control.Tab;
@@ -11,21 +12,22 @@ import java.util.Iterator;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class FileLoader {
+public class FileLoader implements Runnable {
 
+    private final File file;
+
+    private FileLoader(@NotNull File file) {
+        this.file = file;
+    }
+
+    @Override
     @SneakyThrows
-    public static boolean load(@NotNull File file) {
-        if (!file.getName().toLowerCase().endsWith(".jar") &&
-            !file.getName().toLowerCase().endsWith(".war") &&
-            !file.getName().toLowerCase().endsWith(".zip") &&
-            !file.getName().toLowerCase().endsWith(".class"))
-            return false;
-
+    public void run() {
         if (file.getName().toLowerCase().endsWith(".class")) {
             Tab tab = new Code(file.getName(), Files.readAllBytes(file.toPath()), true);
             if (!Container.INSTANCE.getTabs().contains(tab))
                 Container.INSTANCE.getTabs().add(tab);
-            return true;
+            return;
         }
 
         Container.INSTANCE.getTabs().clear();
@@ -35,6 +37,17 @@ public class FileLoader {
                 System.out.println(entry.getName());
             }
         }
+    }
+
+    public static boolean load(@NotNull File file) {
+        if (!file.exists() || (
+                !file.getName().toLowerCase().endsWith(".jar") &&
+                !file.getName().toLowerCase().endsWith(".war") &&
+                !file.getName().toLowerCase().endsWith(".zip") &&
+                !file.getName().toLowerCase().endsWith(".class")))
+            return false;
+
+        Main.EXECUTOR.submit(new FileLoader(file));
 
         return true;
     }
