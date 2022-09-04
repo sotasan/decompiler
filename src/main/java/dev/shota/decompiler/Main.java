@@ -2,8 +2,9 @@ package dev.shota.decompiler;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.shota.decompiler.loader.FileLoader;
-import dev.shota.decompiler.reflection.mixin.MixinBootstrap;
-import dev.shota.decompiler.reflection.singleton.Instance;
+import dev.shota.decompiler.runtime.Bootstrapper;
+import dev.shota.decompiler.runtime.old.mixin.MixinBootstrap;
+import dev.shota.decompiler.runtime.old.singleton.Instance;
 import dev.shota.decompiler.window.Window;
 import javafx.application.Platform;
 import lombok.SneakyThrows;
@@ -24,7 +25,7 @@ public class Main {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         System.setProperty("apple.awt.application.name", "Decompiler");
         System.setProperty("apple.awt.application.appearance", "NSAppearanceNameAqua");
-        MixinBootstrap.init();
+        Bootstrapper.init();
         FlatLightLaf.setup();
         Platform.startup(() -> {});
         Instance.get(Window.class).setVisible(true);

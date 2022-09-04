@@ -1,19 +1,11 @@
 package dev.shota.decompiler.jvm;
 
-import dev.shota.decompiler.mixins.IMixinFernflower;
-import dev.shota.decompiler.reflection.Accessor;
-import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.java.decompiler.main.Fernflower;
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
-import org.jetbrains.java.decompiler.struct.ContextUnit;
-import org.jetbrains.java.decompiler.struct.StructClass;
-import org.jetbrains.java.decompiler.struct.StructContext;
-import org.jetbrains.java.decompiler.struct.lazy.LazyLoader;
-import org.jetbrains.java.decompiler.util.DataInputFullStream;
 import java.io.File;
 import java.util.jar.Manifest;
 
@@ -22,23 +14,12 @@ public class Decompiler extends IFernflowerLogger implements IDestructure, IByte
     private final byte[] bytes;
     private String code;
 
-    @SneakyThrows
+    @SuppressWarnings("ConstantConditions")
     public Decompiler(byte[] bytes) {
         this.bytes = bytes;
 
         Fernflower fernflower = new Fernflower(this, this, IFernflowerPreferences.getDefaults(), this);
-        File file = new File("null.class");
-        fernflower.addSource(file);
-
-        //StructContext structContext = Accessor.get(fernflower, "structContext");
-        StructContext structContext = ((IMixinFernflower) fernflower).getStructContex();
-
-        LazyLoader loader = Accessor.get(structContext, "loader");
-        loader.addClassLink(file.getName(), new LazyLoader.Link(file.getAbsolutePath(), null));
-
-        StructClass structClass = StructClass.create(new DataInputFullStream(bytes), true, loader);
-        ContextUnit contextUnit = new ContextUnit(ContextUnit.TYPE_FOLDER, null, file.getAbsolutePath(), true, this, fernflower);
-        contextUnit.addClass(structClass, file.getName());
+        fernflower.addSource(new File("null.class"));
 
         fernflower.decompileContext();
     }

@@ -1,4 +1,4 @@
-package dev.shota.decompiler.reflection;
+package dev.shota.decompiler.runtime.old;
 
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;

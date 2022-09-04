@@ -1,4 +1,4 @@
-package dev.shota.decompiler.reflection.singleton;
+package dev.shota.decompiler.runtime.old.singleton;
 
 import lombok.experimental.StandardException;
 
