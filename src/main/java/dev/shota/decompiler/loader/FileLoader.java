@@ -1,9 +1,11 @@
 package dev.shota.decompiler.loader;
 
 import dev.shota.decompiler.Main;
+import dev.shota.decompiler.reflection.Instance;
 import dev.shota.decompiler.window.container.Code;
-import dev.shota.decompiler.window.container.Container;
+import dev.shota.decompiler.window.viewer.Viewer;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import java.io.File;
@@ -25,12 +27,13 @@ public class FileLoader implements Runnable {
     public void run() {
         if (file.getName().toLowerCase().endsWith(".class")) {
             Tab tab = new Code(file.getName(), Files.readAllBytes(file.toPath()), true);
-            if (!Container.INSTANCE.getTabs().contains(tab))
-                Container.INSTANCE.getTabs().add(tab);
+            TabPane viewer = Instance.get(Viewer.class);
+            if (!viewer.getTabs().contains(tab))
+                viewer.getTabs().add(tab);
             return;
         }
 
-        Container.INSTANCE.getTabs().clear();
+        Instance.get(Viewer.class).getTabs().clear();
         try (JarFile jar = new JarFile(file)) {
             for (Iterator<JarEntry> it = jar.entries().asIterator(); it.hasNext(); ) {
                 JarEntry entry = it.next();
