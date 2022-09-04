@@ -2,7 +2,6 @@ package dev.shota.decompiler;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.shota.decompiler.loader.FileLoader;
-import dev.shota.decompiler.reflection.Instance;
 import dev.shota.decompiler.window.Window;
 import javafx.application.Platform;
 import lombok.SneakyThrows;
@@ -14,6 +13,7 @@ import java.lang.management.ManagementFactory;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,6 +21,7 @@ import java.util.stream.Stream;
 public class Main {
 
     public static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
+    public static final Preferences PREFERENCES = Preferences.userNodeForPackage(Main.class);
 
     public static void main(String @NotNull [] args) {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
@@ -35,7 +36,7 @@ public class Main {
 
         Platform.startup(() -> {});
         FlatLightLaf.setup();
-        Instance.get(Window.class).setVisible(true);
+        Window.INSTANCE.setVisible(true);
         EXECUTOR.submit(new Updater());
         FileLoader.load(Stream.of(args).map(File::new).collect(Collectors.toList()));
     }

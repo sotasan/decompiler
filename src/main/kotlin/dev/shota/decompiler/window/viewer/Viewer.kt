@@ -1,9 +1,9 @@
-package dev.shota.decompiler.old.container
+package dev.shota.decompiler.window.viewer
 
 import com.formdev.flatlaf.util.SystemInfo
 import javafx.scene.control.TabPane
 
-object Container : TabPane() {
+object Viewer : TabPane() {
 
     init {
         minWidth = 300.0

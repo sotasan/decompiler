@@ -1,12 +1,8 @@
 package dev.shota.decompiler.loader;
 
 import dev.shota.decompiler.Main;
-import dev.shota.decompiler.reflection.Instance;
-import dev.shota.decompiler.old.container.Code;
 import dev.shota.decompiler.window.viewer.Viewer;
 import javafx.application.Platform;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import java.io.File;
@@ -31,15 +27,15 @@ public class FileLoader implements Runnable {
         if (file.getName().toLowerCase().endsWith(".class")) {
             byte[] bytes = Files.readAllBytes(file.toPath());
             Platform.runLater(() -> {
-                Tab tab = new Code(file.getName(), bytes, true);
-                TabPane viewer = Instance.get(Viewer.class);
-                viewer.getTabs().add(tab);
-                viewer.getSelectionModel().select(tab);
+                // TODO
+                //Tab tab = new Code(file.getName(), bytes, true);
+                //Viewer.INSTANCE.getTabs().add(tab);
+                //Viewer.INSTANCE.getSelectionModel().select(tab);
             });
             return;
         }
 
-        Platform.runLater(() -> Instance.get(Viewer.class).getTabs().clear());
+        Platform.runLater(() -> Viewer.INSTANCE.getTabs().clear());
         try (JarFile jar = new JarFile(file)) {
             for (Iterator<JarEntry> it = jar.entries().asIterator(); it.hasNext(); ) {
                 JarEntry entry = it.next();

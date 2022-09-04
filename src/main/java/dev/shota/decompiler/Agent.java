@@ -24,7 +24,6 @@ public class Agent extends Thread {
     }
 
     @Override
-    @SneakyThrows
     public void run() {
         // socket.close();
     }

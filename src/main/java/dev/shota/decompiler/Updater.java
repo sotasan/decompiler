@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.shota.decompiler.old.utils.PreferencesKt;
 import dev.shota.decompiler.window.utils.Language;
 import javafx.application.Platform;
 import lombok.SneakyThrows;
@@ -25,7 +24,7 @@ public class Updater implements Runnable {
     @Override
     @SneakyThrows
     public void run() {
-        String lastChecked = PreferencesKt.getPreferences().get(getClass().getCanonicalName(), null);
+        String lastChecked = Main.PREFERENCES.get(getClass().getCanonicalName(), null);
         if (LocalDate.now().toString().equals(lastChecked)) return;
 
         URLConnection connection = new URL("https://api.github.com/repos/sho7a/Decompiler/releases").openConnection();
@@ -72,7 +71,7 @@ public class Updater implements Runnable {
                 })
                 .show());
 
-        PreferencesKt.getPreferences().put(getClass().getCanonicalName(), LocalDate.now().toString());
+        Main.PREFERENCES.put(getClass().getCanonicalName(), LocalDate.now().toString());
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
