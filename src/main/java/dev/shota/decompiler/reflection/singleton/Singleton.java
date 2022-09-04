@@ -1,4 +1,4 @@
-package dev.shota.decompiler.reflection;
+package dev.shota.decompiler.reflection.singleton;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

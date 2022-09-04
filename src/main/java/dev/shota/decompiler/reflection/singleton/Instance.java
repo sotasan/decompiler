@@ -1,4 +1,4 @@
-package dev.shota.decompiler.reflection;
+package dev.shota.decompiler.reflection.singleton;
 
 import lombok.SneakyThrows;
 import java.lang.reflect.Constructor;

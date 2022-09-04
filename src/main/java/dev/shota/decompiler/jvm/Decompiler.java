@@ -1,5 +1,6 @@
 package dev.shota.decompiler.jvm;
 
+import dev.shota.decompiler.mixins.IMixinFernflower;
 import dev.shota.decompiler.reflection.Accessor;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,9 @@ public class Decompiler extends IFernflowerLogger implements IDestructure, IByte
         File file = new File("null.class");
         fernflower.addSource(file);
 
-        StructContext structContext = Accessor.get(fernflower, "structContext");
+        //StructContext structContext = Accessor.get(fernflower, "structContext");
+        StructContext structContext = ((IMixinFernflower) fernflower).getStructContex();
+
         LazyLoader loader = Accessor.get(structContext, "loader");
         loader.addClassLink(file.getName(), new LazyLoader.Link(file.getAbsolutePath(), null));
 
@@ -53,6 +56,7 @@ public class Decompiler extends IFernflowerLogger implements IDestructure, IByte
     @Override
     public void saveClassFile(String path, String qualifiedName, String entryName, @NotNull String content, int[] mapping) {
         code = content.trim();
+        System.out.println(code);
     }
 
     @Override
