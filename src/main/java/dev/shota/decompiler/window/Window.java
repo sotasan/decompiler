@@ -6,7 +6,7 @@ import dev.shota.decompiler.loader.FileLoader;
 import dev.shota.decompiler.reflection.Instance;
 import dev.shota.decompiler.reflection.Singleton;
 import dev.shota.decompiler.window.explorer.Explorer;
-import dev.shota.decompiler.window.utils.Style;
+import dev.shota.decompiler.window.utils.Styles;
 import dev.shota.decompiler.window.viewer.Viewer;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -43,7 +43,7 @@ public class Window extends JFrame implements DropTargetListener {
         BorderPane sidebar = new BorderPane(explorer);
         SplitPane root = new SplitPane(sidebar, viewer);
         SplitPane.setResizableWithParent(sidebar, false);
-        root.getStylesheets().addAll(new Style("main").getData(), new Style("code").getData());
+        root.getStylesheets().addAll(Styles.get("main"), Styles.get("code"));
         root.setDividerPositions(
                 explorer.getMinWidth() / (explorer.getMinWidth() + viewer.getMinWidth()),
                 viewer.getMinWidth() / (explorer.getMinWidth() + viewer.getMinWidth())
