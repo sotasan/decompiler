@@ -6,7 +6,7 @@ import javafx.scene.control.TreeView;
 @Singleton
 public class Explorer extends TreeView<String> {
 
-    public Explorer() {
+    private Explorer() {
         setMinWidth(100);
     }
 
