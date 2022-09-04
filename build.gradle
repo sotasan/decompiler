@@ -26,12 +26,11 @@ javafx {
 
 dependencies {
     implementation group: "org.jetbrains", name: "annotations", version: "23.0.0"
-    implementation group: "org.slf4j", name: "slf4j-simple", version: "2.0.0"
     implementation group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.13.3"
     implementation group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.13.3"
+    implementation group: "org.slf4j", name: "slf4j-simple", version: "2.0.0"
     implementation group: "org.reflections", name: "reflections", version: "0.10.2"
     implementation group: "org.ow2.asm", name: "asm", version: "9.3"
-    implementation group: "org.ow2.asm", name: "asm-tree", version: "9.3"
     implementation group: "org.ow2.asm", name: "asm-util", version: "9.3"
     implementation group: "org.quiltmc", name: "quiltflower", version: "1.8.1"
     implementation group: "com.formdev", name: "flatlaf", version: "2.4"

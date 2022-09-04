@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.shota.decompiler.old.utils.PreferencesKt;
+import dev.shota.decompiler.window.utils.Language;
 import javafx.application.Platform;
 import lombok.SneakyThrows;
 import org.controlsfx.control.Notifications;
@@ -60,7 +61,7 @@ public class Updater implements Runnable {
 
         Platform.runLater(() -> Notifications.create()
                 .title("Decompiler")
-                .text("An update is available.")
+                .text(Language.get("updater"))
                 .onAction(event -> {
                     try {
                         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))

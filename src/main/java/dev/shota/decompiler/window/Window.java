@@ -6,6 +6,7 @@ import dev.shota.decompiler.loader.FileLoader;
 import dev.shota.decompiler.reflection.Instance;
 import dev.shota.decompiler.reflection.Singleton;
 import dev.shota.decompiler.window.explorer.Explorer;
+import dev.shota.decompiler.window.menu.MenuBar;
 import dev.shota.decompiler.window.utils.Styles;
 import dev.shota.decompiler.window.viewer.Viewer;
 import javafx.embed.swing.JFXPanel;
@@ -76,7 +77,7 @@ public class Window extends JFrame implements DropTargetListener {
         pack();
         setTitle("Decompiler");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setMenuBar(new MenuBar());
+        setJMenuBar(new MenuBar());
         setLocationRelativeTo(null);
     }
 

@@ -33,8 +33,8 @@ public class Main {
                 fps = screen.getDisplayMode().getRefreshRate();
         System.setProperty("javafx.animation.pulse", String.valueOf(fps));
 
-        FlatLightLaf.setup();
         Platform.startup(() -> {});
+        FlatLightLaf.setup();
         Instance.get(Window.class).setVisible(true);
         EXECUTOR.submit(new Updater());
         FileLoader.load(Stream.of(args).map(File::new).collect(Collectors.toList()));
