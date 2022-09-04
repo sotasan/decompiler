@@ -1,19 +1,13 @@
 package dev.shota.decompiler.window.viewer;
 
+import dev.shota.decompiler.reflection.Singleton;
 import javafx.scene.control.TabPane;
 
+@Singleton
 public class Viewer extends TabPane {
-
-    private static Viewer INSTANCE;
 
     private Viewer() {
         setMinWidth(300);
-    }
-
-    public static synchronized Viewer getInstance() {
-        if (INSTANCE == null)
-            INSTANCE = new Viewer();
-        return INSTANCE;
     }
 
 }

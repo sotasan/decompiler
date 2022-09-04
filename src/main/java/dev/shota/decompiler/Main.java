@@ -2,6 +2,7 @@ package dev.shota.decompiler;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.shota.decompiler.loader.FileLoader;
+import dev.shota.decompiler.reflection.Instance;
 import dev.shota.decompiler.window.Window;
 import javafx.application.Platform;
 import lombok.SneakyThrows;
@@ -24,7 +25,7 @@ public class Main {
         System.setProperty("apple.awt.application.appearance", "NSAppearanceNameAqua");
         FlatLightLaf.setup();
         Platform.startup(() -> {});
-        Window.getInstance().setVisible(true);
+        Instance.get(Window.class).setVisible(true);
         EXECUTOR.submit(new Updater());
         if (args.length != 0)
             FileLoader.load(new File(args[0]));

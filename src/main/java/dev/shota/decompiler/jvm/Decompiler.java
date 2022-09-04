@@ -1,5 +1,6 @@
 package dev.shota.decompiler.jvm;
 
+import dev.shota.decompiler.reflection.Accessor;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.java.decompiler.main.Fernflower;
@@ -13,7 +14,6 @@ import org.jetbrains.java.decompiler.struct.StructContext;
 import org.jetbrains.java.decompiler.struct.lazy.LazyLoader;
 import org.jetbrains.java.decompiler.util.DataInputFullStream;
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.jar.Manifest;
 
 public class Decompiler extends IFernflowerLogger implements IDestructure, IBytecodeProvider, IResultSaver {
@@ -29,13 +29,8 @@ public class Decompiler extends IFernflowerLogger implements IDestructure, IByte
         File file = new File("null.class");
         fernflower.addSource(file);
 
-        Field structContextField = fernflower.getClass().getDeclaredField("structContext");
-        structContextField.setAccessible(true);
-        StructContext structContext = (StructContext) structContextField.get(fernflower);
-
-        Field loaderField = structContext.getClass().getDeclaredField("loader");
-        loaderField.setAccessible(true);
-        LazyLoader loader = (LazyLoader) loaderField.get(structContext);
+        StructContext structContext = Accessor.get(fernflower, "structContext");
+        LazyLoader loader = Accessor.get(structContext, "loader");
         loader.addClassLink(file.getName(), new LazyLoader.Link(file.getAbsolutePath(), null));
 
         StructClass structClass = StructClass.create(new DataInputFullStream(bytes), true, loader);

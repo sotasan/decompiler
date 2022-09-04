@@ -1,19 +1,13 @@
 package dev.shota.decompiler.window.explorer;
 
+import dev.shota.decompiler.reflection.Singleton;
 import javafx.scene.control.TreeView;
 
+@Singleton
 public class Explorer extends TreeView<String> {
 
-    private static Explorer INSTANCE;
-
-    private Explorer() {
+    public Explorer() {
         setMinWidth(100);
-    }
-
-    public static synchronized Explorer getInstance() {
-        if (INSTANCE == null)
-            INSTANCE = new Explorer();
-        return INSTANCE;
     }
 
 }

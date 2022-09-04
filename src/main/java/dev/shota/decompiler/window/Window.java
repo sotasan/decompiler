@@ -3,6 +3,8 @@ package dev.shota.decompiler.window;
 import com.formdev.flatlaf.util.SystemInfo;
 import com.sun.javafx.tk.Toolkit;
 import dev.shota.decompiler.loader.FileLoader;
+import dev.shota.decompiler.reflection.Instance;
+import dev.shota.decompiler.reflection.Singleton;
 import dev.shota.decompiler.window.explorer.Explorer;
 import dev.shota.decompiler.window.utils.Style;
 import dev.shota.decompiler.window.viewer.Viewer;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
@@ -26,9 +29,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+@Singleton
 public class Window extends JFrame implements DropTargetListener {
-
-    private static Window INSTANCE;
 
     @SneakyThrows
     private Window() {
@@ -36,13 +38,15 @@ public class Window extends JFrame implements DropTargetListener {
         for (String font : fonts)
             Font.loadFont(getClass().getClassLoader().getResourceAsStream(font), Toolkit.getToolkit().getFontLoader().getSystemFontSize());
 
-        BorderPane sidebar = new BorderPane(Explorer.getInstance());
-        SplitPane root = new SplitPane(sidebar, Viewer.getInstance());
+        Region explorer = Instance.get(Explorer.class);
+        Region viewer = Instance.get(Viewer.class);
+        BorderPane sidebar = new BorderPane(explorer);
+        SplitPane root = new SplitPane(sidebar, viewer);
         SplitPane.setResizableWithParent(sidebar, false);
         root.getStylesheets().addAll(new Style("main").getData(), new Style("code").getData());
         root.setDividerPositions(
-                Explorer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth()),
-                Viewer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth())
+                explorer.getMinWidth() / (explorer.getMinWidth() + viewer.getMinWidth()),
+                viewer.getMinWidth() / (explorer.getMinWidth() + viewer.getMinWidth())
         );
 
         if (SystemInfo.isMacOS && SystemInfo.isMacFullWindowContentSupported) {
@@ -73,12 +77,6 @@ public class Window extends JFrame implements DropTargetListener {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setMenuBar(new MenuBar());
         setLocationRelativeTo(null);
-    }
-
-    public static synchronized Window getInstance() {
-        if (INSTANCE == null)
-            INSTANCE = new Window();
-        return INSTANCE;
     }
 
     @Override
