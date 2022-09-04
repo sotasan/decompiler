@@ -24,7 +24,7 @@ public class Updater implements Runnable {
     @Override
     @SneakyThrows
     public void run() {
-        String lastChecked = PreferencesKt.getPreferences().get("updaterLastChecked", null);
+        String lastChecked = PreferencesKt.getPreferences().get(getClass().getCanonicalName(), null);
         if (LocalDate.now().toString().equals(lastChecked)) return;
 
         URLConnection connection = new URL("https://api.github.com/repos/sho7a/Decompiler/releases").openConnection();
@@ -71,7 +71,7 @@ public class Updater implements Runnable {
                 })
                 .show());
 
-        PreferencesKt.getPreferences().put("updaterLastChecked", LocalDate.now().toString());
+        PreferencesKt.getPreferences().put(getClass().getCanonicalName(), LocalDate.now().toString());
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
