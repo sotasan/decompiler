@@ -2,7 +2,6 @@ package dev.shota.decompiler.old
 
 import com.formdev.flatlaf.util.SystemInfo
 import com.sun.javafx.tk.Toolkit
-import dev.shota.decompiler.loader.FileLoader
 import dev.shota.decompiler.old.container.Container
 import dev.shota.decompiler.old.menu.MenuBarOld
 import dev.shota.decompiler.old.sidebar.Sidebar
@@ -65,7 +64,7 @@ object WindowOld : JFrame() {
                     val files = event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<*>
                     if (files.isNotEmpty()) {
                         val file = files.first() as File
-                        event.dropComplete(FileLoader.load(file))
+                        //event.dropComplete(FileLoader.load(file))
                         return
                     }
                 }

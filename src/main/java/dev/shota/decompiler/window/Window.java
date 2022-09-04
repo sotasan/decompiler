@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Singleton
 public class Window extends JFrame implements DropTargetListener {
@@ -80,6 +81,12 @@ public class Window extends JFrame implements DropTargetListener {
     }
 
     @Override
+    public void dispose() {
+        super.dispose();
+        System.exit(0);
+    }
+
+    @Override
     public void dragEnter(@NotNull DropTargetDragEvent event) {
         event.acceptDrag(DnDConstants.ACTION_COPY);
     }
@@ -93,14 +100,13 @@ public class Window extends JFrame implements DropTargetListener {
     @SneakyThrows
     public void drop(@NotNull DropTargetDropEvent event) {
         event.acceptDrop(DnDConstants.ACTION_COPY);
-        if (!event.getTransferable().isDataFlavorSupported(DataFlavor.javaFileListFlavor)) return;
-        Object data = event.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-        List<?> files = (List<?>) data;
-        boolean complete = false;
-        for (Object file : files)
-            if (FileLoader.load((File) file))
-                complete = true;
-        event.dropComplete(complete);
+        if (event.getTransferable().isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+            List<?> list = (List<?>) event.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+            List<File> files = list.stream().map(o -> (File) o).collect(Collectors.toList());
+            event.dropComplete(FileLoader.load(files));
+            return;
+        }
+        event.dropComplete(false);
     }
 
     @Override

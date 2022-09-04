@@ -1,7 +1,6 @@
 package dev.shota.decompiler.old.menu.file.items
 
 import com.formdev.flatlaf.util.SystemInfo
-import dev.shota.decompiler.loader.FileLoader
 import dev.shota.decompiler.old.WindowOld
 import dev.shota.decompiler.old.menu.MenuItem
 import dev.shota.decompiler.old.menu.view.items.Language
@@ -41,8 +40,10 @@ class OpenFile : MenuItem("file.openFile", KeyEvent.VK_O) {
                 }
             }
 
+            /*
             if (f != null)
                 FileLoader.load(f)
+             */
         }
     }
 

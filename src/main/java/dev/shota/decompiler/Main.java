@@ -14,6 +14,8 @@ import java.lang.management.ManagementFactory;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @UtilityClass
 public class Main {
@@ -35,8 +37,7 @@ public class Main {
         Platform.startup(() -> {});
         Instance.get(Window.class).setVisible(true);
         EXECUTOR.submit(new Updater());
-        if (args.length != 0)
-            FileLoader.load(new File(args[0]));
+        FileLoader.load(Stream.of(args).map(File::new).collect(Collectors.toList()));
     }
 
     @SneakyThrows

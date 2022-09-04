@@ -36,7 +36,6 @@ public class Decompiler extends IFernflowerLogger implements IDestructure, IByte
     @Override
     public void saveClassFile(String path, String qualifiedName, String entryName, @NotNull String content, int[] mapping) {
         code = content.trim();
-        System.out.println(code);
     }
 
     @Override

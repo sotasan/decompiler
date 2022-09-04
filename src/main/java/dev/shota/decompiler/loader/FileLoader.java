@@ -12,6 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -19,7 +21,7 @@ public class FileLoader implements Runnable {
 
     private final File file;
 
-    private FileLoader(@NotNull File file) {
+    private FileLoader(File file) {
         this.file = file;
     }
 
@@ -46,15 +48,16 @@ public class FileLoader implements Runnable {
         }
     }
 
-    public static boolean load(@NotNull File file) {
-        if (!file.exists() || (
-                !file.getName().toLowerCase().endsWith(".jar") &&
-                !file.getName().toLowerCase().endsWith(".war") &&
-                !file.getName().toLowerCase().endsWith(".zip") &&
-                !file.getName().toLowerCase().endsWith(".class")))
+    public static boolean load(@NotNull List<File> files) {
+        Optional<File> file = files.stream().findFirst();
+        if (file.isEmpty() || !file.get().exists() || (
+                !file.get().getName().toLowerCase().endsWith(".jar") &&
+                !file.get().getName().toLowerCase().endsWith(".war") &&
+                !file.get().getName().toLowerCase().endsWith(".zip") &&
+                !file.get().getName().toLowerCase().endsWith(".class")))
             return false;
 
-        Main.EXECUTOR.submit(new FileLoader(file));
+        Main.EXECUTOR.submit(new FileLoader(file.get()));
 
         return true;
     }
