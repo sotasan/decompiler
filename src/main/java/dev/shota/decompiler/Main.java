@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
+import java.awt.*;
 import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.Optional;
@@ -23,6 +24,13 @@ public class Main {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         System.setProperty("apple.awt.application.name", "Decompiler");
         System.setProperty("apple.awt.application.appearance", "NSAppearanceNameAqua");
+
+        int fps = 0;
+        for (GraphicsDevice screen : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices())
+            if (fps < screen.getDisplayMode().getRefreshRate())
+                fps = screen.getDisplayMode().getRefreshRate();
+        System.setProperty("javafx.animation.pulse", String.valueOf(fps));
+
         FlatLightLaf.setup();
         Platform.startup(() -> {});
         Instance.get(Window.class).setVisible(true);
