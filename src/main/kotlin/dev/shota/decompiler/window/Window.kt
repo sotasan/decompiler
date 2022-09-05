@@ -1,7 +1,6 @@
 package dev.shota.decompiler.window
 
 import com.formdev.flatlaf.util.SystemInfo
-import com.sun.javafx.tk.Toolkit
 import dev.shota.decompiler.loader.FileLoader
 import dev.shota.decompiler.window.explorer.Explorer
 import dev.shota.decompiler.window.menu.MenuBar
@@ -12,16 +11,12 @@ import javafx.scene.Scene
 import javafx.scene.control.SplitPane
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Pane
-import javafx.scene.text.Font
-import org.reflections.Reflections
-import org.reflections.scanners.Scanners
 import java.awt.Dimension
 import java.awt.Taskbar
 import java.awt.datatransfer.DataFlavor
 import java.awt.dnd.*
 import java.io.File
 import java.util.*
-import java.util.regex.Pattern
 import java.util.stream.Collectors
 import javax.swing.ImageIcon
 import javax.swing.JFrame
@@ -30,10 +25,6 @@ import kotlin.system.exitProcess
 object Window : JFrame(), DropTargetListener {
 
     init {
-        val fonts = Reflections("fonts", Scanners.Resources).getResources(Pattern.compile(".*\\.ttf"))
-        for (font in fonts)
-            Font.loadFont(javaClass.classLoader.getResourceAsStream(font), Toolkit.getToolkit().fontLoader.systemFontSize.toDouble())
-
         val sidebar = BorderPane(Explorer)
         val root = SplitPane(sidebar, Viewer)
         SplitPane.setResizableWithParent(sidebar, false)
