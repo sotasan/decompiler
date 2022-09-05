@@ -1,5 +1,6 @@
 plugins {
     java
+    antlr
     kotlin("jvm") version "1.7.10"
     id("io.freefair.lombok") version "6.5.1"
     id("org.openjfx.javafxplugin") version "0.0.13"
@@ -24,7 +25,17 @@ javafx {
     modules("javafx.base", "javafx.controls", "javafx.graphics", "javafx.swing")
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs(srcDirs, "build/generated-src/antlr")
+        }
+    }
+}
+
 dependencies {
+    antlr("org.antlr:antlr4:4.11.1")
+    implementation("org.antlr:antlr4-runtime:4.11.1")
     implementation("org.jetbrains:annotations:23.0.0")
     implementation("com.fasterxml.jackson.core:jackson-core:2.13.4")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4")
