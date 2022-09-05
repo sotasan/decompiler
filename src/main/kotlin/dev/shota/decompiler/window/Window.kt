@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane
 import javafx.scene.text.Font
 import org.reflections.Reflections
 import org.reflections.scanners.Scanners
+import java.awt.Dimension
 import java.awt.Taskbar
 import java.awt.datatransfer.DataFlavor
 import java.awt.dnd.*
@@ -67,6 +68,7 @@ object Window : JFrame(), DropTargetListener {
         title = "Decompiler"
         defaultCloseOperation = DISPOSE_ON_CLOSE
         jMenuBar = MenuBar()
+        minimumSize = Dimension((Explorer.minWidth + Viewer.minWidth).toInt(), (Explorer.minWidth + Viewer.minWidth).toInt())
         pack()
         setLocationRelativeTo(null)
     }
