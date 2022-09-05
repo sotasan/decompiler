@@ -42,13 +42,12 @@ public class Main {
     }
 
     @SneakyThrows
-    public static void restart() {
+    public static void start() {
         Optional<String> java = ProcessHandle.current().info().command();
         if (java.isEmpty()) return;
         String classPath = ManagementFactory.getRuntimeMXBean().getClassPath();
         String main = Main.class.getCanonicalName();
         new ProcessBuilder(java.get(), "-cp", classPath, main).start();
-        System.exit(0);
     }
 
 }
