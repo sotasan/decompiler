@@ -5,9 +5,6 @@
 .string {
     -fx-fill: green;
 }
-.paren, .bracket, .brace, .semicolon {
-    -fx-fill: -fx-text-background-color;
-}
 .comment {
     -fx-fill: gray;
     -fx-font-style: italic;

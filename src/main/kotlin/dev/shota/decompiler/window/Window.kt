@@ -28,7 +28,7 @@ object Window : JFrame(), DropTargetListener {
         val sidebar = BorderPane(Explorer)
         val root = SplitPane(sidebar, Viewer)
         SplitPane.setResizableWithParent(sidebar, false)
-        root.stylesheets.addAll(Styles.get("main"), Styles.get("code"))
+        root.stylesheets.addAll(Styles.get("main"), Styles.get("syntax"))
         root.setDividerPositions(Explorer.minWidth / (Explorer.minWidth + Viewer.minWidth), Viewer.minWidth / (Explorer.minWidth + Viewer.minWidth))
 
         if (SystemInfo.isMacOS && SystemInfo.isMacFullWindowContentSupported) {
