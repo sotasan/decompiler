@@ -32,7 +32,6 @@
     -fx-background-color: -fx-mark-color;
 }
 
-
 .tab-pane .tab-header-area {
     -fx-padding: 0;
 }
@@ -58,11 +57,9 @@
 .tab-pane .tab-content-area .virtualized-scroll-pane .styled-text-area * {
     -fx-font-family: "JetBrains Mono";
     -fx-font-size: 16;
-
 }
 .tab-pane .tab-content-area .virtualized-scroll-pane .styled-text-area .selection {
     -fx-fill: -fx-accent;
-
 }
 .tab-pane .tab-content-area .virtualized-scroll-pane .styled-text-area .lineno {
     -fx-text-fill: -fx-mark-color;

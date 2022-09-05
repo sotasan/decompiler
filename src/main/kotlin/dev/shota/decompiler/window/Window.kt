@@ -58,10 +58,11 @@ object Window : JFrame(), DropTargetListener {
             it.addDropTargetListener(this)
         }
 
-        add(JFXPanel().apply {
-            scene = Scene(root, 894.0, 528.0)
-            dropTarget.isActive = false
-        })
+        JFXPanel().let {
+            it.scene = Scene(root, 894.0, 528.0)
+            it.dropTarget.isActive = false
+            add(it)
+        }
 
         title = "Decompiler"
         defaultCloseOperation = DISPOSE_ON_CLOSE

@@ -1,8 +1,10 @@
 package dev.shota.decompiler.loader;
 
 import dev.shota.decompiler.Main;
+import dev.shota.decompiler.window.viewer.Code;
 import dev.shota.decompiler.window.viewer.Viewer;
 import javafx.application.Platform;
+import javafx.scene.control.Tab;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import java.io.File;
@@ -27,10 +29,9 @@ public class FileLoader implements Runnable {
         if (file.getName().toLowerCase().endsWith(".class")) {
             byte[] bytes = Files.readAllBytes(file.toPath());
             Platform.runLater(() -> {
-                // TODO
-                //Tab tab = new Code(file.getName(), bytes, true);
-                //Viewer.INSTANCE.getTabs().add(tab);
-                //Viewer.INSTANCE.getSelectionModel().select(tab);
+                Tab tab = new Code(file.getName(), true, bytes);
+                Viewer.INSTANCE.getTabs().add(tab);
+                Viewer.INSTANCE.getSelectionModel().select(tab);
             });
             return;
         }
