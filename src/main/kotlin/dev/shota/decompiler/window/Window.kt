@@ -68,7 +68,7 @@ object Window : JFrame(), DropTargetListener {
         title = "Decompiler"
         defaultCloseOperation = DISPOSE_ON_CLOSE
         jMenuBar = MenuBar()
-        minimumSize = Dimension((Explorer.minWidth + Viewer.minWidth).toInt(), (Explorer.minWidth + Viewer.minWidth).toInt())
+        minimumSize = Dimension((Explorer.minWidth + Viewer.minWidth).toInt(), ((Explorer.minWidth + Viewer.minWidth) / 2).toInt())
         pack()
         setLocationRelativeTo(null)
     }
