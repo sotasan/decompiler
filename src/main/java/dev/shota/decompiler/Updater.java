@@ -40,10 +40,7 @@ public class Updater implements Runnable {
         Optional<Release> release = Arrays.stream(releases).findFirst();
         if (release.isEmpty()) return;
 
-        Properties properties = new Properties();
-        properties.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
-
-        String[] currentArray = properties.get("version").toString().split("\\.");
+        String[] currentArray = getVersion().split("\\.");
         int currentMajor = Integer.parseInt(currentArray[0]);
         int currentMinor = Integer.parseInt(currentArray[1]);
         int currentPatch = Integer.parseInt(currentArray[2]);
@@ -83,6 +80,13 @@ public class Updater implements Runnable {
         @JsonProperty("tag_name")
         private String tagName;
 
+    }
+
+    @SneakyThrows
+    public static String getVersion() {
+        Properties properties = new Properties();
+        properties.load(Updater.class.getClassLoader().getResourceAsStream("application.properties"));
+        return properties.getProperty("version");
     }
 
 }
