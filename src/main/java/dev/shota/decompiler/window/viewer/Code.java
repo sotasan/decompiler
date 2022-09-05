@@ -23,7 +23,6 @@ public class Code extends Tab {
         codeArea.replaceText(new Decompiler(data).getCode());
 
         ScaledVirtualized<CodeArea> scaledVirtualized = new ScaledVirtualized<>(codeArea);
-
         setContent(new VirtualizedScrollPane<>(scaledVirtualized));
     }
 
