@@ -20,22 +20,22 @@ public class CloseMenu extends ContextMenu {
 
         Viewer.INSTANCE.getTabs().addListener((ListChangeListener<Tab>) c -> closeOthers.setDisable(Viewer.INSTANCE.getTabs().size() == 1));
 
-        close.setOnAction(this::close);
-        closeOthers.setOnAction(this::closeOthers);
-        closeAll.setOnAction(this::closeAll);
+        close.setOnAction(this::onClose);
+        closeOthers.setOnAction(this::onCloseOthers);
+        closeAll.setOnAction(this::onCloseAll);
 
         getItems().addAll(close, closeOthers, closeAll);
     }
 
-    private void close(ActionEvent event) {
+    private void onClose(ActionEvent event) {
         Viewer.INSTANCE.getTabs().remove(parent);
     }
 
-    private void closeOthers(ActionEvent event) {
+    private void onCloseOthers(ActionEvent event) {
         Viewer.INSTANCE.getTabs().removeIf(tab -> !tab.equals(parent));
     }
 
-    private void closeAll(ActionEvent event) {
+    private void onCloseAll(ActionEvent event) {
         Viewer.INSTANCE.getTabs().clear();
     }
 
