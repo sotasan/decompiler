@@ -29,7 +29,7 @@ public class FileLoader implements Runnable {
         if (file.getName().toLowerCase().endsWith(".class")) {
             byte[] bytes = Files.readAllBytes(file.toPath());
             Platform.runLater(() -> {
-                Tab tab = new Code(file.getName(), true, bytes);
+                Tab tab = new Code(file.getName(), bytes, true);
                 Viewer.INSTANCE.getTabs().add(tab);
                 Viewer.INSTANCE.getSelectionModel().select(tab);
             });
