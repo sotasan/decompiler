@@ -30,6 +30,7 @@ public class Code extends Tab {
         }
 
         setContent(new VirtualizedScrollPane<>(codeArea));
+        setContextMenu(CodeContextMenu.INSTANCE);
     }
 
     private enum Type {
