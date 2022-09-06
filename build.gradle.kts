@@ -51,15 +51,15 @@ dependencies {
 }
 
 tasks {
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17.toString()
-        }
-    }
-
     processResources {
         filesMatching("application.properties") {
             expand(project.properties)
+        }
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_17.toString()
         }
     }
 

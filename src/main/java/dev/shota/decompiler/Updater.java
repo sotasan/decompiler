@@ -46,7 +46,7 @@ public class Updater implements Runnable {
         int currentPatch = Integer.parseInt(currentArray[2]);
         Version current = new Version(currentMajor, currentMinor, currentPatch, null, null, null);
 
-        String[] originArray = release.get().tagName.substring(1).split("\\.");
+        String[] originArray = release.get().tagName.split("\\.");
         int originMajor = Integer.parseInt(originArray[0]);
         int originMinor = Integer.parseInt(originArray[1]);
         int originPatch = Integer.parseInt(originArray[2]);

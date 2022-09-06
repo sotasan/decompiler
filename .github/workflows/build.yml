@@ -9,25 +9,26 @@ jobs:
     steps:
 
       - name: Checkout GitHub
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Setup Java
-        uses: actions/setup-java@v2
+      - name: Java
+        uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
 
-      - name: Gradle Build
+      - name: Build
         run: |
           chmod +x gradlew
           echo VERSION=$(./gradlew -q properties | grep 'version:' | cut -d ' ' -f 2) >> $GITHUB_ENV
           ./gradlew build
 
-      - name: Release GitHub
+      - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: build/libs/*.jar
-          tag_name: v${{ env.VERSION }}
+          name: v${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
           fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,10 +43,10 @@ jobs:
     steps:
 
       - name: Checkout GitHub
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Setup Java
-        uses: actions/setup-java@v2
+      - name: Java
+        uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
