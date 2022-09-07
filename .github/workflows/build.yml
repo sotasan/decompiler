@@ -27,8 +27,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: build/libs/*.jar
-          name: v${{ env.VERSION }}
-          tag_name: ${{ env.VERSION }}
+          tag_name: v${{ env.VERSION }}
           fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

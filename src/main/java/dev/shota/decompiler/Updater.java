@@ -5,9 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.shota.decompiler.window.utils.Language;
-import javafx.application.Platform;
 import lombok.SneakyThrows;
-import org.controlsfx.control.Notifications;
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +15,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -24,6 +24,7 @@ public class Updater implements Runnable {
     @Override
     @SneakyThrows
     public void run() {
+        if (!SystemTray.isSupported()) return;
         String lastChecked = Main.PREFERENCES.get(getClass().getCanonicalName(), null);
         if (LocalDate.now().toString().equals(lastChecked)) return;
 
@@ -46,7 +47,7 @@ public class Updater implements Runnable {
         int currentPatch = Integer.parseInt(currentArray[2]);
         Version current = new Version(currentMajor, currentMinor, currentPatch, null, null, null);
 
-        String[] originArray = release.get().tagName.split("\\.");
+        String[] originArray = release.get().tagName.substring(1).split("\\.");
         int originMajor = Integer.parseInt(originArray[0]);
         int originMinor = Integer.parseInt(originArray[1]);
         int originPatch = Integer.parseInt(originArray[2]);
@@ -55,18 +56,19 @@ public class Updater implements Runnable {
         if (current.compareTo(origin) >= 0)
             return;
 
-        Platform.runLater(() -> Notifications.create()
-                .title("Decompiler")
-                .text(Language.get("updater"))
-                .onAction(event -> {
-                    try {
-                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
-                            Desktop.getDesktop().browse(new URI(release.get().htmlUrl));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                })
-                .show());
+        TrayIcon trayIcon = new TrayIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("logo/logo.png")).readAllBytes()).getImage());
+        SystemTray.getSystemTray().add(trayIcon);
+        trayIcon.setToolTip(Language.get("updater"));
+        trayIcon.setImageAutoSize(true);
+        trayIcon.displayMessage("Decompiler", trayIcon.getToolTip(), TrayIcon.MessageType.INFO);
+        trayIcon.addActionListener(event -> {
+            try {
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
+                    Desktop.getDesktop().browse(new URI(release.get().htmlUrl));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         Main.PREFERENCES.put(getClass().getCanonicalName(), LocalDate.now().toString());
     }

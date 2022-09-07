@@ -34,7 +34,6 @@ dependencies {
     implementation("org.ow2.asm:asm-util:9.3")
     implementation("org.quiltmc:quiltflower:1.8.1")
     implementation("com.formdev:flatlaf:2.4")
-    implementation("org.controlsfx:controlsfx:11.1.1")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
