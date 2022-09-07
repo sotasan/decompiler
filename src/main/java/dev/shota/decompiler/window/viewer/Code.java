@@ -2,6 +2,7 @@ package dev.shota.decompiler.window.viewer;
 
 import dev.shota.decompiler.jvm.Decompiler;
 import javafx.scene.control.Tab;
+import org.fxmisc.flowless.ScaledVirtualized;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
@@ -29,7 +30,7 @@ public class Code extends Tab {
             codeArea.replaceText(stringWriter.toString().trim());
         }
 
-        setContent(new VirtualizedScrollPane<>(codeArea));
+        setContent(new VirtualizedScrollPane<>(new ScaledVirtualized<>(codeArea)));
         setContextMenu(new CloseMenu(this));
     }
 

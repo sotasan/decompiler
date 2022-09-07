@@ -25,8 +25,6 @@ import kotlin.system.exitProcess
 object Window : JFrame(), DropTargetListener {
 
     init {
-        val panel = JFXPanel()
-
         val sidebar = BorderPane(Explorer)
         val root = SplitPane(sidebar, Viewer)
         SplitPane.setResizableWithParent(sidebar, false)
@@ -52,9 +50,11 @@ object Window : JFrame(), DropTargetListener {
             it.addDropTargetListener(this)
         }
 
-        panel.scene = Scene(root, 894.0, 528.0)
-        panel.dropTarget.isActive = false
-        add(panel)
+        JFXPanel().let {
+            it.scene = Scene(root, 894.0, 528.0)
+            it.dropTarget.isActive = false
+            add(it)
+        }
 
         title = "Decompiler"
         defaultCloseOperation = DISPOSE_ON_CLOSE
