@@ -31,7 +31,6 @@ public class FileLoader implements Runnable {
             Platform.runLater(() -> {
                 Tab tab = new Code(file.getName(), bytes, true);
                 Viewer.INSTANCE.getTabs().add(tab);
-                Viewer.INSTANCE.getSelectionModel().select(tab);
             });
             return;
         }
