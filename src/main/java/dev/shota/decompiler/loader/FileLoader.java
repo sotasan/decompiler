@@ -45,6 +45,7 @@ public class FileLoader implements Runnable {
         }
     }
 
+    // TODO: multiple files
     public static boolean load(@NotNull List<File> files) {
         Optional<File> file = files.stream().findFirst();
         if (file.isEmpty() || !file.get().exists() || (
