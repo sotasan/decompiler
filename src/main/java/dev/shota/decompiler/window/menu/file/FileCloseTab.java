@@ -20,7 +20,7 @@ public class FileCloseTab extends JMenuItem implements ActionListener {
         addActionListener(this);
         setEnabled(false);
 
-        Platform.runLater(() -> Viewer.INSTANCE.getTabs().addListener((ListChangeListener<Tab>) c -> setEnabled(!Viewer.INSTANCE.getSelectionModel().isEmpty())));
+        Viewer.INSTANCE.getTabs().addListener((ListChangeListener<Tab>) c -> setEnabled(!Viewer.INSTANCE.getSelectionModel().isEmpty()));
     }
 
     @Override
