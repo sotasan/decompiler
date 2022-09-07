@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "dev.shota"
-version = "1.0.0"
+version = "0.9.0"
 
 repositories {
     mavenCentral()
@@ -35,6 +35,7 @@ dependencies {
     implementation("org.quiltmc:quiltflower:1.8.1")
     implementation("com.formdev:flatlaf:2.4")
     implementation("org.fxmisc.richtext:richtextfx:0.10.9")
+    implementation("com.fifesoft:rsyntaxtextarea:3.2.0")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-base:${javafx.version}:linux")

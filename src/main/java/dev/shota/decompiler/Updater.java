@@ -61,12 +61,12 @@ public class Updater implements Runnable {
         trayIcon.setToolTip(Language.get("updater"));
         trayIcon.setImageAutoSize(true);
         trayIcon.displayMessage("Decompiler", trayIcon.getToolTip(), TrayIcon.MessageType.INFO);
-        trayIcon.addActionListener(event -> {
+        trayIcon.addActionListener(e -> {
             try {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
                     Desktop.getDesktop().browse(new URI(release.get().htmlUrl));
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         });
 
