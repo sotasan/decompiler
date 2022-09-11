@@ -1,6 +1,9 @@
 package dev.shota.decompiler.loader;
 
 import dev.shota.decompiler.Main;
+import dev.shota.decompiler.window.explorer.Explorer;
+import dev.shota.decompiler.window.explorer.ExplorerEntry;
+import dev.shota.decompiler.window.explorer.ExplorerRoot;
 import dev.shota.decompiler.window.viewer.Code;
 import dev.shota.decompiler.window.viewer.Viewer;
 import javafx.application.Platform;
@@ -9,6 +12,7 @@ import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -37,10 +41,10 @@ public class FileLoader implements Runnable {
 
         Platform.runLater(() -> Viewer.INSTANCE.getTabs().clear());
         try (JarFile jar = new JarFile(file)) {
-            for (Iterator<JarEntry> it = jar.entries().asIterator(); it.hasNext(); ) {
-                JarEntry entry = it.next();
-                System.out.println(entry.getName());
-            }
+            List<ExplorerEntry> entries = new ArrayList<>();
+            for (Iterator<JarEntry> it = jar.entries().asIterator(); it.hasNext();)
+                entries.add(new ExplorerEntry(it.next()));
+            Platform.runLater(() -> Explorer.INSTANCE.setRoot(new ExplorerRoot(new ExplorerEntry(jar), entries)));
         }
     }
 

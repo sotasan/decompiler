@@ -2,10 +2,11 @@ package dev.shota.decompiler.window.explorer
 
 import javafx.scene.control.TreeView
 
-object Explorer : TreeView<String>() {
+object Explorer : TreeView<ExplorerEntry>() {
 
     init {
         minWidth = 100.0
+        setCellFactory { ExplorerCell() }
     }
 
 }
