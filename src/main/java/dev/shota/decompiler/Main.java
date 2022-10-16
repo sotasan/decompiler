@@ -10,6 +10,7 @@ import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
+import org.reflections.util.ConfigurationBuilder;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -19,7 +20,6 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.prefs.Preferences;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,7 +41,7 @@ public class Main {
                 fps = screen.getDisplayMode().getRefreshRate();
         System.setProperty("javafx.animation.pulse", String.valueOf(fps));
 
-        for (String font : new Reflections("fonts", Scanners.Resources).getResources(Pattern.compile(".*\\.ttf"))) {
+        for (String font : new Reflections(new ConfigurationBuilder().forPackage("fonts").addScanners(Scanners.Resources)).getResources(".*\\.ttf")) {
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(font))));
             javafx.scene.text.Font.loadFont(Main.class.getClassLoader().getResourceAsStream(font), Toolkit.getToolkit().getFontLoader().getSystemFontSize());
         }
