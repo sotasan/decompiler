@@ -1,9 +1,9 @@
 plugins {
     java
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.7.21"
     id("io.freefair.lombok") version "6.5.1"
     id("org.openjfx.javafxplugin") version "0.0.13"
-    id("org.panteleyev.jpackageplugin") version "1.4.1"
+    id("org.panteleyev.jpackageplugin") version "1.5.0"
 }
 
 group = "dev.shota"
@@ -26,8 +26,8 @@ javafx {
 
 dependencies {
     implementation("org.jetbrains:annotations:23.0.0")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.14.0-rc2")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0-rc2")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.14.0")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
     implementation("org.slf4j:slf4j-simple:2.0.3")
     implementation("org.reflections:reflections:0.10.2")
     implementation("org.ow2.asm:asm:9.4")
