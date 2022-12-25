@@ -28,7 +28,7 @@ public class Updater implements Runnable {
         String lastChecked = Main.PREFERENCES.get(getClass().getCanonicalName(), null);
         if (LocalDate.now().toString().equals(lastChecked)) return;
 
-        URLConnection connection = new URL("https://api.github.com/repos/sho7a/Decompiler/releases").openConnection();
+        URLConnection connection = new URL("https://api.github.com/repos/hohltier/decompiler/releases").openConnection();
 
         try {
             connection.connect();

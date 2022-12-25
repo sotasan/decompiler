@@ -52,7 +52,7 @@ public class About extends JDialog implements ActionListener {
         github.setOnAction(event -> {
             try {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
-                    Desktop.getDesktop().browse(new URI("https://github.com/sho7a/Decompiler"));
+                    Desktop.getDesktop().browse(new URI("https://github.com/hohltier/decompiler"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
