@@ -50,7 +50,7 @@ public class Main {
         Platform.startup(() -> {});
         FlatLightLaf.setup();
         Window.INSTANCE.setVisible(true);
-        EXECUTOR.submit(new Updater());
+        // TODO: EXECUTOR.submit(new Updater());
         FileLoader.load(Stream.of(args).map(File::new).collect(Collectors.toList()));
     }
 
