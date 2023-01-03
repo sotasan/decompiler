@@ -72,9 +72,9 @@ tasks {
 
     jpackage {
         appName = rootProject.name
-        copyright = "Copyright 2022 shota"
+        copyright = "Copyright 2022 sota"
         appDescription = "Java Decompiler Gui"
-        vendor = "shota"
+        vendor = "sota"
         input = jar.get().destinationDirectory.asFile.get().path
         mainJar = jar.get().archiveFileName.get()
         destination = "${buildDir.path}/jpackage"
@@ -85,7 +85,7 @@ tasks {
             winMenu = true
             winDirChooser = true
             winUpgradeUuid = "880be177-032d-496e-8d92-cefa555b2c88"
-            winMenuGroup = "shota"
+            winMenuGroup = "sota"
             winShortcut = true
             winPerUserInstall = true
         }

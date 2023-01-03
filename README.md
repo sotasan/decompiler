@@ -1,4 +1,4 @@
-<a href="https://github.com/hohltier/decompiler/blob/master/src/test/java/dev/shota/decompiler/Main.java"><img align="center" width="100%" alt="Screenshot" src="https://github.com/hohltier/decompiler/raw/master/src/main/resources/screenshot.png"></a>
+<a href="https://github.com/hohltier/decompiler/blob/master/src/test/java/com/hohltier/decompiler/Main.java"><img align="center" width="100%" alt="Screenshot" src="https://github.com/hohltier/decompiler/raw/master/src/main/resources/screenshot.png"></a>
 
 <p align="center">
     <a href="https://github.com/hohltier/decompiler/tags"><img alt="Version" src="https://img.shields.io/github/v/release/hohltier/decompiler?label=Version"></a>
