@@ -6,7 +6,7 @@ plugins {
     id("org.panteleyev.jpackageplugin") version "1.5.0"
 }
 
-group = "dev.shota"
+group = "com.hohltier"
 version = "0.9.0"
 
 repositories {
