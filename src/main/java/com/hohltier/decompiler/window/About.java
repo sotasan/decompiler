@@ -1,8 +1,8 @@
-package dev.shota.decompiler.window;
+package com.hohltier.decompiler.window;
 
-import dev.shota.decompiler.Updater;
-import dev.shota.decompiler.window.utils.Language;
-import dev.shota.decompiler.window.utils.Styles;
+import com.hohltier.decompiler.Updater;
+import com.hohltier.decompiler.window.utils.Language;
+import com.hohltier.decompiler.window.utils.Styles;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,7 +41,7 @@ public class About extends JDialog implements ActionListener {
         content.getChildren().addAll(
                 title,
                 new Label(Language.get("about.version") + " " + Updater.getVersion()),
-                new Label(String.format("%s 2022 shota", Language.get("about.copyright")))
+                new Label(String.format("%s 2022 sota", Language.get("about.copyright")))
         );
 
         HBox controls = new HBox();

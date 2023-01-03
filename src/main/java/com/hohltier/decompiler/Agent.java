@@ -1,4 +1,4 @@
-package dev.shota.decompiler;
+package com.hohltier.decompiler;
 
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
