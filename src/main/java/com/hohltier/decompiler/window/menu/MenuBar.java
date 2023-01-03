@@ -5,7 +5,6 @@ import com.hohltier.decompiler.window.menu.file.File;
 import com.hohltier.decompiler.window.menu.view.View;
 import com.hohltier.decompiler.window.menu.help.Help;
 import com.hohltier.decompiler.window.menu.settings.Settings;
-
 import javax.swing.*;
 
 public class MenuBar extends JMenuBar {

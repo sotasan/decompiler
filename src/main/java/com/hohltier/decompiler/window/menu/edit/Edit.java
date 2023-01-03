@@ -1,7 +1,6 @@
 package com.hohltier.decompiler.window.menu.edit;
 
 import com.hohltier.decompiler.window.utils.Language;
-
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 

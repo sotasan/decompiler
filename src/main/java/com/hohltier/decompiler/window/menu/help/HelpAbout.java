@@ -2,7 +2,6 @@ package com.hohltier.decompiler.window.menu.help;
 
 import com.hohltier.decompiler.window.utils.Language;
 import com.hohltier.decompiler.window.About;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
