@@ -1,6 +1,6 @@
 plugins {
     java
-    kotlin("jvm") version "1.7.21"
+    kotlin("jvm") version "1.8.0"
     id("io.freefair.lombok") version "6.5.1"
     id("org.openjfx.javafxplugin") version "0.0.13"
     id("org.panteleyev.jpackageplugin") version "1.5.0"
@@ -25,16 +25,16 @@ javafx {
 }
 
 dependencies {
-    implementation("org.jetbrains:annotations:23.0.0")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.14.0")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
-    implementation("org.slf4j:slf4j-simple:2.0.3")
+    implementation("org.jetbrains:annotations:23.1.0")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.14.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
+    implementation("org.slf4j:slf4j-simple:2.0.6")
     implementation("org.reflections:reflections:0.10.2")
     implementation("org.ow2.asm:asm:9.4")
     implementation("org.ow2.asm:asm-util:9.4")
-    implementation("org.quiltmc:quiltflower:1.8.1")
-    implementation("com.formdev:flatlaf:2.5")
-    implementation("org.fxmisc.richtext:richtextfx:0.10.9")
+    implementation("org.quiltmc:quiltflower:1.9.0")
+    implementation("com.formdev:flatlaf:3.0")
+    implementation("org.fxmisc.richtext:richtextfx:0.11.0")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-base:${javafx.version}:linux")
