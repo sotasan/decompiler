@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("io.freefair.lombok") version "6.5.1"
+    id("io.freefair.lombok") version "8.0.1"
     id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
@@ -23,19 +23,15 @@ javafx {
 }
 
 dependencies {
-    implementation("org.jetbrains:annotations:23.1.0")
+    implementation("org.jetbrains:annotations:24.0.1")
     implementation("info.picocli:picocli:4.7.3")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.14.1")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
-    implementation("org.slf4j:slf4j-simple:2.0.6")
-    implementation("org.reflections:reflections:0.10.2")
-    implementation("org.ow2.asm:asm:9.4")
-    implementation("org.ow2.asm:asm-util:9.4")
-    implementation("org.quiltmc:quiltflower:1.9.0")
-    implementation("com.formdev:flatlaf:3.0")
-    implementation("org.fxmisc.richtext:richtextfx:0.11.0")
     implementation("io.github.classgraph:classgraph:4.8.157")
-    implementation group: 'de.jflex', name: 'jflex', version: '1.9.1'
+    implementation("org.ow2.asm:asm:9.5")
+    implementation("org.ow2.asm:asm-util:9.5")
+    implementation("org.quiltmc:quiltflower:1.9.0")
+    implementation("com.formdev:flatlaf:3.1.1")
+    implementation("org.fxmisc.richtext:richtextfx:0.11.0")
+    implementation("de.jflex:jflex:1.9.1")
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-base:${javafx.version}:linux")
@@ -51,19 +47,19 @@ dependencies {
     annotationProcessor("info.picocli:picocli-codegen:4.7.3")
 }
 
-    processResources {
-        filesMatching("application.properties") {
-            expand(project.properties)
-        }
+processResources {
+    filesMatching("application.properties") {
+        expand(project.properties)
     }
+}
 
-    jar {
-        archiveBaseName.set(project.name.toLowerCase())
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
-        manifest.attributes["Agent-Class"] = "${project.group}.${project.name.toLowerCase()}.Agent"
-        from { configurations.compileClasspath.collect { it.directory ? it : zipTree(it) } }
-    }
+jar {
+    archiveBaseName = project.name.toLowerCase()
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
+    manifest.attributes["Agent-Class"] = "${project.group}.${project.name.toLowerCase()}.Agent"
+    from { configurations.compileClasspath.collect { it.directory ? it : zipTree(it) } }
+}
 
 tasks.register("testJar", Jar) {
     archiveFileName.set("test.jar")
