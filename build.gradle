@@ -22,6 +22,12 @@ javafx {
     modules("javafx.base", "javafx.controls", "javafx.graphics", "javafx.swing")
 }
 
+configurations {
+    implementation {
+        canBeResolved = true
+    }
+}
+
 dependencies {
     implementation("org.jetbrains:annotations:24.0.1")
     implementation("info.picocli:picocli:4.7.3")
@@ -58,7 +64,7 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
     manifest.attributes["Agent-Class"] = "${project.group}.${project.name.toLowerCase()}.Agent"
-    from { configurations.compileClasspath.collect { it.directory ? it : zipTree(it) } }
+    from { configurations.implementation.collect { it.directory ? it : zipTree(it) } }
 }
 
 tasks.register("testJar", Jar) {
