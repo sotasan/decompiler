@@ -1,10 +1,6 @@
 package com.hohltier.decompiler.window.menu.file;
 
 import com.hohltier.decompiler.window.utils.Language;
-import com.hohltier.decompiler.window.viewer.Viewer;
-import javafx.application.Platform;
-import javafx.collections.ListChangeListener;
-import javafx.scene.control.Tab;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,12 +16,12 @@ public class FileCloseTab extends JMenuItem implements ActionListener {
         addActionListener(this);
         setEnabled(false);
 
-        Viewer.INSTANCE.getTabs().addListener((ListChangeListener<Tab>) c -> setEnabled(!Viewer.INSTANCE.getSelectionModel().isEmpty()));
+        //Viewer.INSTANCE.getTabs().addListener((ListChangeListener<Tab>) c -> setEnabled(!Viewer.INSTANCE.getSelectionModel().isEmpty()));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Platform.runLater(() -> Viewer.INSTANCE.getTabs().remove(Viewer.INSTANCE.getSelectionModel().getSelectedItem()));
+        //Platform.runLater(() -> Viewer.INSTANCE.getTabs().remove(Viewer.INSTANCE.getSelectionModel().getSelectedItem()));
     }
 
 }

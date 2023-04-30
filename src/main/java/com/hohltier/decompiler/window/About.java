@@ -1,6 +1,5 @@
 package com.hohltier.decompiler.window;
 
-import com.hohltier.decompiler.Updater;
 import com.hohltier.decompiler.window.utils.Language;
 import com.hohltier.decompiler.window.utils.Styles;
 import javafx.embed.swing.JFXPanel;
@@ -23,7 +22,7 @@ import java.util.Objects;
 public class About extends JDialog implements ActionListener {
 
     public About() {
-        super(Window.INSTANCE);
+        //super(Window.INSTANCE);
 
         GridPane root = new GridPane();
         root.setId("root");
@@ -40,7 +39,7 @@ public class About extends JDialog implements ActionListener {
         root.add(content, 1, 0);
         content.getChildren().addAll(
                 title,
-                new Label(Language.get("about.version") + " " + Updater.getVersion()),
+                //new Label(Language.get("about.version") + " " + Updater.getVersion()),
                 new Label(String.format("%s 2022 sota", Language.get("about.copyright")))
         );
 
@@ -73,7 +72,7 @@ public class About extends JDialog implements ActionListener {
         setResizable(false);
         SwingUtilities.invokeLater(() -> {
             pack();
-            setLocationRelativeTo(Window.INSTANCE);
+            //setLocationRelativeTo(Window.INSTANCE);
             setVisible(true);
         });
         ok.requestFocus();

@@ -1,7 +1,6 @@
 package com.hohltier.decompiler.window.menu.file;
 
 import com.hohltier.decompiler.loader.FileLoader;
-import com.hohltier.decompiler.window.Window;
 import com.hohltier.decompiler.window.utils.Language;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -27,7 +26,7 @@ public class FileOpenFile extends JMenuItem implements ActionListener {
         fileChooser.setFileFilter(new FileNameExtensionFilter(Language.get("file.openFile.extension"), "jar", "war", "zip", "class"));
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setMultiSelectionEnabled(true);
-        fileChooser.showOpenDialog(Window.INSTANCE);
+        //fileChooser.showOpenDialog(Window.INSTANCE);
         FileLoader.load(List.of(fileChooser.getSelectedFiles()));
     }
 

@@ -1,6 +1,5 @@
 package com.hohltier.decompiler.window.menu.file;
 
-import com.hohltier.decompiler.window.Window;
 import com.hohltier.decompiler.window.utils.Language;
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +23,7 @@ public class FileExit extends JMenuItem implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Window.INSTANCE.dispose();
+        //Window.INSTANCE.dispose();
     }
 
 }

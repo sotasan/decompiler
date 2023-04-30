@@ -1,17 +1,15 @@
 plugins {
-    java
-    kotlin("jvm") version "1.8.0"
+    id("java")
     id("io.freefair.lombok") version "6.5.1"
     id("org.openjfx.javafxplugin") version "0.0.13"
-    id("org.panteleyev.jpackageplugin") version "1.5.0"
 }
 
 group = "com.hohltier"
-version = "0.9.0"
+version = "0.8.0"
 
 repositories {
     mavenCentral()
-    maven("https://maven.quiltmc.org/repository/release/")
+    maven { url("https://maven.quiltmc.org/repository/release/") }
 }
 
 java {
@@ -20,12 +18,13 @@ java {
 }
 
 javafx {
-    version = "${JavaVersion.VERSION_17}.0.2"
+    version = "${JavaVersion.VERSION_17}.0.7"
     modules("javafx.base", "javafx.controls", "javafx.graphics", "javafx.swing")
 }
 
 dependencies {
     implementation("org.jetbrains:annotations:23.1.0")
+    implementation("info.picocli:picocli:4.7.3")
     implementation("com.fasterxml.jackson.core:jackson-core:2.14.1")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
     implementation("org.slf4j:slf4j-simple:2.0.6")
@@ -35,6 +34,8 @@ dependencies {
     implementation("org.quiltmc:quiltflower:1.9.0")
     implementation("com.formdev:flatlaf:3.0")
     implementation("org.fxmisc.richtext:richtextfx:0.11.0")
+    implementation("io.github.classgraph:classgraph:4.8.157")
+    implementation group: 'de.jflex', name: 'jflex', version: '1.9.1'
     implementation("org.openjfx:javafx-base:${javafx.version}:win")
     implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-base:${javafx.version}:linux")
@@ -47,18 +48,12 @@ dependencies {
     implementation("org.openjfx:javafx-swing:${javafx.version}:win")
     implementation("org.openjfx:javafx-swing:${javafx.version}:mac-aarch64")
     implementation("org.openjfx:javafx-swing:${javafx.version}:linux")
+    annotationProcessor("info.picocli:picocli-codegen:4.7.3")
 }
 
-tasks {
     processResources {
         filesMatching("application.properties") {
             expand(project.properties)
-        }
-    }
-
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17.toString()
         }
     }
 
@@ -67,38 +62,11 @@ tasks {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
         manifest.attributes["Agent-Class"] = "${project.group}.${project.name.toLowerCase()}.Agent"
-        from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+        from { configurations.compileClasspath.collect { it.directory ? it : zipTree(it) } }
     }
 
-    jpackage {
-        appName = rootProject.name
-        copyright = "Copyright 2022 sota"
-        appDescription = "Java Decompiler Gui"
-        vendor = "sota"
-        input = jar.get().destinationDirectory.asFile.get().path
-        mainJar = jar.get().archiveFileName.get()
-        destination = "${buildDir.path}/jpackage"
-        licenseFile = "${sourceSets["main"].resources.srcDirs.first().path}/license.txt"
-
-        windows {
-            icon = "${sourceSets["main"].resources.srcDirs.first().path}/logo/logo.ico"
-            winMenu = true
-            winDirChooser = true
-            winUpgradeUuid = "880be177-032d-496e-8d92-cefa555b2c88"
-            winMenuGroup = "sota"
-            winShortcut = true
-            winPerUserInstall = true
-        }
-
-        mac {
-            icon = "${sourceSets["main"].resources.srcDirs.first().path}/logo/logo.icns"
-            macPackageIdentifier = "${project.group}.${project.name}"
-        }
-    }
-
-    register<Jar>("testJar") {
-        archiveFileName.set("test.jar")
-        manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
-        from(sourceSets.test.get().output)
-    }
+tasks.register("testJar", Jar) {
+    archiveFileName.set("test.jar")
+    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
+    from(sourceSets.test.output)
 }
