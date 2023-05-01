@@ -2,6 +2,7 @@ package com.hohltier.decompiler.loader;
 
 import com.hohltier.decompiler.Main;
 import com.hohltier.decompiler.jvm.Decompiler;
+import com.hohltier.decompiler.window.explorer.Explorer;
 import com.hohltier.decompiler.window.viewer.ViewerCode;
 import com.hohltier.decompiler.window.viewer.Viewer;
 import javafx.application.Platform;
@@ -53,6 +54,7 @@ public class FileLoader implements Runnable {
     }
 
     public static void load(@NotNull List<File> files) {
+        Explorer.getInstance().setEnabled(false);
         for (File file : files) {
             if (!file.exists())
                 continue;
@@ -64,8 +66,10 @@ public class FileLoader implements Runnable {
 
             if (file.getName().toLowerCase().endsWith(".jar") ||
                 file.getName().toLowerCase().endsWith(".war") ||
-                file.getName().toLowerCase().endsWith(".zip"))
+                file.getName().toLowerCase().endsWith(".zip")) {
                 fileType = FileType.ARCHIVE;
+                Explorer.getInstance().setEnabled(true);
+            }
 
             if (fileType == null)
                 continue;

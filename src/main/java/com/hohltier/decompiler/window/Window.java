@@ -5,7 +5,8 @@ import com.hohltier.decompiler.window.utils.Styles;
 import com.hohltier.decompiler.window.viewer.Viewer;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.SplitPane;
+import lombok.Getter;
 import javax.swing.*;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
@@ -14,11 +15,18 @@ import java.awt.dnd.DropTargetListener;
 
 public class Window extends JFrame implements DropTargetListener {
 
+    private static Window INSTANCE;
+    @Getter private final SplitPane root;
+
     public Window() {
         JFXPanel panel = new JFXPanel();
-        BorderPane root = new BorderPane();
-        root.setCenter(Explorer.getInstance());
-        root.setCenter(Viewer.getInstance());
+
+        root = new SplitPane();
+        SplitPane.setResizableWithParent(Explorer.getInstance(), false);
+        root.setDividerPositions(
+                Explorer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth()),
+                Viewer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth())
+        );
 
         Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add(Styles.get("window"));
@@ -49,6 +57,12 @@ public class Window extends JFrame implements DropTargetListener {
 
     @Override
     public void drop(DropTargetDropEvent event) {
+    }
+
+    public static Window getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new Window();
+        return INSTANCE;
     }
 
 }

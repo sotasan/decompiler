@@ -50,7 +50,7 @@ public class Main {
         UIManager.put("defaultFont", new Font("Inter", Font.PLAIN, (int) Toolkit.getToolkit().getFontLoader().getSystemFontSize()));
 
         FlatLightLaf.setup();
-        new Window().setVisible(true);
+        Window.getInstance().setVisible(true);
         FileLoader.load(Stream.of(args).map(File::new).collect(Collectors.toList()));
     }
 
