@@ -49,8 +49,8 @@ public class FileLoader implements Runnable {
         }
          */
 
-        //Platform.runLater(() -> Viewer.INSTANCE.getTabs().clear());
-           // Platform.runLater(() -> Explorer.INSTANCE.setRoot(new ExplorerRoot(new ExplorerEntry(jar), entries)));
+        // Platform.runLater(() -> Viewer.INSTANCE.getTabs().clear());
+        // Platform.runLater(() -> Explorer.INSTANCE.setRoot(new ExplorerRoot(new ExplorerEntry(jar), entries)));
     }
 
     public static void load(@NotNull List<File> files) {
