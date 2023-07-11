@@ -1,7 +1,6 @@
 plugins {
     id("java")
-    id("io.freefair.lombok") version "8.0.1"
-    id("org.openjfx.javafxplugin") version "0.0.13"
+    id("io.freefair.lombok") version "8.1.0"
 }
 
 group = "com.hohltier"
@@ -14,12 +13,7 @@ repositories {
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-javafx {
-    version = "${JavaVersion.VERSION_17}.0.7"
-    modules("javafx.base", "javafx.controls", "javafx.graphics", "javafx.swing")
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 configurations {
@@ -30,27 +24,13 @@ configurations {
 
 dependencies {
     implementation("org.jetbrains:annotations:24.0.1")
-    implementation("info.picocli:picocli:4.7.3")
-    implementation("io.github.classgraph:classgraph:4.8.157")
+    implementation("io.github.classgraph:classgraph:4.8.161")
     implementation("org.ow2.asm:asm:9.5")
     implementation("org.ow2.asm:asm-util:9.5")
     implementation("org.quiltmc:quiltflower:1.9.0")
     implementation("com.formdev:flatlaf:3.1.1")
-    implementation("org.fxmisc.richtext:richtextfx:0.11.0")
-    implementation("de.jflex:jflex:1.9.1")
-    implementation("org.openjfx:javafx-base:${javafx.version}:win")
-    implementation("org.openjfx:javafx-base:${javafx.version}:mac-aarch64")
-    implementation("org.openjfx:javafx-base:${javafx.version}:linux")
-    implementation("org.openjfx:javafx-controls:${javafx.version}:win")
-    implementation("org.openjfx:javafx-controls:${javafx.version}:mac-aarch64")
-    implementation("org.openjfx:javafx-controls:${javafx.version}:linux")
-    implementation("org.openjfx:javafx-graphics:${javafx.version}:win")
-    implementation("org.openjfx:javafx-graphics:${javafx.version}:mac-aarch64")
-    implementation("org.openjfx:javafx-graphics:${javafx.version}:linux")
-    implementation("org.openjfx:javafx-swing:${javafx.version}:win")
-    implementation("org.openjfx:javafx-swing:${javafx.version}:mac-aarch64")
-    implementation("org.openjfx:javafx-swing:${javafx.version}:linux")
-    annotationProcessor("info.picocli:picocli-codegen:4.7.3")
+    implementation("com.miglayout:miglayout:3.7.4")
+    implementation("com.fifesoft:rsyntaxtextarea:3.3.3")
 }
 
 processResources {
