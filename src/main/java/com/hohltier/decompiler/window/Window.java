@@ -1,62 +1,35 @@
 package com.hohltier.decompiler.window;
 
-import com.hohltier.decompiler.window.explorer.Explorer;
-import com.hohltier.decompiler.window.utils.Styles;
+import com.hohltier.decompiler.window.menu.MenuBar;
+import com.hohltier.decompiler.utils.ResourceUtil;
 import com.hohltier.decompiler.window.viewer.Viewer;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
-import lombok.Getter;
 import javax.swing.*;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
+import java.awt.*;
 
-public class Window extends JFrame implements DropTargetListener {
+public class Window extends JFrame {
 
     private static Window INSTANCE;
-    @Getter private final SplitPane root;
 
     public Window() {
-        JFXPanel panel = new JFXPanel();
+        Image logo = ResourceUtil.getLogo();
+        if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE))
+            Taskbar.getTaskbar().setIconImage(logo);
+        setIconImage(logo);
 
-        root = new SplitPane();
-        SplitPane.setResizableWithParent(Explorer.getInstance(), false);
-        root.setDividerPositions(
-                Explorer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth()),
-                Viewer.getInstance().getMinWidth() / (Explorer.getInstance().getMinWidth() + Viewer.getInstance().getMinWidth())
-        );
-
-        Scene scene = new Scene(root, 800, 600);
-        scene.getStylesheets().add(Styles.get("window"));
-        panel.setScene(scene);
-        add(panel);
-
-        pack();
+        setContentPane(Viewer.getInstance());
+        setMinimumSize(new Dimension(500, 300));
+        setPreferredSize(new Dimension(1000, 600));
         setTitle("Decompiler");
-        setLocationRelativeTo(null);
+        setJMenuBar(new MenuBar());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
     }
 
     @Override
-    public void dragEnter(DropTargetDragEvent event) {
-    }
-
-    @Override
-    public void dragOver(DropTargetDragEvent event) {
-    }
-
-    @Override
-    public void dropActionChanged(DropTargetDragEvent event) {
-    }
-
-    @Override
-    public void dragExit(DropTargetEvent event) {
-    }
-
-    @Override
-    public void drop(DropTargetDropEvent event) {
+    public void dispose() {
+        super.dispose();
+        System.exit(0);
     }
 
     public static Window getInstance() {
