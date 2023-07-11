@@ -1,5 +1,6 @@
 package com.hohltier.decompiler.window;
 
+import com.hohltier.decompiler.window.explorer.Explorer;
 import com.hohltier.decompiler.window.menu.MenuBar;
 import com.hohltier.decompiler.utils.ResourceUtil;
 import com.hohltier.decompiler.window.viewer.Viewer;
@@ -16,7 +17,12 @@ public class Window extends JFrame {
             Taskbar.getTaskbar().setIconImage(logo);
         setIconImage(logo);
 
-        setContentPane(Viewer.getInstance());
+        JSplitPane root = new JSplitPane();
+        root.setDividerLocation(200);
+        root.setLeftComponent(Explorer.getInstance());
+        root.setRightComponent(Viewer.getInstance());
+        setContentPane(root);
+
         setMinimumSize(new Dimension(500, 300));
         setPreferredSize(new Dimension(1000, 600));
         setTitle("Decompiler");
