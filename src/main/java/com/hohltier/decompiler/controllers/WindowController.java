@@ -25,7 +25,7 @@ public class WindowController extends BaseController<WindowView> {
     private static class WindowListener extends WindowAdapter {
 
         @Override
-        public void windowClosing(WindowEvent e) {
+        public void windowClosed(WindowEvent e) {
             System.exit(0);
         }
 
