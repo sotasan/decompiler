@@ -1,8 +1,7 @@
 package com.hohltier.decompiler.menu.help;
 
-import com.hohltier.decompiler.window.AboutDialog;
+import com.hohltier.decompiler.controllers.AboutController;
 import com.hohltier.decompiler.utils.ResourceUtil;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +23,7 @@ public class HelpAbout extends JMenuItem implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new AboutDialog();
+        new AboutController().show();
     }
 
 }

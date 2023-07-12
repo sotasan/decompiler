@@ -8,8 +8,8 @@ public class MainView extends JSplitPane {
 
     public MainView() {
         setDividerLocation(200);
-        setLeftComponent(ExplorerController.getINSTANCE().getView());
-        setRightComponent(ViewerController.getINSTANCE().getView());
+        setLeftComponent(ExplorerController.getINSTANCE().getComponent());
+        setRightComponent(ViewerController.getINSTANCE().getComponent());
     }
 
 }

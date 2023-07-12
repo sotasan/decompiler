@@ -2,13 +2,13 @@ package com.hohltier.decompiler;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.hohltier.decompiler.controllers.WindowController;
-import com.hohltier.decompiler.utils.UIUtils;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.Resource;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.lang.management.ManagementFactory;
 import java.util.Objects;
@@ -33,7 +33,7 @@ public class Main {
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.PLAIN, Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(font.getPath()))));
 
         FlatLightLaf.setup();
-        UIManager.put("defaultFont", new Font("Inter", Font.PLAIN, UIUtils.getDefaultFont().getSize()));
+        UIManager.put("defaultFont", new Font("Inter", Font.PLAIN, ((FontUIResource) UIManager.get("defaultFont")).getSize()));
 
         WindowController.getINSTANCE().show();
         // TODO: FileLoader.load(Stream.of(args).map(File::new).collect(Collectors.toList()));

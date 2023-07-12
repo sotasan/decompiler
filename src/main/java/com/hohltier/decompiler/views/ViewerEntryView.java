@@ -1,6 +1,5 @@
 package com.hohltier.decompiler.views;
 
-import com.hohltier.decompiler.utils.UIUtils;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
@@ -12,7 +11,7 @@ public class ViewerEntryView extends JPanel {
     public ViewerEntryView(String name, String text) {
         setLayout(new BorderLayout());
 
-        Font font = new Font("JetBrains Mono", Font.PLAIN, UIUtils.getDefaultFont().getSize() + 3);
+        Font font = new Font("JetBrains Mono", Font.PLAIN, ((Font) UIManager.get("defaultFont")).getSize() + 3);
 
         RSyntaxTextArea textArea = new RSyntaxTextArea();
         textArea.setCurrentLineHighlightColor(Color.WHITE);

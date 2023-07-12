@@ -27,7 +27,7 @@ public class FileOpenFile extends JMenuItem implements ActionListener {
         fileChooser.setFileFilter(new FileNameExtensionFilter("Java", "jar", "war", "zip"));
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setMultiSelectionEnabled(true);
-        fileChooser.showOpenDialog(WindowController.getINSTANCE().getView());
+        fileChooser.showOpenDialog(WindowController.getINSTANCE().getComponent());
         FileLoader.load(List.of(fileChooser.getSelectedFiles()));
     }
 

@@ -23,10 +23,4 @@ public class WindowView extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    @Override
-    public void dispose() {
-        super.dispose();
-        System.exit(0);
-    }
-
 }

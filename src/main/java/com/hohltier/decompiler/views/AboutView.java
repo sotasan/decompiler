@@ -1,20 +1,16 @@
-package com.hohltier.decompiler.window;
+package com.hohltier.decompiler.views;
 
 import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.utils.ResourceUtil;
-import lombok.SneakyThrows;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.Year;
 
-public class AboutDialog extends JDialog implements ActionListener {
+public class AboutView extends JDialog {
 
-    @SneakyThrows
-    public AboutDialog() {
-        super(WindowController.getINSTANCE().getView());
+    public AboutView() {
+        super((Frame) WindowController.getINSTANCE().getComponent());
 
         JPanel root = new JPanel(new MigLayout());
         setContentPane(root);
@@ -34,11 +30,6 @@ public class AboutDialog extends JDialog implements ActionListener {
         pack();
         setLocationRelativeTo(getOwner());
         setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        dispose();
     }
 
 }
