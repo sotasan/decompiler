@@ -1,6 +1,7 @@
-package com.hohltier.decompiler.window.menu.help;
+package com.hohltier.decompiler.menu.help;
 
-import com.hohltier.decompiler.window.utils.Language;
+import com.hohltier.decompiler.utils.ResourceUtil;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -8,7 +9,7 @@ import java.awt.event.KeyEvent;
 public class Help extends JMenu {
 
     public Help() {
-        setText(Language.get("help"));
+        setText(ResourceUtil.getTranslation("help"));
         setMnemonic(KeyEvent.VK_H);
 
         add(new HelpAbout());

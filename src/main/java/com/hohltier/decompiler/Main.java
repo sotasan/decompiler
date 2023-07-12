@@ -1,7 +1,7 @@
 package com.hohltier.decompiler;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import com.hohltier.decompiler.window.Window;
+import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.utils.UIUtils;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.Resource;
@@ -35,7 +35,7 @@ public class Main {
         FlatLightLaf.setup();
         UIManager.put("defaultFont", new Font("Inter", Font.PLAIN, UIUtils.getDefaultFont().getSize()));
 
-        Window.getInstance().setVisible(true);
+        WindowController.getINSTANCE().show();
         // TODO: FileLoader.load(Stream.of(args).map(File::new).collect(Collectors.toList()));
     }
 

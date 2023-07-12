@@ -1,13 +1,13 @@
-package com.hohltier.decompiler.window.menu.file;
+package com.hohltier.decompiler.menu.file;
 
-import com.hohltier.decompiler.window.utils.Language;
+import com.hohltier.decompiler.utils.ResourceUtil;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 public class File extends JMenu {
 
     public File() {
-        setText(Language.get("file"));
+        setText(ResourceUtil.getTranslation("file"));
         setMnemonic(KeyEvent.VK_F);
 
         add(new FileOpenFile());

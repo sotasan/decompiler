@@ -2,10 +2,6 @@ package com.hohltier.decompiler.loader;
 
 import com.hohltier.decompiler.Main;
 import com.hohltier.decompiler.jvm.Decompiler;
-import com.hohltier.decompiler.window.explorer.Explorer;
-import com.hohltier.decompiler.window.viewer.ViewerCode;
-import com.hohltier.decompiler.window.viewer.Viewer;
-import javafx.application.Platform;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import java.io.File;
@@ -30,7 +26,7 @@ public class FileLoader implements Runnable {
         if (fileType == FileType.CLASS) {
             byte[] bytes = Files.readAllBytes(file.toPath());
             String text = new Decompiler(bytes).getCode();
-            Platform.runLater(() -> Viewer.getInstance().getTabs().add(new ViewerCode(file.getName(), text)));
+            //Platform.runLater(() -> Viewer.getInstance().getTabs().add(new ViewerCode(file.getName(), text)));
             return;
         }
 
@@ -54,7 +50,7 @@ public class FileLoader implements Runnable {
     }
 
     public static void load(@NotNull List<File> files) {
-        Explorer.getInstance().setEnabled(false);
+        //Explorer.getInstance().setEnabled(false);
         for (File file : files) {
             if (!file.exists())
                 continue;
@@ -68,7 +64,7 @@ public class FileLoader implements Runnable {
                 file.getName().toLowerCase().endsWith(".war") ||
                 file.getName().toLowerCase().endsWith(".zip")) {
                 fileType = FileType.ARCHIVE;
-                Explorer.getInstance().setEnabled(true);
+                //Explorer.getInstance().setEnabled(true);
             }
 
             if (fileType == null)
