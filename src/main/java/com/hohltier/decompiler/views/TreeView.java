@@ -7,15 +7,18 @@ import java.awt.*;
 
 public class TreeView extends JPanel {
 
+    @Getter private final JScrollPane scrollPane;
     @Getter private final JTree tree;
-    @Getter private final DefaultMutableTreeNode root;
 
     public TreeView() {
         super(new BorderLayout());
-        root = new DefaultMutableTreeNode("asd");
-        tree = new JTree(root);
+
+        tree = new JTree(new DefaultMutableTreeNode());
         tree.setRootVisible(false);
-        add(tree);
+
+        scrollPane = new JScrollPane(tree);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        add(scrollPane);
     }
 
 }

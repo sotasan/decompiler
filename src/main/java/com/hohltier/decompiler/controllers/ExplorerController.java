@@ -4,6 +4,8 @@ import com.hohltier.decompiler.models.ArchiveModel;
 import com.hohltier.decompiler.views.TreeView;
 import lombok.Getter;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 public class ExplorerController extends BaseController<TreeView> {
 
@@ -11,9 +13,15 @@ public class ExplorerController extends BaseController<TreeView> {
 
     private ExplorerController() {
         super(new TreeView());
+    }
 
-        DefaultMutableTreeNode test = new ArchiveModel("TODO");
-        getView().getRoot().add(test);
+    public void setArchive(ArchiveModel archiveModel) {
+        DefaultTreeModel model = (DefaultTreeModel) getView().getTree().getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+        root.removeAllChildren();
+        root.add(archiveModel);
+        model.reload();
+        getView().getTree().expandPath(new TreePath(archiveModel.getPath()));
     }
 
 }

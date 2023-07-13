@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatInspector;
 import com.hohltier.decompiler.controllers.WindowController;
+import com.hohltier.decompiler.loader.Loader;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.Resource;
 import lombok.SneakyThrows;
@@ -11,6 +12,7 @@ import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,16 +41,18 @@ public class Main {
 
         FlatInspector.install("ctrl shift I");
         WindowController.getINSTANCE().show();
-        // TODO: FileLoader.load(Stream.of(args).map(File::new).collect(Collectors.toList()));
+        if (args.length > 0)
+            Loader.load(new File(args[0]));
     }
 
     @SneakyThrows
     public static void start() {
         Optional<String> java = ProcessHandle.current().info().command();
-        if (java.isEmpty()) return;
-        String classPath = ManagementFactory.getRuntimeMXBean().getClassPath();
-        String main = Main.class.getCanonicalName();
-        new ProcessBuilder(java.get(), "-cp", classPath, main).start();
+        if (java.isPresent()) {
+            String classPath = ManagementFactory.getRuntimeMXBean().getClassPath();
+            String main = Main.class.getCanonicalName();
+            new ProcessBuilder(java.get(), "-cp", classPath, main).start();
+        }
     }
 
 }
