@@ -19,7 +19,6 @@ public class ViewerView extends JTabbedPane {
         types = new JComboBox<>(Transformer.values());
         types.setMaximumSize(dimension);
         types.setPreferredSize(dimension);
-        types.setSelectedItem(Transformer.Fernflower);
 
         toolBar = new JToolBar();
         toolBar.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
