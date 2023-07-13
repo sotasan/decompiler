@@ -24,6 +24,7 @@ public class TabNodeView extends JPanel {
         textArea = new RSyntaxTextArea();
         theme.apply(textArea);
         textArea.setBracketMatchingEnabled(false);
+        textArea.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         textArea.setEditable(false);
         textArea.setFont(font);
         textArea.setHighlightCurrentLine(false);

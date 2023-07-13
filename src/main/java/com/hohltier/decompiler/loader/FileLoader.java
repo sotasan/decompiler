@@ -1,13 +1,11 @@
 package com.hohltier.decompiler.loader;
 
 import com.hohltier.decompiler.Main;
-import com.hohltier.decompiler.jvm.Decompiler;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class FileLoader implements Runnable {
@@ -25,16 +23,18 @@ public class FileLoader implements Runnable {
     public void run() {
         if (fileType == FileType.CLASS) {
             byte[] bytes = Files.readAllBytes(file.toPath());
-            String text = new Decompiler(bytes).getCode();
+            //String text = new Decompiler(bytes).getCode();
             //Platform.runLater(() -> Viewer.getInstance().getTabs().add(new ViewerCode(file.getName(), text)));
             return;
         }
 
         if (fileType == FileType.ARCHIVE) {
             JarFile jar = new JarFile(file);
+            /*
             for (JarEntry entry : jar.stream().toList()) {
                 System.out.println(entry.getName());
             }
+             */
         }
 
         /*
