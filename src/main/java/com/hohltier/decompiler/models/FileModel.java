@@ -1,4 +1,14 @@
 package com.hohltier.decompiler.models;
 
-public class FileModel {
+import lombok.Getter;
+import lombok.Setter;
+
+public class FileModel extends BaseModel {
+
+    @Getter @Setter private byte[] bytes;
+
+    public FileModel(String name) {
+        super(name);
+    }
+
 }

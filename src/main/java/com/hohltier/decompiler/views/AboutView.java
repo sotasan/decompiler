@@ -24,7 +24,7 @@ public class AboutView extends JDialog {
 
         root.add(new JLabel(String.format("\u00a9 2022 - %s Sota", Year.now().getValue())), "wrap");
 
-        setTitle(ResourceUtil.getTranslation("help.about"));
+        setTitle(ResourceUtil.getTranslation("about"));
         setModal(true);
         setResizable(false);
         pack();

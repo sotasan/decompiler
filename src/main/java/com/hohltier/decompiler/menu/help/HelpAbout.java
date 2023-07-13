@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 public class HelpAbout extends JMenuItem implements ActionListener {
 
     public HelpAbout() {
-        setText(ResourceUtil.getTranslation("help.about"));
+        setText(ResourceUtil.getTranslation("about"));
         setMnemonic(KeyEvent.VK_A);
         addActionListener(this);
 

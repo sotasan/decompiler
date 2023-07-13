@@ -13,8 +13,11 @@ import java.util.List;
 
 public class FileOpenFile extends JMenuItem implements ActionListener {
 
+    private final String title;
+
     public FileOpenFile() {
-        setText(ResourceUtil.getTranslation("file.openFile"));
+        title = ResourceUtil.getTranslation("file.openFile");
+        setText(String.format("%s...", title));
         setMnemonic(KeyEvent.VK_O);
         setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         addActionListener(this);
@@ -23,8 +26,8 @@ public class FileOpenFile extends JMenuItem implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle(getText());
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Java", "jar", "war", "zip"));
+        fileChooser.setDialogTitle(title);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Java (*.jar, *.war, *.zip)", "jar", "war", "zip"));
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setMultiSelectionEnabled(true);
         fileChooser.showOpenDialog(WindowController.getINSTANCE().getComponent());

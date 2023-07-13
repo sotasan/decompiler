@@ -1,20 +1,18 @@
 package com.hohltier.decompiler.controllers;
 
-import com.hohltier.decompiler.views.ViewerView;
-import com.hohltier.decompiler.views.ViewerEntryView;
+import com.hohltier.decompiler.views.TabView;
+import com.hohltier.decompiler.views.TabNodeView;
 import lombok.Getter;
 
-import javax.swing.*;
-
-public class ViewerController extends BaseController<ViewerView> {
+public class ViewerController extends BaseController<TabView> {
 
     @Getter private static final ViewerController INSTANCE = new ViewerController();
 
     private ViewerController() {
-        super(new ViewerView());
+        super(new TabView());
 
         // TODO
-        getView().add("Test", new ViewerEntryView("Test", "package com.hohltier.decompiler;\n" +
+        getView().add("Test", new TabNodeView("Test", "package com.hohltier.decompiler;\n" +
                 "\n" +
                 "public class Main {\n" +
                 "\n" +

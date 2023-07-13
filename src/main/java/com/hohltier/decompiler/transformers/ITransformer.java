@@ -1,9 +1,9 @@
 package com.hohltier.decompiler.transformers;
 
-import com.hohltier.decompiler.models.ClassModel;
+import com.hohltier.decompiler.models.FileModel;
 
 public interface ITransformer {
 
-    String transform(ClassModel classModel);
+    String transform(FileModel fileModel);
 
 }

@@ -9,13 +9,13 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import javax.swing.*;
 import java.awt.*;
 
-public class ViewerEntryView extends JPanel {
+public class TabNodeView extends JPanel {
 
     @Getter private final RSyntaxTextArea textArea;
     @Getter private final RTextScrollPane scrollPane;
 
     @SneakyThrows
-    public ViewerEntryView(String name, String text) {
+    public TabNodeView(String name, String text) {
         setLayout(new BorderLayout());
 
         Theme theme = Theme.load(getClass().getClassLoader().getResourceAsStream("org/fife/ui/rsyntaxtextarea/themes/vs.xml"));
@@ -24,9 +24,9 @@ public class ViewerEntryView extends JPanel {
         textArea = new RSyntaxTextArea();
         theme.apply(textArea);
         textArea.setBracketMatchingEnabled(false);
-        textArea.setCurrentLineHighlightColor(Color.WHITE);
         textArea.setEditable(false);
         textArea.setFont(font);
+        textArea.setHighlightCurrentLine(false);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         textArea.setText(text);
 

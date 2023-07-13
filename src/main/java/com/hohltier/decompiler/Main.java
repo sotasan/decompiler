@@ -10,7 +10,6 @@ import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.lang.management.ManagementFactory;
 import java.util.Objects;
