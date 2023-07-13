@@ -16,7 +16,15 @@ public class ViewerController extends BaseController<ViewerView> {
         getView().putClientProperty(FlatClientProperties.TABBED_PANE_TAB_CLOSE_CALLBACK, (BiConsumer<JTabbedPane, Integer>) this::onTabClose);
 
         // TODO
-        getView().add("Test", new ViewerEntryView("Test", "Testasdkjalskjhdkjkjashdkjahsdkjhaksjdhkjahsdkjhaskjdhakjshdkjsssssssssssssssssssssssssssssssssssssssssssssssssssshakjshd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\nd\n"));
+        getView().add("Test", new ViewerEntryView("Test", "package com.hohltier.decompiler;\n" +
+                "\n" +
+                "public class Main {\n" +
+                "\n" +
+                "    public static void main(String[] args) {\n" +
+                "        System.out.println(\"Hello World!\");\n" +
+                "    }\n" +
+                "\n" +
+                "}"));
     }
 
     private void onTabClose(JTabbedPane tabPane, int tabIndex) {
