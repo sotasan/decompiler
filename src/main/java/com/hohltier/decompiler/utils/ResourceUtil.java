@@ -2,7 +2,6 @@ package com.hohltier.decompiler.utils;
 
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
-import javax.swing.*;
 import java.awt.*;
 import java.util.Locale;
 import java.util.Objects;
@@ -14,7 +13,7 @@ public class ResourceUtil {
     private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("lang/language", Locale.getDefault());
 
     public static Image getLogo() {
-        return new ImageIcon(Objects.requireNonNull(ResourceUtil.class.getClassLoader().getResource("logo/logo.png"))).getImage();
+        return Toolkit.getDefaultToolkit().createImage(Objects.requireNonNull(ResourceUtil.class.getClassLoader().getResource("logo/logo.png")));
     }
 
     // TODO

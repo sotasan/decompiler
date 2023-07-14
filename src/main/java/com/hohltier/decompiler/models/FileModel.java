@@ -7,8 +7,9 @@ public class FileModel extends BaseModel {
 
     @Getter @Setter private byte[] bytes;
 
-    public FileModel(String name) {
-        super(name);
+    public FileModel(String path) {
+        super(path, false);
+        setIcon(isClass() ? "icons/class.png" : "icons/file.png");
     }
 
 }
