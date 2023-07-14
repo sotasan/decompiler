@@ -8,7 +8,6 @@ version = "0.8.0"
 
 repositories {
     mavenCentral()
-    maven { url("https://maven.quiltmc.org/repository/release/") }
 }
 
 java {
@@ -46,7 +45,6 @@ jar {
     archiveBaseName = project.name.toLowerCase()
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
-    manifest.attributes["Agent-Class"] = "${project.group}.${project.name.toLowerCase()}.Agent"
     from { configurations.implementation.collect { it.directory ? it : zipTree(it) } }
 }
 

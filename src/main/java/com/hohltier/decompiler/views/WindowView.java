@@ -23,7 +23,7 @@ public class WindowView extends JFrame {
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE))
             Taskbar.getTaskbar().setIconImage(logo);
         setIconImage(logo);
-
+        
         splitPane = new JSplitPane();
         splitPane.setDividerLocation(200);
         splitPane.setLeftComponent(ExplorerController.getINSTANCE().getComponent());

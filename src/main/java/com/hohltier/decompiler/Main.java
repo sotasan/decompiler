@@ -10,7 +10,6 @@ import io.github.classgraph.Resource;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -37,7 +36,6 @@ public class Main {
 
         FlatLaf.registerCustomDefaultsSource("themes");
         FlatLightLaf.setup();
-        UIManager.put("defaultFont", new Font("Inter", Font.PLAIN, UIManager.getFont("defaultFont").getSize()));
 
         FlatInspector.install("ctrl shift I");
         WindowController.getINSTANCE().show();

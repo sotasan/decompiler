@@ -1,8 +1,11 @@
 package com.hohltier.decompiler.controllers;
 
+import com.hohltier.decompiler.models.FileModel;
 import com.hohltier.decompiler.views.TabView;
 import com.hohltier.decompiler.views.TabNodeView;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
+import javax.swing.*;
 
 public class ViewerController extends BaseController<TabView> {
 
@@ -12,7 +15,7 @@ public class ViewerController extends BaseController<TabView> {
         super(new TabView());
 
         // TODO
-        getView().add("Test", new TabNodeView("Test", "package com.hohltier.decompiler;\n" +
+        addTab(new FileModel("Test.class"), "package com.hohltier.decompiler;\n" +
                 "\n" +
                 "public class Main {\n" +
                 "\n" +
@@ -20,7 +23,12 @@ public class ViewerController extends BaseController<TabView> {
                 "        System.out.println(\"Hello World!\");\n" +
                 "    }\n" +
                 "\n" +
-                "}"));
+                "}");
+    }
+
+    // TODO
+    public void addTab(@NotNull FileModel fileModel, String text) {
+        getView().addTab(fileModel.getName(), new ImageIcon(fileModel.getIcon()), new TabNodeView(fileModel.getName(), text));
     }
 
 }
