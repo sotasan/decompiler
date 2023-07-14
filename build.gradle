@@ -33,7 +33,7 @@ dependencies {
     implementation("org.jetbrains:annotations:24.0.1")
     implementation("org.ow2.asm:asm:9.5")
     implementation("org.ow2.asm:asm-util:9.5")
-    implementation("org.quiltmc:quiltflower:1.9.0")
+    implementation("org.vineflower:vineflower:1.9.1")
 }
 
 processResources {
