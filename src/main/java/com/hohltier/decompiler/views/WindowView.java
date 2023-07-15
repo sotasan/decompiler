@@ -5,8 +5,13 @@ import com.hohltier.decompiler.controllers.ViewerController;
 import com.hohltier.decompiler.services.ResourceService;
 import com.hohltier.decompiler.menu.MenuBar;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
 
 public class WindowView extends JFrame {
 
@@ -14,6 +19,7 @@ public class WindowView extends JFrame {
 
     public WindowView() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDropTarget(new WindowDropTarget());
         setJMenuBar(new MenuBar());
         setMinimumSize(new Dimension(500, 300));
         setPreferredSize(new Dimension(1000, 600));
@@ -38,6 +44,24 @@ public class WindowView extends JFrame {
     public void dispose() {
         super.dispose();
         System.exit(0);
+    }
+
+    private static class WindowDropTarget extends DropTarget {
+
+        @Override
+        public synchronized void dragOver(DropTargetDragEvent event) {
+            super.dragOver(event);
+            event.acceptDrag(DnDConstants.ACTION_MOVE);
+        }
+
+        @Override
+        @SneakyThrows
+        public synchronized void drop(DropTargetDropEvent event) {
+            super.drop(event);
+            event.acceptDrop(DnDConstants.ACTION_MOVE);
+            // TODO
+        }
+
     }
 
 }
