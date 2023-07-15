@@ -4,7 +4,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatInspector;
 import com.hohltier.decompiler.controllers.WindowController;
-import com.hohltier.decompiler.loader.Loader;
+import com.hohltier.decompiler.services.LoaderService;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.Resource;
 import lombok.SneakyThrows;
@@ -40,7 +40,7 @@ public class Main {
         FlatInspector.install("ctrl shift I");
         WindowController.getINSTANCE().show();
         if (args.length > 0)
-            Loader.load(new File(args[0]));
+            LoaderService.load(new File(args[0]));
     }
 
     @SneakyThrows

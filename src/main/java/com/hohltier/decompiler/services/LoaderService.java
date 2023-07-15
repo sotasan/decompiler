@@ -1,4 +1,4 @@
-package com.hohltier.decompiler.loader;
+package com.hohltier.decompiler.services;
 
 import com.hohltier.decompiler.controllers.ExplorerController;
 import com.hohltier.decompiler.models.ArchiveModel;
@@ -14,7 +14,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 @UtilityClass
-public class Loader {
+public class LoaderService {
 
     @SneakyThrows
     public static void load(File file) {
