@@ -18,7 +18,7 @@ public class TabNodeView extends JPanel {
     public TabNodeView(String name, String text) {
         setLayout(new BorderLayout());
 
-        Theme theme = Theme.load(getClass().getClassLoader().getResourceAsStream("org/fife/ui/rsyntaxtextarea/themes/vs.xml"));
+        Theme theme = Theme.load(getClass().getClassLoader().getResourceAsStream("org/fife/ui/rsyntaxtextarea/themes/eclipse.xml"));
         Font font = new Font("JetBrains Mono", Font.PLAIN, UIManager.getFont("defaultFont").getSize() + 3);
 
         textArea = new RSyntaxTextArea();
