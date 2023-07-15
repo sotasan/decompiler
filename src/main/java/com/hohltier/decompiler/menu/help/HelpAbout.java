@@ -1,7 +1,7 @@
 package com.hohltier.decompiler.menu.help;
 
 import com.hohltier.decompiler.controllers.AboutController;
-import com.hohltier.decompiler.utils.ResourceUtil;
+import com.hohltier.decompiler.services.ResourceService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 public class HelpAbout extends JMenuItem implements ActionListener {
 
     public HelpAbout() {
-        setText(ResourceUtil.getTranslation("about"));
+        setText(ResourceService.getTranslation("about"));
         setMnemonic(KeyEvent.VK_A);
         addActionListener(this);
 

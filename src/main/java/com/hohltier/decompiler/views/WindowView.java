@@ -2,7 +2,7 @@ package com.hohltier.decompiler.views;
 
 import com.hohltier.decompiler.controllers.ExplorerController;
 import com.hohltier.decompiler.controllers.ViewerController;
-import com.hohltier.decompiler.utils.ResourceUtil;
+import com.hohltier.decompiler.services.ResourceService;
 import com.hohltier.decompiler.menu.MenuBar;
 import lombok.Getter;
 import javax.swing.*;
@@ -19,11 +19,11 @@ public class WindowView extends JFrame {
         setPreferredSize(new Dimension(1000, 600));
         setTitle("Decompiler");
 
-        Image logo = ResourceUtil.getLogo();
+        Image logo = ResourceService.getLogo();
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE))
             Taskbar.getTaskbar().setIconImage(logo);
         setIconImage(logo);
-        
+
         splitPane = new JSplitPane();
         splitPane.setDividerLocation(200);
         splitPane.setLeftComponent(ExplorerController.getINSTANCE().getComponent());

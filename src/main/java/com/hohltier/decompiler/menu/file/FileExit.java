@@ -1,7 +1,7 @@
 package com.hohltier.decompiler.menu.file;
 
 import com.hohltier.decompiler.controllers.WindowController;
-import com.hohltier.decompiler.utils.ResourceUtil;
+import com.hohltier.decompiler.services.ResourceService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 public class FileExit extends JMenuItem implements ActionListener {
 
     public FileExit() {
-        setText(ResourceUtil.getTranslation("file.exit"));
+        setText(ResourceService.getTranslation("file.exit"));
         setMnemonic(KeyEvent.VK_Q);
         setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         addActionListener(this);

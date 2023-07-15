@@ -1,4 +1,4 @@
-package com.hohltier.decompiler.utils;
+package com.hohltier.decompiler.services;
 
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
@@ -8,12 +8,12 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 @UtilityClass
-public class ResourceUtil {
+public class ResourceService {
 
     private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("lang/language", Locale.getDefault());
 
     public static Image getLogo() {
-        return Toolkit.getDefaultToolkit().createImage(Objects.requireNonNull(ResourceUtil.class.getClassLoader().getResource("logo/logo.png")));
+        return Toolkit.getDefaultToolkit().createImage(Objects.requireNonNull(ResourceService.class.getClassLoader().getResource("logo/logo.png")));
     }
 
     // TODO

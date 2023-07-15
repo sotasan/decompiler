@@ -12,18 +12,10 @@ import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.io.File;
-import java.lang.management.ManagementFactory;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.prefs.Preferences;
 
 @UtilityClass
 public class Main {
-
-    public static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
-    public static final Preferences PREFERENCES = Preferences.userNodeForPackage(Main.class);
 
     @SneakyThrows
     public static void main(String @NotNull [] args) {
@@ -41,16 +33,6 @@ public class Main {
         WindowController.getINSTANCE().show();
         if (args.length > 0)
             LoaderService.load(new File(args[0]));
-    }
-
-    @SneakyThrows
-    public static void start() {
-        Optional<String> java = ProcessHandle.current().info().command();
-        if (java.isPresent()) {
-            String classPath = ManagementFactory.getRuntimeMXBean().getClassPath();
-            String main = Main.class.getCanonicalName();
-            new ProcessBuilder(java.get(), "-cp", classPath, main).start();
-        }
     }
 
 }
