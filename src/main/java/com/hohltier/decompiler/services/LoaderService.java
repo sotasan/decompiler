@@ -3,6 +3,7 @@ package com.hohltier.decompiler.services;
 import com.hohltier.decompiler.controllers.ExplorerController;
 import com.hohltier.decompiler.models.ArchiveModel;
 import com.hohltier.decompiler.models.BaseModel;
+import com.hohltier.decompiler.models.FileModel;
 import com.hohltier.decompiler.models.PackageModel;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
@@ -25,29 +26,22 @@ public class LoaderService {
 
         ArchiveModel archive = new ArchiveModel(file.getName());
         for (JarEntry entry : entries) {
-
-            // TODO
-            if (entry.isDirectory()) {
-                archive.getChildren().add(new PackageModel(entry.getName()));
-            } else {
-
-            }
-            System.out.println(entry.getName());
-
+            BaseModel packageModel = getChildByPath(archive, entry.getName());
+            if (entry.isDirectory())
+                packageModel.getChildren().add(new PackageModel(entry.getName()));
+            else
+                packageModel.getChildren().add(new FileModel(entry.getName()));
         }
+
         ExplorerController.getINSTANCE().setArchive(archive);
     }
 
-    // TODO
-    private static void createPackages(List<JarEntry> entries, BaseModel baseModel, String path) {
-        for (JarEntry entry : entries) {
-            if (entry.isDirectory()) {
-                String name = entry.getName();
-                if (name.startsWith(path)) {
-                    baseModel.getChildren().add(new PackageModel(name.substring(path.length())));
-                }
-            }
-        }
+    private static BaseModel getChildByPath(BaseModel baseModel, String path) {
+        for (BaseModel child : baseModel.getChildren())
+            if (child instanceof PackageModel)
+                if (path.startsWith(child.getPath()))
+                    return getChildByPath(child, path);
+        return baseModel;
     }
 
 }
