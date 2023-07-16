@@ -8,6 +8,7 @@ import com.hohltier.decompiler.models.PackageModel;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
@@ -35,7 +36,7 @@ public class LoaderService {
         ExplorerController.getINSTANCE().setArchive(archive);
     }
 
-    private static BaseModel getChildByPath(BaseModel baseModel, String path) {
+    private static BaseModel getChildByPath(@NotNull BaseModel baseModel, String path) {
         for (BaseModel child : baseModel.getChildren())
             if (child instanceof PackageModel)
                 if (path.startsWith(child.getPath()))
