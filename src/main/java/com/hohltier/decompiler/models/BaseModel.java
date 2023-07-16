@@ -11,18 +11,16 @@ public abstract class BaseModel {
 
     @Getter private final List<BaseModel> children = new ArrayList<>();
     @Getter private final String path;
-    @Getter private final String name;
+    @Getter private String name;
     @Getter private Image icon;
 
     public BaseModel(String path, boolean directory) {
         this.path = path;
+        name = path;
 
-        if (directory) {
-            String t = path.substring(0, path.length() - 1);
-            this.name = t.substring(t.lastIndexOf("/") + 1);
-        } else {
-            name = path;
-        }
+        if (directory)
+            name = path.substring(0, path.length() - 1);
+        name = name.substring(name.lastIndexOf('/') + 1);
     }
 
     public boolean isClass() {
