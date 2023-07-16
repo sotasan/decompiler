@@ -26,7 +26,7 @@ public class TabView extends JTabbedPane {
         comboBox.setFocusable(false);
         comboBox.setMaximumSize(dimension);
         comboBox.setPreferredSize(dimension);
-        comboBox.setSelectedItem(Transformer.Procyon);
+        comboBox.setSelectedItem(Transformer.Fernflower);
 
         toolBar = new JToolBar();
         toolBar.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));

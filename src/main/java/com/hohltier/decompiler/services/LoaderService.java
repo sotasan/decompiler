@@ -5,7 +5,6 @@ import com.hohltier.decompiler.models.ArchiveModel;
 import com.hohltier.decompiler.models.BaseModel;
 import com.hohltier.decompiler.models.FileModel;
 import com.hohltier.decompiler.models.PackageModel;
-import lombok.Cleanup;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +18,7 @@ public class LoaderService {
 
     @SneakyThrows
     public static void load(File file) {
-        @Cleanup JarFile jar = new JarFile(file);
+        JarFile jar = new JarFile(file);
         Enumeration<JarEntry> entries = jar.entries();;
         ArchiveModel archive = new ArchiveModel(file.getName());
 
@@ -30,7 +29,7 @@ public class LoaderService {
             if (entry.isDirectory())
                 packageModel.getChildren().add(new PackageModel(entry.getName()));
             else
-                packageModel.getChildren().add(new FileModel(entry.getName()));
+                packageModel.getChildren().add(new FileModel(jar, entry));
         }
 
         ExplorerController.getINSTANCE().setArchive(archive);

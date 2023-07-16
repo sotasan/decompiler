@@ -1,5 +1,7 @@
 package com.hohltier.decompiler.views;
 
+import com.hohltier.decompiler.controllers.ViewerController;
+import com.hohltier.decompiler.models.FileModel;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
@@ -11,15 +13,17 @@ import java.awt.*;
 
 public class TabNodeView extends JPanel {
 
+    @Getter private final FileModel fileModel;
     @Getter private final RSyntaxTextArea textArea;
     @Getter private final RTextScrollPane scrollPane;
 
     @SneakyThrows
-    public TabNodeView(String name, String text) {
+    public TabNodeView(FileModel fileModel) {
+        this.fileModel = fileModel;
         setLayout(new BorderLayout());
 
         Theme theme = Theme.load(getClass().getClassLoader().getResourceAsStream("org/fife/ui/rsyntaxtextarea/themes/eclipse.xml"));
-        Font font = new Font("JetBrains Mono", Font.PLAIN, UIManager.getFont("defaultFont").getSize() + 3);
+        Font font = new Font("JetBrains Mono", Font.PLAIN, UIManager.getFont("defaultFont").getSize());
 
         textArea = new RSyntaxTextArea();
         theme.apply(textArea);
@@ -29,7 +33,8 @@ public class TabNodeView extends JPanel {
         textArea.setFont(font);
         textArea.setHighlightCurrentLine(false);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-        textArea.setText(text);
+        // TODO: Controller
+        textArea.setText(ViewerController.getINSTANCE().getTransformer().getInstance().transform(fileModel));
 
         scrollPane = new RTextScrollPane(textArea);
         scrollPane.getGutter().setLineNumberFont(font);
