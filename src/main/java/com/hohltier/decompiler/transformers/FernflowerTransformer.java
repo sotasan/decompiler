@@ -17,7 +17,7 @@ public class FernflowerTransformer extends IFernflowerLogger implements ITransfo
     @Override
     public String transform(FileModel fileModel) {
         this.fileModel = fileModel;
-        // TODO
+        // TODO: Refactor
         Fernflower fernflower = new Fernflower(this, this, IFernflowerPreferences.getDefaults(), this);
         fernflower.addSource(new File(".class"));
         fernflower.decompileContext();

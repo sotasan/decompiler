@@ -33,8 +33,14 @@ public class TabNodeView extends JPanel {
         textArea.setFont(font);
         textArea.setHighlightCurrentLine(false);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+
         // TODO: Controller
-        textArea.setText(ViewerController.getINSTANCE().getTransformer().getInstance().transform(fileModel));
+        try {
+            textArea.setText(ViewerController.getINSTANCE().getTransformer().getInstance().transform(fileModel));
+            // TODO: Scroll to top
+        } catch (Exception e) {
+            textArea.setText(e.getMessage());
+        }
 
         scrollPane = new RTextScrollPane(textArea);
         scrollPane.getGutter().setLineNumberFont(font);
