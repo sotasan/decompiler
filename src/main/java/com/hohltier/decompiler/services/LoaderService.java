@@ -9,8 +9,7 @@ import lombok.Cleanup;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import java.io.File;
-import java.util.Collections;
-import java.util.List;
+import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -20,12 +19,12 @@ public class LoaderService {
     @SneakyThrows
     public static void load(File file) {
         @Cleanup JarFile jar = new JarFile(file);
-
-        List<JarEntry> entries = Collections.list(jar.entries());
-        entries.sort((e1, e2) -> e1.getName().compareToIgnoreCase(e2.getName()));
-
+        Enumeration<JarEntry> entries = jar.entries();;
         ArchiveModel archive = new ArchiveModel(file.getName());
-        for (JarEntry entry : entries) {
+
+        // TODO: Sort
+        while (entries.hasMoreElements()) {
+            JarEntry entry = entries.nextElement();
             BaseModel packageModel = getChildByPath(archive, entry.getName());
             if (entry.isDirectory())
                 packageModel.getChildren().add(new PackageModel(entry.getName()));
