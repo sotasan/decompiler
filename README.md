@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://github.com/hohltier/decompiler/blob/master/src/test/java/com/hohltier/decompiler/Main.java"><img align="center" width="80%" alt="Screenshot" src="https://github.com/hohltier/decompiler/raw/master/src/test/resources/META-INF/screenshot.png"></a>
+    <a href="https://github.com/hohltier/decompiler/blob/master/src/test/java/com/hohltier/decompiler/Main.java"><img width="85%" alt="Screenshot" src="https://github.com/hohltier/decompiler/raw/master/src/test/resources/META-INF/screenshot.png"></a>
 </p>
 
 <p align="center">
