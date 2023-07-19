@@ -23,7 +23,6 @@ public class LoaderService {
         Enumeration<JarEntry> entries = jar.entries();;
         ArchiveModel archive = new ArchiveModel(file.getName());
 
-        // TODO: Sort
         while (entries.hasMoreElements()) {
             JarEntry entry = entries.nextElement();
             BaseModel packageModel = getChildByPath(archive, entry.getName());

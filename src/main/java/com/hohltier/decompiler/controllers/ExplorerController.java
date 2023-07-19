@@ -2,6 +2,8 @@ package com.hohltier.decompiler.controllers;
 
 import com.hohltier.decompiler.models.ArchiveModel;
 import com.hohltier.decompiler.models.BaseModel;
+import com.hohltier.decompiler.models.FileModel;
+import com.hohltier.decompiler.models.PackageModel;
 import com.hohltier.decompiler.views.TreeView;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -27,10 +29,15 @@ public class ExplorerController extends BaseController<TreeView> {
         getView().getTree().expandPath(new TreePath(treeNode.getPath()));
     }
 
+    // TODO: Update sorting (+ Alphabetic, Inside Loader)
     private @NotNull DefaultMutableTreeNode createTreeNode(BaseModel baseModel) {
         DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode(baseModel);
         for (BaseModel child : baseModel.getChildren())
-            treeNode.add(createTreeNode(child));
+            if (child instanceof PackageModel)
+                treeNode.add(createTreeNode(child));
+        for (BaseModel child : baseModel.getChildren())
+            if (child instanceof FileModel)
+                treeNode.add(createTreeNode(child));
         return treeNode;
     }
 
