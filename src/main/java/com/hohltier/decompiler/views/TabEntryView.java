@@ -11,19 +11,19 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import javax.swing.*;
 import java.awt.*;
 
-public class TabNodeView extends JPanel {
+public class TabEntryView extends JPanel {
 
     @Getter private final FileModel fileModel;
     @Getter private final RSyntaxTextArea textArea;
     @Getter private final RTextScrollPane scrollPane;
 
     @SneakyThrows
-    public TabNodeView(FileModel fileModel) {
+    public TabEntryView(FileModel fileModel) {
         this.fileModel = fileModel;
         setLayout(new BorderLayout());
 
         Theme theme = Theme.load(getClass().getClassLoader().getResourceAsStream("org/fife/ui/rsyntaxtextarea/themes/eclipse.xml"));
-        Font font = new Font("JetBrains Mono", Font.PLAIN, UIManager.getFont("defaultFont").getSize());
+        Font font = new Font("JetBrains Mono", Font.PLAIN, UIManager.getFont("defaultFont").getSize() + 1);
 
         textArea = new RSyntaxTextArea();
         theme.apply(textArea);
@@ -35,17 +35,21 @@ public class TabNodeView extends JPanel {
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
         // TODO: Controller
-        try {
-            textArea.setText(ViewerController.getINSTANCE().getTransformer().getInstance().transform(fileModel));
-            // TODO: Scroll to top
-        } catch (Exception e) {
-            textArea.setText(e.getMessage());
-        }
+        setText(fileModel);
 
         scrollPane = new RTextScrollPane(textArea);
         scrollPane.getGutter().setLineNumberFont(font);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         add(scrollPane);
+    }
+
+    public void setText(FileModel fileModel) {
+        try {
+            textArea.setText(ViewerController.getINSTANCE().getTransformer().getInstance().transform(fileModel));
+            textArea.setCaretPosition(0);
+        } catch (Exception e) {
+            textArea.setText(e.getMessage());
+        }
     }
 
 }
