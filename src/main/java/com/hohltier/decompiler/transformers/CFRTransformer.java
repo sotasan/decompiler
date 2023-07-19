@@ -6,9 +6,7 @@ import org.benf.cfr.reader.api.ClassFileSource;
 import org.benf.cfr.reader.api.OutputSinkFactory;
 import org.benf.cfr.reader.bytecode.analysis.parse.utils.Pair;
 import org.jetbrains.annotations.NotNull;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class CFRTransformer implements ITransformer, ClassFileSource, OutputSinkFactory, OutputSinkFactory.Sink<String> {
 
@@ -20,7 +18,7 @@ public class CFRTransformer implements ITransformer, ClassFileSource, OutputSink
         this.fileModel = fileModel;
         CfrDriver driver = new CfrDriver.Builder().withClassFileSource(this).withOutputSink(this).build();
         driver.analyse(Collections.singletonList(fileModel.getPath()));
-        return output;
+        return output.substring(37).trim();
     }
 
     @Override

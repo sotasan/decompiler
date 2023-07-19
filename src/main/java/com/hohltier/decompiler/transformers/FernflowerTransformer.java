@@ -21,7 +21,7 @@ public class FernflowerTransformer extends IFernflowerLogger implements ITransfo
         Fernflower fernflower = new Fernflower(this, this, IFernflowerPreferences.getDefaults(), this);
         fernflower.addSource(new File(".class"));
         fernflower.decompileContext();
-        return content;
+        return content.trim();
     }
 
     @Override
