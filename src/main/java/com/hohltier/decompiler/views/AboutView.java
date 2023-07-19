@@ -29,7 +29,6 @@ public class AboutView extends JDialog {
         setResizable(false);
         pack();
         setLocationRelativeTo(getOwner());
-        setVisible(true);
     }
 
 }

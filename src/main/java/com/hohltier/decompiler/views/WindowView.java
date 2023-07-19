@@ -18,7 +18,7 @@ public class WindowView extends JFrame {
     @Getter private final JSplitPane splitPane;
 
     public WindowView() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setDropTarget(new WindowDropTarget());
         setJMenuBar(new MenuBar());
         setMinimumSize(new Dimension(500, 300));
@@ -31,7 +31,7 @@ public class WindowView extends JFrame {
         setIconImage(logo);
 
         splitPane = new JSplitPane();
-        splitPane.setDividerLocation(200);
+        splitPane.setDividerLocation(225);
         splitPane.setLeftComponent(ExplorerController.getINSTANCE().getComponent());
         splitPane.setRightComponent(ViewerController.getINSTANCE().getComponent());
         setContentPane(splitPane);

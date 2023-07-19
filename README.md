@@ -14,6 +14,20 @@ Java Decompiler Gui
 
 [Releases](https://github.com/hohltier/decompiler/releases)
 
+## Decompilers
+
+- [CFR](https://www.benf.org/other/cfr/) - Another Java Decompiler
+- [Fernflower](https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler/engine) - First actually working analytical decompiler for Java
+- [Procyon](https://github.com/mstrobel/procyon) - A suite of Java metaprogramming tools
+
+## Languages
+
+- [English](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language.properties)
+- [German](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language_de.properties)
+- [Japanese](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language_ja.properties)
+- [Russian](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language_ru.properties)
+- [Chinese](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language_zh.properties)
+
 ## Build
 
 ```bash
