@@ -17,8 +17,10 @@ public class TabView extends JTabbedPane {
 
     public TabView() {
         addMouseListener(new TabMouseAdapter());
+        putClientProperty(FlatClientProperties.TABBED_PANE_HAS_FULL_BORDER, true);
         putClientProperty(FlatClientProperties.TABBED_PANE_TAB_CLOSABLE, true);
         putClientProperty(FlatClientProperties.TABBED_PANE_TAB_CLOSE_CALLBACK, (BiConsumer<JTabbedPane, Integer>) this::onTabClose);
+        putClientProperty(FlatClientProperties.TABBED_PANE_TAB_TYPE, FlatClientProperties.TABBED_PANE_TAB_TYPE_CARD);
         setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
         Dimension dimension = new Dimension(150, 25);
