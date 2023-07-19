@@ -1,6 +1,7 @@
 package com.hohltier.decompiler.services;
 
 import com.hohltier.decompiler.controllers.ExplorerController;
+import com.hohltier.decompiler.controllers.ViewerController;
 import com.hohltier.decompiler.models.ArchiveModel;
 import com.hohltier.decompiler.models.BaseModel;
 import com.hohltier.decompiler.models.FileModel;
@@ -32,6 +33,7 @@ public class LoaderService {
                 packageModel.getChildren().add(new FileModel(jar, entry));
         }
 
+        ViewerController.getINSTANCE().clearTabs();
         ExplorerController.getINSTANCE().setArchive(archive);
     }
 
