@@ -1,6 +1,5 @@
 package com.hohltier.decompiler.views;
 
-import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.services.ResourceService;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
@@ -10,8 +9,6 @@ import java.time.Year;
 public class AboutView extends JDialog {
 
     public AboutView() {
-        super((Frame) WindowController.getINSTANCE().getComponent());
-
         JPanel root = new JPanel(new MigLayout());
         setContentPane(root);
 
