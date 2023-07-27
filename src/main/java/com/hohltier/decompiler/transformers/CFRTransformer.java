@@ -18,7 +18,9 @@ public class CFRTransformer implements ITransformer, ClassFileSource, OutputSink
         this.fileModel = fileModel;
         CfrDriver driver = new CfrDriver.Builder().withClassFileSource(this).withOutputSink(this).build();
         driver.analyse(Collections.singletonList(fileModel.getPath()));
-        return output.substring(37).trim();
+        if (output.startsWith("/"))
+            output = output.substring(37);
+        return output.trim();
     }
 
     @Override
