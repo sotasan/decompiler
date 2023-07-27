@@ -5,67 +5,65 @@
 
     <baseFont family="JetBrains Mono" size="15"/>
     <background color="4C566A"/>
-    <caret color="c1cbc2" />
-    <selection useFG="false" bg="434C5E" />
-    <currentLineHighlight color="2F393C" fade="false" />
+    <caret color="FF0000"/>
+    <selection useFG="false" bg="434C5E"/>
+    <currentLineHighlight color="FF0000" fade="false"/>
     <marginLine fg="FF0000"/>
-    <markAllHighlight color="6b8189"/>
-    <markOccurrencesHighlight color="5b7179" border="false" />
+    <markAllHighlight color="FF0000"/>
+    <markOccurrencesHighlight color="FF0000" border="false"/>
     <matchedBracket fg="FF0000"/>
-    <hyperlinks fg="a082bd" />
+    <hyperlinks fg="FF0000"/>
     <secondaryLanguages>
-        <language index="1" bg="333344" />
-        <language index="2" bg="223322" />
-        <language index="3" bg="332222" />
+        <language index="1" bg="FF0000"/>
+        <language index="2" bg="FF0000"/>
+        <language index="3" bg="FF0000"/>
     </secondaryLanguages>
 
-    <!-- Gutter styling. -->
     <gutterBorder color="4C566A"/>
     <lineNumbers fg="D8DEE9"/>
-    <foldIndicator fg="6A8088" armedFg="a9b7c6" iconBg="2f383c" iconArmedBg="3f484c" />
-    <iconRowHeader activeLineRange="3399ff" />
+    <foldIndicator fg="FF0000" armedFg="a9b7c6" iconBg="2f383c" iconArmedBg="3f484c"/>
+    <iconRowHeader activeLineRange="FF0000"/>
 
-    <!-- Syntax tokens. -->
     <tokenStyles>
-        <style token="IDENTIFIER" fg="ECEFF4" />
-        <style token="RESERVED_WORD" fg="D08770" bold="true" />
-        <style token="RESERVED_WORD_2" fg="D08770" bold="true" />
-        <style token="ANNOTATION" fg="E8E2B7" />
-        <style token="COMMENT_DOCUMENTATION" fg="6C788C" />
-        <style token="COMMENT_EOL" fg="66747B" />
-        <style token="COMMENT_MULTILINE" fg="66747B" />
-        <style token="COMMENT_KEYWORD" fg="ae9fbf" />
-        <style token="COMMENT_MARKUP" fg="ae9fbf" />
+        <style token="IDENTIFIER" fg="ECEFF4"/>
+        <style token="RESERVED_WORD" fg="D08770" bold="true"/>
+        <style token="RESERVED_WORD_2" fg="D08770" bold="true"/>
+        <style token="ANNOTATION" fg="FF0000"/>
+        <style token="COMMENT_DOCUMENTATION" fg="FF0000"/>
+        <style token="COMMENT_EOL" fg="FF0000"/>
+        <style token="COMMENT_MULTILINE" fg="FF0000"/>
+        <style token="COMMENT_KEYWORD" fg="FF0000"/>
+        <style token="COMMENT_MARKUP" fg="FF0000"/>
         <style token="FUNCTION" fg="EBCB8B"/>
-        <style token="DATA_TYPE" fg="EBCB8B"  />
-        <style token="LITERAL_BOOLEAN" fg="EBCB8B" />
-        <style token="LITERAL_NUMBER_DECIMAL_INT" fg="EBCB8B" />
-        <style token="LITERAL_NUMBER_FLOAT" fg="EBCB8B" />
-        <style token="LITERAL_NUMBER_HEXADECIMAL" fg="EBCB8B" />
-        <style token="LITERAL_STRING_DOUBLE_QUOTE" fg="A3BE8C" />
-        <style token="LITERAL_CHAR" fg="EBCB8B" />
-        <style token="LITERAL_BACKQUOTE" fg="EBCB8B" />
-        <style token="MARKUP_TAG_DELIMITER" fg="678CB1" />
-        <style token="MARKUP_TAG_NAME" fg="ABBFD3" bold="true" />
-        <style token="MARKUP_TAG_ATTRIBUTE" fg="B3B689" />
-        <style token="MARKUP_TAG_ATTRIBUTE_VALUE" fg="e1e2cf" />
-        <style token="MARKUP_COMMENT" fg="66747B" />
-        <style token="MARKUP_DTD" fg="A082BD" />
-        <style token="MARKUP_PROCESSING_INSTRUCTION" fg="A082BD" />
-        <style token="MARKUP_CDATA" fg="d5e6f0" />
-        <style token="MARKUP_CDATA_DELIMITER" fg="ae9fbf" />
-        <style token="MARKUP_ENTITY_REFERENCE" fg="678CB1" />
-        <style token="OPERATOR" fg="ECEFF4" />
-        <style token="PREPROCESSOR" fg="FF0000" />
-        <style token="REGEX" fg="FF0000" />
-        <style token="SEPARATOR" fg="ECEFF4" />
-        <style token="VARIABLE" fg="FF0000" bold="true" />
-        <style token="WHITESPACE" fg="FF0000" />
+        <style token="DATA_TYPE" fg="EBCB8B"/>
+        <style token="LITERAL_BOOLEAN" fg="EBCB8B"/>
+        <style token="LITERAL_NUMBER_DECIMAL_INT" fg="EBCB8B"/>
+        <style token="LITERAL_NUMBER_FLOAT" fg="EBCB8B"/>
+        <style token="LITERAL_NUMBER_HEXADECIMAL" fg="EBCB8B"/>
+        <style token="LITERAL_STRING_DOUBLE_QUOTE" fg="A3BE8C"/>
+        <style token="LITERAL_CHAR" fg="EBCB8B"/>
+        <style token="LITERAL_BACKQUOTE" fg="EBCB8B"/>
+        <style token="MARKUP_TAG_DELIMITER" fg="FF0000"/>
+        <style token="MARKUP_TAG_NAME" fg="FF0000" bold="true"/>
+        <style token="MARKUP_TAG_ATTRIBUTE" fg="FF0000"/>
+        <style token="MARKUP_TAG_ATTRIBUTE_VALUE" fg="FF0000"/>
+        <style token="MARKUP_COMMENT" fg="FF0000"/>
+        <style token="MARKUP_DTD" fg="FF0000"/>
+        <style token="MARKUP_PROCESSING_INSTRUCTION" fg="FF0000"/>
+        <style token="MARKUP_CDATA" fg="FF0000"/>
+        <style token="MARKUP_CDATA_DELIMITER" fg="FF0000"/>
+        <style token="MARKUP_ENTITY_REFERENCE" fg="FF0000"/>
+        <style token="OPERATOR" fg="ECEFF4"/>
+        <style token="PREPROCESSOR" fg="FF0000"/>
+        <style token="REGEX" fg="FF0000"/>
+        <style token="SEPARATOR" fg="ECEFF4"/>
+        <style token="VARIABLE" fg="FF0000" bold="true"/>
+        <style token="WHITESPACE" fg="FF0000"/>
 
-        <style token="ERROR_IDENTIFIER" fg="E0E2E4" bg="04790e" />
-        <style token="ERROR_NUMBER_FORMAT" fg="E0E2E4" bg="04790e" />
-        <style token="ERROR_STRING_DOUBLE" fg="E0E2E4" bg="04790e" />
-        <style token="ERROR_CHAR" fg="E0E2E4" bg="04790e" />
+        <style token="ERROR_IDENTIFIER" fg="FF0000" bg="04790e"/>
+        <style token="ERROR_NUMBER_FORMAT" fg="FF0000" bg="04790e"/>
+        <style token="ERROR_STRING_DOUBLE" fg="FF0000" bg="04790e"/>
+        <style token="ERROR_CHAR" fg="E0E2E4" bg="FF0000"/>
     </tokenStyles>
 
 </RSyntaxTheme>
