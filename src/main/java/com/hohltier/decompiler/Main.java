@@ -1,7 +1,7 @@
 package com.hohltier.decompiler;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatInspector;
 import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.services.LoaderService;
@@ -21,13 +21,13 @@ public class Main {
     public static void main(String @NotNull [] args) {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         System.setProperty("apple.awt.application.name", "Decompiler");
-        System.setProperty("apple.awt.application.appearance", "NSAppearanceNameAqua");
+        System.setProperty("apple.awt.application.appearance", "NSAppearanceNameDarkAqua");
 
         for (Resource font : new ClassGraph().acceptPaths("fonts").scan().getResourcesWithExtension("ttf"))
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.PLAIN, Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(font.getPath()))));
 
         FlatLaf.registerCustomDefaultsSource("themes");
-        FlatLightLaf.setup();
+        FlatDarkLaf.setup();
 
         FlatInspector.install("ctrl shift I");
         WindowController.getINSTANCE().show();

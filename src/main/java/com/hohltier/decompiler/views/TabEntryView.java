@@ -22,15 +22,13 @@ public class TabEntryView extends JPanel {
         this.fileModel = fileModel;
         setLayout(new BorderLayout());
 
-        Theme theme = Theme.load(getClass().getClassLoader().getResourceAsStream("org/fife/ui/rsyntaxtextarea/themes/eclipse.xml"));
-        Font font = new Font("JetBrains Mono", Font.PLAIN, UIManager.getFont("defaultFont").getSize() + 2);
+        Theme theme = Theme.load(getClass().getClassLoader().getResourceAsStream("themes/RSyntaxTheme.xml"));
 
         textArea = new RSyntaxTextArea();
         theme.apply(textArea);
         textArea.setBracketMatchingEnabled(false);
         textArea.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         textArea.setEditable(false);
-        textArea.setFont(font);
         textArea.setHighlightCurrentLine(false);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
@@ -38,7 +36,7 @@ public class TabEntryView extends JPanel {
         setText(fileModel);
 
         scrollPane = new RTextScrollPane(textArea);
-        scrollPane.getGutter().setLineNumberFont(font);
+        theme.apply(textArea);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         add(scrollPane);
     }
