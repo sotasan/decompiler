@@ -24,11 +24,11 @@ Java Decompiler Gui
 
 ## Languages
 
-- [English](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language.properties)
-- [German](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language_de.properties)
-- [Japanese](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language_ja.properties)
-- [Russian](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language_ru.properties)
-- [Chinese](https://github.com/hohltier/decompiler/blob/master/src/main/resources/lang/language_zh.properties)
+- [English](https://github.com/hohltier/decompiler/blob/master/src/main/resources/langs/language.properties)
+- [German](https://github.com/hohltier/decompiler/blob/master/src/main/resources/langs/language_de.properties)
+- [Japanese](https://github.com/hohltier/decompiler/blob/master/src/main/resources/langs/language_ja.properties)
+- [Russian](https://github.com/hohltier/decompiler/blob/master/src/main/resources/langs/language_ru.properties)
+- [Chinese](https://github.com/hohltier/decompiler/blob/master/src/main/resources/langs/language_zh.properties)
 
 ## Build
 

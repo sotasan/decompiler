@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 @UtilityClass
 public class ResourceService {
 
-    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("lang/language", Locale.getDefault());
+    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("langs/language", Locale.getDefault());
 
     public static Image getLogo() {
         return Toolkit.getDefaultToolkit().createImage(Objects.requireNonNull(ResourceService.class.getClassLoader().getResource("logo/logo.png")));
