@@ -55,7 +55,7 @@ public class TreeView extends JPanel {
         @Override
         public void mouseClicked(@NotNull MouseEvent event) {
             if (event.getClickCount() == 2) {
-                TreePath path = ((JTree) event.getSource()).getPathForLocation(event.getX(), event.getY());
+                TreePath path = ((JTree) event.getSource()).getSelectionPath();
                 if (path != null) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
                     if (node.getUserObject() != null) {
