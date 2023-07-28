@@ -8,10 +8,13 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
-public class TabEntryView extends JPanel {
+public class TabEntryView extends JPanel implements MouseWheelListener {
 
     @Getter private final FileModel fileModel;
     @Getter private final RSyntaxTextArea textArea;
@@ -26,6 +29,7 @@ public class TabEntryView extends JPanel {
 
         textArea = new RSyntaxTextArea();
         theme.apply(textArea);
+        textArea.addMouseWheelListener(this);
         textArea.setBracketMatchingEnabled(false);
         textArea.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         textArea.setDropTarget(null);
@@ -40,6 +44,24 @@ public class TabEntryView extends JPanel {
         theme.apply(textArea);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         add(scrollPane);
+
+        setFontSize(getFont().getSize() + 2);
+    }
+
+    // TODO: global font size
+    @Override
+    public void mouseWheelMoved(@NotNull MouseWheelEvent event) {
+        if (event.isControlDown() || event.isMetaDown())
+            setFontSize(Math.min(50, Math.max(10, textArea.getFont().getSize() - event.getWheelRotation())));
+        else
+            for (MouseWheelListener listener : scrollPane.getMouseWheelListeners())
+                listener.mouseWheelMoved(event);
+    }
+
+    private void setFontSize(float size) {
+        Font font = textArea.getFont().deriveFont(size);
+        textArea.setFont(font);
+        scrollPane.getGutter().setLineNumberFont(font);
     }
 
     public void setText(FileModel fileModel) {

@@ -3,7 +3,7 @@
 
 <RSyntaxTheme version="1.0">
 
-    <baseFont family="JetBrains Mono" size="15"/>
+    <baseFont family="JetBrains Mono"/>
     <background color="4C566A"/>
     <caret color="4C566A"/>
     <selection fg="4C566A" bg="D08770"/>
