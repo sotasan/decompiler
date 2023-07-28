@@ -6,7 +6,7 @@
     <baseFont family="JetBrains Mono" size="15"/>
     <background color="4C566A"/>
     <caret color="FF0000"/>
-    <selection useFG="false" bg="434C5E"/>
+    <selection fg="4C566A" bg="D08770"/>
     <currentLineHighlight color="FF0000" fade="false"/>
     <marginLine fg="FF0000"/>
     <markAllHighlight color="FF0000"/>
