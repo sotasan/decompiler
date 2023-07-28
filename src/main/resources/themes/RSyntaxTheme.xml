@@ -20,7 +20,7 @@
     </secondaryLanguages>
 
     <gutterBorder color="4C566A"/>
-    <lineNumbers fg="D8DEE9"/>
+    <lineNumbers fg="81A1C1"/>
     <foldIndicator fg="FF0000" armedFg="a9b7c6" iconBg="2f383c" iconArmedBg="3f484c"/>
     <iconRowHeader activeLineRange="FF0000"/>
 
@@ -28,12 +28,12 @@
         <style token="IDENTIFIER" fg="ECEFF4"/>
         <style token="RESERVED_WORD" fg="D08770" bold="true"/>
         <style token="RESERVED_WORD_2" fg="D08770" bold="true"/>
-        <style token="ANNOTATION" fg="FF0000"/>
-        <style token="COMMENT_DOCUMENTATION" fg="FF0000"/>
-        <style token="COMMENT_EOL" fg="FF0000"/>
-        <style token="COMMENT_MULTILINE" fg="FF0000"/>
-        <style token="COMMENT_KEYWORD" fg="FF0000"/>
-        <style token="COMMENT_MARKUP" fg="FF0000"/>
+        <style token="ANNOTATION" fg="B48EAD"/>
+        <style token="COMMENT_DOCUMENTATION" fg="81A1C1"/>
+        <style token="COMMENT_EOL" fg="81A1C1"/>
+        <style token="COMMENT_MULTILINE" fg="81A1C1"/>
+        <style token="COMMENT_KEYWORD" fg="81A1C1"/>
+        <style token="COMMENT_MARKUP" fg="81A1C1"/>
         <style token="FUNCTION" fg="EBCB8B"/>
         <style token="DATA_TYPE" fg="EBCB8B"/>
         <style token="LITERAL_BOOLEAN" fg="EBCB8B"/>
@@ -47,7 +47,7 @@
         <style token="MARKUP_TAG_NAME" fg="FF0000" bold="true"/>
         <style token="MARKUP_TAG_ATTRIBUTE" fg="FF0000"/>
         <style token="MARKUP_TAG_ATTRIBUTE_VALUE" fg="FF0000"/>
-        <style token="MARKUP_COMMENT" fg="FF0000"/>
+        <style token="MARKUP_COMMENT" fg="81A1C1"/>
         <style token="MARKUP_DTD" fg="FF0000"/>
         <style token="MARKUP_PROCESSING_INSTRUCTION" fg="FF0000"/>
         <style token="MARKUP_CDATA" fg="FF0000"/>
