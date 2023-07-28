@@ -28,6 +28,7 @@ public class TabEntryView extends JPanel {
         theme.apply(textArea);
         textArea.setBracketMatchingEnabled(false);
         textArea.setCursor(new Cursor(Cursor.TEXT_CURSOR));
+        textArea.setDropTarget(null);
         textArea.setEditable(false);
         textArea.setHighlightCurrentLine(false);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
