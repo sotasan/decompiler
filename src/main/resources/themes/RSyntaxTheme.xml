@@ -5,7 +5,7 @@
 
     <baseFont family="JetBrains Mono" size="15"/>
     <background color="4C566A"/>
-    <caret color="FF0000"/>
+    <caret color="4C566A"/>
     <selection fg="4C566A" bg="D08770"/>
     <currentLineHighlight color="FF0000"/>
     <marginLine fg="FF0000"/>
