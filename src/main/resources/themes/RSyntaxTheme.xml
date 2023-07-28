@@ -7,10 +7,10 @@
     <background color="4C566A"/>
     <caret color="FF0000"/>
     <selection fg="4C566A" bg="D08770"/>
-    <currentLineHighlight color="FF0000" fade="false"/>
+    <currentLineHighlight color="FF0000"/>
     <marginLine fg="FF0000"/>
     <markAllHighlight color="FF0000"/>
-    <markOccurrencesHighlight color="FF0000" border="false"/>
+    <markOccurrencesHighlight color="FF0000"/>
     <matchedBracket fg="FF0000"/>
     <hyperlinks fg="FF0000"/>
     <secondaryLanguages>
