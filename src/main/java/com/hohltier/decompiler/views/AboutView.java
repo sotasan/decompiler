@@ -53,7 +53,7 @@ public class AboutView extends JDialog {
         header.putClientProperty("FlatLaf.styleClass", "h1");
         content.add(header, "wrap");
 
-        copyright = new JLabel(String.format("\u00a9 2022 - %s Sota", Year.now().getValue()));
+        copyright = new JLabel(String.format("\u00a9 2022 - %s Souta", Year.now().getValue()));
         content.add(copyright, "wrap");
 
         Properties properties = new Properties();
