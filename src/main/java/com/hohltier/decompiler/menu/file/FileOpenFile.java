@@ -2,7 +2,7 @@ package com.hohltier.decompiler.menu.file;
 
 import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.services.LoaderService;
-import com.hohltier.decompiler.services.ResourceService;
+import com.hohltier.decompiler.services.LanguageService;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -15,7 +15,7 @@ public class FileOpenFile extends JMenuItem implements ActionListener {
     private final String title;
 
     public FileOpenFile() {
-        title = ResourceService.getTranslation("file.openFile");
+        title = LanguageService.getTranslation("file.openFile");
         setText(String.format("%s...", title));
         setMnemonic(KeyEvent.VK_O);
         setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));

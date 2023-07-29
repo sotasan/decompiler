@@ -3,7 +3,7 @@ package com.hohltier.decompiler.views;
 import com.hohltier.decompiler.controllers.ExplorerController;
 import com.hohltier.decompiler.controllers.ViewerController;
 import com.hohltier.decompiler.services.LoaderService;
-import com.hohltier.decompiler.services.ResourceService;
+import com.hohltier.decompiler.services.LanguageService;
 import com.hohltier.decompiler.menu.MenuBar;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -17,6 +17,7 @@ import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 public class WindowView extends JFrame {
 
@@ -30,7 +31,7 @@ public class WindowView extends JFrame {
         setPreferredSize(new Dimension(1000, 600));
         setTitle("Decompiler");
 
-        Image logo = ResourceService.getLogo();
+        Image logo = Toolkit.getDefaultToolkit().createImage(Objects.requireNonNull(LanguageService.class.getClassLoader().getResource("logo/logo.png")));
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE))
             Taskbar.getTaskbar().setIconImage(logo);
         setIconImage(logo);

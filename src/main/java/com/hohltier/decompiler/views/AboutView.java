@@ -2,59 +2,102 @@ package com.hohltier.decompiler.views;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.hohltier.decompiler.controllers.WindowController;
-import com.hohltier.decompiler.services.ResourceService;
+import com.hohltier.decompiler.services.LanguageService;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.lang.management.ManagementFactory;
+import java.net.URI;
 import java.time.Year;
+import java.util.Properties;
 
 public class AboutView extends JDialog {
 
     @Getter private final JPanel root;
+    @Getter private final JPanel content;
     @Getter private final JLabel logo;
     @Getter private final JLabel header;
     @Getter private final JLabel version;
     @Getter private final JPanel vm;
     @Getter private final JLabel copyright;
+    @Getter private final JPanel controls;
+    @Getter private final JButton github;
+    @Getter private final JButton ok;
 
+    @SneakyThrows
     public AboutView() {
         super((JFrame) WindowController.getINSTANCE().getComponent());
         getRootPane().putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICON, false);
-        setTitle(ResourceService.getTranslation("about"));
+        setTitle(LanguageService.getTranslation("about"));
         setModal(true);
         setResizable(false);
 
-        // TODO: padding
-        root = new JPanel(new MigLayout());
+        root = new JPanel(new BorderLayout());
+        root.setBorder(new EmptyBorder(15, 15, 15, 15));
         setContentPane(root);
 
-        // TODO: align top
-        logo = new JLabel(new ImageIcon(ResourceService.getLogo().getScaledInstance(64, 64, Image.SCALE_SMOOTH)));
+        content = new JPanel(new MigLayout());
+        content.setBorder(new EmptyBorder(0, 0, 15, 0));
+        root.add(content, BorderLayout.CENTER);
+
+        logo = new JLabel(new ImageIcon(getOwner().getIconImages().get(0).getScaledInstance(64, 64, Image.SCALE_SMOOTH)));
+        logo.setBorder(new EmptyBorder(0, 0, 0, 15));
+        logo.setVerticalAlignment(JLabel.TOP);
+        content.add(logo, "dock west");
+
         header = new JLabel("Decompiler");
         header.putClientProperty("FlatLaf.styleClass", "h1");
-        version = new JLabel(String.format(ResourceService.getTranslation("about.version"), ResourceService.getVersion()));
-
-        root.add(logo, "dock west");
-        root.add(header, "wrap");
-        root.add(version, "wrap");
-
-        vm = new JPanel(new MigLayout());
-        vm.setBorder(BorderFactory.createTitledBorder(ResourceService.getTranslation("about.vm")));
-        root.add(vm, "wrap, gapy 15px");
-
-        vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmName()), "wrap");
-        vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmVersion()), "wrap");
-        vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmVendor()), "wrap");
+        content.add(header, "wrap");
 
         copyright = new JLabel(String.format("\u00a9 2022 - %s Sota", Year.now().getValue()));
-        root.add(copyright, "wrap, gapy 15px");
+        content.add(copyright, "wrap");
 
-        // TODO: buttons (github, ok)
+        Properties properties = new Properties();
+        properties.load(LanguageService.class.getClassLoader().getResourceAsStream("application.properties"));
+        version = new JLabel(String.format(LanguageService.getTranslation("about.version"), properties.getProperty("version")));
+        content.add(version, "wrap");
+
+        vm = new JPanel(new MigLayout());
+        vm.setBorder(BorderFactory.createTitledBorder(LanguageService.getTranslation("about.vm")));
+        content.add(vm, "wrap, gapy 15px");
+
+        vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmName()), "wrap");
+        vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmVendor()), "wrap");
+        vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmVersion()), "wrap");
+
+        controls = new JPanel();
+        controls.add(Box.createHorizontalGlue());
+        controls.setLayout(new BoxLayout(controls, BoxLayout.X_AXIS));
+        root.add(controls, BorderLayout.SOUTH);
+
+        github = new JButton("GitHub");
+        github.addActionListener(this::OnGitHubAction);
+        github.setFocusable(false);
+        controls.add(github);
+
+        controls.add(Box.createHorizontalStrut(5));
+
+        ok = new JButton(LanguageService.getTranslation("about.ok"));
+        ok.addActionListener(this::onOkAction);
+        controls.add(ok);
+        getRootPane().setDefaultButton(ok);
 
         pack();
         setLocationRelativeTo(getOwner());
+    }
+
+    @SneakyThrows
+    private void OnGitHubAction(ActionEvent event) {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
+            Desktop.getDesktop().browse(new URI("https://github.com/hohltier/decompiler"));
+    }
+
+    private void onOkAction(ActionEvent event) {
+        dispose();
     }
 
 }
