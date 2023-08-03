@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.hohltier"
-version = "0.8.1"
+version = "0.8.2"
 
 repositories {
     mavenCentral()
@@ -22,18 +22,19 @@ configurations {
 }
 
 dependencies {
-    implementation("com.fifesoft:rsyntaxtextarea:3.3.3")
+    implementation("com.fifesoft:rsyntaxtextarea:3.3.4")
     implementation("com.formdev:flatlaf:3.1.1")
-    implementation("com.formdev:flatlaf-extras:3.1.1")
     implementation("com.miglayout:miglayout:3.7.4")
     implementation("io.github.classgraph:classgraph:4.8.161")
     implementation("org.benf:cfr:0.152")
     implementation("org.bitbucket.mstrobel:procyon-compilertools:0.6.0")
     implementation("org.jetbrains:annotations:24.0.1")
     implementation("org.vineflower:vineflower:1.9.1")
+    runtimeOnly("com.formdev:flatlaf-extras:3.1.1")
 }
 
 processResources {
+    outputs.upToDateWhen { false }
     filesMatching("application.properties") {
         expand(project.properties)
     }
@@ -41,7 +42,7 @@ processResources {
 
 jar {
     archiveBaseName = project.name.toLowerCase()
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
     from { configurations.implementation.collect { it.directory ? it : zipTree(it) } }
 }
