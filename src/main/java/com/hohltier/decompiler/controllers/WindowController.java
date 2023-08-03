@@ -15,6 +15,11 @@ public class WindowController extends BaseController<WindowView> {
         getView().setVisible(true);
     }
 
+    public void activate() {
+        getView().setContentPane(getView().getSplitPane());
+        getView().validate();
+    }
+
     public void dispose() {
         getView().dispose();
     }

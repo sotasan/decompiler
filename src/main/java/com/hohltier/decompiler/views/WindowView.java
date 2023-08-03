@@ -1,5 +1,6 @@
 package com.hohltier.decompiler.views;
 
+import com.hohltier.decompiler.controllers.EmptyController;
 import com.hohltier.decompiler.controllers.ExplorerController;
 import com.hohltier.decompiler.controllers.ViewerController;
 import com.hohltier.decompiler.services.LoaderService;
@@ -25,6 +26,7 @@ public class WindowView extends JFrame {
     private final JSplitPane splitPane;
 
     public WindowView() {
+        setContentPane((Container) new EmptyController().getComponent());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setDropTarget(new WindowDropTarget());
         setJMenuBar(new MenuBar());
@@ -41,7 +43,6 @@ public class WindowView extends JFrame {
         splitPane.setDividerLocation(225);
         splitPane.setLeftComponent(ExplorerController.getINSTANCE().getComponent());
         splitPane.setRightComponent(ViewerController.getINSTANCE().getComponent());
-        setContentPane(splitPane);
 
         pack();
         setLocationRelativeTo(null);

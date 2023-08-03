@@ -39,6 +39,7 @@ public class LoaderService {
                 packageModel.getChildren().add(new FileModel(jar, entry));
         }
 
+        WindowController.getINSTANCE().activate();
         ViewerController.getINSTANCE().clearTabs();
         ExplorerController.getINSTANCE().setArchive(archive);
 
