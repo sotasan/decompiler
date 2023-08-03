@@ -10,10 +10,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.function.BiConsumer;
 
+@Getter
 public class TabView extends JTabbedPane {
 
-    @Getter private final JToolBar toolBar;
-    @Getter private final JComboBox<Transformer> comboBox;
+    private final JToolBar toolBar;
+    private final JComboBox<Transformer> comboBox;
 
     public TabView() {
         addMouseListener(new TabMouseAdapter());

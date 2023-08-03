@@ -15,18 +15,19 @@ import java.net.URI;
 import java.time.Year;
 import java.util.Properties;
 
+@Getter
 public class AboutView extends JDialog {
 
-    @Getter private final JPanel root;
-    @Getter private final JPanel content;
-    @Getter private final JLabel logo;
-    @Getter private final JLabel header;
-    @Getter private final JLabel version;
-    @Getter private final JPanel vm;
-    @Getter private final JLabel copyright;
-    @Getter private final JPanel controls;
-    @Getter private final JButton github;
-    @Getter private final JButton ok;
+    private final JPanel root;
+    private final JPanel content;
+    private final JLabel logo;
+    private final JLabel header;
+    private final JLabel version;
+    private final JPanel vm;
+    private final JLabel copyright;
+    private final JPanel controls;
+    private final JButton github;
+    private final JButton ok;
 
     @SneakyThrows
     public AboutView() {

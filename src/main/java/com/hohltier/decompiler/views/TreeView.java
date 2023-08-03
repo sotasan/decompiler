@@ -14,10 +14,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@Getter
 public class TreeView extends JPanel {
 
-    @Getter private final JScrollPane scrollPane;
-    @Getter private final JTree tree;
+    private final JScrollPane scrollPane;
+    private final JTree tree;
 
     public TreeView() {
         super(new BorderLayout());

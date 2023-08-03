@@ -14,11 +14,12 @@ import java.awt.*;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+@Getter
 public class TabEntryView extends JPanel implements MouseWheelListener {
 
-    @Getter private final FileModel fileModel;
-    @Getter private final RSyntaxTextArea textArea;
-    @Getter private final RTextScrollPane scrollPane;
+    private final FileModel fileModel;
+    private final RSyntaxTextArea textArea;
+    private final RTextScrollPane scrollPane;
 
     @SneakyThrows
     public TabEntryView(FileModel fileModel) {

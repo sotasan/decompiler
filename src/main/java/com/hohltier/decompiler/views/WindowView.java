@@ -19,9 +19,10 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
 public class WindowView extends JFrame {
 
-    @Getter private final JSplitPane splitPane;
+    private final JSplitPane splitPane;
 
     public WindowView() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
