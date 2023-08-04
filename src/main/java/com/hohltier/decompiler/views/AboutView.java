@@ -27,6 +27,9 @@ public class AboutView extends JDialog {
     private final FlatLabel copyright;
     private final FlatLabel version;
     private final JPanel vm;
+    private final FlatLabel vmName;
+    private final FlatLabel vmVendor;
+    private final FlatLabel vmVersion;
     private final JPanel controls;
     private final FlatButton github;
     private final FlatButton ok;
@@ -75,10 +78,17 @@ public class AboutView extends JDialog {
         vm.setLayout(new MigLayout());
         content.add(vm, "wrap, gapy 15px");
 
-        // TODO: FlatLabel
-        vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmName()), "wrap");
-        vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmVendor()), "wrap");
-        vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmVersion()), "wrap");
+        vmName = new FlatLabel();
+        vmName.setText(ManagementFactory.getRuntimeMXBean().getVmName());
+        vm.add(vmName, "wrap");
+
+        vmVendor = new FlatLabel();
+        vmVendor.setText(ManagementFactory.getRuntimeMXBean().getVmVendor());
+        vm.add(vmVendor, "wrap");
+
+        vmVersion = new FlatLabel();
+        vmVersion.setText(ManagementFactory.getRuntimeMXBean().getVmVersion());
+        vm.add(vmVersion, "wrap");
 
         controls = new JPanel();
         controls.add(Box.createHorizontalGlue());
