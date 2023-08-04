@@ -1,7 +1,7 @@
 package com.hohltier.decompiler.services;
 
-import com.hohltier.decompiler.controllers.ExplorerController;
-import com.hohltier.decompiler.controllers.ViewerController;
+import com.hohltier.decompiler.controllers.TreeController;
+import com.hohltier.decompiler.controllers.TabsController;
 import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.models.ArchiveModel;
 import com.hohltier.decompiler.models.BaseModel;
@@ -40,8 +40,8 @@ public class LoaderService {
         }
 
         WindowController.getINSTANCE().activate();
-        ViewerController.getINSTANCE().clearTabs();
-        ExplorerController.getINSTANCE().setArchive(archive);
+        TabsController.getINSTANCE().clearTabs();
+        TreeController.getINSTANCE().setArchive(archive);
 
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
             Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.getINSTANCE().getComponent(), Taskbar.State.OFF);

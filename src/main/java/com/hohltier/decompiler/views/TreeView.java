@@ -2,7 +2,7 @@ package com.hohltier.decompiler.views;
 
 import com.formdev.flatlaf.extras.components.FlatScrollPane;
 import com.formdev.flatlaf.extras.components.FlatTree;
-import com.hohltier.decompiler.controllers.ViewerController;
+import com.hohltier.decompiler.controllers.TabsController;
 import com.hohltier.decompiler.models.BaseModel;
 import com.hohltier.decompiler.models.FileModel;
 import lombok.Getter;
@@ -64,7 +64,7 @@ public class TreeView extends JPanel {
                     if (node.getUserObject() != null) {
                         BaseModel model = (BaseModel) node.getUserObject();
                         if (model instanceof FileModel && model.isClass()) {
-                            ViewerController.getINSTANCE().addTab((FileModel) model);
+                            TabsController.getINSTANCE().addTab((FileModel) model);
                         }
                     }
                 }

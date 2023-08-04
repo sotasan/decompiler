@@ -11,11 +11,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-public class ExplorerController extends BaseController<TreeView> {
+public class TreeController extends BaseController<TreeView> {
 
-    @Getter private static final ExplorerController INSTANCE = new ExplorerController();
+    @Getter private static final TreeController INSTANCE = new TreeController();
 
-    private ExplorerController() {
+    private TreeController() {
         super(new TreeView());
     }
 

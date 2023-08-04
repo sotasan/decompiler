@@ -8,14 +8,14 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 @Getter
-public class EmptyView extends JPanel {
+public class StartView extends JPanel {
 
     private final JPanel root;
     private final FlatLabel header;
     private final FlatLabel open;
     private final FlatLabel drag;
 
-    public EmptyView() {
+    public StartView() {
         setLayout(new MigLayout("fill"));
 
         root = new JPanel();
