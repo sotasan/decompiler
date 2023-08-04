@@ -30,7 +30,7 @@ dependencies {
     implementation("org.benf:cfr:0.152")
     implementation("org.bitbucket.mstrobel:procyon-compilertools:0.6.0")
     implementation("org.jetbrains:annotations:24.0.1")
-    implementation("org.vineflower:vineflower:1.9.1")
+    implementation("org.vineflower:vineflower:1.9.2")
 }
 
 processResources {
