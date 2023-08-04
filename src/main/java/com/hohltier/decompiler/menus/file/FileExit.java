@@ -1,5 +1,6 @@
-package com.hohltier.decompiler.menu.file;
+package com.hohltier.decompiler.menus.file;
 
+import com.formdev.flatlaf.extras.components.FlatMenuItem;
 import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.services.LanguageService;
 import javax.swing.*;
@@ -8,17 +9,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class FileExit extends JMenuItem implements ActionListener {
+public class FileExit extends FlatMenuItem implements ActionListener {
 
     public FileExit() {
-        setText(LanguageService.getTranslation("file.exit"));
-        setMnemonic(KeyEvent.VK_Q);
-        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         addActionListener(this);
+        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
+        setMnemonic(KeyEvent.VK_Q);
+        setText(LanguageService.getTranslation("file.exit"));
 
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.APP_QUIT_HANDLER)) {
-            Desktop.getDesktop().setQuitHandler((e, response) -> actionPerformed(null));
             setVisible(false);
+            Desktop.getDesktop().setQuitHandler((e, r) -> actionPerformed(null));
         }
     }
 

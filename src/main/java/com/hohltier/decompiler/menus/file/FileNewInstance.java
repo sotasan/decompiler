@@ -1,5 +1,6 @@
-package com.hohltier.decompiler.menu.file;
+package com.hohltier.decompiler.menus.file;
 
+import com.formdev.flatlaf.extras.components.FlatMenuItem;
 import com.hohltier.decompiler.services.ProcessService;
 import com.hohltier.decompiler.services.LanguageService;
 import javax.swing.*;
@@ -8,13 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class FileNewInstance extends JMenuItem implements ActionListener {
+public class FileNewInstance extends FlatMenuItem implements ActionListener {
 
     public FileNewInstance() {
-        setText(LanguageService.getTranslation("file.newInstance"));
-        setMnemonic(KeyEvent.VK_N);
-        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         addActionListener(this);
+        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
+        setMnemonic(KeyEvent.VK_N);
+        setText(LanguageService.getTranslation("file.newInstance"));
     }
 
     @Override

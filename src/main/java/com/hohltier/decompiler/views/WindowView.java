@@ -1,11 +1,12 @@
 package com.hohltier.decompiler.views;
 
+import com.formdev.flatlaf.extras.components.FlatSplitPane;
 import com.hohltier.decompiler.controllers.EmptyController;
 import com.hohltier.decompiler.controllers.ExplorerController;
 import com.hohltier.decompiler.controllers.ViewerController;
 import com.hohltier.decompiler.services.LoaderService;
 import com.hohltier.decompiler.services.LanguageService;
-import com.hohltier.decompiler.menu.MenuBar;
+import com.hohltier.decompiler.menus.MenuBar;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +24,7 @@ import java.util.Objects;
 @Getter
 public class WindowView extends JFrame {
 
-    private final JSplitPane splitPane;
+    private final FlatSplitPane splitPane;
 
     public WindowView() {
         setContentPane((Container) new EmptyController().getComponent());
@@ -39,7 +40,7 @@ public class WindowView extends JFrame {
             Taskbar.getTaskbar().setIconImage(logo);
         setIconImage(logo);
 
-        splitPane = new JSplitPane();
+        splitPane = new FlatSplitPane();
         splitPane.setDividerLocation(225);
         splitPane.setLeftComponent(ExplorerController.getINSTANCE().getComponent());
         splitPane.setRightComponent(ViewerController.getINSTANCE().getComponent());

@@ -1,5 +1,6 @@
 package com.hohltier.decompiler.views;
 
+import com.formdev.flatlaf.extras.components.FlatScrollPane;
 import com.hohltier.decompiler.controllers.ViewerController;
 import com.hohltier.decompiler.models.BaseModel;
 import com.hohltier.decompiler.models.FileModel;
@@ -17,21 +18,22 @@ import java.awt.event.MouseEvent;
 @Getter
 public class TreeView extends JPanel {
 
-    private final JScrollPane scrollPane;
     private final JTree tree;
+    private final FlatScrollPane scrollPane;
 
     public TreeView() {
         super(new BorderLayout());
 
-        tree = new JTree(new DefaultMutableTreeNode());
+        tree = new JTree(new DefaultMutableTreeNode()); // TODO: FlatTree
         tree.addMouseListener(new TreeMouseAdapter());
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setCellRenderer(new TreeCellRenderer());
         tree.setRootVisible(false);
         tree.setShowsRootHandles(true);
 
-        scrollPane = new JScrollPane(tree);
+        scrollPane = new FlatScrollPane();
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.setViewportView(tree);
         add(scrollPane);
     }
 

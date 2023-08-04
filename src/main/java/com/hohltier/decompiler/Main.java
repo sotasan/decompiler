@@ -2,6 +2,7 @@ package com.hohltier.decompiler;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.extras.FlatInspector;
 import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.services.LoaderService;
 import io.github.classgraph.ClassGraph;
@@ -27,11 +28,7 @@ public class Main {
 
         FlatLaf.registerCustomDefaultsSource("themes");
         FlatDarkLaf.setup();
-
-        try {
-            Class<?> clazz = Class.forName("com.formdev.flatlaf.extras.FlatInspector");
-            clazz.getMethod("install", String.class).invoke(null, "ctrl shift I");
-        } catch (ClassNotFoundException ignored) {}
+        FlatInspector.install("ctrl shift I");
 
         WindowController.getINSTANCE().show();
         if (args.length > 0)

@@ -1,5 +1,6 @@
-package com.hohltier.decompiler.menu.file;
+package com.hohltier.decompiler.menus.file;
 
+import com.formdev.flatlaf.extras.components.FlatMenuItem;
 import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.services.LoaderService;
 import com.hohltier.decompiler.services.LanguageService;
@@ -10,24 +11,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class FileOpenFile extends JMenuItem implements ActionListener {
+public class FileOpenFile extends FlatMenuItem implements ActionListener {
 
-    private final String title;
+    private final String text;
 
     public FileOpenFile() {
-        title = LanguageService.getTranslation("file.openFile");
-        setText(String.format("%s...", title));
-        setMnemonic(KeyEvent.VK_O);
-        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
+        text = LanguageService.getTranslation("file.openFile");
         addActionListener(this);
+        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
+        setMnemonic(KeyEvent.VK_O);
+        setText(String.format("%s...", text));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);
-        fileChooser.setDialogTitle(title);
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Java (*.jar, *.war, *.zip)", "jar", "war", "zip"));
+        fileChooser.setDialogTitle(text);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Java (*.jar;*.war;*.zip)", "jar", "war", "zip"));
         fileChooser.showOpenDialog(WindowController.getINSTANCE().getComponent());
         if (fileChooser.getSelectedFile() != null)
             LoaderService.load(fileChooser.getSelectedFile());

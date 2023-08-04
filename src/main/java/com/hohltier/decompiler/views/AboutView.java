@@ -1,6 +1,8 @@
 package com.hohltier.decompiler.views;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.components.FlatButton;
+import com.formdev.flatlaf.extras.components.FlatLabel;
 import com.hohltier.decompiler.controllers.WindowController;
 import com.hohltier.decompiler.services.LanguageService;
 import lombok.Getter;
@@ -20,52 +22,60 @@ public class AboutView extends JDialog {
 
     private final JPanel root;
     private final JPanel content;
-    private final JLabel logo;
-    private final JLabel header;
-    private final JLabel version;
+    private final FlatLabel logo;
+    private final FlatLabel header;
+    private final FlatLabel copyright;
+    private final FlatLabel version;
     private final JPanel vm;
-    private final JLabel copyright;
     private final JPanel controls;
-    private final JButton github;
-    private final JButton ok;
+    private final FlatButton github;
+    private final FlatButton ok;
 
     @SneakyThrows
     public AboutView() {
         super((JFrame) WindowController.getINSTANCE().getComponent());
         getRootPane().putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICON, false);
-        setTitle(LanguageService.getTranslation("about"));
         setModal(true);
         setResizable(false);
+        setTitle(LanguageService.getTranslation("about"));
 
-        root = new JPanel(new BorderLayout());
+        root = new JPanel();
         root.setBorder(new EmptyBorder(15, 15, 15, 15));
+        root.setLayout(new BorderLayout());
         setContentPane(root);
 
-        content = new JPanel(new MigLayout());
+        content = new JPanel();
         content.setBorder(new EmptyBorder(0, 0, 15, 0));
+        content.setLayout(new MigLayout());
         root.add(content, BorderLayout.CENTER);
 
-        logo = new JLabel(new ImageIcon(getOwner().getIconImages().get(0).getScaledInstance(64, 64, Image.SCALE_SMOOTH)));
+        logo = new FlatLabel();
         logo.setBorder(new EmptyBorder(0, 0, 0, 15));
+        logo.setIcon(new ImageIcon(getOwner().getIconImages().get(0).getScaledInstance(64, 64, Image.SCALE_SMOOTH)));
         logo.setVerticalAlignment(JLabel.TOP);
         content.add(logo, "dock west");
 
-        header = new JLabel("Decompiler");
-        header.putClientProperty("FlatLaf.styleClass", "h1");
+        header = new FlatLabel();
+        header.setStyleClass("h1");
+        header.setText("Decompiler");
         content.add(header, "wrap");
 
-        copyright = new JLabel(String.format("\u00a9 2022 - %s Souta", Year.now().getValue()));
+        copyright = new FlatLabel();
+        copyright.setText(String.format("\u00a9 2022 - %s Souta", Year.now().getValue()));
         content.add(copyright, "wrap");
 
         Properties properties = new Properties();
         properties.load(LanguageService.class.getClassLoader().getResourceAsStream("application.properties"));
-        version = new JLabel(String.format(LanguageService.getTranslation("about.version"), properties.getProperty("version")));
+        version = new FlatLabel();
+        version.setText(String.format(LanguageService.getTranslation("about.version"), properties.getProperty("version")));
         content.add(version, "wrap");
 
-        vm = new JPanel(new MigLayout());
+        vm = new JPanel();
         vm.setBorder(BorderFactory.createTitledBorder(LanguageService.getTranslation("about.vm")));
+        vm.setLayout(new MigLayout());
         content.add(vm, "wrap, gapy 15px");
 
+        // TODO: FlatLabel
         vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmName()), "wrap");
         vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmVendor()), "wrap");
         vm.add(new JLabel(ManagementFactory.getRuntimeMXBean().getVmVersion()), "wrap");
@@ -75,15 +85,17 @@ public class AboutView extends JDialog {
         controls.setLayout(new BoxLayout(controls, BoxLayout.X_AXIS));
         root.add(controls, BorderLayout.SOUTH);
 
-        github = new JButton("GitHub");
-        github.addActionListener(this::OnGitHubAction);
+        github = new FlatButton();
+        github.addActionListener(this::onGitHubAction);
         github.setFocusable(false);
+        github.setText("GitHub");
         controls.add(github);
 
         controls.add(Box.createHorizontalStrut(5));
 
-        ok = new JButton(LanguageService.getTranslation("about.ok"));
+        ok = new FlatButton();
         ok.addActionListener(this::onOkAction);
+        ok.setText(LanguageService.getTranslation("about.ok"));
         controls.add(ok);
         getRootPane().setDefaultButton(ok);
 
@@ -92,7 +104,7 @@ public class AboutView extends JDialog {
     }
 
     @SneakyThrows
-    private void OnGitHubAction(ActionEvent event) {
+    private void onGitHubAction(ActionEvent event) {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
             Desktop.getDesktop().browse(new URI("https://github.com/hohltier/decompiler"));
     }

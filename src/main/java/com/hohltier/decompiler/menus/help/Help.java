@@ -1,16 +1,15 @@
-package com.hohltier.decompiler.menu.help;
+package com.hohltier.decompiler.menus.help;
 
+import com.formdev.flatlaf.extras.components.FlatMenu;
 import com.hohltier.decompiler.services.LanguageService;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class Help extends JMenu {
+public class Help extends FlatMenu {
 
     public Help() {
-        setText(LanguageService.getTranslation("help"));
         setMnemonic(KeyEvent.VK_H);
+        setText(LanguageService.getTranslation("help"));
 
         add(new HelpAbout());
 

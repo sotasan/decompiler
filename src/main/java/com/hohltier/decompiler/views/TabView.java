@@ -1,6 +1,8 @@
 package com.hohltier.decompiler.views;
 
-import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.components.FlatComboBox;
+import com.formdev.flatlaf.extras.components.FlatTabbedPane;
+import com.formdev.flatlaf.extras.components.FlatToolBar;
 import com.hohltier.decompiler.transformers.Transformer;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -8,34 +10,34 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.function.BiConsumer;
 
 @Getter
-public class TabView extends JTabbedPane {
+public class TabView extends FlatTabbedPane {
 
-    private final JToolBar toolBar;
-    private final JComboBox<Transformer> comboBox;
+    private final FlatComboBox<Transformer> comboBox;
+    private final FlatToolBar toolBar;
 
     public TabView() {
         addMouseListener(new TabMouseAdapter());
-        putClientProperty(FlatClientProperties.TABBED_PANE_HAS_FULL_BORDER, true);
-        putClientProperty(FlatClientProperties.TABBED_PANE_TAB_CLOSABLE, true);
-        putClientProperty(FlatClientProperties.TABBED_PANE_TAB_CLOSE_CALLBACK, (BiConsumer<JTabbedPane, Integer>) this::onTabClose);
-        putClientProperty(FlatClientProperties.TABBED_PANE_TAB_TYPE, FlatClientProperties.TABBED_PANE_TAB_TYPE_CARD);
-        setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        setHasFullBorder(true);
+        setTabsClosable(true);
+        setTabCloseCallback(this::onTabClose);
+        setTabLayoutPolicy(SCROLL_TAB_LAYOUT);
+        setTabType(TabType.card);
 
         Dimension dimension = new Dimension(150, 25);
-        comboBox = new JComboBox<>(Transformer.values());
+        comboBox = new FlatComboBox<>();
         comboBox.setFocusable(false);
         comboBox.setMaximumSize(dimension);
+        comboBox.setModel(new DefaultComboBoxModel(Transformer.values()));
         comboBox.setPreferredSize(dimension);
         comboBox.setSelectedItem(Transformer.Fernflower);
 
-        toolBar = new JToolBar();
+        toolBar = new FlatToolBar();
         toolBar.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         toolBar.add(Box.createHorizontalGlue());
         toolBar.add(comboBox);
-        putClientProperty(FlatClientProperties.TABBED_PANE_TRAILING_COMPONENT, toolBar);
+        setTrailingComponent(toolBar);
     }
 
     private void onTabClose(JTabbedPane tabPane, int tabIndex) {
@@ -46,7 +48,7 @@ public class TabView extends JTabbedPane {
 
         @Override
         public void mouseClicked(@NotNull MouseEvent event) {
-            JTabbedPane tabbedPane = (JTabbedPane) event.getSource();
+            FlatTabbedPane tabbedPane = (FlatTabbedPane) event.getSource();
             if (event.getButton() == MouseEvent.BUTTON2)
                 tabbedPane.remove(tabbedPane.indexAtLocation(event.getX(), event.getY()));
         }
