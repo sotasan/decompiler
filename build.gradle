@@ -1,6 +1,8 @@
 plugins {
+    id("application")
+    id("com.github.johnrengelman.shadow") version("8.1.1")
+    id("io.freefair.lombok") version("8.1.0")
     id("java")
-    id("io.freefair.lombok") version "8.1.0"
 }
 
 group = "com.hohltier"
@@ -10,15 +12,13 @@ repositories {
     mavenCentral()
 }
 
+application {
+    mainClass = "${project.group}.${project.name.toLowerCase()}.Main"
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
-}
-
-configurations {
-    implementation {
-        canBeResolved = true
-    }
 }
 
 dependencies {
@@ -41,14 +41,25 @@ processResources {
 }
 
 jar {
+    enabled = false
+}
+
+shadowJar {
+    dependsOn(distTar, distZip)
     archiveBaseName = project.name.toLowerCase()
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
-    from { configurations.implementation.collect { it.directory ? it : zipTree(it) } }
+    archiveClassifier = null
+}
+
+test {
+    enabled = false
 }
 
 tasks.register("testJar", Jar) {
-    archiveFileName.set("test.jar")
-    manifest.attributes["Main-Class"] = "${project.group}.${project.name.toLowerCase()}.Main"
+    archiveFileName = "test.jar"
     from(sourceSets.test.output)
+}
+
+run {
+    dependsOn(testJar)
+    args((testJar as Jar).archiveFile.get())
 }
