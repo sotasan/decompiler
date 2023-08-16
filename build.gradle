@@ -1,7 +1,7 @@
 plugins {
     id("application")
     id("com.github.johnrengelman.shadow") version("8.1.1")
-    id("io.freefair.lombok") version("8.1.0")
+    id("io.freefair.lombok") version("8.2.2")
     id("java")
 }
 
@@ -23,10 +23,10 @@ java {
 
 dependencies {
     implementation("com.fifesoft:rsyntaxtextarea:3.3.4")
-    implementation("com.formdev:flatlaf:3.1.1")
-    implementation("com.formdev:flatlaf-extras:3.1.1")
+    implementation("com.formdev:flatlaf:3.2")
+    implementation("com.formdev:flatlaf-extras:3.2")
     implementation("com.miglayout:miglayout:3.7.4")
-    implementation("io.github.classgraph:classgraph:4.8.161")
+    implementation("io.github.classgraph:classgraph:4.8.162")
     implementation("org.benf:cfr:0.152")
     implementation("org.bitbucket.mstrobel:procyon-compilertools:0.6.0")
     implementation("org.jetbrains:annotations:24.0.1")
