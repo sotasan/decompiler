@@ -116,7 +116,7 @@ public class AboutView extends JDialog {
     @SneakyThrows
     private void onGitHubAction(ActionEvent event) {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
-            Desktop.getDesktop().browse(new URI("https://github.com/hohltier/decompiler"));
+            Desktop.getDesktop().browse(new URI("https://github.com/sotasan/decompiler"));
     }
 
     private void onOkAction(ActionEvent event) {
