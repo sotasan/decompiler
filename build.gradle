@@ -1,12 +1,12 @@
 plugins {
     id("application")
     id("com.github.johnrengelman.shadow") version("8.1.1")
-    id("io.freefair.lombok") version("8.2.2")
+    id("io.freefair.lombok") version("8.3")
     id("java")
 }
 
 group = "com.sotasan"
-version = "0.8.8"
+version = "0.8.9"
 
 repositories {
     mavenCentral()

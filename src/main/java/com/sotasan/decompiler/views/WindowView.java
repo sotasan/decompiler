@@ -1,6 +1,7 @@
 package com.sotasan.decompiler.views;
 
 import com.formdev.flatlaf.extras.components.FlatSplitPane;
+import com.formdev.flatlaf.util.SystemInfo;
 import com.sotasan.decompiler.controllers.StartController;
 import com.sotasan.decompiler.controllers.TreeController;
 import com.sotasan.decompiler.controllers.TabsController;
@@ -42,8 +43,23 @@ public class WindowView extends JFrame {
 
         splitPane = new FlatSplitPane();
         splitPane.setDividerLocation(225);
-        splitPane.setLeftComponent(TreeController.getINSTANCE().getComponent());
         splitPane.setRightComponent(TabsController.getINSTANCE().getComponent());
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        splitPane.setLeftComponent(panel);
+
+        if (SystemInfo.isMacFullWindowContentSupported) {
+            getRootPane().putClientProperty("apple.awt.fullWindowContent", true);
+            getRootPane().putClientProperty("apple.awt.transparentTitleBar", true);
+            getRootPane().putClientProperty("apple.awt.windowTitleVisible", false);
+
+            JPanel macos = new JPanel();
+            macos.setPreferredSize(new Dimension(0, 25));
+            panel.add(macos);
+        }
+
+        panel.add(TreeController.getINSTANCE().getComponent());
 
         pack();
         setLocationRelativeTo(null);
