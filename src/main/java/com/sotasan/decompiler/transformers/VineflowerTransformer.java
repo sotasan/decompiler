@@ -9,7 +9,7 @@ import org.jetbrains.java.decompiler.main.extern.IResultSaver;
 import java.io.File;
 import java.util.jar.Manifest;
 
-public class FernflowerTransformer extends IFernflowerLogger implements ITransformer, IBytecodeProvider, IResultSaver {
+public class VineflowerTransformer extends IFernflowerLogger implements ITransformer, IBytecodeProvider, IResultSaver {
 
     private FileModel fileModel;
     private String content;

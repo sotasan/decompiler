@@ -19,8 +19,8 @@ Java Decompiler Gui
 ## Decompilers
 
 - [CFR](https://www.benf.org/other/cfr/) - Another Java Decompiler
-- [Fernflower](https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler/engine) - First actually working analytical decompiler for Java
 - [Procyon](https://github.com/mstrobel/procyon) - A suite of Java metaprogramming tools
+- [Vineflower](https://vineflower.org) - Modern Java decompiler aiming to be as accurate as possible
 
 ## Languages
 

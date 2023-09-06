@@ -2,13 +2,13 @@ package com.sotasan.decompiler.transformers;
 
 import lombok.Getter;
 
+@Getter
 public enum Transformer {
 
     CFR(new CFRTransformer()),
-    Fernflower(new FernflowerTransformer()),
-    Procyon(new ProcyonTransformer());
+    Procyon(new ProcyonTransformer()),
+    Vineflower(new VineflowerTransformer());
 
-    @Getter
     private final ITransformer instance;
 
     Transformer(ITransformer instance) {

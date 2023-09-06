@@ -31,7 +31,7 @@ public class TabsView extends FlatTabbedPane {
         comboBox.setMaximumSize(dimension);
         comboBox.setModel(new DefaultComboBoxModel<>(Transformer.values()));
         comboBox.setPreferredSize(dimension);
-        comboBox.setSelectedItem(Transformer.Fernflower);
+        comboBox.setSelectedItem(Transformer.Vineflower);
 
         toolBar = new FlatToolBar();
         toolBar.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
