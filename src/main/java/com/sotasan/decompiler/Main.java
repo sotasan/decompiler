@@ -28,7 +28,7 @@ public class Main {
 
         FlatLaf.registerCustomDefaultsSource("themes");
         FlatDarkLaf.setup();
-        FlatInspector.install("ctrl shift I");
+        FlatInspector.install("meta shift I");
 
         WindowController.getINSTANCE().show();
         if (args.length > 0)
