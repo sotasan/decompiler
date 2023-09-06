@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.sotasan"
-version = "0.8.7"
+version = "0.8.8"
 
 repositories {
     mavenCentral()
@@ -23,14 +23,14 @@ java {
 
 dependencies {
     implementation("com.fifesoft:rsyntaxtextarea:3.3.4")
-    implementation("com.formdev:flatlaf:3.2")
-    implementation("com.formdev:flatlaf-extras:3.2")
+    implementation("com.formdev:flatlaf:3.2.1")
+    implementation("com.formdev:flatlaf-extras:3.2.1")
     implementation("com.miglayout:miglayout:3.7.4")
     implementation("io.github.classgraph:classgraph:4.8.162")
     implementation("org.benf:cfr:0.152")
     implementation("org.bitbucket.mstrobel:procyon-compilertools:0.6.0")
     implementation("org.jetbrains:annotations:24.0.1")
-    implementation("org.vineflower:vineflower:1.9.2")
+    implementation("org.vineflower:vineflower:1.9.3")
 }
 
 processResources {
