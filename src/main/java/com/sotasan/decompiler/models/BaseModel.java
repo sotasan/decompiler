@@ -2,29 +2,26 @@ package com.sotasan.decompiler.models;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class BaseModel {
+@Getter
+public abstract class BaseModel implements Comparable<BaseModel> {
 
-    @Getter private final List<BaseModel> children = new ArrayList<>();
-    @Getter private final String path;
-    @Getter private String name;
-    @Getter private Image icon;
+    private final List<BaseModel> children = new ArrayList<>();
+    private final String path;
+    private String name;
+    private Image icon;
 
     public BaseModel(String path, boolean directory) {
         this.path = path;
         name = path;
-
-        if (directory)
-            name = path.substring(0, path.length() - 1);
+        if (directory) name = path.substring(0, path.length() - 1);
         name = name.substring(name.lastIndexOf('/') + 1);
-    }
-
-    public boolean isClass() {
-        return name.toLowerCase().endsWith(".class");
     }
 
     @SneakyThrows
@@ -32,4 +29,17 @@ public abstract class BaseModel {
         icon = Toolkit.getDefaultToolkit().createImage(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path)).readAllBytes());
     }
 
+    @Override
+    public int compareTo(@NotNull BaseModel o) {
+        Class<? extends BaseModel> thisClazz = this.getClass();
+        Class<? extends BaseModel> otherClazz = o.getClass();
+        if (thisClazz.equals(otherClazz)) {
+            return this.getName().compareToIgnoreCase(o.getName());
+        } else if (thisClazz.equals(FileModel.class)) {
+            return +1;
+        } else if (otherClazz.equals(FileModel.class)) {
+            return -1;
+        }
+        return 0;
+    }
 }
