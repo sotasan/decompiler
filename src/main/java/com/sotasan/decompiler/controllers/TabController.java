@@ -18,11 +18,19 @@ public class TabController extends BaseController<TabView> {
 
     public void update() {
         try {
-            getView().getTextArea().setText(TabsController.getINSTANCE().getTransformer().getInstance().transform(fileModel));
+            String text = getText(fileModel);
+            getView().getTextArea().setText(text);
             getView().getTextArea().setCaretPosition(0);
         } catch (Exception e) {
             getView().getTextArea().setText(e.getMessage());
         }
+    }
+
+    private String getText(FileModel fileModel) throws Exception {
+        if (fileModel.isClass()) {
+            return TabsController.getINSTANCE().getTransformer().getInstance().transform(fileModel);
+        }
+        return new String(fileModel.getBytes());
     }
 
 }

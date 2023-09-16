@@ -57,17 +57,20 @@ public class TreeView extends JPanel {
 
         @Override
         public void mouseClicked(@NotNull MouseEvent event) {
-            if (event.getClickCount() == 2) {
-                TreePath path = ((JTree) event.getSource()).getSelectionPath();
-                if (path != null) {
-                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-                    if (node.getUserObject() != null) {
-                        BaseModel model = (BaseModel) node.getUserObject();
-                        if (model instanceof FileModel && model.isClass()) {
-                            TabsController.getINSTANCE().addTab((FileModel) model);
-                        }
-                    }
-                }
+            if (event.getClickCount() != 2)
+                return;
+
+            TreePath path = ((JTree) event.getSource()).getSelectionPath();
+            if (path == null)
+                return;
+
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+            if (node.getUserObject() == null)
+                return;
+
+            BaseModel model = (BaseModel) node.getUserObject();
+            if (model instanceof FileModel) {
+                TabsController.getINSTANCE().addTab((FileModel) model);
             }
         }
 
