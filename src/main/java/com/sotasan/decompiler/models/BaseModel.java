@@ -19,9 +19,8 @@ public abstract class BaseModel implements Comparable<BaseModel> {
 
     public BaseModel(String path, boolean directory) {
         this.path = path;
-        name = path;
-        if (directory) name = path.substring(0, path.length() - 1);
-        name = name.substring(name.lastIndexOf('/') + 1);
+        this.name = directory ? path.substring(0, path.length() - 1)
+                : path.substring(path.lastIndexOf('/') + 1);
     }
 
     @SneakyThrows
