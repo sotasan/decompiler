@@ -18,8 +18,7 @@ public class TabController extends BaseController<TabView> {
 
     public void update() {
         try {
-            String text = getText(fileModel);
-            getView().getTextArea().setText(text);
+            getView().getTextArea().setText(getText(fileModel));
             getView().getTextArea().setCaretPosition(0);
         } catch (Exception e) {
             getView().getTextArea().setText(e.getMessage());
