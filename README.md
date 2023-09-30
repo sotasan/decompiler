@@ -27,8 +27,8 @@ Java Decompiler Gui
 - [English](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language.properties)
 - [German](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_de.properties)
 - [French](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_fr.properties)
-- [Japanese](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_ja.properties
-- [Dutch](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_nl.properties))
+- [Japanese](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_ja.properties)
+- [Dutch](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_nl.properties)
 - [Russian](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_ru.properties)
 - [Chinese](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_zh.properties)
 
