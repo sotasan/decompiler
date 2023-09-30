@@ -21,8 +21,11 @@ public class TabsController extends BaseController<TabsView> implements ActionLi
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        for (int i = 0; i < getView().getTabCount(); i++)
-            ((TabView) getView().getComponentAt(i)).getController().update();
+        for (int i = 0; i < getView().getTabCount(); i++) {
+            TabController controller = ((TabView) getView().getComponentAt(i)).getController();
+            if (controller.getFileModel().isClass())
+                controller.update();
+        }
     }
 
     public void addTab(@NotNull FileModel fileModel) {
