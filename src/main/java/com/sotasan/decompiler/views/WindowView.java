@@ -47,6 +47,7 @@ public class WindowView extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setMinimumSize(new Dimension(100, 0));
         splitPane.setLeftComponent(panel);
 
         if (SystemInfo.isMacFullWindowContentSupported) {
@@ -54,8 +55,11 @@ public class WindowView extends JFrame {
             getRootPane().putClientProperty("apple.awt.transparentTitleBar", true);
             getRootPane().putClientProperty("apple.awt.windowTitleVisible", false);
 
+            // TODO: macos maximized window support
+            Dimension dimension = new Dimension(0, 25);
             JPanel macos = new JPanel();
-            macos.setPreferredSize(new Dimension(0, 25));
+            macos.setMinimumSize(dimension);
+            macos.setPreferredSize(dimension);
             panel.add(macos);
         }
 
