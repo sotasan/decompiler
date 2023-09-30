@@ -33,7 +33,8 @@ public class TreeController extends BaseController<TreeView> {
         DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode(baseModel);
         List<BaseModel> children = baseModel.getChildren();
         Collections.sort(children);
-        children.forEach(child -> treeNode.add(createTreeNode(child)));
+        for (BaseModel child : children)
+            treeNode.add(createTreeNode(child));
         return treeNode;
     }
 
