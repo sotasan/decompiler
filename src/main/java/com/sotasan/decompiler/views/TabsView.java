@@ -20,6 +20,7 @@ public class TabsView extends FlatTabbedPane {
     public TabsView() {
         addMouseListener(new TabMouseAdapter());
         setHasFullBorder(true);
+        setMinimumSize(new Dimension(250, 0));
         setTabsClosable(true);
         setTabCloseCallback(this::onTabClose);
         setTabLayoutPolicy(SCROLL_TAB_LAYOUT);

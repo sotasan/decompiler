@@ -5,6 +5,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.extras.FlatInspector;
 import com.formdev.flatlaf.fonts.inter.FlatInterFont;
 import com.formdev.flatlaf.fonts.jetbrains_mono.FlatJetBrainsMonoFont;
+import com.formdev.flatlaf.util.SystemInfo;
 import com.sotasan.decompiler.controllers.WindowController;
 import com.sotasan.decompiler.services.LoaderService;
 import lombok.SneakyThrows;
@@ -26,7 +27,7 @@ public class Main {
         FlatLaf.setPreferredFontFamily(FlatInterFont.FAMILY);
         FlatLaf.registerCustomDefaultsSource("themes");
         FlatDarkLaf.setup();
-        FlatInspector.install("meta shift I");
+        FlatInspector.install(String.format("%s shift I", SystemInfo.isMacOS ? "meta" : "ctrl"));
 
         WindowController.getINSTANCE().show();
         if (args.length > 0)
