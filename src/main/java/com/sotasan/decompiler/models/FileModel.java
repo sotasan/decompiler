@@ -3,7 +3,6 @@ package com.sotasan.decompiler.models;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Locale;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;

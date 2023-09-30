@@ -3,7 +3,6 @@ package com.sotasan.decompiler.models;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +18,8 @@ public abstract class BaseModel implements Comparable<BaseModel> {
 
     public BaseModel(String path, boolean directory) {
         this.path = path;
-        this.name = directory ? path.substring(0, path.length() - 1)
-                : path.substring(path.lastIndexOf('/') + 1);
+        name = directory ? path.substring(0, path.length() - 1) : path;
+        name = name.substring(name.lastIndexOf('/') + 1);
     }
 
     @SneakyThrows
@@ -41,4 +40,5 @@ public abstract class BaseModel implements Comparable<BaseModel> {
         }
         return 0;
     }
+
 }
