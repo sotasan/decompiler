@@ -69,9 +69,8 @@ public class TreeView extends JPanel {
                 return;
 
             BaseModel model = (BaseModel) node.getUserObject();
-            if (model instanceof FileModel) {
+            if (model instanceof FileModel)
                 TabsController.getINSTANCE().addTab((FileModel) model);
-            }
         }
 
     }

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +34,6 @@ public class TabView extends JPanel implements MouseWheelListener {
         textArea.setDropTarget(null);
         textArea.setEditable(false);
         textArea.setHighlightCurrentLine(false);
-        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
 
         scrollPane = new RTextScrollPane(textArea);
         theme.apply(textArea);
