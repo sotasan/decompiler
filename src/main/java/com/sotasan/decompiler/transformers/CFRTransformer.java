@@ -5,10 +5,17 @@ import org.benf.cfr.reader.api.CfrDriver;
 import org.benf.cfr.reader.api.ClassFileSource;
 import org.benf.cfr.reader.api.OutputSinkFactory;
 import org.benf.cfr.reader.bytecode.analysis.parse.utils.Pair;
+import org.benf.cfr.reader.util.getopt.OptionsImpl;
 import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class CFRTransformer implements ITransformer, ClassFileSource, OutputSinkFactory, OutputSinkFactory.Sink<String> {
+
+    private static final Map<String, String> OPTIONS = Map.of(
+            OptionsImpl.DECOMPILE_INNER_CLASSES.getName(), String.valueOf(false),
+            OptionsImpl.RELINK_CONSTANT_STRINGS.getName(), String.valueOf(false),
+            OptionsImpl.REMOVE_INNER_CLASS_SYNTHETICS.getName(), String.valueOf(false)
+    );
 
     private FileModel fileModel;
     private String output;
@@ -16,7 +23,7 @@ public class CFRTransformer implements ITransformer, ClassFileSource, OutputSink
     @Override
     public String transform(@NotNull FileModel fileModel) {
         this.fileModel = fileModel;
-        CfrDriver driver = new CfrDriver.Builder().withClassFileSource(this).withOutputSink(this).build();
+        CfrDriver driver = new CfrDriver.Builder().withClassFileSource(this).withOptions(OPTIONS).withOutputSink(this).build();
         driver.analyse(Collections.singletonList(fileModel.getPath()));
         if (output.startsWith("/"))
             output = output.substring(37);

@@ -29,11 +29,10 @@ public class TabController extends BaseController<TabView> {
         }
     }
 
-    private String getText(FileModel fileModel) throws Exception {
-        if (fileModel.isClass()) {
-            return TabsController.getINSTANCE().getTransformer().getInstance().transform(fileModel);
-        }
-        return new String(fileModel.getBytes());
+    private String getText(@NotNull FileModel fileModel) throws Exception {
+        return fileModel.isClass()
+                ? TabsController.getINSTANCE().getTransformer().getInstance().transform(fileModel)
+                : new String(fileModel.getBytes());
     }
 
 }

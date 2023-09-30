@@ -28,17 +28,13 @@ public abstract class BaseModel implements Comparable<BaseModel> {
     }
 
     @Override
-    public int compareTo(@NotNull BaseModel o) {
-        Class<? extends BaseModel> thisClazz = this.getClass();
-        Class<? extends BaseModel> otherClazz = o.getClass();
-        if (thisClazz.equals(otherClazz)) {
-            return this.getName().compareToIgnoreCase(o.getName());
-        } else if (thisClazz.equals(FileModel.class)) {
-            return +1;
-        } else if (otherClazz.equals(FileModel.class)) {
-            return -1;
-        }
-        return 0;
+    public int compareTo(@NotNull BaseModel baseModel) {
+        Class<? extends BaseModel> class1 = getClass();
+        Class<? extends BaseModel> class2 = baseModel.getClass();
+        return class1.equals(class2) ? getName().compareToIgnoreCase(baseModel.getName())
+                : class1.equals(FileModel.class) ? 1
+                : class2.equals(FileModel.class) ? -1
+                : 0;
     }
 
 }

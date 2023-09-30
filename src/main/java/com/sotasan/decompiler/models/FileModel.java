@@ -3,7 +3,6 @@ package com.sotasan.decompiler.models;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
-import java.util.Locale;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -21,7 +20,7 @@ public class FileModel extends BaseModel {
     }
 
     public boolean isClass() {
-        return this.getName().toLowerCase(Locale.ROOT).endsWith(".class");
+        return getName().toLowerCase().endsWith(".class");
     }
 
     @SneakyThrows

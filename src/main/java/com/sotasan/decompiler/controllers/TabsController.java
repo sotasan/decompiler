@@ -21,12 +21,10 @@ public class TabsController extends BaseController<TabsView> implements ActionLi
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        clearTabs();
         for (int i = 0; i < getView().getTabCount(); i++) {
-            Object current = getView().getComponentAt(i);
-            if (!(current instanceof TabView))
-                continue;
-            ((TabView) current).getController().update();
+            TabController controller = ((TabView) getView().getComponentAt(i)).getController();
+            if (controller.getFileModel().isClass())
+                controller.update();
         }
     }
 
