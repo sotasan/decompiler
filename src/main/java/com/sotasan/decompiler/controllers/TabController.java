@@ -14,8 +14,6 @@ public class TabController extends BaseController<TabView> {
     public TabController(@NotNull FileModel fileModel) {
         super(new TabView());
         this.fileModel = fileModel;
-        if (fileModel.isClass())
-            getView().getTextArea().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         getView().setController(this);
         update();
     }
@@ -23,10 +21,13 @@ public class TabController extends BaseController<TabView> {
     public void update() {
         try {
             getView().getTextArea().setText(getText(fileModel));
-            getView().getTextArea().setCaretPosition(0);
+            if (fileModel.isClass())
+                getView().getTextArea().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         } catch (Exception e) {
             getView().getTextArea().setText(e.getMessage());
+            getView().getTextArea().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
         }
+        getView().getTextArea().setCaretPosition(0);
     }
 
     private String getText(@NotNull FileModel fileModel) throws Exception {
