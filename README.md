@@ -56,7 +56,7 @@ To add more languages, you can add new localization files [here](https://github.
 
 ## Build
 
-To build the application from source, you can navigate to a new directory and run the following script:
+To build the application from source, make sure you have Java 11+ installed, then just build it with Gradle:
 
 ```bash
 $ git clone https://github.com/sotasan/decompiler.git
