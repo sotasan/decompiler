@@ -10,7 +10,7 @@
 
 # <a href="src/main/resources/logo/logo.svg"><img src="src/main/resources/logo/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
 
-A Java-Based GUI application that allows you to browse java archives using various different decompilers.
+A GUI application that allows you to browse Java archives using various decompilers.
 
 ## Download
 
