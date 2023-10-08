@@ -50,8 +50,8 @@ The following languages are supported:
 - [Chinese](src/main/resources/langs/language_zh.properties)
 
 If you want to add or change a localization,
-you can create a [pull request](https://github.com/sotasan/decompiler/pulls)
-and edit the files [here](src/main/resources/langs).
+you can edit the files [here](src/main/resources/langs)
+and create a [pull request](https://github.com/sotasan/decompiler/pulls).
 
 ## Build
 
