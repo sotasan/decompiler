@@ -67,7 +67,11 @@ $ ./gradlew build
 
 ## Contributing
 
-You can make issue requests [here](https://github.com/sotasan/decompiler/issues).
+Contributions are welcome!
+If you want to report bugs or provide feedback,
+you can create an [issue](https://github.com/sotasan/decompiler/issues).
+If you would like to contribute directly, 
+you can create a [pull request](https://github.com/sotasan/decompiler/pulls).
 
 ## License
 
