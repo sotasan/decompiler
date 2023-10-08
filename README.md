@@ -41,7 +41,8 @@ The decompiler GUI supports the following decompilers:
 
 ## Languages
 
-The application supports the following languages:
+The application is multilingual and determines the language based on your locale.
+The following languages are supported:
 
 - [English](src/main/resources/langs/language.properties)
 - [German](src/main/resources/langs/language_de.properties)
@@ -51,12 +52,13 @@ The application supports the following languages:
 - [Russian](src/main/resources/langs/language_ru.properties)
 - [Chinese](src/main/resources/langs/language_zh.properties)
 
-The language is automatically determined by your locale.
-To add more languages, you can add new localization files [here](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/).
+If you want to add or change a localization, you can edit the files [here](src/main/resources/langs).
 
 ## Build
 
-To build the application from source, make sure you have Java 11+ installed, then just build it with Gradle:
+To build the application from source,
+make sure you have Java 11+ installed,
+then simply build it using Gradle:
 
 ```bash
 $ git clone https://github.com/sotasan/decompiler.git
