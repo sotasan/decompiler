@@ -18,9 +18,9 @@ public class Main {
 
     @SneakyThrows
     public static void main(String @NotNull [] args) {
-        System.setProperty("apple.laf.useScreenMenuBar", "true");
-        System.setProperty("apple.awt.application.name", "Decompiler");
         System.setProperty("apple.awt.application.appearance", "NSAppearanceNameDarkAqua");
+        System.setProperty("apple.awt.application.name", "Decompiler");
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
 
         FlatInterFont.install();
         FlatJetBrainsMonoFont.install();
