@@ -78,4 +78,4 @@ you can create a [pull request](https://github.com/sotasan/decompiler/pulls).
 
 ## License
 
-The application is available under the [BSD 3-Clause](LICENSE) license.
+Licensed under the [BSD 3-Clause](LICENSE) license.
