@@ -41,6 +41,8 @@ The decompiler GUI supports the following decompilers:
 
 ## Languages
 
+The application supports the following languages:
+
 - [English](src/main/resources/langs/language.properties)
 - [German](src/main/resources/langs/language_de.properties)
 - [French](src/main/resources/langs/language_fr.properties)
