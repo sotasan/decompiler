@@ -27,11 +27,12 @@ public class StartView extends JPanel {
         header.setText(LanguageService.getTranslation("empty"));
         root.add(header, "wrap");
 
-        String text = LanguageService.getTranslation("file.openFile");
+        String group = LanguageService.getTranslation("file");
+        String item = LanguageService.getTranslation("file.openFile");
         String modifier = KeyEvent.getModifiersExText(KeyEvent.CTRL_DOWN_MASK);
         String key = KeyEvent.getKeyText(KeyEvent.VK_O);
         open = new FlatLabel();
-        open.setText(String.format("%s (%s+%s)", text, modifier, key));
+        open.setText(String.format("%s > %s (%s+%s)", group, item, modifier, key));
         root.add(open, "wrap");
 
         drag = new FlatLabel();
