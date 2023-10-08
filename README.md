@@ -43,4 +43,4 @@ $ ./gradlew build
 
 ## License
 
-[Apache License 2.0](https://github.com/sotasan/decompiler/blob/master/LICENSE)
+[BSD 3-Clause](https://github.com/sotasan/decompiler/blob/master/LICENSE)
