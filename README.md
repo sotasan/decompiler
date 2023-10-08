@@ -20,12 +20,12 @@ You can download the application from the [releases](https://github.com/sotasan/
 
 To run the application, make sure you have Java 11+ installed and then simply execute the JAR file.
 
-To open an archive, select "File > Open File (Ctrl + O)" in the menu bar or directly drag and drop it.
+To open an archive, select `File > Open File (Ctrl + O)` in the menu bar or directly drag and drop it.
 
 To change the decompiler, select the one you want to use, with the combo box in the top right corner.
 
 If you want to compare different decompilers side by side or decompile multiple archives at the same time,
-you can create a new instance from the menu bar "File > New Instance (Ctrl + N)".
+you can create a new instance from the menu bar `File > New Instance (Ctrl + N)`.
 
 ## Decompilers
 
