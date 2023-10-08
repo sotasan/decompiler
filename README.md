@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://github.com/sotasan/decompiler/blob/master/src/test/java/com/sotasan/decompiler/Main.java"><img width="85%" alt="Screenshot" src="https://github.com/sotasan/decompiler/raw/master/src/test/resources/META-INF/screenshot.png"></a>
+    <a href="src/test/java/com/sotasan/decompiler/Main.java"><img width="85%" alt="Screenshot" src="src/test/resources/META-INF/screenshot.png"></a>
 </p>
 
 <p align="center">
@@ -8,7 +8,7 @@
     <a href="https://github.com/sotasan/decompiler/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/sotasan/decompiler?label=License"></a>
 </p>
 
-# <a href="https://github.com/sotasan/decompiler/blob/master/src/main/resources/logo/logo.svg"><img src="https://github.com/sotasan/decompiler/raw/master/src/main/resources/logo/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
+# <a href="src/main/resources/logo/logo.svg"><img src="src/main/resources/logo/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
 
 Java Decompiler Gui
 
@@ -24,13 +24,13 @@ Java Decompiler Gui
 
 ## Languages
 
-- [English](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language.properties)
-- [German](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_de.properties)
-- [French](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_fr.properties)
-- [Japanese](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_ja.properties)
-- [Dutch](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_nl.properties)
-- [Russian](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_ru.properties)
-- [Chinese](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/language_zh.properties)
+- [English](src/main/resources/langs/language.properties)
+- [German](src/main/resources/langs/language_de.properties)
+- [French](src/main/resources/langs/language_fr.properties)
+- [Japanese](src/main/resources/langs/language_ja.properties)
+- [Dutch](src/main/resources/langs/language_nl.properties)
+- [Russian](src/main/resources/langs/language_ru.properties)
+- [Chinese](src/main/resources/langs/language_zh.properties)
 
 ## Build
 
@@ -43,4 +43,4 @@ $ ./gradlew build
 
 ## License
 
-[BSD 3-Clause](https://github.com/sotasan/decompiler/blob/master/LICENSE)
+[BSD 3-Clause](LICENSE)
