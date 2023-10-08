@@ -5,7 +5,7 @@
 <p align="center">
     <a href="https://github.com/sotasan/decompiler/tags"><img alt="Version" src="https://img.shields.io/github/v/release/sotasan/decompiler?label=Version"></a>
     <a href="https://github.com/sotasan/decompiler/actions/workflows/build.yml"><img alt="Build" src="https://github.com/sotasan/decompiler/actions/workflows/build.yml/badge.svg"></a>
-    <a href="https://github.com/sotasan/decompiler/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/sotasan/decompiler?label=License"></a>
+    <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/sotasan/decompiler?label=License"></a>
 </p>
 
 # <a href="src/main/resources/logo/logo.svg"><img src="src/main/resources/logo/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
@@ -14,21 +14,18 @@ A GUI application that allows you to browse Java archives using various decompil
 
 ## Download
 
-To download the application, you can go to the [Releases](https://github.com/sotasan/decompiler/releases) page to either directly download the .jar, or you can obtain the source and [build it yourself](https://github.com/sotasan/decompiler#Build).
-The latest release can be found [here](https://github.com/sotasan/decompiler/releases/tag/v0.9.0).
+You can download the application from the [releases](https://github.com/sotasan/decompiler/releases) page.
 
 ## Usage
 
 To run the application, make sure you have Java 11+ installed and then simply execute the JAR file.
 
-Then, you can drag-and-drop any jar you want to decompile and analyze directly onto the program.
-From here, you will be able to browse the archive's files using the tree browser on the left.
+To open an archive, select "File > Open File (Ctrl + O)" in the menu bar or directly drag and drop it.
 
-You can select a decompiler to use by locating the decompiler dropdown in the top right.
+To change the decompiler, select the one you want to use, with the combo box in the top right corner.
 
-![DropdownImage](src/test/resources/META-INF/Decompiler%20Type%20Screenshot.png)
-
-If you want to compare different compilers side to side or if you want to analyze multiple jars at once, you can start up a new instance of the application via the File dropdown.
+If you want to compare different decompilers side by side or decompile multiple archives at the same time,
+you can create a new instance from the menu bar "File > New Instance (Ctrl + N)".
 
 ## Decompilers
 
