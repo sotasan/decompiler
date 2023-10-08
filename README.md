@@ -39,7 +39,6 @@ The decompiler GUI supports the following decompilers:
 - [Procyon](https://github.com/mstrobel/procyon) - A suite of Java metaprogramming tools
 - [Vineflower](https://vineflower.org) - Modern Java decompiler aiming to be as accurate as possible
 
-
 ## Languages
 
 The decompiler GUI supports the following languages:
@@ -55,10 +54,10 @@ The decompiler GUI supports the following languages:
 The language is automatically determined by your locale.
 To add more languages, you can add new localization files [here](https://github.com/sotasan/decompiler/blob/master/src/main/resources/langs/).
 
-
 ## Build
 
 To build the application from source, you can navigate to a new directory and run the following script:
+
 ```bash
 $ git clone https://github.com/sotasan/decompiler.git
 $ cd decompiler
@@ -67,12 +66,8 @@ $ ./gradlew build
 ```
 
 ## Contributing
-You can make issue requests [here](https://github.com/sotasan/decompiler/issues).
 
-## Contributors
-<a href="https://github.com/sotasan/decompiler/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=sotasan/decompiler" />
-</a>
+You can make issue requests [here](https://github.com/sotasan/decompiler/issues).
 
 ## License
 
