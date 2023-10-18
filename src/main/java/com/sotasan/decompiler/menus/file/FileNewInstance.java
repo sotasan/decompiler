@@ -3,7 +3,6 @@ package com.sotasan.decompiler.menus.file;
 import com.formdev.flatlaf.extras.components.FlatMenuItem;
 import com.sotasan.decompiler.services.ProcessService;
 import com.sotasan.decompiler.services.LanguageService;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

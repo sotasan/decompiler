@@ -49,9 +49,8 @@ public class LoaderService {
 
     private static BaseModel getChildByPath(@NotNull BaseModel baseModel, String path) {
         for (BaseModel child : baseModel.getChildren())
-            if (child instanceof PackageModel)
-                if (path.startsWith(child.getPath()))
-                    return getChildByPath(child, path);
+            if (child instanceof PackageModel && path.startsWith(child.getPath()))
+                return getChildByPath(child, path);
         return baseModel;
     }
 

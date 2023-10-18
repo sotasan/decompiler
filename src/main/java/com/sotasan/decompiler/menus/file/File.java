@@ -2,7 +2,6 @@ package com.sotasan.decompiler.menus.file;
 
 import com.formdev.flatlaf.extras.components.FlatMenu;
 import com.sotasan.decompiler.services.LanguageService;
-
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 

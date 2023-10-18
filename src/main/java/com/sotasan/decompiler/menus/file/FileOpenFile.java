@@ -4,7 +4,6 @@ import com.formdev.flatlaf.extras.components.FlatMenuItem;
 import com.sotasan.decompiler.controllers.WindowController;
 import com.sotasan.decompiler.services.LoaderService;
 import com.sotasan.decompiler.services.LanguageService;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
