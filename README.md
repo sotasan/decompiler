@@ -31,7 +31,7 @@ you can create a new instance from the menu bar `File > New Instance (Ctrl + N)`
 
 The following decompilers are supported:
 
-- [CFR](https://www.benf.org/other/cfr/) - Another Java Decompiler
+- [CFR](https://github.com/FabricMC/cfr) - Another Java Decompiler
 - [Procyon](https://github.com/mstrobel/procyon) - A suite of Java metaprogramming tools
 - [Vineflower](https://vineflower.org) - Modern Java decompiler aiming to be as accurate as possible
 

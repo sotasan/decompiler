@@ -14,7 +14,8 @@ public class CFRTransformer implements ITransformer, ClassFileSource, OutputSink
     private static final Map<String, String> OPTIONS = Map.of(
             OptionsImpl.DECOMPILE_INNER_CLASSES.getName(), String.valueOf(false),
             OptionsImpl.RELINK_CONSTANT_STRINGS.getName(), String.valueOf(false),
-            OptionsImpl.REMOVE_INNER_CLASS_SYNTHETICS.getName(), String.valueOf(false)
+            OptionsImpl.REMOVE_INNER_CLASS_SYNTHETICS.getName(), String.valueOf(false),
+            OptionsImpl.SHOW_CFR_VERSION.getName(), String.valueOf(false)
     );
 
     private FileModel fileModel;
@@ -26,7 +27,7 @@ public class CFRTransformer implements ITransformer, ClassFileSource, OutputSink
         CfrDriver driver = new CfrDriver.Builder().withClassFileSource(this).withOptions(OPTIONS).withOutputSink(this).build();
         driver.analyse(Collections.singletonList(fileModel.getPath()));
         if (output.startsWith("/"))
-            output = output.substring(37);
+            output = output.substring(30);
         return output.trim();
     }
 

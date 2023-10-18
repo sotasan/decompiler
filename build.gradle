@@ -28,7 +28,7 @@ dependencies {
     implementation("com.formdev:flatlaf-fonts-inter:3.19")
     implementation("com.formdev:flatlaf-fonts-jetbrains-mono:2.242")
     implementation("com.miglayout:miglayout:3.7.4")
-    implementation("org.benf:cfr:0.152")
+    implementation("net.fabricmc:cfr:0.2.1")
     implementation("org.bitbucket.mstrobel:procyon-compilertools:0.6.0")
     implementation("org.jetbrains:annotations:24.0.1")
     implementation("org.vineflower:vineflower:1.9.3")
