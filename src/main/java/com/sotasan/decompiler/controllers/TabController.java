@@ -6,6 +6,7 @@ import com.sotasan.decompiler.views.TabView;
 import lombok.Getter;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.jetbrains.annotations.NotNull;
+import java.nio.charset.StandardCharsets;
 
 @Getter
 public class TabController extends BaseController<TabView> {
@@ -34,7 +35,7 @@ public class TabController extends BaseController<TabView> {
     private String getText(@NotNull FileModel fileModel) throws Exception {
         return fileModel.getType() instanceof ClassType
                 ? TabsController.getINSTANCE().getTransformer().getInstance().transform(fileModel)
-                : new String(fileModel.getBytes());
+                : new String(fileModel.getBytes(), StandardCharsets.UTF_8);
     }
 
 }
