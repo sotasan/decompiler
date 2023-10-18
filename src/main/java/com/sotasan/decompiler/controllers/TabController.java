@@ -1,6 +1,7 @@
 package com.sotasan.decompiler.controllers;
 
 import com.sotasan.decompiler.models.FileModel;
+import com.sotasan.decompiler.types.ClassType;
 import com.sotasan.decompiler.views.TabView;
 import lombok.Getter;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
@@ -21,8 +22,8 @@ public class TabController extends BaseController<TabView> {
     public void update() {
         try {
             getView().getTextArea().setText(getText(fileModel));
-            if (fileModel.isClass())
-                getView().getTextArea().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+            if (fileModel.getType() != null)
+                getView().getTextArea().setSyntaxEditingStyle(fileModel.getType().getSyntax());
         } catch (Exception e) {
             getView().getTextArea().setText(e.getMessage());
             getView().getTextArea().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
@@ -31,7 +32,7 @@ public class TabController extends BaseController<TabView> {
     }
 
     private String getText(@NotNull FileModel fileModel) throws Exception {
-        return fileModel.isClass()
+        return fileModel.getType() instanceof ClassType
                 ? TabsController.getINSTANCE().getTransformer().getInstance().transform(fileModel)
                 : new String(fileModel.getBytes());
     }

@@ -2,6 +2,7 @@ package com.sotasan.decompiler.controllers;
 
 import com.sotasan.decompiler.models.FileModel;
 import com.sotasan.decompiler.transformers.Transformer;
+import com.sotasan.decompiler.types.ClassType;
 import com.sotasan.decompiler.views.TabsView;
 import com.sotasan.decompiler.views.TabView;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class TabsController extends BaseController<TabsView> implements ActionLi
     public void actionPerformed(ActionEvent event) {
         for (int i = 0; i < getView().getTabCount(); i++) {
             TabController controller = ((TabView) getView().getComponentAt(i)).getController();
-            if (controller.getFileModel().isClass())
+            if (controller.getFileModel().getType() instanceof ClassType)
                 controller.update();
         }
     }
