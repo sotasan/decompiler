@@ -2,31 +2,32 @@ name: Build
 on: workflow_dispatch
 jobs:
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
 
-      - name: Checkout
-        uses: actions/checkout@v4
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - name: Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: zulu
-          java-version: 21
+            - name: Java
+              uses: actions/setup-java@v3
+              with:
+                distribution: zulu
+                java-version: 21
 
-      - name: Build
-        run: |
-          chmod +x gradlew
-          echo VERSION=$(./gradlew -q properties | grep 'version:' | cut -d ' ' -f 2) >> $GITHUB_ENV
-          ./gradlew build
+            - name: Build
+              run: |
+                chmod +x gradlew
+                echo VERSION=$(./gradlew -q properties | grep 'version:' | cut -d ' ' -f 2) >> $GITHUB_ENV
+                ./gradlew build
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: build/libs/*.jar
-          tag_name: ${{ env.VERSION }}
-          fail_on_unmatched_files: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Release
+              uses: softprops/action-gh-release@v1
+              with:
+                draft: true
+                files: build/libs/*.jar
+                tag_name: ${{ env.VERSION }}
+                fail_on_unmatched_files: true
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
