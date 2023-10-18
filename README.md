@@ -5,7 +5,7 @@
 <p align="center">
     <a href="https://github.com/sotasan/decompiler/tags"><img alt="Version" src="https://img.shields.io/github/v/release/sotasan/decompiler?label=Version"></a>
     <a href="https://github.com/sotasan/decompiler/actions/workflows/build.yml"><img alt="Build" src="https://github.com/sotasan/decompiler/actions/workflows/build.yml/badge.svg"></a>
-    <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/sotasan/decompiler?label=License"></a>
+    <a href="LICENSE.txt"><img alt="License" src="https://img.shields.io/github/license/sotasan/decompiler?label=License"></a>
 </p>
 
 # <a href="src/main/resources/logo/logo.svg"><img src="src/main/resources/logo/logo.png" alt="Logo" width="30" height="auto"></a> Decompiler
@@ -78,4 +78,4 @@ you can create a [pull request](https://github.com/sotasan/decompiler/pulls).
 
 ## License
 
-Licensed under the [BSD 3-Clause](LICENSE) license.
+Licensed under the [MIT](LICENSE.txt) license.
