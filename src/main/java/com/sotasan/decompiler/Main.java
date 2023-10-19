@@ -8,7 +8,6 @@ import com.formdev.flatlaf.fonts.jetbrains_mono.FlatJetBrainsMonoFont;
 import com.formdev.flatlaf.util.SystemInfo;
 import com.sotasan.decompiler.controllers.WindowController;
 import com.sotasan.decompiler.services.LoaderService;
-import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 import java.io.File;
@@ -16,7 +15,6 @@ import java.io.File;
 @UtilityClass
 public class Main {
 
-    @SneakyThrows
     public static void main(String @NotNull [] args) {
         if (SystemInfo.isMacOS) {
             System.setProperty("apple.awt.application.appearance", "NSAppearanceNameDarkAqua");
