@@ -10,8 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 @Getter
 public class TreeView extends JPanel {
@@ -24,6 +23,7 @@ public class TreeView extends JPanel {
 
         // TODO: only one root node
         tree = new FlatTree();
+        tree.addKeyListener(new TreeKeyListener());
         tree.addMouseListener(new TreeMouseAdapter());
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setCellRenderer(new TreeCellRenderer());
@@ -35,6 +35,20 @@ public class TreeView extends JPanel {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setViewportView(tree);
         add(scrollPane);
+    }
+
+    private static void addTab(@NotNull InputEvent event) {
+        TreePath path = ((JTree) event.getSource()).getSelectionPath();
+        if (path == null)
+            return;
+
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+        if (node.getUserObject() == null)
+            return;
+
+        BaseModel model = (BaseModel) node.getUserObject();
+        if (model instanceof FileModel)
+            TabsController.getINSTANCE().addTab((FileModel) model);
     }
 
     private static class TreeCellRenderer extends DefaultTreeCellRenderer {
@@ -57,21 +71,22 @@ public class TreeView extends JPanel {
 
         @Override
         public void mouseClicked(@NotNull MouseEvent event) {
-            if (event.getClickCount() != 2)
-                return;
-
-            TreePath path = ((JTree) event.getSource()).getSelectionPath();
-            if (path == null)
-                return;
-
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-            if (node.getUserObject() == null)
-                return;
-
-            BaseModel model = (BaseModel) node.getUserObject();
-            if (model instanceof FileModel)
-                TabsController.getINSTANCE().addTab((FileModel) model);
+            if (event.getClickCount() == 2)
+                addTab(event);
         }
+
+    }
+
+    private static class TreeKeyListener implements KeyListener {
+
+        @Override
+        public void keyPressed(@NotNull KeyEvent keyEvent) {
+            if (keyEvent.getExtendedKeyCode() == KeyEvent.VK_ENTER)
+                addTab(keyEvent);
+        }
+
+        @Override public void keyTyped(KeyEvent keyEvent) {}
+        @Override public void keyReleased(KeyEvent keyEvent) {}
 
     }
 
