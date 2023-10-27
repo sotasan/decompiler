@@ -71,7 +71,7 @@ public class TreeView extends JPanel {
 
         @Override
         public void mouseClicked(@NotNull MouseEvent event) {
-            if (event.getClickCount() == 2)
+            if (event.getClickCount() % 2 == 0)
                 addTab(event);
         }
 
