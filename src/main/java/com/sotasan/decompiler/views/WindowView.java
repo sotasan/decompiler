@@ -91,10 +91,8 @@ public class WindowView extends JFrame {
                 if (!files.isEmpty()) {
                     File file = (File) files.get(0);
                     String name = file.getName().toLowerCase();
-                    if (name.endsWith(".jar") || name.endsWith(".war") || name.endsWith(".zip")) {
-                        LoaderService.load(file);
-                        event.dropComplete(true);
-                    }
+                    if (name.endsWith(".jar") || name.endsWith(".war") || name.endsWith(".zip"))
+                        LoaderService.load(file).thenRun(() -> event.dropComplete(true));
                 }
             }
         }

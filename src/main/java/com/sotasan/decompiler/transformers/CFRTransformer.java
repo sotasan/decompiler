@@ -8,6 +8,7 @@ import org.benf.cfr.reader.bytecode.analysis.parse.utils.Pair;
 import org.benf.cfr.reader.util.getopt.OptionsImpl;
 import org.jetbrains.annotations.NotNull;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 public class CFRTransformer implements ITransformer, ClassFileSource, OutputSinkFactory, OutputSinkFactory.Sink<String> {
 
@@ -22,13 +23,15 @@ public class CFRTransformer implements ITransformer, ClassFileSource, OutputSink
     private String output;
 
     @Override
-    public String transform(@NotNull FileModel fileModel) {
-        this.fileModel = fileModel;
-        CfrDriver driver = new CfrDriver.Builder().withClassFileSource(this).withOptions(OPTIONS).withOutputSink(this).build();
-        driver.analyse(Collections.singletonList(fileModel.getPath()));
-        if (output.startsWith("/"))
-            output = output.substring(30);
-        return output.trim();
+    public CompletableFuture<String> transform(@NotNull FileModel fileModel) {
+        return CompletableFuture.supplyAsync(() -> {
+            this.fileModel = fileModel;
+            CfrDriver driver = new CfrDriver.Builder().withClassFileSource(this).withOptions(OPTIONS).withOutputSink(this).build();
+            driver.analyse(Collections.singletonList(fileModel.getPath()));
+            if (output.startsWith("/"))
+                output = output.substring(30);
+            return output.trim();
+        });
     }
 
     @Override

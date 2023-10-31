@@ -8,6 +8,7 @@ import com.sotasan.decompiler.views.TabView;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,10 +40,15 @@ public class TabsController extends BaseController<TabsView> implements ActionLi
 
         if (controller == null) {
             controller = new TabController(fileModel);
-            getView().addTab(fileModel.getName(), new ImageIcon(fileModel.getIcon()), controller.getComponent());
+            ImageIcon icon = new ImageIcon(fileModel.getIcon());
+            Component component = controller.getComponent();
+            controller.update().thenRun(() -> {
+                getView().addTab(fileModel.getName(), icon, component);
+                getView().setSelectedComponent(component);
+            });
+        } else {
+            getView().setSelectedComponent(controller.getComponent());
         }
-
-        getView().setSelectedComponent(controller.getComponent());
     }
 
     public void clearTabs() {

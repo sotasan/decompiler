@@ -5,14 +5,11 @@ import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import java.lang.management.ManagementFactory;
 import java.util.Optional;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.prefs.Preferences;
 
 @UtilityClass
 public class ProcessService {
 
-    public static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
     public static final Preferences PREFERENCES = Preferences.userNodeForPackage(Main.class);
 
     @SneakyThrows

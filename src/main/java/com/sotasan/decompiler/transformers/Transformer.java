@@ -1,18 +1,23 @@
 package com.sotasan.decompiler.transformers;
 
-import lombok.Getter;
+import lombok.SneakyThrows;
+import org.jetbrains.annotations.NotNull;
 
-@Getter
 public enum Transformer {
 
-    CFR(new CFRTransformer()),
-    Procyon(new ProcyonTransformer()),
-    Vineflower(new VineflowerTransformer());
+    CFR(CFRTransformer.class),
+    Procyon(ProcyonTransformer.class),
+    Vineflower(VineflowerTransformer.class);
 
-    private final ITransformer instance;
+    private final Class<? extends ITransformer> clazz;
 
-    Transformer(ITransformer instance) {
-        this.instance = instance;
+    Transformer(Class<? extends ITransformer> clazz) {
+        this.clazz = clazz;
+    }
+
+    @SneakyThrows
+    public @NotNull ITransformer newInstance() {
+        return clazz.getConstructor().newInstance();
     }
 
 }

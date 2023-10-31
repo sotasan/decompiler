@@ -7,13 +7,14 @@ import com.sotasan.decompiler.models.ArchiveModel;
 import com.sotasan.decompiler.models.BaseModel;
 import com.sotasan.decompiler.models.FileModel;
 import com.sotasan.decompiler.models.PackageModel;
-import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.Enumeration;
+import java.util.concurrent.CompletableFuture;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
