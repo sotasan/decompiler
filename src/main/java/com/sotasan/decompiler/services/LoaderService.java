@@ -21,31 +21,41 @@ import java.util.jar.JarFile;
 @UtilityClass
 public class LoaderService {
 
-    // TODO: separate thread (loading in taskbar)
-    @SneakyThrows
-    public static void load(File file) {
-        if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
-            Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.getINSTANCE().getComponent(), Taskbar.State.INDETERMINATE);
+    @Contract("_ -> new")
+    public static @NotNull CompletableFuture<Void> load(File file) {
+        return CompletableFuture.supplyAsync(() -> {
 
-        JarFile jar = new JarFile(file);
-        Enumeration<JarEntry> entries = jar.entries();;
-        ArchiveModel archive = new ArchiveModel(file.getName());
+            if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
+                Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.getINSTANCE().getComponent(), Taskbar.State.INDETERMINATE);
 
-        while (entries.hasMoreElements()) {
-            JarEntry entry = entries.nextElement();
-            BaseModel packageModel = getChildByPath(archive, entry.getName());
-            if (entry.isDirectory())
-                packageModel.getChildren().add(new PackageModel(entry.getName()));
-            else
-                packageModel.getChildren().add(new FileModel(jar, entry));
-        }
+            try {
 
-        WindowController.getINSTANCE().activate();
-        TabsController.getINSTANCE().clearTabs();
-        TreeController.getINSTANCE().setArchive(archive);
+                JarFile jar = new JarFile(file);
+                Enumeration<JarEntry> entries = jar.entries();
+                ArchiveModel archive = new ArchiveModel(file.getName());
 
-        if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
-            Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.getINSTANCE().getComponent(), Taskbar.State.OFF);
+                while (entries.hasMoreElements()) {
+                    JarEntry entry = entries.nextElement();
+                    BaseModel packageModel = getChildByPath(archive, entry.getName());
+                    if (entry.isDirectory())
+                        packageModel.getChildren().add(new PackageModel(entry.getName()));
+                    else
+                        packageModel.getChildren().add(new FileModel(jar, entry));
+                }
+
+                WindowController.getINSTANCE().activate();
+                TabsController.getINSTANCE().clearTabs();
+                TreeController.getINSTANCE().setArchive(archive);
+
+            } catch (Exception e) {
+                e.printStackTrace(System.err);
+            }
+
+            if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
+                Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.getINSTANCE().getComponent(), Taskbar.State.OFF);
+
+            return null;
+        });
     }
 
     private static BaseModel getChildByPath(@NotNull BaseModel baseModel, String path) {
