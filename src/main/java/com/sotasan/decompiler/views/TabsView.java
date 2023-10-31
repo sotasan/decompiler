@@ -47,19 +47,20 @@ public class TabsView extends FlatTabbedPane {
 
     private static class TabMouseAdapter extends MouseAdapter {
 
-        private int x, y;
+        private int index;
 
         @Override
         public void mousePressed(@NotNull MouseEvent event) {
-            x = event.getX();
-            y = event.getY();
+            FlatTabbedPane tabbedPane = (FlatTabbedPane) event.getSource();
+            if (event.getButton() == MouseEvent.BUTTON2)
+                index = tabbedPane.indexAtLocation(event.getX(), event.getY());
         }
 
         @Override
         public void mouseReleased(@NotNull MouseEvent event) {
             FlatTabbedPane tabbedPane = (FlatTabbedPane) event.getSource();
-            if (event.getButton() == MouseEvent.BUTTON2)
-                tabbedPane.remove(tabbedPane.indexAtLocation(x, y));
+            if (event.getButton() == MouseEvent.BUTTON2 && index != -1)
+                tabbedPane.remove(index);
         }
 
     }
