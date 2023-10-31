@@ -5,6 +5,7 @@ import com.sotasan.decompiler.types.Type;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -13,7 +14,7 @@ public class FileModel extends BaseModel {
 
     private final JarFile jarFile;
     private final JarEntry jarEntry;
-    private final Type type;
+    @Nullable private final Type type;
 
     public FileModel(JarFile jarFile, @NotNull JarEntry jarEntry) {
         super(jarEntry.getName(), false);
