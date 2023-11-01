@@ -15,7 +15,7 @@ import java.awt.event.*;
 @Getter
 public class TreeView extends JPanel {
 
-    private final JTree tree;
+    private final FlatTree tree;
     private final FlatScrollPane scrollPane;
 
     public TreeView() {
