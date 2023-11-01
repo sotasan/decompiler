@@ -16,6 +16,8 @@ public class JDTransformer implements ITransformer, Loader, Printer {
     public String transform(@NotNull FileModel fileModel) throws Exception {
         this.fileModel = fileModel;
         builder = new StringBuilder();
+        String pkg = fileModel.getPath().substring(0, fileModel.getPath().lastIndexOf('/')).replace('/', '.');
+        builder.append(String.format("package %s;\n\n", pkg));
         ClassFileToJavaSourceDecompiler decompiler = new ClassFileToJavaSourceDecompiler();
         decompiler.decompile(this, this, "");
         return builder.toString().trim();
