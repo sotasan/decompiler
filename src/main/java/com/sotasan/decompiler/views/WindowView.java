@@ -11,6 +11,7 @@ import com.sotasan.decompiler.menus.MenuBar;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -18,6 +19,8 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
@@ -26,8 +29,10 @@ import java.util.Objects;
 public class WindowView extends JFrame {
 
     private final FlatSplitPane splitPane;
+    @Nullable private JPanel macos;
 
     public WindowView() {
+        addComponentListener(new WindowComponentAdapter());
         setContentPane((Container) new StartController().getComponent());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setDropTarget(new WindowDropTarget());
@@ -55,9 +60,8 @@ public class WindowView extends JFrame {
             getRootPane().putClientProperty("apple.awt.transparentTitleBar", true);
             getRootPane().putClientProperty("apple.awt.windowTitleVisible", false);
 
-            // TODO: macos maximized window support
             Dimension dimension = new Dimension(0, 25);
-            JPanel macos = new JPanel();
+            macos = new JPanel();
             macos.setMinimumSize(dimension);
             macos.setPreferredSize(dimension);
             panel.add(macos);
@@ -73,6 +77,16 @@ public class WindowView extends JFrame {
     public void dispose() {
         super.dispose();
         System.exit(0);
+    }
+
+    private class WindowComponentAdapter extends ComponentAdapter {
+
+        @Override
+        public void componentResized(ComponentEvent e) {
+            if (SystemInfo.isMacOS && macos != null)
+                macos.setVisible(getHeight() < GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight());
+        }
+
     }
 
     private static class WindowDropTarget extends DropTarget {
