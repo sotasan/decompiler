@@ -42,8 +42,8 @@ public class TabController extends BaseController<TabView> {
                     return null;
                 })
                 .thenRun(() -> {
-                    getView().getScrollPane().getVerticalScrollBar().setValue(0);
                     getView().getScrollPane().getHorizontalScrollBar().setValue(0);
+                    getView().getScrollPane().getVerticalScrollBar().setValue(0);
                 });
     }
 
