@@ -31,7 +31,7 @@ public class FileOpenFile extends FlatMenuItem implements ActionListener {
         fileChooser.setFileFilter(new FileNameExtensionFilter("Java (*.jar;*.war;*.zip)", "jar", "war", "zip"));
         fileChooser.showOpenDialog(WindowController.getINSTANCE().getComponent());
         if (fileChooser.getSelectedFile() != null)
-            LoaderService.load(fileChooser.getSelectedFile());
+            LoaderService.loadAsync(fileChooser.getSelectedFile());
     }
 
 }

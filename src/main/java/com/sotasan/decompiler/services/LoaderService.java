@@ -20,8 +20,8 @@ import java.util.jar.JarFile;
 @UtilityClass
 public class LoaderService {
 
-    public static void load(File file) {
-        CompletableFuture.supplyAsync(() -> {
+    public static void loadAsync(File file) {
+        CompletableFuture.runAsync(() -> {
 
             if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
                 Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.getINSTANCE().getComponent(), Taskbar.State.INDETERMINATE);
@@ -52,7 +52,6 @@ public class LoaderService {
             if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
                 Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.getINSTANCE().getComponent(), Taskbar.State.OFF);
 
-            return null;
         });
     }
 

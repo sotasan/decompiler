@@ -92,7 +92,7 @@ public class WindowView extends JFrame {
                     File file = (File) files.get(0);
                     String name = file.getName().toLowerCase();
                     if (name.endsWith(".jar") || name.endsWith(".war") || name.endsWith(".zip")) {
-                        LoaderService.load(file);
+                        LoaderService.loadAsync(file);
                         event.dropComplete(true);
                     }
                 }

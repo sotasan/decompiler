@@ -31,7 +31,7 @@ public class Main {
 
         WindowController.getINSTANCE().show();
         if (args.length > 0)
-            LoaderService.load(new File(args[0]));
+            LoaderService.loadAsync(new File(args[0]));
     }
 
 }
