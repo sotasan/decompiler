@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 public enum Transformer {
 
     CFR(CFRTransformer.class),
+    JD(JDTransformer.class),
     Procyon(ProcyonTransformer.class),
     Vineflower(VineflowerTransformer.class);
 
