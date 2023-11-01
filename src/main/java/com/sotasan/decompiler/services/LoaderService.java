@@ -8,7 +8,6 @@ import com.sotasan.decompiler.models.BaseModel;
 import com.sotasan.decompiler.models.FileModel;
 import com.sotasan.decompiler.models.PackageModel;
 import lombok.experimental.UtilityClass;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
@@ -21,9 +20,8 @@ import java.util.jar.JarFile;
 @UtilityClass
 public class LoaderService {
 
-    @Contract("_ -> new")
-    public static @NotNull CompletableFuture<Void> load(File file) {
-        return CompletableFuture.supplyAsync(() -> {
+    public static void load(File file) {
+        CompletableFuture.supplyAsync(() -> {
 
             if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
                 Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.getINSTANCE().getComponent(), Taskbar.State.INDETERMINATE);
