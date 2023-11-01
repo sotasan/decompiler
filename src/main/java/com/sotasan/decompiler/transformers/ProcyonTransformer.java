@@ -7,20 +7,17 @@ import com.strobel.decompiler.DecompilerSettings;
 import com.strobel.decompiler.ITextOutput;
 import com.strobel.decompiler.PlainTextOutput;
 import org.jetbrains.annotations.NotNull;
-import java.util.concurrent.CompletableFuture;
 
 public class ProcyonTransformer implements ITransformer {
 
     @Override
-    public CompletableFuture<String> transform(@NotNull FileModel fileModel) {
-        return CompletableFuture.supplyAsync(() -> {
-            DecompilerSettings settings = DecompilerSettings.javaDefaults();
-            ArrayTypeLoader typeLoader = new ArrayTypeLoader(fileModel.getBytes());
-            settings.setTypeLoader(typeLoader);
-            ITextOutput output = new PlainTextOutput();
-            Decompiler.decompile(typeLoader.getClassNameFromArray(), output, settings);
-            return output.toString().trim();
-        });
+    public String transform(@NotNull FileModel fileModel) {
+        DecompilerSettings settings = DecompilerSettings.javaDefaults();
+        ArrayTypeLoader typeLoader = new ArrayTypeLoader(fileModel.getBytes());
+        settings.setTypeLoader(typeLoader);
+        ITextOutput output = new PlainTextOutput();
+        Decompiler.decompile(typeLoader.getClassNameFromArray(), output, settings);
+        return output.toString().trim();
     }
 
 }

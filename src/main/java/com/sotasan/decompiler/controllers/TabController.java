@@ -6,9 +6,13 @@ import com.sotasan.decompiler.types.Type;
 import com.sotasan.decompiler.views.TabView;
 import lombok.Getter;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 
 @Getter
 public class TabController extends BaseController<TabView> {
@@ -21,27 +25,37 @@ public class TabController extends BaseController<TabView> {
         getView().setController(this);
     }
 
-    public CompletableFuture<Void> update() {
-        try {
-            return getText(fileModel).thenAccept(s -> {
-                getView().getTextArea().setText(s);
-                Type type = fileModel.getType();
-                if (type != null)
-                    getView().getTextArea().setSyntaxEditingStyle(type.getSyntax());
-                getView().getTextArea().setCaretPosition(0);
-            });
-        } catch (Exception e) {
-            getView().getTextArea().setText(e.getMessage());
-            getView().getTextArea().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
-            getView().getTextArea().setCaretPosition(0);
-            return CompletableFuture.completedFuture(null);
-        }
+    public CompletableFuture<Void> updateAsync() {
+        return getTextAsync(fileModel)
+                .thenAccept(s -> {
+                    getView().getTextArea().setText(s);
+                    Type type = fileModel.getType();
+                    if (type != null)
+                        getView().getTextArea().setSyntaxEditingStyle(type.getSyntax());
+                    getView().getTextArea().setCaretPosition(0);
+                })
+                .exceptionally(e -> {
+                    StringWriter stringWriter = new StringWriter();
+                    PrintWriter printWriter = new PrintWriter(stringWriter);
+                    e.printStackTrace(printWriter);
+                    getView().getTextArea().setText(stringWriter.toString().trim());
+                    getView().getTextArea().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
+                    getView().getTextArea().setCaretPosition(0);
+                    return null;
+                });
     }
 
-    private CompletableFuture<String> getText(@NotNull FileModel fileModel) throws Exception {
-        return fileModel.getType() instanceof ClassType
-                ? TabsController.getINSTANCE().getTransformer().newInstance().transform(fileModel)
-                : CompletableFuture.completedFuture(new String(fileModel.getBytes(), StandardCharsets.UTF_8));
+    @Contract("_ -> new")
+    private @NotNull CompletableFuture<String> getTextAsync(FileModel fileModel) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return fileModel.getType() instanceof ClassType
+                        ? TabsController.getINSTANCE().getTransformer().newInstance().transform(fileModel)
+                        : new String(fileModel.getBytes(), StandardCharsets.UTF_8);
+            } catch (Exception e) {
+                throw new CompletionException(e);
+            }
+        });
     }
 
 }

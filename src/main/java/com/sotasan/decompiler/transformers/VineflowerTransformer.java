@@ -7,7 +7,6 @@ import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
 import java.io.File;
-import java.util.concurrent.CompletableFuture;
 import java.util.jar.Manifest;
 
 public class VineflowerTransformer extends IFernflowerLogger implements ITransformer, IBytecodeProvider, IResultSaver {
@@ -16,15 +15,13 @@ public class VineflowerTransformer extends IFernflowerLogger implements ITransfo
     private String content;
 
     @Override
-    public CompletableFuture<String> transform(FileModel fileModel) {
-        return CompletableFuture.supplyAsync(() -> {
-            this.fileModel = fileModel;
-            // TODO: Refactor
-            Fernflower fernflower = new Fernflower(this, this, IFernflowerPreferences.getDefaults(), this);
-            fernflower.addSource(new File(".class"));
-            fernflower.decompileContext();
-            return content.trim();
-        });
+    public String transform(FileModel fileModel) {
+        this.fileModel = fileModel;
+        // TODO: Refactor
+        Fernflower fernflower = new Fernflower(this, this, IFernflowerPreferences.getDefaults(), this);
+        fernflower.addSource(new File(".class"));
+        fernflower.decompileContext();
+        return content.trim();
     }
 
     @Override
