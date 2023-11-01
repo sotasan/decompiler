@@ -32,7 +32,6 @@ public class TabController extends BaseController<TabView> {
                     Type type = fileModel.getType();
                     if (type != null)
                         getView().getTextArea().setSyntaxEditingStyle(type.getSyntax());
-                    getView().getTextArea().setCaretPosition(0);
                 })
                 .exceptionally(e -> {
                     StringWriter stringWriter = new StringWriter();
@@ -40,8 +39,11 @@ public class TabController extends BaseController<TabView> {
                     e.printStackTrace(printWriter);
                     getView().getTextArea().setText(stringWriter.toString().trim());
                     getView().getTextArea().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
-                    getView().getTextArea().setCaretPosition(0);
                     return null;
+                })
+                .thenRun(() -> {
+                    getView().getScrollPane().getVerticalScrollBar().setValue(0);
+                    getView().getScrollPane().getHorizontalScrollBar().setValue(0);
                 });
     }
 
