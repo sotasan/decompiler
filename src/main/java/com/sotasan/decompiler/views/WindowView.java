@@ -82,7 +82,7 @@ public class WindowView extends JFrame {
     private class WindowComponentAdapter extends ComponentAdapter {
 
         @Override
-        public void componentResized(ComponentEvent e) {
+        public void componentResized(ComponentEvent event) {
             if (SystemInfo.isMacOS && macos != null)
                 macos.setVisible(getHeight() < GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getHeight());
         }
