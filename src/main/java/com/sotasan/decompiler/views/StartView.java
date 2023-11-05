@@ -5,6 +5,7 @@ import com.sotasan.decompiler.services.LanguageService;
 import lombok.Getter;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 @Getter
@@ -29,7 +30,7 @@ public class StartView extends JPanel {
 
         String group = LanguageService.getTranslation("file");
         String item = LanguageService.getTranslation("file.openFile");
-        String modifier = KeyEvent.getModifiersExText(KeyEvent.CTRL_DOWN_MASK);
+        String modifier = KeyEvent.getModifiersExText(Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
         String key = KeyEvent.getKeyText(KeyEvent.VK_O);
         open = new FlatLabel();
         open.setText(String.format("%s > %s (%s + %s)", group, item, modifier, key));
