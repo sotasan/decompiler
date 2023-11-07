@@ -17,7 +17,7 @@ public class ProcyonTransformer implements ITransformer {
         settings.setTypeLoader(typeLoader);
         ITextOutput output = new PlainTextOutput();
         Decompiler.decompile(typeLoader.getClassNameFromArray(), output, settings);
-        return output.toString().trim().replace("\n{", " {");
+        return output.toString().trim();
     }
 
 }
