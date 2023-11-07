@@ -1,6 +1,7 @@
 package com.sotasan.decompiler.controllers;
 
 import com.sotasan.decompiler.models.FileModel;
+import com.sotasan.decompiler.services.ProcessService;
 import com.sotasan.decompiler.transformers.Transformer;
 import com.sotasan.decompiler.types.ClassType;
 import com.sotasan.decompiler.views.TabsView;
@@ -19,10 +20,14 @@ public class TabsController extends BaseController<TabsView> implements ActionLi
     private TabsController() {
         super(new TabsView());
         getView().getComboBox().addActionListener(this);
+        String transformer = ProcessService.PREFERENCES.get("transformer", null);
+        if (transformer != null)
+            getView().getComboBox().setSelectedItem(Transformer.valueOf(transformer));
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
+        ProcessService.PREFERENCES.put("transformer", getTransformer().name());
         for (int i = 0; i < getView().getTabCount(); i++) {
             TabController controller = ((TabView) getView().getComponentAt(i)).getController();
             if (controller.getFileModel().getType() instanceof ClassType)
