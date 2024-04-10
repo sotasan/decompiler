@@ -1,5 +1,6 @@
 package com.sotasan.decompiler.controllers;
 
+import com.sotasan.decompiler.menus.file.FileCloseTab;
 import com.sotasan.decompiler.models.FileModel;
 import com.sotasan.decompiler.services.ProcessService;
 import com.sotasan.decompiler.transformers.Transformer;
@@ -9,17 +10,20 @@ import com.sotasan.decompiler.views.TabView;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TabsController extends BaseController<TabsView> implements ActionListener {
+public class TabsController extends BaseController<TabsView> implements ActionListener, ChangeListener {
 
     @Getter private static final TabsController INSTANCE = new TabsController();
 
     private TabsController() {
         super(new TabsView());
         getView().getComboBox().addActionListener(this);
+        getView().getModel().addChangeListener(this);
         String transformer = ProcessService.PREFERENCES.get("transformer", null);
         if (transformer != null)
             getView().getComboBox().setSelectedItem(Transformer.valueOf(transformer));
@@ -33,6 +37,11 @@ public class TabsController extends BaseController<TabsView> implements ActionLi
             if (controller.getFileModel().getType() instanceof ClassType)
                 controller.updateAsync();
         }
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent changeEvent) {
+        FileCloseTab.getINSTANCE().setEnabled(getView().getTabCount() > 0);
     }
 
     public void addTab(FileModel fileModel) {
@@ -50,6 +59,10 @@ public class TabsController extends BaseController<TabsView> implements ActionLi
         } else {
             getView().setSelectedComponent(controller.getComponent());
         }
+    }
+
+    public void closeTab() {
+        getView().removeTabAt(getView().getSelectedIndex());
     }
 
     public void clearTabs() {
