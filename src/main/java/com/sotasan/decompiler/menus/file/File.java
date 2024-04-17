@@ -12,9 +12,9 @@ public class File extends FlatMenu {
         setText(LanguageService.getTranslation("file"));
 
         add(new FileOpenFile());
-        add(new FileNewInstance());
-        add(new JSeparator());
         add(FileCloseTab.getINSTANCE());
+        add(new JSeparator());
+        add(new FileNewInstance());
         add(new FileExit());
     }
 
