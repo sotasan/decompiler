@@ -34,7 +34,7 @@ dependencies {
     implementation("net.fabricmc:cfr:0.2.2")
     implementation("org.bitbucket.mstrobel:procyon-compilertools:0.6.0")
     implementation("org.jetbrains:annotations:24.1.0")
-    implementation("org.vineflower:vineflower:1.10.0")
+    implementation("org.vineflower:vineflower:1.10.1")
 }
 
 processResources {
