@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
     if (SystemInfo.isMacOS) {
         System.setProperty("apple.awt.application.appearance", "NSAppearanceNameDarkAqua")
         System.setProperty("apple.awt.application.name", "Decompiler")
-        System.setProperty("apple.laf.useScreenMenuBar", true.toString())
+        System.setProperty("apple.laf.useScreenMenuBar", "${true}")
     }
 
     FlatInterFont.install()
