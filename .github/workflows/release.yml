@@ -2,8 +2,8 @@ name: Release
 on: workflow_dispatch
 jobs:
 
-    build:
-        name: Build
+    release:
+        name: Release
         runs-on: ubuntu-latest
         steps:
 
