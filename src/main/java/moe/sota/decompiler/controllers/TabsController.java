@@ -9,6 +9,7 @@ import moe.sota.decompiler.types.ClassType;
 import moe.sota.decompiler.views.TabView;
 import moe.sota.decompiler.views.TabsView;
 import org.jetbrains.annotations.Nullable;
+import org.koin.java.KoinJavaComponent;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -43,7 +44,8 @@ public class TabsController extends BaseController<TabsView> implements ActionLi
 
     @Override
     public void stateChanged(ChangeEvent changeEvent) {
-        FileCloseTab.INSTANCE.setEnabled(getView().getTabCount() > 0);
+        FileCloseTab fileCloseTab = KoinJavaComponent.get(FileCloseTab.class);
+        fileCloseTab.setEnabled(getView().getTabCount() > 0);
     }
 
     public void addTab(FileModel fileModel) {

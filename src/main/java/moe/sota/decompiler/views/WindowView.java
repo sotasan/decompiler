@@ -12,6 +12,7 @@ import moe.sota.decompiler.services.LanguageService;
 import moe.sota.decompiler.services.LoaderService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.koin.java.KoinJavaComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +38,7 @@ public class WindowView extends JFrame {
         setContentPane((Container) new StartController().getComponent());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setDropTarget(new WindowDropTarget());
-        setJMenuBar(new MenuBar());
+        setJMenuBar(KoinJavaComponent.get(MenuBar.class));
         setMinimumSize(new Dimension(500, 300));
         setPreferredSize(new Dimension(1000, 600));
         setTitle("Decompiler");

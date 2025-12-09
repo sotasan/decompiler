@@ -5,17 +5,22 @@ import moe.sota.decompiler.services.LanguageService
 import java.awt.event.KeyEvent
 import javax.swing.JSeparator
 
-class File : FlatMenu() {
+class File(
+    openFile: FileOpenFile,
+    closeTab: FileCloseTab,
+    newInstance: FileNewInstance,
+    exit: FileExit
+) : FlatMenu() {
 
     init {
         mnemonic = KeyEvent.VK_F
         text = LanguageService.getTranslation("file")
 
-        add(FileOpenFile())
-        add(FileCloseTab)
+        add(openFile)
+        add(closeTab)
         add(JSeparator())
-        add(FileNewInstance())
-        add(FileExit())
+        add(newInstance)
+        add(exit)
     }
 
 }

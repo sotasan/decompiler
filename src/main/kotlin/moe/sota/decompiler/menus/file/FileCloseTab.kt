@@ -9,7 +9,7 @@ import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
 import javax.swing.KeyStroke
 
-object FileCloseTab : FlatMenuItem(), ActionListener {
+class FileCloseTab : FlatMenuItem(), ActionListener {
 
     init {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
