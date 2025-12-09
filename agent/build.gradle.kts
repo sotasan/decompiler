@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("io.freefair.lombok") version "8.12.1"
+    id("io.freefair.lombok") version "9.1.0"
 }
 
 group = "moe.sota"

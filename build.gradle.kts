@@ -3,9 +3,9 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("application")
     id("java")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.freefair.lombok") version "8.12.1"
-    kotlin("jvm") version "2.1.10"
+    id("com.gradleup.shadow") version "9.3.0"
+    id("io.freefair.lombok") version "9.1.0"
+    kotlin("jvm") version "2.1.21"
 }
 
 group = "moe.sota"
