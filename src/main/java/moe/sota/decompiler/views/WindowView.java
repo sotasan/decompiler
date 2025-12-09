@@ -35,7 +35,7 @@ public class WindowView extends JFrame {
 
     public WindowView() {
         addComponentListener(new WindowComponentAdapter());
-        setContentPane((Container) new StartController().getComponent());
+        setContentPane((Container) (((StartController) KoinJavaComponent.get(StartController.class)).getComponent()));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setDropTarget(new WindowDropTarget());
         setJMenuBar(KoinJavaComponent.get(MenuBar.class));
