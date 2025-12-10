@@ -44,6 +44,8 @@ dependencies {
     implementation("org.bitbucket.mstrobel:procyon-compilertools:0.6.0")
     implementation("org.jetbrains:annotations:26.0.2-1")
     implementation("org.ktorm:ktorm-core:4.1.1")
+    implementation("org.ow2.asm:asm:9.9")
+    implementation("org.ow2.asm:asm-util:9.9")
     implementation("org.vineflower:vineflower:1.11.2")
 }
 
