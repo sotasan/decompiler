@@ -8,10 +8,7 @@ import moe.sota.decompiler.models.FileModel
 import java.awt.BorderLayout
 import java.awt.Component
 import java.awt.event.*
-import javax.swing.BorderFactory
-import javax.swing.ImageIcon
-import javax.swing.JPanel
-import javax.swing.JTree
+import javax.swing.*
 import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.DefaultTreeCellRenderer
 import javax.swing.tree.DefaultTreeModel
@@ -34,6 +31,7 @@ class TreeView(
         tree.setModel(DefaultTreeModel(DefaultMutableTreeNode()))
         tree.setRootVisible(false)
         tree.setShowsRootHandles(true)
+        ToolTipManager.sharedInstance().registerComponent(tree)
 
         scrollPane = FlatScrollPane()
         scrollPane.setBorder(BorderFactory.createEmptyBorder())
@@ -74,6 +72,7 @@ private class TreeCellRenderer : DefaultTreeCellRenderer() {
             val model = node.getUserObject() as BaseModel
             setText(model.getName())
             setIcon(ImageIcon(model.icon))
+            setToolTipText(model.name)
         }
         return component
     }

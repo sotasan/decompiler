@@ -4,6 +4,7 @@ import moe.sota.decompiler.models.ArchiveModel
 import moe.sota.decompiler.models.BaseModel
 import moe.sota.decompiler.views.TreeView
 import java.util.*
+import javax.swing.SwingUtilities
 import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.DefaultTreeModel
 import javax.swing.tree.TreePath
@@ -19,7 +20,10 @@ class TreeController(
         rootNode.removeAllChildren()
         rootNode.add(treeNode)
         treeModel.reload()
-        treeView.tree.expandPath(TreePath(treeNode.path))
+
+        SwingUtilities.invokeLater {
+            treeView.tree.expandPath(TreePath(treeNode.path))
+        }
     }
 
     private fun createTreeNode(baseModel: BaseModel): DefaultMutableTreeNode {
