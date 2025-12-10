@@ -32,7 +32,7 @@ public class FileSearch extends FlatMenuItem implements ActionListener {
     public FileSearch() {
         setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_F,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | InputEvent.SHIFT_DOWN_MASK
         ));
         setMnemonic(KeyEvent.VK_F);
         setText(LanguageService.getTranslation("file.search"));
