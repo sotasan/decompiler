@@ -12,7 +12,9 @@ import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
 import javax.swing.KeyStroke
 
-class FileExit : FlatMenuItem(), ActionListener, KoinComponent {
+class FileExit(
+    languageService: LanguageService
+) : FlatMenuItem(), ActionListener, KoinComponent {
 
     private val windowController: WindowController by inject()
 
@@ -20,7 +22,8 @@ class FileExit : FlatMenuItem(), ActionListener, KoinComponent {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         isVisible = !(Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.APP_QUIT_HANDLER))
         mnemonic = KeyEvent.VK_Q
-        text = LanguageService.getTranslation("file.exit")
+        text = languageService.getString("file.exit")
+
         addActionListener(this)
 
         if (!isVisible)

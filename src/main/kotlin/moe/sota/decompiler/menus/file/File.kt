@@ -6,21 +6,22 @@ import java.awt.event.KeyEvent
 import javax.swing.JSeparator
 
 class File(
-    openFile: FileOpenFile,
-    closeTab: FileCloseTab,
-    newInstance: FileNewInstance,
-    exit: FileExit
+    fileOpenFile: FileOpenFile,
+    fileCloseTab: FileCloseTab,
+    fileNewInstance: FileNewInstance,
+    fileExit: FileExit,
+    languageService: LanguageService
 ) : FlatMenu() {
 
     init {
         mnemonic = KeyEvent.VK_F
-        text = LanguageService.getTranslation("file")
+        text = languageService.getString("file")
 
-        add(openFile)
-        add(closeTab)
+        add(fileOpenFile)
+        add(fileCloseTab)
         add(JSeparator())
-        add(newInstance)
-        add(exit)
+        add(fileNewInstance)
+        add(fileExit)
     }
 
 }

@@ -8,7 +8,6 @@ import moe.sota.decompiler.controllers.StartController;
 import moe.sota.decompiler.controllers.TabsController;
 import moe.sota.decompiler.controllers.TreeController;
 import moe.sota.decompiler.menus.MenuBar;
-import moe.sota.decompiler.services.LanguageService;
 import moe.sota.decompiler.services.LoaderService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +43,7 @@ public class WindowView extends JFrame {
         setTitle("Decompiler");
 
         String logo = SystemInfo.isMacOS ? "logo/logo-macos.png" : "logo/logo.png";
-        Image image = Toolkit.getDefaultToolkit().createImage(LanguageService.class.getClassLoader().getResource(logo));
+        Image image = Toolkit.getDefaultToolkit().createImage(getClass().getClassLoader().getResource(logo));
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE))
             Taskbar.getTaskbar().setIconImage(image);
         setIconImage(image);

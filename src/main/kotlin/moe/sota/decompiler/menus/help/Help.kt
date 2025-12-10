@@ -6,15 +6,16 @@ import java.awt.Desktop
 import java.awt.event.KeyEvent
 
 class Help(
-    about: HelpAbout
+    helpAbout: HelpAbout,
+    languageService: LanguageService
 ) : FlatMenu() {
 
     init {
         isVisible = !(Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.APP_ABOUT))
         mnemonic = KeyEvent.VK_H
-        text = LanguageService.getTranslation("help")
+        text = languageService.getString("help")
 
-        add(about)
+        add(helpAbout)
     }
 
 }

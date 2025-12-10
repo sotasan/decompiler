@@ -12,23 +12,27 @@ import javax.swing.JFileChooser
 import javax.swing.KeyStroke
 import javax.swing.filechooser.FileNameExtensionFilter
 
-class FileOpenFile : FlatMenuItem(), ActionListener {
+class FileOpenFile(
+    languageService: LanguageService
+) : FlatMenuItem(), ActionListener {
 
-    private val translation = LanguageService.getTranslation("file.openFile")
+    private val originalText = languageService.getString("file.openFile")
 
     init {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         mnemonic = KeyEvent.VK_O
-        text = "$translation..."
+        text = "$originalText..."
+
         addActionListener(this)
     }
 
-    override fun actionPerformed(p0: ActionEvent?) {
+    override fun actionPerformed(e: ActionEvent?) {
         val fileChooser = JFileChooser().apply {
             isAcceptAllFileFilterUsed = false
-            dialogTitle = translation
+            dialogTitle = originalText
             fileFilter = FileNameExtensionFilter("Java (*.jar;*.war;*.zip)", "jar", "war", "zip")
         }
+
         fileChooser.showOpenDialog(WindowController.view)
         if (fileChooser.selectedFile != null)
             LoaderService.loadAsync(fileChooser.selectedFile)

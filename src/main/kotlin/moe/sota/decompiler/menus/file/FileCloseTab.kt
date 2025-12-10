@@ -9,17 +9,20 @@ import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
 import javax.swing.KeyStroke
 
-class FileCloseTab : FlatMenuItem(), ActionListener {
+class FileCloseTab(
+    languageService: LanguageService
+) : FlatMenuItem(), ActionListener {
 
     init {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         isEnabled = false
         mnemonic = KeyEvent.VK_W
-        text = LanguageService.getTranslation("file.closeTab")
+        text = languageService.getString("file.closeTab")
+
         addActionListener(this)
     }
 
-    override fun actionPerformed(p0: ActionEvent?) {
+    override fun actionPerformed(e: ActionEvent?) {
         TabsController.INSTANCE.closeTab()
     }
 

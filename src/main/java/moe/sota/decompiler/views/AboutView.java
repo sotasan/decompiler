@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import moe.sota.decompiler.controllers.WindowController;
 import moe.sota.decompiler.services.LanguageService;
 import net.miginfocom.swing.MigLayout;
+import org.koin.java.KoinJavaComponent;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -20,6 +21,8 @@ import java.util.Properties;
 
 @Getter
 public class AboutView extends JDialog {
+
+    private final LanguageService languageService = KoinJavaComponent.get(LanguageService.class);
 
     private final JPanel root;
     private final JPanel content;
@@ -41,7 +44,7 @@ public class AboutView extends JDialog {
         getRootPane().putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICON, false);
         setModal(true);
         setResizable(false);
-        setTitle(LanguageService.getTranslation("about"));
+        setTitle(languageService.getString("about"));
 
         root = new JPanel();
         root.setBorder(new EmptyBorder(16, 16, 16, 16));
@@ -65,9 +68,9 @@ public class AboutView extends JDialog {
         content.add(header, "wrap");
 
         Properties properties = new Properties();
-        properties.load(LanguageService.class.getClassLoader().getResourceAsStream("application.properties"));
+        properties.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
         version = new FlatLabel();
-        version.setText(String.format(LanguageService.getTranslation("about.version"), properties.getProperty("version")));
+        version.setText(String.format(languageService.getString("about.version"), properties.getProperty("version")));
         content.add(version, "wrap");
 
         copyright = new FlatLabel();
@@ -75,7 +78,7 @@ public class AboutView extends JDialog {
         content.add(copyright, "wrap");
 
         vm = new JPanel();
-        vm.setBorder(BorderFactory.createTitledBorder(LanguageService.getTranslation("about.vm")));
+        vm.setBorder(BorderFactory.createTitledBorder(languageService.getString("about.vm")));
         vm.setLayout(new MigLayout());
         content.add(vm, "wrap, gapy 16px");
 
@@ -106,7 +109,7 @@ public class AboutView extends JDialog {
 
         ok = new FlatButton();
         ok.addActionListener(this::onOkAction);
-        ok.setText(LanguageService.getTranslation("about.ok"));
+        ok.setText(languageService.getString("about.ok"));
         controls.add(ok);
         getRootPane().setDefaultButton(ok);
 

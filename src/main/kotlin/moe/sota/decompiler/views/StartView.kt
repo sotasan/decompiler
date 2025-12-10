@@ -7,7 +7,9 @@ import java.awt.Toolkit
 import java.awt.event.KeyEvent
 import javax.swing.JPanel
 
-class StartView : JPanel() {
+class StartView(
+    languageService: LanguageService
+) : JPanel() {
 
     private val root: JPanel
     private val header: FlatLabel
@@ -23,11 +25,11 @@ class StartView : JPanel() {
 
         header = FlatLabel()
         header.styleClass = "h1"
-        header.text = LanguageService.getTranslation("empty")
+        header.text = languageService.getString("empty")
         root.add(header, "wrap")
 
-        val group = LanguageService.getTranslation("file")
-        val item = LanguageService.getTranslation("file.openFile")
+        val group = languageService.getString("file")
+        val item = languageService.getString("file.openFile")
         val modifier = KeyEvent.getModifiersExText(Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx())
         val key = KeyEvent.getKeyText(KeyEvent.VK_O)
         open = FlatLabel()
@@ -35,7 +37,7 @@ class StartView : JPanel() {
         root.add(open, "wrap")
 
         drag = FlatLabel()
-        drag.text = LanguageService.getTranslation("empty.drag")
+        drag.text = languageService.getString("empty.drag")
         root.add(drag, "wrap")
     }
 

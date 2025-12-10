@@ -8,18 +8,21 @@ import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
 
-class HelpAbout : FlatMenuItem(), ActionListener {
+class HelpAbout(
+    languageService: LanguageService
+) : FlatMenuItem(), ActionListener {
 
     init {
         mnemonic = KeyEvent.VK_A
-        text = LanguageService.getTranslation("about")
+        text = languageService.getString("about")
+
         addActionListener(this)
 
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.APP_ABOUT))
             Desktop.getDesktop().setAboutHandler { actionPerformed(null) }
     }
 
-    override fun actionPerformed(p0: ActionEvent?) {
+    override fun actionPerformed(e: ActionEvent?) {
         AboutController().show()
     }
 

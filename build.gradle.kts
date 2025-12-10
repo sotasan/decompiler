@@ -21,7 +21,7 @@ kotlin.compilerOptions {
 }
 
 application {
-    mainClass = "${project.group}.${project.name.lowercase()}.MainKt"
+    mainClass = "${project.group}.${project.name.lowercase()}.Main"
 }
 
 repositories {

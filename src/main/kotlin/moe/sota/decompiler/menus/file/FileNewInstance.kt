@@ -9,17 +9,21 @@ import java.awt.event.ActionListener
 import java.awt.event.KeyEvent
 import javax.swing.KeyStroke
 
-class FileNewInstance : FlatMenuItem(), ActionListener {
+class FileNewInstance(
+    languageService: LanguageService,
+    private val processService: ProcessService
+) : FlatMenuItem(), ActionListener {
 
     init {
         accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
         mnemonic = KeyEvent.VK_N
-        text = LanguageService.getTranslation("file.newInstance")
+        text = languageService.getString("file.newInstance")
+
         addActionListener(this)
     }
 
-    override fun actionPerformed(p0: ActionEvent?) {
-        ProcessService.start()
+    override fun actionPerformed(e: ActionEvent?) {
+        processService.start()
     }
 
 }

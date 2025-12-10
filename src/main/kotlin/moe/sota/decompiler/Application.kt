@@ -16,7 +16,7 @@ object Application : KoinComponent {
 
     private val windowController: WindowController by inject()
 
-    fun start(args: Array<String>) {
+    fun run(args: Array<String>) {
         FlatInterFont.install()
         FlatJetBrainsMonoFont.install()
         FlatLaf.setPreferredFontFamily(FlatInterFont.FAMILY)

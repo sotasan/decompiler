@@ -3,7 +3,7 @@ package moe.sota.decompiler.controllers;
 import lombok.Getter;
 import moe.sota.decompiler.menus.file.FileCloseTab;
 import moe.sota.decompiler.models.FileModel;
-import moe.sota.decompiler.services.ProcessService;
+import moe.sota.decompiler.services.PreferenceService;
 import moe.sota.decompiler.transformers.Transformer;
 import moe.sota.decompiler.types.ClassType;
 import moe.sota.decompiler.views.TabView;
@@ -27,14 +27,14 @@ public class TabsController extends BaseController<TabsView> implements ActionLi
         super(new TabsView());
         getView().getComboBox().addActionListener(this);
         getView().getModel().addChangeListener(this);
-        String transformer = ProcessService.PREFERENCES.get("transformer", null);
+        String transformer = PreferenceService.PREFERENCES.get("transformer", null);
         if (transformer != null)
             getView().getComboBox().setSelectedItem(Transformer.valueOf(transformer));
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        ProcessService.PREFERENCES.put("transformer", getTransformer().name());
+        PreferenceService.PREFERENCES.put("transformer", getTransformer().name());
         for (int i = 0; i < getView().getTabCount(); i++) {
             TabController controller = ((TabView) getView().getComponentAt(i)).getController();
             if (controller.getFileModel().getType() instanceof ClassType)
