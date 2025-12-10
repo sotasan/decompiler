@@ -19,25 +19,29 @@ class StartView(
     init {
         layout = MigLayout("fill")
 
-        root = JPanel()
-        root.layout = MigLayout("gapy 15")
+        root = JPanel().apply {
+            layout = MigLayout("gapy 15")
+        }
         add(root, "center")
 
-        header = FlatLabel()
-        header.styleClass = "h1"
-        header.text = languageService.getString("empty")
+        header = FlatLabel().apply {
+            styleClass = "h1"
+            text = languageService.getString("empty")
+        }
         root.add(header, "wrap")
 
-        val group = languageService.getString("file")
-        val item = languageService.getString("file.openFile")
-        val modifier = KeyEvent.getModifiersExText(Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx())
-        val key = KeyEvent.getKeyText(KeyEvent.VK_O)
-        open = FlatLabel()
-        open.text = "$group > $item ($modifier + $key)"
+        open = FlatLabel().apply {
+            val group = languageService.getString("file")
+            val item = languageService.getString("file.openFile")
+            val modifier = KeyEvent.getModifiersExText(Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx())
+            val key = KeyEvent.getKeyText(KeyEvent.VK_O)
+            text = "$group > $item ($modifier + $key)"
+        }
         root.add(open, "wrap")
 
-        drag = FlatLabel()
-        drag.text = languageService.getString("empty.drag")
+        drag = FlatLabel().apply {
+            text = languageService.getString("empty.drag")
+        }
         root.add(drag, "wrap")
     }
 
