@@ -6,6 +6,7 @@ import moe.sota.decompiler.models.BaseModel;
 import moe.sota.decompiler.views.TreeView;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -23,12 +24,25 @@ public class TreeController extends BaseController<TreeView> {
 
     public void setArchive(ArchiveModel archiveModel) {
         DefaultTreeModel treeModel = (DefaultTreeModel) getView().getTree().getModel();
-        DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) treeModel.getRoot();
         DefaultMutableTreeNode treeNode = createTreeNode(archiveModel);
-        rootNode.removeAllChildren();
-        rootNode.add(treeNode);
+        treeModel.setRoot(treeNode);
         treeModel.reload();
-        getView().getTree().expandPath(new TreePath(treeNode.getPath()));
+
+        SwingUtilities.invokeLater(() -> {
+            var tree = getView().getTree();
+            TreePath topPath = new TreePath(treeNode.getPath());
+
+            tree.expandPath(topPath);
+
+            if (tree.getRowCount() > 0) {
+                tree.expandRow(0);
+                tree.collapseRow(0);
+                tree.expandPath(topPath);
+            }
+
+            tree.revalidate();
+            tree.repaint();
+        });
     }
 
     private @NotNull DefaultMutableTreeNode createTreeNode(BaseModel baseModel) {

@@ -31,6 +31,7 @@ public class TreeView extends JPanel {
         tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode()));
         tree.setRootVisible(false);
         tree.setShowsRootHandles(true);
+        ToolTipManager.sharedInstance().registerComponent(tree);
 
         scrollPane = new FlatScrollPane();
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -62,6 +63,7 @@ public class TreeView extends JPanel {
                 BaseModel model = (BaseModel) node.getUserObject();
                 setText(model.getName());
                 setIcon(new ImageIcon(model.getIcon()));
+                setToolTipText(model.getPath());
             }
             return component;
         }
