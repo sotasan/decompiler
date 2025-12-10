@@ -24,22 +24,34 @@ public class LoaderService {
     public static void loadAsync(File file) {
         CompletableFuture.runAsync(() -> {
 
-            if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
-                Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.INSTANCE.getComponent(), Taskbar.State.INDETERMINATE);
+            if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW)) {
+                Taskbar.getTaskbar().setWindowProgressState(
+                        (JFrame) WindowController.INSTANCE.getComponent(),
+                        Taskbar.State.INDETERMINATE
+                );
+            }
 
             try {
-
                 JarFile jar = new JarFile(file);
                 Enumeration<JarEntry> entries = jar.entries();
                 ArchiveModel archive = new ArchiveModel(file.getName());
 
                 while (entries.hasMoreElements()) {
                     JarEntry entry = entries.nextElement();
-                    BaseModel packageModel = getChildByPath(archive, entry.getName());
-                    if (entry.isDirectory())
-                        packageModel.getChildren().add(new PackageModel(entry.getName()));
-                    else
-                        packageModel.getChildren().add(new FileModel(jar, entry));
+                    String name = entry.getName();
+
+                    if (entry.isDirectory()) {
+                        // Ensure the full package chain exists
+                        ensurePackagePath(archive, name);
+                    } else {
+                        // Ensure parent folder chain exists, then add file
+                        String parentDir = parentDir(name);
+                        BaseModel parent = parentDir.isEmpty()
+                                ? archive
+                                : ensurePackagePath(archive, parentDir);
+
+                        parent.getChildren().add(new FileModel(jar, entry));
+                    }
                 }
 
                 WindowController.INSTANCE.activate();
@@ -50,17 +62,59 @@ public class LoaderService {
                 e.printStackTrace(System.err);
             }
 
-            if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
-                Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.INSTANCE.getComponent(), Taskbar.State.OFF);
+            if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW)) {
+                Taskbar.getTaskbar().setWindowProgressState(
+                        (JFrame) WindowController.INSTANCE.getComponent(),
+                        Taskbar.State.OFF
+                );
+            }
 
         });
     }
 
-    private static BaseModel getChildByPath(@NotNull BaseModel baseModel, String path) {
-        for (BaseModel child : baseModel.getChildren())
-            if (child instanceof PackageModel && path.startsWith(child.getPath()))
-                return getChildByPath(child, path);
-        return baseModel;
+    /**
+     * Returns the parent directory path ending with '/', or "" if none.
+     * Example: "META-INF/MANIFEST.MF" -> "META-INF/"
+     */
+    private static @NotNull String parentDir(@NotNull String path) {
+        int idx = path.lastIndexOf('/');
+        if (idx < 0) return "";
+        return path.substring(0, idx + 1);
     }
 
+    /**
+     * Ensures that all package nodes for a path exist.
+     * Path should end with '/', e.g. "moe/sota/decompiler/".
+     * Returns the deepest created/found PackageModel.
+     */
+    private static @NotNull BaseModel ensurePackagePath(@NotNull BaseModel root, @NotNull String dirPath) {
+        String[] parts = dirPath.split("/");
+        StringBuilder currentPath = new StringBuilder();
+        BaseModel current = root;
+
+        for (String part : parts) {
+            if (part == null || part.isEmpty()) continue;
+
+            currentPath.append(part).append("/");
+            String p = currentPath.toString();
+
+            PackageModel existing = findPackageChild(current, p);
+            if (existing == null) {
+                existing = new PackageModel(p);
+                current.getChildren().add(existing);
+            }
+            current = existing;
+        }
+
+        return current;
+    }
+
+    private static PackageModel findPackageChild(@NotNull BaseModel parent, @NotNull String path) {
+        for (BaseModel child : parent.getChildren()) {
+            if (child instanceof PackageModel && path.equals(child.getPath())) {
+                return (PackageModel) child;
+            }
+        }
+        return null;
+    }
 }
