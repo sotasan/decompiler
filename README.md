@@ -34,7 +34,7 @@ The following decompilers are supported:
 - [CFR](https://github.com/FabricMC/cfr) - Another Java Decompiler
 - [JD](https://java-decompiler.github.io) - Yet another fast Java decompiler
 - [Procyon](https://github.com/mstrobel/procyon) - A suite of Java metaprogramming tools
-- [Vineflower](https://vineflower.org) - Modern Java decompiler aiming to be as accurate as possible
+- [Vineflower](https://vineflower.org) - A modern Java decompiler aiming to be as accurate as possible
 
 ## Languages
 
