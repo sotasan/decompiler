@@ -3,10 +3,10 @@
 package moe.sota.decompiler
 
 import com.formdev.flatlaf.util.SystemInfo
-import moe.sota.decompiler.modules.controllerModule
-import moe.sota.decompiler.modules.menuModule
-import moe.sota.decompiler.modules.serviceModule
-import moe.sota.decompiler.modules.viewModule
+import moe.sota.decompiler.modules.controllersModule
+import moe.sota.decompiler.modules.menusModule
+import moe.sota.decompiler.modules.servicesModule
+import moe.sota.decompiler.modules.viewsModule
 import org.koin.core.context.startKoin
 
 fun main(args: Array<String>) {
@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
     }
 
     startKoin {
-        modules(controllerModule, menuModule, serviceModule, viewModule)
+        modules(controllersModule, menusModule, servicesModule, viewsModule)
     }
 
     Application.run(args)

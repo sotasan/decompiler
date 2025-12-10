@@ -7,7 +7,7 @@ import moe.sota.decompiler.menus.help.HelpAbout
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val menuModule = module {
+val menusModule = module {
     singleOf(::File)
     singleOf(::FileCloseTab)
     singleOf(::FileExit)

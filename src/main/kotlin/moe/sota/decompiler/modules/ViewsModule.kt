@@ -4,6 +4,6 @@ import moe.sota.decompiler.views.StartView
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val viewModule = module {
+val viewsModule = module {
     singleOf(::StartView)
 }

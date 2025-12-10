@@ -5,7 +5,7 @@ import moe.sota.decompiler.controllers.WindowController
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val controllerModule = module {
+val controllersModule = module {
     singleOf(::StartController)
     single { WindowController }
 }
