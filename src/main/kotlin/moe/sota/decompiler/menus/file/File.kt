@@ -7,6 +7,7 @@ import javax.swing.JSeparator
 
 class File(
     openFile: FileOpenFile,
+    searchFile: FileSearch,
     closeTab: FileCloseTab,
     newInstance: FileNewInstance,
     exit: FileExit
@@ -17,6 +18,7 @@ class File(
         text = LanguageService.getTranslation("file")
 
         add(openFile)
+        add(searchFile)
         add(closeTab)
         add(JSeparator())
         add(newInstance)

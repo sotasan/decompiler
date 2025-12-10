@@ -9,6 +9,7 @@ import org.koin.dsl.module
 
 val menuModule = module {
     singleOf(::File)
+    single { FileSearch() }
     singleOf(::FileCloseTab)
     singleOf(::FileExit)
     singleOf(::FileNewInstance)
