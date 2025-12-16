@@ -22,7 +22,7 @@ public class JDTransformer implements ITransformer, Loader, Printer {
         }
         ClassFileToJavaSourceDecompiler decompiler = new ClassFileToJavaSourceDecompiler();
         decompiler.decompile(this, this, "");
-        return builder.toString().trim();
+        return builder.toString();
     }
 
     @Override

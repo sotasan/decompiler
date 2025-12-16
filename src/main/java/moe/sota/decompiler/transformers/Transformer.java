@@ -20,5 +20,5 @@ public enum Transformer {
     public @NotNull ITransformer newInstance() {
         return clazz.getConstructor().newInstance();
     }
-
+   
 }
