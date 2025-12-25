@@ -5,7 +5,7 @@ plugins {
     id("java")
     id("com.gradleup.shadow") version "9.3.0"
     id("io.freefair.lombok") version "9.1.0"
-    kotlin("jvm") version "2.1.21"
+    kotlin("jvm") version "2.3.0"
 }
 
 version = "0.10.0"
@@ -72,9 +72,7 @@ tasks {
         archiveBaseName = project.name.lowercase()
         archiveClassifier = null
         manifest {
-            attributes(
-                "Enable-Native-Access" to "ALL-UNNAMED"
-            )
+            attributes("Enable-Native-Access" to "ALL-UNNAMED")
         }
     }
 
