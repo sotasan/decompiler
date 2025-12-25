@@ -54,8 +54,9 @@ tasks {
     processResources {
         dependsOn(":agent:build")
         outputs.upToDateWhen { false }
+        val version = project.version
         filesMatching("application.properties") {
-            expand(project.properties)
+            expand("version" to version)
         }
     }
 
@@ -78,13 +79,13 @@ tasks {
         enabled = false
     }
 
-    register<Jar>("testJar") {
+    val testJarTask = register<Jar>("testJar") {
         archiveFileName = "test.jar"
         from(sourceSets.test.get().output)
     }
 
     named<JavaExec>("run") {
-        dependsOn("testJar")
-        args = listOf((named("testJar").get() as Jar).archiveFile.get().asFile.path)
+        dependsOn(testJarTask)
+        args = listOf(testJarTask.get().archiveFile.get().asFile.path)
     }
 }
