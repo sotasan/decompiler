@@ -3,8 +3,6 @@ plugins {
     id("io.freefair.lombok") version "9.1.0"
 }
 
-group = "moe.sota"
-
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
