@@ -4,6 +4,7 @@
     <module name="Decompiler.main" />
     <option name="PROGRAM_PARAMETERS" value="build/libs/test.jar" />
     <shortenClasspath name="NONE" />
+    <option name="VM_PARAMETERS" value="--enable-native-access=ALL-UNNAMED" />
     <method v="2">
       <option name="Gradle.BeforeRunTask" enabled="false" tasks="testJar" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
       <option name="Make" enabled="true" />

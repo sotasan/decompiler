@@ -21,6 +21,7 @@ kotlin.compilerOptions {
 }
 
 application {
+    applicationDefaultJvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
     mainClass = "${project.group}.${project.name.lowercase()}.Main"
 }
 
@@ -66,6 +67,11 @@ tasks {
         dependsOn(distTar, distZip)
         archiveBaseName = project.name.lowercase()
         archiveClassifier = null
+        manifest {
+            attributes(
+                "Enable-Native-Access" to "ALL-UNNAMED"
+            )
+        }
     }
 
     test {

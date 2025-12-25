@@ -17,6 +17,8 @@ repositories {
 tasks.jar {
     archiveExtension = "zip"
     manifest {
-        attributes("Agent-Class" to "${project.group}.${rootProject.name.lowercase()}.${project.name}.Main")
+        attributes(
+            "Agent-Class" to "${project.group}.${rootProject.name.lowercase()}.${project.name}.Main"
+        )
     }
 }
