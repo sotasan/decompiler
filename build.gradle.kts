@@ -41,15 +41,15 @@ dependencies {
     implementation("com.formdev:flatlaf-fonts-inter:4.1")
     implementation("com.formdev:flatlaf-fonts-jetbrains-mono:2.304")
     implementation("com.h2database:h2:2.4.240")
-    implementation("com.github.java-decompiler:jd-core:v1.1.3")
+    implementation("com.github.java-decompiler:jd-core:1.1.3")
     implementation("com.miglayout:miglayout-swing:11.4.2")
     implementation("io.insert-koin:koin-core:4.1.1")
     implementation("net.fabricmc:cfr:0.2.2")
     implementation("org.bitbucket.mstrobel:procyon-compilertools:0.6.0")
     implementation("org.jetbrains:annotations:26.0.2-1")
     implementation("org.ktorm:ktorm-core:4.1.1")
-    implementation("org.ow2.asm:asm:9.9")
-    implementation("org.ow2.asm:asm-util:9.9")
+    implementation("org.ow2.asm:asm:9.9.1")
+    implementation("org.ow2.asm:asm-util:9.9.1")
     implementation("org.vineflower:vineflower:1.11.2")
 }
 
