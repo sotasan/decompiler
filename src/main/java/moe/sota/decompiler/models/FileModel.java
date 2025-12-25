@@ -32,4 +32,5 @@ public class FileModel extends BaseModel {
     public Type getType() {
         return type;
     }
+   
 }

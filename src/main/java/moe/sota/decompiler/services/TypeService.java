@@ -14,9 +14,9 @@ import java.util.List;
 public class TypeService {
 
     private static final List<Type> TYPES = List.of(
-            new ClassType(),
-            new ImageType(),
-            new ManifestType()
+        new ClassType(),
+        new ImageType(),
+        new ManifestType()
     );
 
     public static @Nullable Type getType(FileModel fileModel) {
