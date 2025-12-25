@@ -46,6 +46,7 @@ public class CFRTransformer implements ITransformer, ClassFileSource, OutputSink
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> Sink<T> getSink(SinkType sinkType, SinkClass sinkClass) {
         return (Sink<T>) this;
     }
