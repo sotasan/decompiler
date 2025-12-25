@@ -100,9 +100,9 @@ class AboutView(
         vm.add(vmVersion, "wrap")
 
         controls = JPanel().apply {
+            layout = BoxLayout(this, BoxLayout.X_AXIS)
             add(Box.createHorizontalGlue())
         }
-        controls.setLayout(BoxLayout(controls, BoxLayout.X_AXIS))
         root.add(controls, BorderLayout.SOUTH)
 
         github = FlatButton().apply {

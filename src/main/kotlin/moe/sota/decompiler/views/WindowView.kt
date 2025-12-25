@@ -33,28 +33,30 @@ class WindowView(
     var macos: JPanel? = null
 
     init {
-        addComponentListener(WindowComponentAdapter(this))
         contentPane = startView
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE)
-        setDropTarget(WindowDropTarget())
+        defaultCloseOperation = DISPOSE_ON_CLOSE
+        dropTarget = WindowDropTarget()
         jMenuBar = menuBar
         minimumSize = Dimension(500, 300)
-        setPreferredSize(Dimension(1000, 600))
-        setTitle("Decompiler")
+        preferredSize = Dimension(1000, 600)
+        title = "Decompiler"
+        addComponentListener(WindowComponentAdapter(this))
 
         val logo = if (SystemInfo.isMacOS) "logo/logo-macos.png" else "logo/logo.png"
-        val image = Toolkit.getDefaultToolkit().createImage(javaClass.getClassLoader().getResource(logo))
+        val image = Toolkit.getDefaultToolkit().createImage(javaClass.classLoader.getResource(logo))
         if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE))
             Taskbar.getTaskbar().setIconImage(image)
         iconImage = image
 
-        splitPane = FlatSplitPane()
-        splitPane.setDividerLocation(225)
-        splitPane.setRightComponent(tabsView)
+        splitPane = FlatSplitPane().apply {
+            dividerLocation = 225
+            rightComponent = tabsView
+        }
 
-        val panel = JPanel()
-        panel.setLayout(BoxLayout(panel, BoxLayout.Y_AXIS))
-        panel.minimumSize = Dimension(100, 0)
+        val panel = JPanel().apply {
+            layout = BoxLayout(this, BoxLayout.Y_AXIS)
+            minimumSize = Dimension(100, 0)
+        }
         splitPane.setLeftComponent(panel)
 
         if (SystemInfo.isMacFullWindowContentSupported) {

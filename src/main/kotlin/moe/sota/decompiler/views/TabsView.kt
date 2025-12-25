@@ -14,31 +14,33 @@ import javax.swing.JTabbedPane
 
 class TabsView : FlatTabbedPane() {
 
-    val comboBox: FlatComboBox<Transformer?>
+    val comboBox: FlatComboBox<Transformer>
     val toolBar: FlatToolBar
 
     init {
-        addMouseListener(TabMouseAdapter())
         isHasFullBorder = true
-        minimumSize = Dimension(250, 0)
         isTabsClosable = true
-        setTabCloseCallback(::onTabClose)
-        setTabLayoutPolicy(SCROLL_TAB_LAYOUT)
+        minimumSize = Dimension(250, 0)
+        tabLayoutPolicy = SCROLL_TAB_LAYOUT
         tabType = TabType.card
+        addMouseListener(TabMouseAdapter())
+        setTabCloseCallback(::onTabClose)
 
-        val dimension = Dimension(150, 25)
-        comboBox = FlatComboBox<Transformer?>()
-        comboBox.setFocusable(false)
-        comboBox.maximumSize = dimension
-        comboBox.setModel(DefaultComboBoxModel<Transformer?>(Transformer.entries.toTypedArray()))
-        comboBox.preferredSize = dimension
-        comboBox.setSelectedItem(Transformer.Vineflower)
-
-        toolBar = FlatToolBar()
-        toolBar.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5))
-        toolBar.add(Box.createHorizontalGlue())
-        toolBar.add(comboBox)
+        toolBar = FlatToolBar().apply {
+            border = BorderFactory.createEmptyBorder(0, 5, 0, 5)
+            add(Box.createHorizontalGlue())
+        }
         trailingComponent = toolBar
+
+        comboBox = FlatComboBox<Transformer>().apply {
+            val dimension = Dimension(150, 25)
+            isFocusable = false
+            maximumSize = dimension
+            model = DefaultComboBoxModel<Transformer>(Transformer.entries.toTypedArray())
+            preferredSize = dimension
+            selectedItem = Transformer.Vineflower
+        }
+        toolBar.add(comboBox)
     }
 
     private fun onTabClose(tabPane: JTabbedPane?, tabIndex: Int) {

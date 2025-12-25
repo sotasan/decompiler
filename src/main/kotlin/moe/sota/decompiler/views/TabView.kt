@@ -28,7 +28,7 @@ class TabView(
     init {
         setLayout(BorderLayout())
 
-        val theme = Theme.load(javaClass.getClassLoader().getResourceAsStream("themes/RSyntaxTheme.xml"))
+        val theme = Theme.load(javaClass.classLoader.getResourceAsStream("themes/RSyntaxTheme.xml"))
 
         textArea = RSyntaxTextArea()
         theme.apply(textArea)
