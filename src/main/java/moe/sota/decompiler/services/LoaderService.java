@@ -9,6 +9,7 @@ import moe.sota.decompiler.models.BaseModel;
 import moe.sota.decompiler.models.FileModel;
 import moe.sota.decompiler.models.PackageModel;
 import org.jetbrains.annotations.NotNull;
+import org.koin.java.KoinJavaComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,9 +24,10 @@ public class LoaderService {
 
     public static void loadAsync(File file) {
         CompletableFuture.runAsync(() -> {
+            WindowController windowController = KoinJavaComponent.get(WindowController.class);
 
             if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
-                Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.INSTANCE.getComponent(), Taskbar.State.INDETERMINATE);
+                Taskbar.getTaskbar().setWindowProgressState((JFrame) windowController.getComponent(), Taskbar.State.INDETERMINATE);
 
             try {
 
@@ -42,7 +44,7 @@ public class LoaderService {
                         packageModel.getChildren().add(new FileModel(jar, entry));
                 }
 
-                WindowController.INSTANCE.activate();
+                windowController.activate();
                 TabsController.getINSTANCE().clearTabs();
                 TreeController.getINSTANCE().setArchive(archive);
 
@@ -51,7 +53,7 @@ public class LoaderService {
             }
 
             if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
-                Taskbar.getTaskbar().setWindowProgressState((JFrame) WindowController.INSTANCE.getComponent(), Taskbar.State.OFF);
+                Taskbar.getTaskbar().setWindowProgressState((JFrame) windowController.getComponent(), Taskbar.State.OFF);
 
         });
     }

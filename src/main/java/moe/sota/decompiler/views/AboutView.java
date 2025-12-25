@@ -5,6 +5,7 @@ import com.formdev.flatlaf.extras.components.FlatButton;
 import com.formdev.flatlaf.extras.components.FlatLabel;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import moe.sota.decompiler.controllers.StartController;
 import moe.sota.decompiler.controllers.WindowController;
 import moe.sota.decompiler.services.LanguageService;
 import net.miginfocom.swing.MigLayout;
@@ -40,7 +41,7 @@ public class AboutView extends JDialog {
 
     @SneakyThrows
     public AboutView() {
-        super((JFrame) WindowController.INSTANCE.getComponent());
+        super((JFrame) (((WindowController) KoinJavaComponent.get(WindowController.class)).getComponent()));
         getRootPane().putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICON, false);
         setModal(true);
         setResizable(false);

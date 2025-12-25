@@ -7,5 +7,5 @@ import org.koin.dsl.module
 
 val controllersModule = module {
     singleOf(::StartController)
-    single { WindowController }
+    singleOf(::WindowController)
 }
