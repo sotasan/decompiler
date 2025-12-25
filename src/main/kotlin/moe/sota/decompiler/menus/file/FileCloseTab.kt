@@ -10,7 +10,8 @@ import java.awt.event.KeyEvent
 import javax.swing.KeyStroke
 
 class FileCloseTab(
-    languageService: LanguageService
+    languageService: LanguageService,
+    private val tabsController: TabsController
 ) : FlatMenuItem(), ActionListener {
 
     init {
@@ -23,7 +24,7 @@ class FileCloseTab(
     }
 
     override fun actionPerformed(e: ActionEvent?) {
-        TabsController.INSTANCE.closeTab()
+        tabsController.closeTab()
     }
 
 }

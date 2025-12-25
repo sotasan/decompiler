@@ -8,10 +8,10 @@ import moe.sota.decompiler.models.ArchiveModel;
 import moe.sota.decompiler.models.BaseModel;
 import moe.sota.decompiler.models.FileModel;
 import moe.sota.decompiler.models.PackageModel;
+import moe.sota.decompiler.views.WindowView;
 import org.jetbrains.annotations.NotNull;
 import org.koin.java.KoinJavaComponent;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.Enumeration;
@@ -24,10 +24,13 @@ public class LoaderService {
 
     public static void loadAsync(File file) {
         CompletableFuture.runAsync(() -> {
+            TabsController tabsController = KoinJavaComponent.get(TabsController.class);
+            TreeController treeController = KoinJavaComponent.get(TreeController.class);
             WindowController windowController = KoinJavaComponent.get(WindowController.class);
+            WindowView windowView = KoinJavaComponent.get(WindowView.class);
 
             if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
-                Taskbar.getTaskbar().setWindowProgressState((JFrame) windowController.getComponent(), Taskbar.State.INDETERMINATE);
+                Taskbar.getTaskbar().setWindowProgressState(windowView, Taskbar.State.INDETERMINATE);
 
             try {
 
@@ -45,16 +48,14 @@ public class LoaderService {
                 }
 
                 windowController.activate();
-                TabsController.getINSTANCE().clearTabs();
-                TreeController.getINSTANCE().setArchive(archive);
-
+                tabsController.clearTabs();
+                treeController.setArchive(archive);
             } catch (Exception e) {
                 e.printStackTrace(System.err);
             }
 
             if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
-                Taskbar.getTaskbar().setWindowProgressState((JFrame) windowController.getComponent(), Taskbar.State.OFF);
-
+                Taskbar.getTaskbar().setWindowProgressState(windowView, Taskbar.State.OFF);
         });
     }
 
@@ -62,6 +63,7 @@ public class LoaderService {
         for (BaseModel child : baseModel.getChildren())
             if (child instanceof PackageModel && path.startsWith(child.getPath()))
                 return getChildByPath(child, path);
+
         return baseModel;
     }
 

@@ -2,19 +2,21 @@ package moe.sota.decompiler.controllers
 
 import moe.sota.decompiler.views.WindowView
 
-class WindowController : BaseController<WindowView>(WindowView()) {
+class WindowController(
+    private val windowView: WindowView
+) {
 
     fun show() {
-        view.isVisible = true
+        windowView.isVisible = true
     }
 
     fun activate() {
-        view.contentPane = view.splitPane
-        view.validate()
+        windowView.contentPane = windowView.splitPane
+        windowView.validate()
     }
 
     fun dispose() {
-        view.dispose()
+        windowView.dispose()
     }
 
 }

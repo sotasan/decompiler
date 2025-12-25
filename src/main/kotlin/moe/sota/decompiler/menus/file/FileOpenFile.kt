@@ -1,9 +1,9 @@
 package moe.sota.decompiler.menus.file
 
 import com.formdev.flatlaf.extras.components.FlatMenuItem
-import moe.sota.decompiler.controllers.WindowController
 import moe.sota.decompiler.services.LanguageService
 import moe.sota.decompiler.services.LoaderService
+import moe.sota.decompiler.views.WindowView
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.awt.Toolkit
@@ -15,10 +15,10 @@ import javax.swing.KeyStroke
 import javax.swing.filechooser.FileNameExtensionFilter
 
 class FileOpenFile(
-    languageService: LanguageService,
+    languageService: LanguageService
 ) : FlatMenuItem(), ActionListener, KoinComponent {
 
-    private val windowController: WindowController by inject()
+    private val windowView: WindowView by inject()
     private val originalText = languageService.getString("file.openFile")
 
     init {
@@ -36,7 +36,7 @@ class FileOpenFile(
             fileFilter = FileNameExtensionFilter("Java (*.jar;*.war;*.zip)", "jar", "war", "zip")
         }
 
-        fileChooser.showOpenDialog(windowController.view)
+        fileChooser.showOpenDialog(windowView)
         if (fileChooser.selectedFile != null)
             LoaderService.loadAsync(fileChooser.selectedFile)
     }

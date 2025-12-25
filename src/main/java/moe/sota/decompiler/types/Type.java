@@ -1,9 +1,7 @@
 package moe.sota.decompiler.types;
 
-import lombok.Getter;
 import moe.sota.decompiler.models.FileModel;
 
-@Getter
 public abstract class Type {
 
     private final String icon;
@@ -15,5 +13,13 @@ public abstract class Type {
     }
 
     public abstract boolean isFormat(FileModel fileModel);
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public String getSyntax() {
+        return syntax;
+    }
 
 }

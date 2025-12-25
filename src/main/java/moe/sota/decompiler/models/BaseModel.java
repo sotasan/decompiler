@@ -1,6 +1,5 @@
 package moe.sota.decompiler.models;
 
-import lombok.Getter;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
 public abstract class BaseModel implements Comparable<BaseModel> {
 
     private final List<BaseModel> children = new ArrayList<>();
@@ -28,14 +26,30 @@ public abstract class BaseModel implements Comparable<BaseModel> {
         icon = Toolkit.getDefaultToolkit().createImage(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path)).readAllBytes());
     }
 
+    public List<BaseModel> getChildren() {
+        return children;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Image getIcon() {
+        return icon;
+    }
+
     @Override
     public int compareTo(@NotNull BaseModel baseModel) {
         Class<? extends BaseModel> class1 = getClass();
         Class<? extends BaseModel> class2 = baseModel.getClass();
         return class1.equals(class2) ? getName().compareToIgnoreCase(baseModel.getName())
-                : class1.equals(FileModel.class) ? 1
-                : class2.equals(FileModel.class) ? -1
-                : 0;
+            : class1.equals(FileModel.class) ? 1
+            : class2.equals(FileModel.class) ? -1
+            : 0;
     }
 
 }
