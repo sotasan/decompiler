@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="src/test/java/moe/sota/decompiler/Main.java"><img width="75%" alt="Screenshot" src="assets/readme/screenshot.png"></a>
+    <a href="src/test/java/moe/sota/decompiler/Main.java"><img width="75%" alt="Screenshot" src=".github/assets/screenshot.png"></a>
 </p>
 
 <p align="center">
