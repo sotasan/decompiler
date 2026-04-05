@@ -2,8 +2,6 @@ package moe.sota.decompiler.views
 
 import com.formdev.flatlaf.extras.components.FlatSplitPane
 import com.formdev.flatlaf.util.SystemInfo
-import moe.sota.decompiler.menus.MenuBar
-import moe.sota.decompiler.services.LoaderService
 import java.awt.Dimension
 import java.awt.GraphicsEnvironment
 import java.awt.Taskbar
@@ -21,14 +19,11 @@ import javax.swing.BoxLayout
 import javax.swing.JFrame
 import javax.swing.JPanel
 import kotlin.system.exitProcess
+import moe.sota.decompiler.menus.MenuBar
+import moe.sota.decompiler.services.LoaderService
 
-class WindowView(
-    menuBar: MenuBar,
-    startView: StartView,
-    tabsView: TabsView,
-    treeView: TreeView
-) : JFrame() {
-
+class WindowView(menuBar: MenuBar, startView: StartView, tabsView: TabsView, treeView: TreeView) :
+    JFrame() {
     val splitPane: FlatSplitPane
     var macos: JPanel? = null
 
@@ -44,19 +39,24 @@ class WindowView(
 
         val logo = if (SystemInfo.isMacOS) "logo/logo-macos.png" else "logo/logo.png"
         val image = Toolkit.getDefaultToolkit().createImage(javaClass.classLoader.getResource(logo))
-        if (Taskbar.isTaskbarSupported() && Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE))
+        if (
+            Taskbar.isTaskbarSupported() &&
+                Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE)
+        )
             Taskbar.getTaskbar().setIconImage(image)
         iconImage = image
 
-        splitPane = FlatSplitPane().apply {
-            dividerLocation = 225
-            rightComponent = tabsView
-        }
+        splitPane =
+            FlatSplitPane().apply {
+                dividerLocation = 225
+                rightComponent = tabsView
+            }
 
-        val panel = JPanel().apply {
-            layout = BoxLayout(this, BoxLayout.Y_AXIS)
-            minimumSize = Dimension(100, 0)
-        }
+        val panel =
+            JPanel().apply {
+                layout = BoxLayout(this, BoxLayout.Y_AXIS)
+                minimumSize = Dimension(100, 0)
+            }
         splitPane.setLeftComponent(panel)
 
         if (SystemInfo.isMacFullWindowContentSupported) {
@@ -64,11 +64,12 @@ class WindowView(
             getRootPane().putClientProperty("apple.awt.transparentTitleBar", true)
             getRootPane().putClientProperty("apple.awt.windowTitleVisible", false)
 
-            macos = JPanel().apply {
-                val dimension = Dimension(0, 30)
-                minimumSize = dimension
-                preferredSize = dimension
-            }
+            macos =
+                JPanel().apply {
+                    val dimension = Dimension(0, 30)
+                    minimumSize = dimension
+                    preferredSize = dimension
+                }
             panel.add(macos)
         }
 
@@ -82,23 +83,18 @@ class WindowView(
         super.dispose()
         exitProcess(0)
     }
-
 }
 
-private class WindowComponentAdapter(
-    private val windowView: WindowView
-) : ComponentAdapter() {
-
+private class WindowComponentAdapter(private val windowView: WindowView) : ComponentAdapter() {
     override fun componentResized(event: ComponentEvent?) {
         if (SystemInfo.isMacOS && windowView.macos != null)
             windowView.isVisible =
-                windowView.height < GraphicsEnvironment.getLocalGraphicsEnvironment().maximumWindowBounds.height
+                windowView.height <
+                    GraphicsEnvironment.getLocalGraphicsEnvironment().maximumWindowBounds.height
     }
-
 }
 
 private class WindowDropTarget : DropTarget() {
-
     override fun dragOver(event: DropTargetDragEvent) {
         event.acceptDrag(DnDConstants.ACTION_MOVE)
     }
@@ -107,7 +103,8 @@ private class WindowDropTarget : DropTarget() {
         event.acceptDrop(DnDConstants.ACTION_MOVE)
 
         if (event.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
-            val files = event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as MutableList<*>
+            val files =
+                event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as MutableList<*>
 
             if (!files.isEmpty()) {
                 val file = files[0] as File
@@ -120,5 +117,4 @@ private class WindowDropTarget : DropTarget() {
             }
         }
     }
-
 }

@@ -4,7 +4,6 @@ import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 
 public enum Transformer {
-
     CFR(CFRTransformer.class),
     JD(JDTransformer.class),
     Procyon(ProcyonTransformer.class),
@@ -20,5 +19,4 @@ public enum Transformer {
     public @NotNull ITransformer newInstance() {
         return clazz.getConstructor().newInstance();
     }
-   
 }

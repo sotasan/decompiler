@@ -1,5 +1,10 @@
 package moe.sota.decompiler.controllers
 
+import java.awt.event.ActionEvent
+import java.awt.event.ActionListener
+import javax.swing.ImageIcon
+import javax.swing.event.ChangeEvent
+import javax.swing.event.ChangeListener
 import moe.sota.decompiler.menus.file.FileCloseTab
 import moe.sota.decompiler.models.FileModel
 import moe.sota.decompiler.services.PreferenceService
@@ -8,33 +13,26 @@ import moe.sota.decompiler.types.ClassType
 import moe.sota.decompiler.views.TabView
 import moe.sota.decompiler.views.TabsView
 import org.koin.java.KoinJavaComponent.get
-import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
-import javax.swing.ImageIcon
-import javax.swing.event.ChangeEvent
-import javax.swing.event.ChangeListener
 
 class TabsController(
     private val tabsView: TabsView,
-    private val createTabController: (FileModel) -> TabController
+    private val createTabController: (FileModel) -> TabController,
 ) : ActionListener, ChangeListener {
-
-    val transformer: Transformer? get() = tabsView.comboBox.selectedItem as Transformer?
+    val transformer: Transformer?
+        get() = tabsView.comboBox.selectedItem as Transformer?
 
     init {
         tabsView.comboBox.addActionListener(this)
         tabsView.getModel().addChangeListener(this)
         val transformer = PreferenceService.PREFERENCES.get("transformer", null)
-        if (transformer != null)
-            tabsView.comboBox.setSelectedItem(Transformer.valueOf(transformer))
+        if (transformer != null) tabsView.comboBox.setSelectedItem(Transformer.valueOf(transformer))
     }
 
     override fun actionPerformed(event: ActionEvent?) {
         PreferenceService.PREFERENCES.put("transformer", this.transformer?.name)
         for (i in 0..<tabsView.tabCount) {
             val controller: TabController? = (tabsView.getComponentAt(i) as TabView).tabController
-            if (controller?.fileModel?.type is ClassType)
-                controller.updateAsync()
+            if (controller?.fileModel?.type is ClassType) controller.updateAsync()
         }
     }
 
@@ -73,11 +71,9 @@ class TabsController(
 
         for (i in 0..<tabsView.tabCount) {
             val current: TabController? = (tabsView.getComponentAt(i) as TabView).tabController
-            if (fileModel === current?.fileModel)
-                controller = current
+            if (fileModel === current?.fileModel) controller = current
         }
 
         return controller
     }
-
 }

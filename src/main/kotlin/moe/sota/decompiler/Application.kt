@@ -6,14 +6,13 @@ import com.formdev.flatlaf.extras.FlatInspector
 import com.formdev.flatlaf.fonts.inter.FlatInterFont
 import com.formdev.flatlaf.fonts.jetbrains_mono.FlatJetBrainsMonoFont
 import com.formdev.flatlaf.util.SystemInfo
+import java.io.File
 import moe.sota.decompiler.controllers.WindowController
 import moe.sota.decompiler.services.LoaderService
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.io.File
 
 object Application : KoinComponent {
-
     private val windowController: WindowController by inject()
 
     fun run(args: Array<String>) {
@@ -26,8 +25,6 @@ object Application : KoinComponent {
 
         windowController.show()
 
-        if (args.isNotEmpty())
-            LoaderService.loadAsync(File(args.first()))
+        if (args.isNotEmpty()) LoaderService.loadAsync(File(args.first()))
     }
-
 }

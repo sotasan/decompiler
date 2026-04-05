@@ -12,11 +12,7 @@ val controllersModule = module {
     singleOf(::StartController)
     singleOf(::WindowController)
 
-    single {
-        TabsController(get()) { fileModel ->
-            get { parametersOf(fileModel) }
-        }
-    }
+    single { TabsController(get()) { fileModel -> get { parametersOf(fileModel) } } }
 
     factory { (fileModel: FileModel) ->
         TabController(fileModel, get { parametersOf(fileModel) }, get())

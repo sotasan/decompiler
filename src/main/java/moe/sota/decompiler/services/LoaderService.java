@@ -1,5 +1,11 @@
 package moe.sota.decompiler.services;
 
+import java.awt.*;
+import java.io.File;
+import java.util.Enumeration;
+import java.util.concurrent.CompletableFuture;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import lombok.experimental.UtilityClass;
 import moe.sota.decompiler.controllers.TabsController;
 import moe.sota.decompiler.controllers.TreeController;
@@ -12,16 +18,8 @@ import moe.sota.decompiler.views.WindowView;
 import org.jetbrains.annotations.NotNull;
 import org.koin.java.KoinJavaComponent;
 
-import java.awt.*;
-import java.io.File;
-import java.util.Enumeration;
-import java.util.concurrent.CompletableFuture;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-
 @UtilityClass
 public class LoaderService {
-
     public static void loadAsync(File file) {
         CompletableFuture.runAsync(() -> {
             TabsController tabsController = KoinJavaComponent.get(TabsController.class);
@@ -41,10 +39,8 @@ public class LoaderService {
                 while (entries.hasMoreElements()) {
                     JarEntry entry = entries.nextElement();
                     BaseModel packageModel = getChildByPath(archive, entry.getName());
-                    if (entry.isDirectory())
-                        packageModel.getChildren().add(new PackageModel(entry.getName()));
-                    else
-                        packageModel.getChildren().add(new FileModel(jar, entry));
+                    if (entry.isDirectory()) packageModel.getChildren().add(new PackageModel(entry.getName()));
+                    else packageModel.getChildren().add(new FileModel(jar, entry));
                 }
 
                 windowController.activate();
@@ -61,10 +57,8 @@ public class LoaderService {
 
     private static BaseModel getChildByPath(@NotNull BaseModel baseModel, String path) {
         for (BaseModel child : baseModel.getChildren())
-            if (child instanceof PackageModel && path.startsWith(child.getPath()))
-                return getChildByPath(child, path);
+            if (child instanceof PackageModel && path.startsWith(child.getPath())) return getChildByPath(child, path);
 
         return baseModel;
     }
-
 }

@@ -7,7 +7,6 @@ import org.jd.core.v1.api.printer.Printer;
 import org.jetbrains.annotations.NotNull;
 
 public class JDTransformer implements ITransformer, Loader, Printer {
-
     private FileModel fileModel;
     private StringBuilder builder;
     private int indent;
@@ -17,7 +16,10 @@ public class JDTransformer implements ITransformer, Loader, Printer {
         this.fileModel = fileModel;
         builder = new StringBuilder();
         if (fileModel.getPath().contains("/")) {
-            String pkg = fileModel.getPath().substring(0, fileModel.getPath().lastIndexOf('/')).replace('/', '.');
+            String pkg = fileModel
+                    .getPath()
+                    .substring(0, fileModel.getPath().lastIndexOf('/'))
+                    .replace('/', '.');
             builder.append(String.format("package %s;\n\n", pkg));
         }
         ClassFileToJavaSourceDecompiler decompiler = new ClassFileToJavaSourceDecompiler();
@@ -37,8 +39,7 @@ public class JDTransformer implements ITransformer, Loader, Printer {
 
     @Override
     public void extraLine(int count) {
-        while (count-- > 0)
-            builder.append('\n');
+        while (count-- > 0) builder.append('\n');
     }
 
     @Override
@@ -67,7 +68,8 @@ public class JDTransformer implements ITransformer, Loader, Printer {
     }
 
     @Override
-    public void printReference(int type, String internalTypeName, String name, String descriptor, String ownerInternalName) {
+    public void printReference(
+            int type, String internalTypeName, String name, String descriptor, String ownerInternalName) {
         builder.append(name);
     }
 
@@ -92,19 +94,14 @@ public class JDTransformer implements ITransformer, Loader, Printer {
     }
 
     @Override
-    public void start(int maxLineNumber, int majorVersion, int minorVersion) {
-    }
+    public void start(int maxLineNumber, int majorVersion, int minorVersion) {}
 
     @Override
-    public void startMarker(int type) {
-    }
+    public void startMarker(int type) {}
 
     @Override
-    public void end() {
-    }
+    public void end() {}
 
     @Override
-    public void endMarker(int type) {
-    }
-
+    public void endMarker(int type) {}
 }

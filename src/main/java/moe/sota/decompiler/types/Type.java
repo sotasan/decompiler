@@ -3,7 +3,6 @@ package moe.sota.decompiler.types;
 import moe.sota.decompiler.models.FileModel;
 
 public abstract class Type {
-
     private final String icon;
     private final String syntax;
 
@@ -21,5 +20,4 @@ public abstract class Type {
     public String getSyntax() {
         return syntax;
     }
-
 }

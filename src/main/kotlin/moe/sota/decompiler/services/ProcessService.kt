@@ -1,11 +1,10 @@
 package moe.sota.decompiler.services
 
-import moe.sota.decompiler.main
 import java.lang.management.ManagementFactory
 import kotlin.reflect.jvm.javaMethod
+import moe.sota.decompiler.main
 
 class ProcessService {
-
     fun start() {
         val java = ProcessHandle.current().info().command()
         if (java.isPresent) {
@@ -14,5 +13,4 @@ class ProcessService {
             ProcessBuilder(java.get(), "-cp", classPath, main).start()
         }
     }
-
 }

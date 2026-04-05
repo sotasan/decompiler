@@ -12,7 +12,5 @@ val viewsModule = module {
     singleOf(::TreeView)
     singleOf(::WindowView)
 
-    factory { (fileModel: FileModel) ->
-        TabView(fileModel)
-    }
+    factory { (fileModel: FileModel) -> TabView(fileModel) }
 }

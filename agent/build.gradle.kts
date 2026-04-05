@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("com.diffplug.spotless") version "8.4.0"
     id("io.freefair.lombok") version "9.1.0"
 }
 
@@ -10,6 +11,12 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+spotless {
+    java {
+        palantirJavaFormat()
+    }
 }
 
 tasks.jar {

@@ -1,18 +1,17 @@
 package moe.sota.decompiler.models;
 
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import lombok.SneakyThrows;
 import moe.sota.decompiler.services.TypeService;
 import moe.sota.decompiler.types.Type;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-
 public class FileModel extends BaseModel {
-
     private final JarFile jarFile;
     private final JarEntry jarEntry;
+
     @Nullable
     private final Type type;
 
@@ -32,5 +31,4 @@ public class FileModel extends BaseModel {
     public Type getType() {
         return type;
     }
-   
 }

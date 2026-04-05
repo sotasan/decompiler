@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("application")
     id("java")
+    id("com.diffplug.spotless") version "8.4.0"
     id("com.gradleup.shadow") version "9.3.0"
     id("io.freefair.lombok") version "9.1.0"
     kotlin("jvm") version "2.3.0"
@@ -10,18 +11,14 @@ plugins {
 
 version = "0.10.0"
 
-allprojects {
-    group = "moe.sota"
-}
+allprojects { group = "moe.sota" }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-kotlin.compilerOptions {
-    jvmTarget = JvmTarget.JVM_17
-}
+kotlin.compilerOptions { jvmTarget = JvmTarget.JVM_17 }
 
 application {
     applicationDefaultJvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
@@ -53,37 +50,36 @@ dependencies {
     implementation("org.vineflower:vineflower:1.11.2")
 }
 
+spotless {
+    java { palantirJavaFormat() }
+    kotlin { ktfmt().kotlinlangStyle() }
+    kotlinGradle { ktfmt().kotlinlangStyle() }
+}
+
 tasks {
     processResources {
         dependsOn(":agent:build")
         outputs.upToDateWhen { false }
         val version = project.version
-        filesMatching("application.properties") {
-            expand("version" to version)
-        }
+        filesMatching("application.properties") { expand("version" to version) }
     }
 
-    jar {
-        enabled = false
-    }
+    jar { enabled = false }
 
     shadowJar {
         dependsOn(distTar, distZip)
         archiveBaseName = project.name.lowercase()
         archiveClassifier = null
-        manifest {
-            attributes("Enable-Native-Access" to "ALL-UNNAMED")
+        manifest { attributes("Enable-Native-Access" to "ALL-UNNAMED") }
+    }
+
+    test { enabled = false }
+
+    val testJarTask =
+        register<Jar>("testJar") {
+            archiveFileName = "test.jar"
+            from(sourceSets.test.get().output)
         }
-    }
-
-    test {
-        enabled = false
-    }
-
-    val testJarTask = register<Jar>("testJar") {
-        archiveFileName = "test.jar"
-        from(sourceSets.test.get().output)
-    }
 
     named<JavaExec>("run") {
         dependsOn(testJarTask)

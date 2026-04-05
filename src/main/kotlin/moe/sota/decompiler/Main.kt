@@ -16,9 +16,7 @@ fun main(args: Array<String>) {
         System.setProperty("apple.laf.useScreenMenuBar", "${true}")
     }
 
-    startKoin {
-        modules(controllersModule, menusModule, servicesModule, viewsModule)
-    }
+    startKoin { modules(controllersModule, menusModule, servicesModule, viewsModule) }
 
     Application.run(args)
 }

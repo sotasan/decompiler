@@ -1,5 +1,7 @@
 package moe.sota.decompiler.transformers;
 
+import java.io.File;
+import java.util.jar.Manifest;
 import moe.sota.decompiler.models.FileModel;
 import org.jetbrains.java.decompiler.main.Fernflower;
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider;
@@ -7,11 +9,7 @@ import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
 
-import java.io.File;
-import java.util.jar.Manifest;
-
 public class VineflowerTransformer extends IFernflowerLogger implements ITransformer, IBytecodeProvider, IResultSaver {
-
     private FileModel fileModel;
     private String content;
 
@@ -36,39 +34,30 @@ public class VineflowerTransformer extends IFernflowerLogger implements ITransfo
     }
 
     @Override
-    public void closeArchive(String path, String archiveName) {
-    }
+    public void closeArchive(String path, String archiveName) {}
 
     @Override
-    public void copyEntry(String source, String path, String archiveName, String entry) {
-    }
+    public void copyEntry(String source, String path, String archiveName, String entry) {}
 
     @Override
-    public void copyFile(String source, String path, String entryName) {
-    }
+    public void copyFile(String source, String path, String entryName) {}
 
     @Override
-    public void createArchive(String path, String archiveName, Manifest manifest) {
-    }
+    public void createArchive(String path, String archiveName, Manifest manifest) {}
 
     @Override
-    public void saveClassEntry(String path, String archiveName, String qualifiedName, String entryName, String content) {
-    }
+    public void saveClassEntry(
+            String path, String archiveName, String qualifiedName, String entryName, String content) {}
 
     @Override
-    public void saveDirEntry(String path, String archiveName, String entryName) {
-    }
+    public void saveDirEntry(String path, String archiveName, String entryName) {}
 
     @Override
-    public void saveFolder(String path) {
-    }
+    public void saveFolder(String path) {}
 
     @Override
-    public void writeMessage(String message, Severity severity) {
-    }
+    public void writeMessage(String message, Severity severity) {}
 
     @Override
-    public void writeMessage(String message, Severity severity, Throwable t) {
-    }
-
+    public void writeMessage(String message, Severity severity, Throwable t) {}
 }

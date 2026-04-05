@@ -1,16 +1,13 @@
 package moe.sota.decompiler.views
 
 import com.formdev.flatlaf.extras.components.FlatLabel
-import moe.sota.decompiler.services.LanguageService
-import net.miginfocom.swing.MigLayout
 import java.awt.Toolkit
 import java.awt.event.KeyEvent
 import javax.swing.JPanel
+import moe.sota.decompiler.services.LanguageService
+import net.miginfocom.swing.MigLayout
 
-class StartView(
-    languageService: LanguageService
-) : JPanel() {
-
+class StartView(languageService: LanguageService) : JPanel() {
     private val root: JPanel
     private val header: FlatLabel
     private val open: FlatLabel
@@ -19,30 +16,30 @@ class StartView(
     init {
         layout = MigLayout("fill")
 
-        root = JPanel().apply {
-            layout = MigLayout("gapy 15")
-        }
+        root = JPanel().apply { layout = MigLayout("gapy 15") }
         add(root, "center")
 
-        header = FlatLabel().apply {
-            styleClass = "h1"
-            text = languageService.getString("empty")
-        }
+        header =
+            FlatLabel().apply {
+                styleClass = "h1"
+                text = languageService.getString("empty")
+            }
         root.add(header, "wrap")
 
-        open = FlatLabel().apply {
-            val group = languageService.getString("file")
-            val item = languageService.getString("file.openFile")
-            val modifier = KeyEvent.getModifiersExText(Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx())
-            val key = KeyEvent.getKeyText(KeyEvent.VK_O)
-            text = "$group > $item ($modifier + $key)"
-        }
+        open =
+            FlatLabel().apply {
+                val group = languageService.getString("file")
+                val item = languageService.getString("file.openFile")
+                val modifier =
+                    KeyEvent.getModifiersExText(
+                        Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()
+                    )
+                val key = KeyEvent.getKeyText(KeyEvent.VK_O)
+                text = "$group > $item ($modifier + $key)"
+            }
         root.add(open, "wrap")
 
-        drag = FlatLabel().apply {
-            text = languageService.getString("empty.drag")
-        }
+        drag = FlatLabel().apply { text = languageService.getString("empty.drag") }
         root.add(drag, "wrap")
     }
-
 }

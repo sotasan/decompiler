@@ -9,7 +9,6 @@ import moe.sota.decompiler.models.FileModel;
 import org.jetbrains.annotations.NotNull;
 
 public class ProcyonTransformer implements ITransformer {
-
     @Override
     public String transform(@NotNull FileModel fileModel) {
         DecompilerSettings settings = DecompilerSettings.javaDefaults();
@@ -19,5 +18,4 @@ public class ProcyonTransformer implements ITransformer {
         Decompiler.decompile(typeLoader.getClassNameFromArray(), output, settings);
         return output.toString();
     }
-
 }

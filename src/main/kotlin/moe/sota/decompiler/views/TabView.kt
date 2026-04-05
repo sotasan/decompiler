@@ -1,10 +1,5 @@
 package moe.sota.decompiler.views
 
-import moe.sota.decompiler.controllers.TabController
-import moe.sota.decompiler.models.FileModel
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
-import org.fife.ui.rsyntaxtextarea.Theme
-import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.BorderLayout
 import java.awt.Cursor
 import java.awt.Dimension
@@ -16,11 +11,13 @@ import java.awt.event.MouseWheelListener
 import javax.swing.*
 import kotlin.math.max
 import kotlin.math.min
+import moe.sota.decompiler.controllers.TabController
+import moe.sota.decompiler.models.FileModel
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
+import org.fife.ui.rsyntaxtextarea.Theme
+import org.fife.ui.rtextarea.RTextScrollPane
 
-class TabView(
-    val fileModel: FileModel
-) : JPanel(), MouseWheelListener {
-
+class TabView(val fileModel: FileModel) : JPanel(), MouseWheelListener {
     val textArea: RSyntaxTextArea
     val scrollPane: RTextScrollPane
     var tabController: TabController? = null
@@ -49,12 +46,10 @@ class TabView(
 
     // TODO: global font size
     override fun mouseWheelMoved(event: MouseWheelEvent) {
-        if (event.isControlDown || event.isMetaDown) setFontSize(
-            min(
-                50,
-                max(10, textArea.getFont().getSize() - event.getWheelRotation())
-            ).toFloat()
-        )
+        if (event.isControlDown || event.isMetaDown)
+            setFontSize(
+                min(50, max(10, textArea.getFont().getSize() - event.getWheelRotation())).toFloat()
+            )
         else for (listener in scrollPane.mouseWheelListeners) listener.mouseWheelMoved(event)
     }
 
@@ -78,31 +73,40 @@ class TabView(
         imageScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER)
         imageScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER)
 
-        imageScrollPane.addComponentListener(object : ComponentAdapter() {
-            override fun componentResized(e: ComponentEvent?) {
-                var height = getHeight()
-                var width = (originalIcon.iconWidth * (height.toDouble() / originalIcon.iconHeight)).toInt()
+        imageScrollPane.addComponentListener(
+            object : ComponentAdapter() {
+                override fun componentResized(e: ComponentEvent?) {
+                    var height = getHeight()
+                    var width =
+                        (originalIcon.iconWidth * (height.toDouble() / originalIcon.iconHeight))
+                            .toInt()
 
-                if (width > getWidth()) {
-                    width = getWidth()
-                    height = (originalIcon.iconHeight * (width.toDouble() / originalIcon.iconWidth)).toInt()
-                }
+                    if (width > getWidth()) {
+                        width = getWidth()
+                        height =
+                            (originalIcon.iconHeight * (width.toDouble() / originalIcon.iconWidth))
+                                .toInt()
+                    }
 
-                // Verify if the image is bigger than the scroll pane
-                if (originalIcon.iconWidth > width || originalIcon.iconHeight > height) {
-                    val scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH)
-                    imageLabel.setIcon(ImageIcon(scaledImage))
-                    imageLabel.preferredSize = Dimension(width, height)
-                } else {
-                    imageLabel.setIcon(originalIcon)
-                    imageLabel.preferredSize = Dimension(originalIcon.iconWidth, originalIcon.iconHeight)
+                    // Verify if the image is bigger than the scroll pane
+                    if (originalIcon.iconWidth > width || originalIcon.iconHeight > height) {
+                        val scaledImage =
+                            originalIcon
+                                .getImage()
+                                .getScaledInstance(width, height, Image.SCALE_SMOOTH)
+                        imageLabel.setIcon(ImageIcon(scaledImage))
+                        imageLabel.preferredSize = Dimension(width, height)
+                    } else {
+                        imageLabel.setIcon(originalIcon)
+                        imageLabel.preferredSize =
+                            Dimension(originalIcon.iconWidth, originalIcon.iconHeight)
+                    }
                 }
             }
-        })
+        )
 
         add(imageScrollPane, BorderLayout.CENTER)
         revalidate()
         repaint()
     }
-
 }
