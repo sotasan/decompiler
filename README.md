@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="src/test/java/moe/sota/decompiler/Main.java"><img width="75%" alt="Screenshot" src=".github/assets/screenshot.png"></a>
+    <a href="demo/src/main/java/moe/sota/decompiler/demo/Main.java"><img width="75%" alt="Screenshot" src=".github/assets/screenshot.png"></a>
 </p>
 
 <p align="center">
@@ -18,14 +18,14 @@ You can download the application from the [releases](https://github.com/sotasan/
 
 ## Usage
 
-To run the application, make sure you have Java 17+ installed and then simply execute the JAR file.
+To run the application, make sure you have Java 17+ installed and then execute the JAR file with `java -jar decompiler-x.y.z.jar`.
 
-To open an archive, select `File > Open File (Ctrl + O)` in the menu bar or directly drag and drop it.
+To open an archive, select `File > Open File (Ctrl/Cmd + O)` in the menu bar or directly drag and drop it.
 
 To change the decompiler, select the one you want to use, with the combo box in the top right corner.
 
 If you want to compare different decompilers side by side or decompile multiple archives at the same time,
-you can create a new instance from the menu bar `File > New Instance (Ctrl + N)`.
+you can create a new instance from the menu bar `File > New Instance (Ctrl/Cmd + N)`.
 
 ## Decompilers
 
@@ -64,8 +64,13 @@ then simply build it using Gradle:
 ```bash
 $ git clone https://github.com/sotasan/decompiler.git
 $ cd decompiler
-$ chmod +x gradlew
 $ ./gradlew build
+```
+
+To launch the application from source with a demo JAR pre-loaded:
+
+```bash
+$ ./gradlew run
 ```
 
 ## Contributing
