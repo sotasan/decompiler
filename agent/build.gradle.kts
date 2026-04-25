@@ -1,16 +1,12 @@
 plugins {
     id("java")
-    id("com.diffplug.spotless") version "8.4.0"
-    id("io.freefair.lombok") version "9.2.0"
+    alias(libs.plugins.lombok)
+    alias(libs.plugins.spotless)
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
-}
-
-repositories {
-    mavenCentral()
 }
 
 spotless {
@@ -20,7 +16,6 @@ spotless {
 }
 
 tasks.jar {
-    archiveExtension = "zip"
     manifest {
         attributes("Agent-Class" to "${project.group}.${rootProject.name.lowercase()}.${project.name}.Main")
     }

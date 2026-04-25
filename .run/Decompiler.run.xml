@@ -2,11 +2,11 @@
   <configuration default="false" name="Decompiler" type="JetRunConfigurationType">
     <option name="MAIN_CLASS_NAME" value="moe.sota.decompiler.Main" />
     <module name="Decompiler.main" />
-    <option name="PROGRAM_PARAMETERS" value="build/libs/test.jar" />
+    <option name="PROGRAM_PARAMETERS" value="demo/build/libs/demo.jar" />
     <shortenClasspath name="NONE" />
     <option name="VM_PARAMETERS" value="--enable-native-access=ALL-UNNAMED" />
     <method v="2">
-      <option name="Gradle.BeforeRunTask" enabled="false" tasks="testJar" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
+      <option name="Gradle.BeforeRunTask" enabled="false" tasks=":demo:jar" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
       <option name="Make" enabled="true" />
     </method>
   </configuration>

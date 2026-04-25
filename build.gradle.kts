@@ -2,11 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("application")
-    id("java")
-    id("com.diffplug.spotless") version "8.4.0"
-    id("com.gradleup.shadow") version "9.4.1"
-    id("io.freefair.lombok") version "9.2.0"
-    kotlin("jvm") version "2.3.20"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.lombok)
+    alias(libs.plugins.shadow)
+    alias(libs.plugins.spotless)
 }
 
 version = "0.10.0"
@@ -25,29 +24,29 @@ application {
     mainClass = "${project.group}.${project.name.lowercase()}.Main"
 }
 
-repositories {
-    mavenCentral()
-    maven { url = uri("https://jitpack.io") }
-    maven { url = uri("https://maven.fabricmc.net") }
-}
+val agentJar by configurations.creating { isTransitive = false }
+val demoJar by configurations.creating
 
 dependencies {
-    implementation("com.fifesoft:rsyntaxtextarea:3.6.2")
-    implementation("com.formdev:flatlaf:3.7.1")
-    implementation("com.formdev:flatlaf-extras:3.7.1")
-    implementation("com.formdev:flatlaf-fonts-inter:4.1")
-    implementation("com.formdev:flatlaf-fonts-jetbrains-mono:2.304")
-    implementation("com.h2database:h2:2.4.240")
-    implementation("com.github.java-decompiler:jd-core:1.1.3")
-    implementation("com.miglayout:miglayout-swing:11.4.3")
-    implementation("io.insert-koin:koin-core:4.2.0")
-    implementation("net.fabricmc:cfr:0.2.2")
-    implementation("org.bitbucket.mstrobel:procyon-compilertools:0.6.0")
-    implementation("org.jetbrains:annotations:26.1.0")
-    implementation("org.ktorm:ktorm-core:4.1.1")
-    implementation("org.ow2.asm:asm:9.9.1")
-    implementation("org.ow2.asm:asm-util:9.9.1")
-    implementation("org.vineflower:vineflower:1.11.2")
+    agentJar(project(":agent"))
+    demoJar(project(":demo"))
+
+    implementation(libs.asm)
+    implementation(libs.asm.util)
+    implementation(libs.cfr)
+    implementation(libs.flatlaf)
+    implementation(libs.flatlaf.extras)
+    implementation(libs.flatlaf.fonts.inter)
+    implementation(libs.flatlaf.fonts.jetbrains.mono)
+    implementation(libs.h2)
+    implementation(libs.jd.core)
+    implementation(libs.jetbrains.annotations)
+    implementation(libs.koin.core)
+    implementation(libs.ktorm.core)
+    implementation(libs.miglayout.swing)
+    implementation(libs.procyon)
+    implementation(libs.rsyntaxtextarea)
+    implementation(libs.vineflower)
 }
 
 spotless {
@@ -58,31 +57,27 @@ spotless {
 
 tasks {
     processResources {
-        dependsOn(":agent:build")
-        outputs.upToDateWhen { false }
+        from(agentJar)
         val version = project.version
+        inputs.property("version", version)
         filesMatching("application.properties") { expand("version" to version) }
     }
 
     jar { enabled = false }
 
     shadowJar {
-        dependsOn(distTar, distZip)
         archiveBaseName = project.name.lowercase()
         archiveClassifier = null
         manifest { attributes("Enable-Native-Access" to "ALL-UNNAMED") }
     }
 
-    test { enabled = false }
-
-    val testJarTask =
-        register<Jar>("testJar") {
-            archiveFileName = "test.jar"
-            from(sourceSets.test.get().output)
-        }
+    startScripts { dependsOn(shadowJar) }
 
     named<JavaExec>("run") {
-        dependsOn(testJarTask)
-        args = listOf(testJarTask.get().archiveFile.get().asFile.path)
+        val demoFiles: FileCollection = demoJar
+        inputs.files(demoFiles)
+        argumentProviders.add(
+            CommandLineArgumentProvider { listOf(demoFiles.singleFile.absolutePath) }
+        )
     }
 }

@@ -1,4 +1,4 @@
-package moe.sota.decompiler;
+package moe.sota.decompiler.demo;
 
 public class Main {
     public static void main(String[] args) {
