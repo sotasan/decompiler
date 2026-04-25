@@ -70,7 +70,7 @@ $ bun install
 Run the Tauri shell in development mode:
 
 ```bash
-$ bun run tauri dev
+$ mise run dev
 ```
 
 Build a release bundle for the host platform:
