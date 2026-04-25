@@ -12,9 +12,11 @@
   "app": {
     "windows": [
       {
-        "title": "decompiler",
-        "width": 800,
-        "height": 600
+        "title": "Decompiler",
+        "width": 1000,
+        "height": 700,
+        "minWidth": 500,
+        "minHeight": 300
       }
     ],
     "security": {
