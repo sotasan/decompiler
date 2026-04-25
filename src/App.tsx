@@ -40,9 +40,9 @@ function Node({ node, style, dragHandle }: NodeRendererProps<FileNode>) {
       ref={dragHandle}
       style={style}
       onClick={() => node.toggle()}
-      className="cursor-pointer truncate px-1 text-sm hover:bg-zinc-800"
+      className="cursor-pointer truncate px-1 text-sm hover:bg-nord-2"
     >
-      <span className="inline-block w-4 text-zinc-500">
+      <span className="inline-block w-4 text-nord-9">
         {node.isInternal ? (node.isOpen ? "▾" : "▸") : ""}
       </span>
       {node.data.name}
@@ -76,7 +76,7 @@ function App() {
             {Node}
           </Tree>
         </Panel>
-        <Separator className="w-px bg-zinc-700 transition-colors hover:bg-blue-500" />
+        <Separator className="w-px bg-nord-2 transition-colors hover:bg-nord-12" />
         <Panel>
           <Editor
             defaultLanguage="java"
