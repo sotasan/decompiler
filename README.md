@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="demo/src/main/java/moe/sota/decompiler/demo/Main.java"><img width="75%" alt="Screenshot" src=".github/assets/screenshot.png"></a>
+    <a href="jvm/demo/src/main/java/moe/sota/decompiler/demo/Main.java"><img width="75%" alt="Screenshot" src=".github/assets/screenshot.png"></a>
 </p>
 
 <p align="center">
@@ -8,7 +8,7 @@
     <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/sotasan/decompiler?label=License"></a>
 </p>
 
-# <img src="src/main/resources/logo/logo.png" alt="Logo" width="32" align="center"> Decompiler
+# <img src="jvm/src/main/resources/logo/logo.png" alt="Logo" width="32" align="center"> Decompiler
 
 A GUI application that allows you to browse Java archives using various decompilers.
 
@@ -42,17 +42,17 @@ The application is multilingual and determines the language based on your locale
 
 The following languages are supported:
 
-- [English](src/main/resources/langs/language.properties)
-- [German](src/main/resources/langs/language_de.properties)
-- [Spanish](src/main/resources/langs/language_es.properties)
-- [French](src/main/resources/langs/language_fr.properties)
-- [Japanese](src/main/resources/langs/language_ja.properties)
-- [Dutch](src/main/resources/langs/language_nl.properties)
-- [Russian](src/main/resources/langs/language_ru.properties)
-- [Chinese](src/main/resources/langs/language_zh.properties)
+- [English](jvm/src/main/resources/langs/language.properties)
+- [German](jvm/src/main/resources/langs/language_de.properties)
+- [Spanish](jvm/src/main/resources/langs/language_es.properties)
+- [French](jvm/src/main/resources/langs/language_fr.properties)
+- [Japanese](jvm/src/main/resources/langs/language_ja.properties)
+- [Dutch](jvm/src/main/resources/langs/language_nl.properties)
+- [Russian](jvm/src/main/resources/langs/language_ru.properties)
+- [Chinese](jvm/src/main/resources/langs/language_zh.properties)
 
 If you want to add or change a localization,
-you can edit the files [here](src/main/resources/langs)
+you can edit the files [here](jvm/src/main/resources/langs)
 and create a [pull request](https://github.com/sotasan/decompiler/pulls).
 
 ## Development
