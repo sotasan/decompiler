@@ -8,8 +8,6 @@ plugins {
     alias(libs.plugins.spotless)
 }
 
-version = "0.10.0"
-
 allprojects { group = "moe.sota.decompiler" }
 
 java {
@@ -59,7 +57,6 @@ tasks {
     jar { enabled = false }
 
     shadowJar {
-        archiveBaseName = rootProject.name.lowercase()
         archiveClassifier = null
         manifest { attributes("Enable-Native-Access" to "ALL-UNNAMED") }
     }
