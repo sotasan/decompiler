@@ -660,7 +660,7 @@ dependencies = [
 
 [[package]]
 name = "decompiler"
-version = "0.1.0"
+version = "0.10.0"
 dependencies = [
  "j4rs",
  "serde",

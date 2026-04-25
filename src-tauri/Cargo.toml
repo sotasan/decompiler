@@ -1,8 +1,8 @@
 [package]
 name = "decompiler"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+version = "0.10.0"
+description = "A GUI decompiler for Java archives."
+authors = ["Sōta"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
