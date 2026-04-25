@@ -12,5 +12,3 @@ rootProject.name = "Decompiler"
 include("agent")
 
 include("demo")
-
-include("jvm")
