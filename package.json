@@ -16,14 +16,18 @@
     "@tauri-apps/plugin-opener": "^2",
     "monaco-editor": "^0.55.1",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-arborist": "^3.5.0",
+    "react-dom": "^19.2.5",
+    "react-resizable-panels": "^4.10.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.2.4",
+    "@tauri-apps/cli": "^2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
+    "tailwindcss": "^4.2.4",
     "typescript": "~6.0.3",
-    "vite": "^8.0.10",
-    "@tauri-apps/cli": "^2"
+    "vite": "^8.0.10"
   }
 }

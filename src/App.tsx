@@ -1,7 +1,54 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import Editor from "@monaco-editor/react";
+import { Group, Panel, Separator } from "react-resizable-panels";
+import { NodeRendererProps, Tree } from "react-arborist";
 import "./App.css";
+
+type FileNode = {
+  id: string;
+  name: string;
+  children?: FileNode[];
+};
+
+const sampleTree: FileNode[] = [
+  {
+    id: "moe",
+    name: "moe",
+    children: [
+      {
+        id: "moe.sota",
+        name: "sota",
+        children: [
+          {
+            id: "moe.sota.decompiler",
+            name: "decompiler",
+            children: [
+              { id: "Main.class", name: "Main.class" },
+              { id: "Application.class", name: "Application.class" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+
+function Node({ node, style, dragHandle }: NodeRendererProps<FileNode>) {
+  return (
+    <div
+      ref={dragHandle}
+      style={style}
+      onClick={() => node.toggle()}
+      className="cursor-pointer truncate px-1 text-sm hover:bg-zinc-800"
+    >
+      <span className="inline-block w-4 text-zinc-500">
+        {node.isInternal ? (node.isOpen ? "▾" : "▸") : ""}
+      </span>
+      {node.data.name}
+    </div>
+  );
+}
 
 function App() {
   const [greeting, setGreeting] = useState("loading…");
@@ -12,31 +59,39 @@ function App() {
       .catch((err) => setGreeting(`error: ${err}`));
   }, []);
 
+  useEffect(() => {
+    const onContextMenu = (e: MouseEvent) => e.preventDefault();
+    document.addEventListener("contextmenu", onContextMenu);
+    return () => document.removeEventListener("contextmenu", onContextMenu);
+  }, []);
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      <header
-        style={{
-          padding: "8px 16px",
-          borderBottom: "1px solid #333",
-          fontFamily: "system-ui, sans-serif",
-          fontSize: 13,
-        }}
-      >
+    <div className="flex h-screen flex-col">
+      <header className="px-4 py-2 font-sans text-sm">
         JVM says: {greeting}
       </header>
-      <div style={{ flex: 1, minHeight: 0 }}>
-        <Editor
-          defaultLanguage="java"
-          defaultValue={`public class Hello {\n    public static void main(String[] args) {\n        System.out.println("Hello from Monaco");\n    }\n}\n`}
-          theme="vs-dark"
-          loading={null}
-          options={{
-            readOnly: true,
-            minimap: { enabled: false },
-            contextmenu: false,
-          }}
-        />
-      </div>
+      <Group orientation="horizontal" className="flex min-h-0 flex-1">
+        <Panel defaultSize={25} minSize={15}>
+          <Tree<FileNode> initialData={sampleTree} openByDefault={false}>
+            {Node}
+          </Tree>
+        </Panel>
+        <Separator className="w-px bg-zinc-700 transition-colors hover:bg-blue-500" />
+        <Panel>
+          <Editor
+            defaultLanguage="java"
+            defaultValue={`public class Hello {\n    public static void main(String[] args) {\n        System.out.println("Hello from Monaco");\n    }\n}\n`}
+            theme="nord"
+            loading={null}
+            options={{
+              readOnly: true,
+              minimap: { enabled: false },
+              contextmenu: false,
+              fontSize: 16,
+            }}
+          />
+        </Panel>
+      </Group>
     </div>
   );
 }

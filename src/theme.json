@@ -1,0 +1,30 @@
+{
+  "base": "vs-dark",
+  "inherit": true,
+  "rules": [
+    { "token": "", "foreground": "eceff4", "background": "4c566a" },
+    { "token": "identifier", "foreground": "eceff4" },
+    { "token": "keyword", "foreground": "d08770", "fontStyle": "bold" },
+    { "token": "annotation", "foreground": "b48ead" },
+    { "token": "comment", "foreground": "81a1c1" },
+    { "token": "comment.doc", "foreground": "81a1c1" },
+    { "token": "string", "foreground": "a3be8c" },
+    { "token": "string.escape", "foreground": "a3be8c" },
+    { "token": "number", "foreground": "ebcb8b" },
+    { "token": "number.float", "foreground": "ebcb8b" },
+    { "token": "number.hex", "foreground": "ebcb8b" },
+    { "token": "constant", "foreground": "ebcb8b" },
+    { "token": "type", "foreground": "ebcb8b" },
+    { "token": "type.identifier", "foreground": "ebcb8b" },
+    { "token": "delimiter", "foreground": "eceff4" }
+  ],
+  "colors": {
+    "editor.background": "#4c566a",
+    "editor.foreground": "#eceff4",
+    "editor.selectionBackground": "#d08770",
+    "editor.selectionForeground": "#4c566a",
+    "editorCursor.foreground": "#eceff4",
+    "editorLineNumber.foreground": "#bcc6d8",
+    "editorLineNumber.activeForeground": "#eceff4"
+  }
+}

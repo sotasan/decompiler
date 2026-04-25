@@ -1,3 +1,14 @@
+@import "tailwindcss";
+
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+::selection {
+  background: transparent;
+}
+
 .monaco-editor-overlaymessage {
   display: none !important;
 }
