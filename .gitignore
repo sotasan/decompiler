@@ -1,6 +1,7 @@
 .gradle
 .idea
 .kotlin
+.vscode
 bin
 build
 .DS_Store
