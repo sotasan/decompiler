@@ -1,4 +1,4 @@
-package moe.sota.decompiler.agent;
+package moe.sota.decompiler.jvm.agent;
 
 import java.lang.instrument.Instrumentation;
 import lombok.experimental.UtilityClass;

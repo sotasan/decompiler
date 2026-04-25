@@ -10,7 +10,7 @@ plugins {
 
 version = "0.10.0"
 
-allprojects { group = "moe.sota" }
+allprojects { group = "moe.sota.decompiler" }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17

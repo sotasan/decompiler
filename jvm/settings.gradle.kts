@@ -7,7 +7,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Decompiler"
+rootProject.name = "jvm"
 
 include("agent")
 
