@@ -1,4 +1,8 @@
 [tools]
 bun = "latest"
+"cargo:watchexec-cli" = "latest"
 java = "latest"
 rust = "stable"
+
+[tasks.dev]
+run = "watchexec -rw jvm/src -- bun run tauri dev"
