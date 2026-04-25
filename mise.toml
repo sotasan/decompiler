@@ -1,2 +1,4 @@
 [tools]
+bun = "latest"
 java = "latest"
+rust = "stable"
