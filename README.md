@@ -55,22 +55,28 @@ If you want to add or change a localization,
 you can edit the files [here](src/main/resources/langs)
 and create a [pull request](https://github.com/sotasan/decompiler/pulls).
 
-## Build
+## Development
 
-To build the application from source,
-make sure you have Java 17+ installed,
-then simply build it using Gradle:
+This project uses [mise](https://mise.jdx.dev) to pin its toolchain versions.
+Install it once and the rest follows:
 
 ```bash
 $ git clone https://github.com/sotasan/decompiler.git
 $ cd decompiler
-$ ./gradlew build
+$ mise install
+$ bun install
 ```
 
-To launch the application from source with a demo JAR pre-loaded:
+Run the Tauri shell in development mode:
 
 ```bash
-$ ./gradlew run
+$ bun tauri dev
+```
+
+Build a release bundle for the host platform:
+
+```bash
+$ bun tauri build
 ```
 
 ## Contributing
