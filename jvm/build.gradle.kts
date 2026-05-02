@@ -1,10 +1,8 @@
 import java.nio.file.Files
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("java")
     application
-    alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.lombok)
     alias(libs.plugins.runtime)
     alias(libs.plugins.shadow)
@@ -18,24 +16,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_25
 }
 
-kotlin.compilerOptions { jvmTarget = JvmTarget.JVM_25 }
-
 application { mainClass = "moe.sota.decompiler.jvm.Main" }
 
 runtime {
     options = listOf("--strip-debug", "--no-header-files", "--no-man-pages", "--compress", "2")
-    modules =
-        listOf(
-            "java.compiler",
-            "java.desktop",
-            "java.instrument",
-            "java.management",
-            "java.prefs",
-            "java.scripting",
-            "java.sql.rowset",
-            "jdk.net",
-            "jdk.unsupported",
-        )
+    modules = listOf("java.compiler", "java.logging", "jdk.unsupported")
 }
 
 val agentJar by configurations.creating { isTransitive = false }
@@ -46,24 +31,14 @@ dependencies {
     implementation(libs.asm)
     implementation(libs.asm.util)
     implementation(libs.cfr)
-    implementation(libs.flatlaf)
-    implementation(libs.flatlaf.extras)
-    implementation(libs.flatlaf.fonts.inter)
-    implementation(libs.flatlaf.fonts.jetbrains.mono)
-    implementation(libs.h2)
     implementation(libs.jd.core)
     implementation(libs.jetbrains.annotations)
-    implementation(libs.koin.core)
-    implementation(libs.ktorm.core)
-    implementation(libs.miglayout.swing)
     implementation(libs.procyon)
-    implementation(libs.rsyntaxtextarea)
     implementation(libs.vineflower)
 }
 
 spotless {
     java { palantirJavaFormat() }
-    kotlin { ktfmt().kotlinlangStyle() }
     kotlinGradle { ktfmt().kotlinlangStyle() }
 }
 

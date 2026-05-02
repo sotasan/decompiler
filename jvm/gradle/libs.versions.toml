@@ -1,19 +1,10 @@
 [versions]
 asm = "9.9.1"
 cfr = "0.2.2"
-flatlaf = "3.7.1"
-flatlaf-fonts-inter = "4.1"
-flatlaf-fonts-jetbrains-mono = "2.304"
-h2 = "2.4.240"
 jd-core = "1.1.3"
 jetbrains-annotations = "26.1.0"
-koin = "4.2.1"
-kotlin = "2.3.21"
-ktorm = "4.1.1"
 lombok = "9.4.0"
-miglayout = "11.4.3"
 procyon = "0.6.0"
-rsyntaxtextarea = "3.6.2"
 runtime = "2.0.1"
 shadow = "9.4.1"
 spotless = "8.4.0"
@@ -23,22 +14,12 @@ vineflower = "1.11.2"
 asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
 asm-util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
 cfr = { module = "net.fabricmc:cfr", version.ref = "cfr" }
-flatlaf = { module = "com.formdev:flatlaf", version.ref = "flatlaf" }
-flatlaf-extras = { module = "com.formdev:flatlaf-extras", version.ref = "flatlaf" }
-flatlaf-fonts-inter = { module = "com.formdev:flatlaf-fonts-inter", version.ref = "flatlaf-fonts-inter" }
-flatlaf-fonts-jetbrains-mono = { module = "com.formdev:flatlaf-fonts-jetbrains-mono", version.ref = "flatlaf-fonts-jetbrains-mono" }
-h2 = { module = "com.h2database:h2", version.ref = "h2" }
 jd-core = { module = "com.github.java-decompiler:jd-core", version.ref = "jd-core" }
 jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-ktorm-core = { module = "org.ktorm:ktorm-core", version.ref = "ktorm" }
-miglayout-swing = { module = "com.miglayout:miglayout-swing", version.ref = "miglayout" }
 procyon = { module = "org.bitbucket.mstrobel:procyon-compilertools", version.ref = "procyon" }
-rsyntaxtextarea = { module = "com.fifesoft:rsyntaxtextarea", version.ref = "rsyntaxtextarea" }
 vineflower = { module = "org.vineflower:vineflower", version.ref = "vineflower" }
 
 [plugins]
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 lombok = { id = "io.freefair.lombok", version.ref = "lombok" }
 runtime = { id = "org.beryx.runtime", version.ref = "runtime" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }

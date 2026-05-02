@@ -1,29 +1,18 @@
 package moe.sota.decompiler.jvm.models;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseModel implements Comparable<BaseModel> {
     private final List<BaseModel> children = new ArrayList<>();
     private final String path;
     public String name;
-    private Image icon;
 
     public BaseModel(String path, boolean directory) {
         this.path = path;
         name = directory ? path.substring(0, path.length() - 1) : path;
         name = name.substring(name.lastIndexOf('/') + 1);
-    }
-
-    @SneakyThrows
-    public void setIcon(String path) {
-        icon = Toolkit.getDefaultToolkit()
-                .createImage(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(path))
-                        .readAllBytes());
     }
 
     public List<BaseModel> getChildren() {
@@ -36,10 +25,6 @@ public abstract class BaseModel implements Comparable<BaseModel> {
 
     public String getName() {
         return name;
-    }
-
-    public Image getIcon() {
-        return icon;
     }
 
     @Override
