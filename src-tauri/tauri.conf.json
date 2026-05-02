@@ -39,7 +39,8 @@
     "active": true,
     "targets": "all",
     "resources": {
-      "../jvm/build/libs/jvm.jar": "jvm.jar"
+      "../jvm/build/libs/jvm.jar": "jvm.jar",
+      "../jvm/build/jre": "jre"
     },
     "icon": [
       "icons/32x32.png",

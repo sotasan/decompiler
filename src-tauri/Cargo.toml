@@ -22,6 +22,7 @@ tauri = { version = "2", features = [] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-j4rs = "0.25"
+java-locator = "0.1"
+jni = { version = "0.22", features = ["invocation"] }
 tauri-plugin-cli = "2.4.1"
 

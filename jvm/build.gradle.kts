@@ -1,9 +1,12 @@
+import java.nio.file.Files
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("java")
+    application
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.lombok)
+    alias(libs.plugins.runtime)
     alias(libs.plugins.shadow)
     alias(libs.plugins.spotless)
 }
@@ -11,11 +14,29 @@ plugins {
 allprojects { group = "moe.sota.decompiler" }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
-kotlin.compilerOptions { jvmTarget = JvmTarget.JVM_17 }
+kotlin.compilerOptions { jvmTarget = JvmTarget.JVM_25 }
+
+application { mainClass = "moe.sota.decompiler.jvm.Main" }
+
+runtime {
+    options = listOf("--strip-debug", "--no-header-files", "--no-man-pages", "--compress", "2")
+    modules =
+        listOf(
+            "java.compiler",
+            "java.desktop",
+            "java.instrument",
+            "java.management",
+            "java.prefs",
+            "java.scripting",
+            "java.sql.rowset",
+            "jdk.net",
+            "jdk.unsupported",
+        )
+}
 
 val agentJar by configurations.creating { isTransitive = false }
 
@@ -59,5 +80,18 @@ tasks {
     shadowJar {
         archiveClassifier = null
         manifest { attributes("Enable-Native-Access" to "ALL-UNNAMED") }
+    }
+
+    named("jre") {
+        notCompatibleWithConfigurationCache("badass-runtime-plugin 2.0.1")
+        doLast {
+            val jre = layout.buildDirectory.dir("jre").get().asFile
+            jre.walkBottomUp().filter { Files.isSymbolicLink(it.toPath()) }.forEach {
+                val target = it.toPath().toRealPath()
+                it.delete()
+                Files.copy(target, it.toPath())
+            }
+            jre.walkTopDown().forEach { it.setWritable(true, true) }
+        }
     }
 }

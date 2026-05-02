@@ -1,31 +1,25 @@
-use j4rs::{ClasspathEntry, InvocationArg, JvmBuilder};
-use tauri::{AppHandle, Manager};
+use jni::objects::JString;
+use jni::{InitArgsBuilder, JNIVersion, JavaVM, jni_sig, jni_str};
+use tauri::{Manager, State};
+
+struct Jvm(JavaVM);
 
 #[tauri::command]
-fn greet_from_jvm(app: AppHandle) -> Result<String, String> {
-    let jar = app
-        .path()
-        .resource_dir()
-        .map_err(|e| format!("failed to resolve resource_dir: {e}"))?
-        .join("jvm.jar");
-
-    let jar_str = jar.to_str().ok_or_else(|| "non-UTF8 jar path".to_string())?;
-
-    let jvm = JvmBuilder::new()
-        .classpath_entry(ClasspathEntry::new(jar_str))
-        .build()
-        .map_err(|e| format!("failed to start JVM: {e}"))?;
-
-    let result = jvm
-        .invoke_static(
-            "moe.sota.decompiler.jvm.Main",
-            "greet",
-            &[] as &[InvocationArg],
-        )
-        .map_err(|e| format!("failed to invoke Service.greet: {e}"))?;
-
-    jvm.to_rust(result)
-        .map_err(|e| format!("failed to unwrap String: {e}"))
+fn greet_from_jvm(jvm: State<'_, Jvm>) -> Result<String, String> {
+    jvm.0
+        .attach_current_thread(|env| -> jni::errors::Result<String> {
+            let class = env.find_class(jni_str!("moe/sota/decompiler/jvm/Main"))?;
+            let result = env.call_static_method(
+                &class,
+                jni_str!("greet"),
+                &jni_sig!(() -> java.lang.String),
+                &[],
+            )?;
+            let obj = result.l()?;
+            let jstr = unsafe { JString::from_raw(env, obj.as_raw()) };
+            jstr.try_to_string(env)
+        })
+        .map_err(|e: jni::errors::Error| format!("greet failed: {e}"))
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -35,6 +29,21 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![greet_from_jvm])
         .setup(|app| {
+            let resource_dir = app.path().resource_dir()?;
+            let jre = resource_dir.join("jre");
+            let jar = resource_dir.join("jvm.jar");
+            let jar_str = jar.to_str().ok_or("non-UTF8 jar path")?;
+            let args = InitArgsBuilder::new()
+                .version(JNIVersion::V21)
+                .option(format!("-Djava.class.path={jar_str}"))
+                .build()?;
+            let libjvm = jre
+                .join(if cfg!(target_os = "windows") { "bin" } else { "lib" })
+                .join("server")
+                .join(java_locator::get_jvm_dyn_lib_file_name());
+            let jvm = JavaVM::with_libjvm(args, || Ok(libjvm))?;
+            app.manage(Jvm(jvm));
+
             #[cfg(target_os = "macos")]
             {
                 use tauri::menu::{AboutMetadata, MenuBuilder, PredefinedMenuItem, SubmenuBuilder};

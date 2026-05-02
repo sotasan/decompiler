@@ -14,6 +14,7 @@ lombok = "9.4.0"
 miglayout = "11.4.3"
 procyon = "0.6.0"
 rsyntaxtextarea = "3.6.2"
+runtime = "2.0.1"
 shadow = "9.4.1"
 spotless = "8.4.0"
 vineflower = "1.11.2"
@@ -39,5 +40,6 @@ vineflower = { module = "org.vineflower:vineflower", version.ref = "vineflower" 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 lombok = { id = "io.freefair.lombok", version.ref = "lombok" }
+runtime = { id = "org.beryx.runtime", version.ref = "runtime" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

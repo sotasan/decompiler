@@ -17,13 +17,13 @@ fn main() {
     };
 
     let status = Command::new(&gradlew)
-        .arg(":shadowJar")
+        .args([":jre", ":shadowJar"])
         .current_dir(&jvm_dir)
         .status()
         .expect("failed to invoke gradle wrapper");
 
     if !status.success() {
-        panic!("gradle :shadowJar failed");
+        panic!("gradle :jre :shadowJar failed");
     }
 
     tauri_build::build();
