@@ -18,7 +18,7 @@ fn greet_from_jvm(app: AppHandle) -> Result<String, String> {
 
     let result = jvm
         .invoke_static(
-            "moe.sota.decompiler.jvm.Service",
+            "moe.sota.decompiler.jvm.Main",
             "greet",
             &[] as &[InvocationArg],
         )
