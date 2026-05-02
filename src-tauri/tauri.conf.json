@@ -9,6 +9,18 @@
     "beforeBuildCommand": "bun run build",
     "frontendDist": "../dist"
   },
+  "plugins": {
+    "cli": {
+      "args": [
+        {
+          "name": "file",
+          "description": "JAR/WAR/ZIP archive to open",
+          "takesValue": true,
+          "index": 1
+        }
+      ]
+    }
+  },
   "app": {
     "windows": [
       {
