@@ -111,7 +111,7 @@ private class WindowDropTarget : DropTarget() {
                 val name = file.getName().lowercase(Locale.getDefault())
 
                 if (name.endsWith(".jar") || name.endsWith(".war") || name.endsWith(".zip")) {
-                    LoaderService.loadAsync(file)
+                    LoaderService.load(file)
                     event.dropComplete(true)
                 }
             }

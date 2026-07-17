@@ -38,6 +38,6 @@ class FileOpenFile(languageService: LanguageService) :
             }
 
         fileChooser.showOpenDialog(windowView)
-        if (fileChooser.selectedFile != null) LoaderService.loadAsync(fileChooser.selectedFile)
+        if (fileChooser.selectedFile != null) LoaderService.load(fileChooser.selectedFile)
     }
 }

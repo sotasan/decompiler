@@ -25,6 +25,6 @@ object Application : KoinComponent {
 
         windowController.show()
 
-        if (args.isNotEmpty()) LoaderService.loadAsync(File(args.first()))
+        if (args.isNotEmpty()) LoaderService.load(File(args.first()))
     }
 }
