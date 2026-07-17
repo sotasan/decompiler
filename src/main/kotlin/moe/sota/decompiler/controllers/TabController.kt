@@ -3,12 +3,12 @@ package moe.sota.decompiler.controllers
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.nio.charset.StandardCharsets
-import java.util.concurrent.CompletableFuture
-import java.util.concurrent.CompletionException
-import java.util.function.Consumer
-import java.util.function.Function
 import javax.swing.JScrollPane
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import moe.sota.decompiler.models.FileModel
+import moe.sota.decompiler.transformers.Transformer
 import moe.sota.decompiler.types.ClassType
 import moe.sota.decompiler.types.ImageType
 import moe.sota.decompiler.views.TabView
@@ -23,46 +23,33 @@ class TabController(
         tabView.tabController = this
     }
 
-    fun updateAsync(): CompletableFuture<Void?> {
+    suspend fun update() {
         if (fileModel.type is ImageType) {
             val imageScrollPane = JScrollPane()
             tabView.setScrollPane(imageScrollPane)
-            return CompletableFuture.completedFuture<Void?>(null)
+            return
         }
 
-        return getTextAsync(fileModel)
-            .thenAccept(
-                Consumer { s: String? ->
-                    tabView.textArea.text = s
-                    val type = fileModel.type
-                    if (type != null) tabView.textArea.setSyntaxEditingStyle(type.syntax)
-                }
-            )
-            .exceptionally(
-                Function { e: Throwable? ->
-                    val stringWriter = StringWriter()
-                    val printWriter = PrintWriter(stringWriter)
-                    e?.printStackTrace(printWriter)
-                    tabView.textArea.text = stringWriter.toString().trim { it <= ' ' }
-                    tabView.textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE)
-                    null
-                }
-            )
-            .thenRun {
-                tabView.scrollPane.getHorizontalScrollBar().setValue(0)
-                tabView.scrollPane.getVerticalScrollBar().setValue(0)
-            }
+        try {
+            val transformer = tabsController.transformer
+            val text = withContext(Dispatchers.Default) { getText(transformer) }
+            tabView.textArea.text = text
+            val type = fileModel.type
+            if (type != null) tabView.textArea.setSyntaxEditingStyle(type.syntax)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Throwable) {
+            val stringWriter = StringWriter()
+            e.printStackTrace(PrintWriter(stringWriter))
+            tabView.textArea.text = stringWriter.toString().trim { it <= ' ' }
+            tabView.textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE)
+        }
+
+        tabView.scrollPane.getHorizontalScrollBar().setValue(0)
+        tabView.scrollPane.getVerticalScrollBar().setValue(0)
     }
 
-    private fun getTextAsync(fileModel: FileModel): CompletableFuture<String?> {
-        return CompletableFuture.supplyAsync<String?> {
-            try {
-                return@supplyAsync if (fileModel.type is ClassType)
-                    tabsController.transformer!!.newInstance().transform(fileModel)
-                else String(fileModel.bytes, StandardCharsets.UTF_8)
-            } catch (e: Exception) {
-                throw CompletionException(e)
-            }
-        }
-    }
+    private fun getText(transformer: Transformer?): String =
+        if (fileModel.type is ClassType) transformer!!.newInstance().transform(fileModel)
+        else String(fileModel.bytes, StandardCharsets.UTF_8)
 }

@@ -5,6 +5,8 @@ import java.awt.event.ActionListener
 import javax.swing.ImageIcon
 import javax.swing.event.ChangeEvent
 import javax.swing.event.ChangeListener
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import moe.sota.decompiler.menus.file.FileCloseTab
 import moe.sota.decompiler.models.FileModel
 import moe.sota.decompiler.services.PreferenceService
@@ -18,6 +20,8 @@ class TabsController(
     private val tabsView: TabsView,
     private val createTabController: (FileModel) -> TabController,
 ) : ActionListener, ChangeListener {
+    private val scope = MainScope()
+
     val transformer: Transformer?
         get() = tabsView.comboBox.selectedItem as Transformer?
 
@@ -32,7 +36,7 @@ class TabsController(
         PreferenceService.PREFERENCES.put("transformer", this.transformer?.name)
         for (i in 0..<tabsView.tabCount) {
             val controller: TabController? = (tabsView.getComponentAt(i) as TabView).tabController
-            if (controller?.fileModel?.type is ClassType) controller.updateAsync()
+            if (controller?.fileModel?.type is ClassType) scope.launch { controller.update() }
         }
     }
 
@@ -42,19 +46,21 @@ class TabsController(
     }
 
     fun addTab(fileModel: FileModel) {
-        var controller = getController(fileModel)
-        if (controller == null) {
-            controller = createTabController(fileModel)
-            val icon = ImageIcon(fileModel.icon)
-            val component = controller.tabView
-            controller.updateAsync().thenRun {
-                if (getController(fileModel) == null) {
-                    tabsView.addTab(fileModel.getName(), icon, component)
-                    tabsView.setSelectedComponent(component)
-                }
+        val existing = getController(fileModel)
+        if (existing != null) {
+            tabsView.setSelectedComponent(existing.tabView)
+            return
+        }
+
+        val controller = createTabController(fileModel)
+        val icon = ImageIcon(fileModel.icon)
+        val component = controller.tabView
+        scope.launch {
+            controller.update()
+            if (getController(fileModel) == null) {
+                tabsView.addTab(fileModel.name, icon, component)
+                tabsView.setSelectedComponent(component)
             }
-        } else {
-            tabsView.setSelectedComponent(controller.tabView)
         }
     }
 
