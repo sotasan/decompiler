@@ -43,14 +43,14 @@ java -jar decompiler-x.y.z.jar
 
 应用程序会跟随系统区域设置：
 
-🇬🇧 [英语](src/main/resources/langs/language.properties) |
-🇩🇪 [德语](src/main/resources/langs/language_de.properties) |
-🇪🇸 [西班牙语](src/main/resources/langs/language_es.properties) |
-🇫🇷 [法语](src/main/resources/langs/language_fr.properties) |
-🇯🇵 [日语](src/main/resources/langs/language_ja.properties) |
-🇳🇱 [荷兰语](src/main/resources/langs/language_nl.properties) |
-🇷🇺 [俄语](src/main/resources/langs/language_ru.properties) |
-🇨🇳 [中文](src/main/resources/langs/language_zh.properties)
+[英语](src/main/resources/langs/language.properties) |
+[德语](src/main/resources/langs/language_de.properties) |
+[西班牙语](src/main/resources/langs/language_es.properties) |
+[法语](src/main/resources/langs/language_fr.properties) |
+[日语](src/main/resources/langs/language_ja.properties) |
+[荷兰语](src/main/resources/langs/language_nl.properties) |
+[俄语](src/main/resources/langs/language_ru.properties) |
+[中文](src/main/resources/langs/language_zh.properties)
 
 如需添加或改进翻译，请编辑[语言文件](src/main/resources/langs)并发起 [pull request](https://github.com/sotasan/decompiler/pulls)。
 

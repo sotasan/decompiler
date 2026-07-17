@@ -43,14 +43,14 @@ java -jar decompiler-x.y.z.jar
 
 Приложение использует локаль вашей системы:
 
-🇬🇧 [Английский](src/main/resources/langs/language.properties) |
-🇩🇪 [Немецкий](src/main/resources/langs/language_de.properties) |
-🇪🇸 [Испанский](src/main/resources/langs/language_es.properties) |
-🇫🇷 [Французский](src/main/resources/langs/language_fr.properties) |
-🇯🇵 [Японский](src/main/resources/langs/language_ja.properties) |
-🇳🇱 [Нидерландский](src/main/resources/langs/language_nl.properties) |
-🇷🇺 [Русский](src/main/resources/langs/language_ru.properties) |
-🇨🇳 [Китайский](src/main/resources/langs/language_zh.properties)
+[Английский](src/main/resources/langs/language.properties) |
+[Немецкий](src/main/resources/langs/language_de.properties) |
+[Испанский](src/main/resources/langs/language_es.properties) |
+[Французский](src/main/resources/langs/language_fr.properties) |
+[Японский](src/main/resources/langs/language_ja.properties) |
+[Нидерландский](src/main/resources/langs/language_nl.properties) |
+[Русский](src/main/resources/langs/language_ru.properties) |
+[Китайский](src/main/resources/langs/language_zh.properties)
 
 Чтобы добавить или улучшить перевод, отредактируйте [файлы локализации](src/main/resources/langs) и откройте [pull request](https://github.com/sotasan/decompiler/pulls).
 

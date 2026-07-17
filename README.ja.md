@@ -43,14 +43,14 @@ java -jar decompiler-x.y.z.jar
 
 アプリケーションはシステムのロケールに従います:
 
-🇬🇧 [英語](src/main/resources/langs/language.properties) |
-🇩🇪 [ドイツ語](src/main/resources/langs/language_de.properties) |
-🇪🇸 [スペイン語](src/main/resources/langs/language_es.properties) |
-🇫🇷 [フランス語](src/main/resources/langs/language_fr.properties) |
-🇯🇵 [日本語](src/main/resources/langs/language_ja.properties) |
-🇳🇱 [オランダ語](src/main/resources/langs/language_nl.properties) |
-🇷🇺 [ロシア語](src/main/resources/langs/language_ru.properties) |
-🇨🇳 [中国語](src/main/resources/langs/language_zh.properties)
+[英語](src/main/resources/langs/language.properties) |
+[ドイツ語](src/main/resources/langs/language_de.properties) |
+[スペイン語](src/main/resources/langs/language_es.properties) |
+[フランス語](src/main/resources/langs/language_fr.properties) |
+[日本語](src/main/resources/langs/language_ja.properties) |
+[オランダ語](src/main/resources/langs/language_nl.properties) |
+[ロシア語](src/main/resources/langs/language_ru.properties) |
+[中国語](src/main/resources/langs/language_zh.properties)
 
 翻訳の追加や改善は、[言語ファイル](src/main/resources/langs)を編集して[プルリクエスト](https://github.com/sotasan/decompiler/pulls)を作成してください。
 

@@ -43,14 +43,14 @@ Die folgenden Decompiler werden unterstützt:
 
 Die Anwendung richtet sich nach deiner Systemsprache:
 
-🇬🇧 [Englisch](src/main/resources/langs/language.properties) |
-🇩🇪 [Deutsch](src/main/resources/langs/language_de.properties) |
-🇪🇸 [Spanisch](src/main/resources/langs/language_es.properties) |
-🇫🇷 [Französisch](src/main/resources/langs/language_fr.properties) |
-🇯🇵 [Japanisch](src/main/resources/langs/language_ja.properties) |
-🇳🇱 [Niederländisch](src/main/resources/langs/language_nl.properties) |
-🇷🇺 [Russisch](src/main/resources/langs/language_ru.properties) |
-🇨🇳 [Chinesisch](src/main/resources/langs/language_zh.properties)
+[Englisch](src/main/resources/langs/language.properties) |
+[Deutsch](src/main/resources/langs/language_de.properties) |
+[Spanisch](src/main/resources/langs/language_es.properties) |
+[Französisch](src/main/resources/langs/language_fr.properties) |
+[Japanisch](src/main/resources/langs/language_ja.properties) |
+[Niederländisch](src/main/resources/langs/language_nl.properties) |
+[Russisch](src/main/resources/langs/language_ru.properties) |
+[Chinesisch](src/main/resources/langs/language_zh.properties)
 
 Um eine Übersetzung hinzuzufügen oder zu verbessern, bearbeite die [Sprachdateien](src/main/resources/langs) und erstelle einen [Pull Request](https://github.com/sotasan/decompiler/pulls).
 
