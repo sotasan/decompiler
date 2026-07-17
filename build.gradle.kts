@@ -67,6 +67,7 @@ tasks {
     shadowJar {
         archiveBaseName = project.name.lowercase()
         archiveClassifier = null
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
         mergeServiceFiles()
         manifest { attributes("Enable-Native-Access" to "ALL-UNNAMED") }
     }
