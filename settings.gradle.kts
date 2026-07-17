@@ -11,6 +11,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Decompiler"
 
-include("agent")
-
-include("demo")
+include("agent", "demo")
