@@ -60,16 +60,16 @@ and create a [pull request](https://github.com/sotasan/decompiler/pulls).
 To build the application from source, simply build it using Gradle:
 
 ```bash
-$ git clone https://github.com/sotasan/decompiler.git
-$ cd decompiler
-$ mise install
-$ ./gradlew build
+git clone https://github.com/sotasan/decompiler.git
+cd decompiler
+mise install
+./gradlew build
 ```
 
 To launch the application from source with a demo JAR pre-loaded:
 
 ```bash
-$ ./gradlew run
+./gradlew run
 ```
 
 ## Contributing
