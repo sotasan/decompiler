@@ -23,7 +23,7 @@ jobs:
               with:
                   draft: true
                   files: build/libs/*.jar
-                  tag_name: ${{ steps.build.outputs.version }}
+                  tag_name: v${{ steps.build.outputs.version }}
                   fail_on_unmatched_files: true
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
