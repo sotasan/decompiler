@@ -18,7 +18,7 @@ You can download the application from the [releases](https://github.com/sotasan/
 
 ## Usage
 
-To run the application, make sure you have Java 17+ installed and then execute the JAR file with `java -jar decompiler-x.y.z.jar`.
+To run the application, make sure you have Java 25+ installed and then execute the JAR file with `java -jar decompiler-x.y.z.jar`.
 
 To open an archive, select `File > Open File (Ctrl/Cmd + O)` in the menu bar or directly drag and drop it.
 
@@ -57,13 +57,12 @@ and create a [pull request](https://github.com/sotasan/decompiler/pulls).
 
 ## Build
 
-To build the application from source,
-make sure you have Java 17+ installed,
-then simply build it using Gradle:
+To build the application from source, simply build it using Gradle:
 
 ```bash
 $ git clone https://github.com/sotasan/decompiler.git
 $ cd decompiler
+$ mise install
 $ ./gradlew build
 ```
 
