@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     id("application")
     alias(libs.plugins.kotlin.jvm)
@@ -11,12 +9,7 @@ version = "0.10.0"
 
 allprojects { group = "moe.sota" }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-kotlin.compilerOptions { jvmTarget = JvmTarget.JVM_17 }
+kotlin { jvmToolchain(26) }
 
 application {
     applicationDefaultJvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
