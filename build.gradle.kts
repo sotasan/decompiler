@@ -9,7 +9,7 @@ version = "0.10.0"
 
 allprojects { group = "moe.sota" }
 
-kotlin { jvmToolchain(26) }
+kotlin { jvmToolchain(25) }
 
 application {
     applicationDefaultJvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
