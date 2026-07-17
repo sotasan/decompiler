@@ -42,6 +42,8 @@ dependencies {
     implementation(libs.jd.core)
     implementation(libs.jetbrains.annotations)
     implementation(libs.koin.core)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.swing)
     implementation(libs.ktorm.core)
     implementation(libs.miglayout.swing)
     implementation(libs.procyon)
@@ -68,6 +70,7 @@ tasks {
     shadowJar {
         archiveBaseName = project.name.lowercase()
         archiveClassifier = null
+        mergeServiceFiles()
         manifest { attributes("Enable-Native-Access" to "ALL-UNNAMED") }
     }
 
