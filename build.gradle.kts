@@ -5,8 +5,6 @@ plugins {
     alias(libs.plugins.spotless)
 }
 
-allprojects { group = "moe.sota" }
-
 kotlin { jvmToolchain(25) }
 
 application {
