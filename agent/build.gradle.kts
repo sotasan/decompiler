@@ -1,6 +1,7 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    id("java")
-    alias(libs.plugins.lombok)
+    alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.spotless)
 }
 
@@ -9,11 +10,9 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-spotless {
-    java {
-        palantirJavaFormat()
-    }
-}
+kotlin.compilerOptions { jvmTarget = JvmTarget.JVM_11 }
+
+spotless { kotlin { ktfmt().kotlinlangStyle() } }
 
 tasks.jar {
     manifest {
