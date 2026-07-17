@@ -38,5 +38,6 @@ vineflower = { module = "org.vineflower:vineflower", version.ref = "vineflower" 
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+lombok = { id = "io.freefair.lombok", version = "9.5.0" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

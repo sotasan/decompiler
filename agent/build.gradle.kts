@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    alias(libs.plugins.lombok)
     alias(libs.plugins.spotless)
 }
 
