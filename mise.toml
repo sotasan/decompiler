@@ -1,2 +1,3 @@
 [tools]
 java = "zulu-26"
+lefthook = "2"

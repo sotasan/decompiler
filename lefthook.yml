@@ -1,0 +1,5 @@
+pre-commit:
+  jobs:
+    - name: format
+      glob: "*.{kt,kts,java}"
+      run: ./gradlew spotlessCheck
