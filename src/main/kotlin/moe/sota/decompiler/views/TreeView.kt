@@ -63,7 +63,7 @@ private class TreeCellRenderer : DefaultTreeCellRenderer() {
         val node = value as DefaultMutableTreeNode
         if (node.getUserObject() is BaseModel) {
             val model = node.getUserObject() as BaseModel
-            setText(model.getName())
+            setText(model.name)
             setIcon(ImageIcon(model.icon))
             setToolTipText(model.name)
         }
