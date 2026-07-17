@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("application")
     alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.lombok)
     alias(libs.plugins.shadow)
     alias(libs.plugins.spotless)
 }
@@ -40,7 +39,6 @@ dependencies {
     implementation(libs.flatlaf.fonts.jetbrains.mono)
     implementation(libs.h2)
     implementation(libs.jd.core)
-    implementation(libs.jetbrains.annotations)
     implementation(libs.koin.core)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.swing)
@@ -52,7 +50,6 @@ dependencies {
 }
 
 spotless {
-    java { palantirJavaFormat() }
     kotlin { ktfmt().kotlinlangStyle() }
     kotlinGradle { ktfmt().kotlinlangStyle() }
 }

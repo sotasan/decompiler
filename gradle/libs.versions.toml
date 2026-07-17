@@ -6,12 +6,10 @@ flatlaf-fonts-inter = "4.1"
 flatlaf-fonts-jetbrains-mono = "2.304"
 h2 = "2.4.240"
 jd-core = "1.1.3"
-jetbrains-annotations = "26.1.0"
 koin = "4.2.1"
 kotlin = "2.3.21"
 kotlinx-coroutines = "1.10.2"
 ktorm = "4.1.1"
-lombok = "9.4.0"
 miglayout = "11.4.3"
 procyon = "0.6.0"
 rsyntaxtextarea = "3.6.2"
@@ -29,7 +27,6 @@ flatlaf-fonts-inter = { module = "com.formdev:flatlaf-fonts-inter", version.ref 
 flatlaf-fonts-jetbrains-mono = { module = "com.formdev:flatlaf-fonts-jetbrains-mono", version.ref = "flatlaf-fonts-jetbrains-mono" }
 h2 = { module = "com.h2database:h2", version.ref = "h2" }
 jd-core = { module = "com.github.java-decompiler:jd-core", version.ref = "jd-core" }
-jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
@@ -41,6 +38,5 @@ vineflower = { module = "org.vineflower:vineflower", version.ref = "vineflower" 
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-lombok = { id = "io.freefair.lombok", version.ref = "lombok" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
