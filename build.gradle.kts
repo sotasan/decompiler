@@ -5,8 +5,6 @@ plugins {
     alias(libs.plugins.spotless)
 }
 
-version = "0.10.0"
-
 allprojects { group = "moe.sota" }
 
 kotlin { jvmToolchain(25) }
@@ -49,7 +47,7 @@ spotless {
 
 tasks {
     processResources {
-        from(agentJar)
+        from(agentJar) { rename { "agent.jar" } }
         val version = project.version
         inputs.property("version", version)
         filesMatching("application.properties") { expand("version" to version) }

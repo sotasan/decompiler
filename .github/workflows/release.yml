@@ -15,7 +15,7 @@ jobs:
               id: build
               run: |
                   chmod +x gradlew
-                  echo version=$(./gradlew -q properties | grep 'version:' | cut -d ' ' -f 2) >> $GITHUB_OUTPUT
+                  echo version=$(grep '^version=' gradle.properties | cut -d= -f2) >> $GITHUB_OUTPUT
                   ./gradlew build
 
             - name: Release
