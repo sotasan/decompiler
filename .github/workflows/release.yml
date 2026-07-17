@@ -1,30 +1,29 @@
 name: Release
 on: workflow_dispatch
 jobs:
-
     release:
         name: Release
         runs-on: ubuntu-latest
         steps:
+            - name: Checkout
+              uses: actions/checkout@v7
 
-            -   name: Checkout
-                uses: actions/checkout@v7
+            - name: Mise
+              uses: jdx/mise-action@v4
 
-            -   name: Mise
-                uses: jdx/mise-action@v4
+            - name: Build
+              id: build
+              run: |
+                  chmod +x gradlew
+                  echo version=$(./gradlew -q properties | grep 'version:' | cut -d ' ' -f 2) >> $GITHUB_OUTPUT
+                  ./gradlew build
 
-            -   name: Build
-                run: |
-                    chmod +x gradlew
-                    echo VERSION=$(./gradlew -q properties | grep 'version:' | cut -d ' ' -f 2) >> $GITHUB_ENV
-                    ./gradlew build
-
-            -   name: Release
-                uses: softprops/action-gh-release@v3
-                with:
-                    draft: true
-                    files: build/libs/*.jar
-                    tag_name: ${{ env.VERSION }}
-                    fail_on_unmatched_files: true
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Release
+              uses: softprops/action-gh-release@v3
+              with:
+                  draft: true
+                  files: build/libs/*.jar
+                  tag_name: ${{ steps.build.outputs.version }}
+                  fail_on_unmatched_files: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
