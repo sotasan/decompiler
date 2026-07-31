@@ -5,8 +5,6 @@ import java.awt.event.ActionListener
 import java.awt.event.ContainerEvent
 import java.awt.event.ContainerListener
 import javax.swing.ImageIcon
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import moe.sota.decompiler.menus.file.FileCloseTab
 import moe.sota.decompiler.models.FileModel
 import moe.sota.decompiler.services.PreferenceService
@@ -22,7 +20,6 @@ class TabsController(
     private val createTabController: (FileModel) -> TabController,
 ) : ActionListener, ContainerListener, KoinComponent {
     private val fileCloseTab: FileCloseTab by inject()
-    private val scope = MainScope()
 
     val transformer: Transformer?
         get() = tabsView.comboBox.selectedItem as Transformer?
@@ -43,9 +40,7 @@ class TabsController(
 
     override fun actionPerformed(event: ActionEvent?) {
         PreferenceService.preferences.put("transformer", transformer?.name)
-        controllers
-            .filter { it.fileModel.type is ClassType }
-            .forEach { scope.launch { it.update() } }
+        controllers.filter { it.fileModel.type is ClassType }.forEach { it.update() }
     }
 
     override fun componentAdded(event: ContainerEvent) {
@@ -53,6 +48,7 @@ class TabsController(
     }
 
     override fun componentRemoved(event: ContainerEvent) {
+        (event.child as? TabView)?.tabController?.dispose()
         fileCloseTab.isEnabled = tabsView.tabCount > 0
     }
 
@@ -64,15 +60,9 @@ class TabsController(
         }
 
         val controller = createTabController(fileModel)
-        val icon = ImageIcon(fileModel.icon)
-        val component = controller.tabView
-        scope.launch {
-            controller.update()
-            if (getController(fileModel) == null) {
-                tabsView.addTab(fileModel.name, icon, component)
-                tabsView.selectedComponent = component
-            }
-        }
+        tabsView.addTab(fileModel.name, ImageIcon(fileModel.icon), controller.tabView)
+        tabsView.selectedComponent = controller.tabView
+        controller.update()
     }
 
     fun closeTab() {

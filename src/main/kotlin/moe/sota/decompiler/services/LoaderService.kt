@@ -3,8 +3,12 @@ package moe.sota.decompiler.services
 import java.awt.Taskbar
 import java.io.File
 import java.util.jar.JarFile
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import moe.sota.decompiler.controllers.TabsController
@@ -27,9 +31,10 @@ object LoaderService : KoinComponent {
     private val windowView: WindowView by inject()
 
     fun load(file: File) {
-        scope.launch {
-            setProgressState(Taskbar.State.INDETERMINATE)
+        scope.coroutineContext.cancelChildren()
+        setProgressState(Taskbar.State.INDETERMINATE)
 
+        scope.launch {
             try {
                 val archive =
                     withContext(Dispatchers.IO) {
@@ -37,6 +42,7 @@ object LoaderService : KoinComponent {
 
                         ArchiveModel(file.name).apply {
                             for (entry in jar.entries()) {
+                                ensureActive()
                                 val child =
                                     if (entry.isDirectory) PackageModel(entry.name)
                                     else FileModel(jar, entry)
@@ -48,10 +54,13 @@ object LoaderService : KoinComponent {
                 windowController.activate()
                 tabsController.clearTabs()
                 treeController.setArchive(archive)
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 e.printStackTrace(System.err)
             } finally {
-                setProgressState(Taskbar.State.OFF)
+                // A superseded load must leave the progress state to the load that replaced it
+                if (isActive) setProgressState(Taskbar.State.OFF)
             }
         }
     }
