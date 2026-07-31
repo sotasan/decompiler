@@ -26,18 +26,18 @@ Download the latest JAR from the [releases](https://github.com/sotasan/decompile
 java -jar decompiler-x.y.z.jar
 ```
 
-- **Open an archive** — `File > Open File` (`Ctrl/Cmd + O`), or drag and drop it into the window.
-- **Switch decompiler** — use the combo box in the top right corner.
-- **Compare or multitask** — `File > New Instance` (`Ctrl/Cmd + N`) opens another window, so you can view decompilers side by side or browse multiple archives at once.
+- **Open an archive** - `File > Open File` (`Ctrl/Cmd + O`), or drag and drop it into the window.
+- **Switch decompiler** - use the combo box in the top right corner.
+- **Compare or multitask** - `File > New Instance` (`Ctrl/Cmd + N`) opens another window, so you can view decompilers side by side or browse multiple archives at once.
 
 ## Decompilers
 
 The following decompilers are supported:
 
-- [CFR](https://github.com/FabricMC/cfr) — Another Java Decompiler
-- [JD](https://java-decompiler.github.io) — Yet another fast Java decompiler
-- [Procyon](https://github.com/mstrobel/procyon) — A suite of Java metaprogramming tools
-- [Vineflower](https://vineflower.org) — A modern Java decompiler aiming to be as accurate as possible
+- [CFR](https://github.com/FabricMC/cfr) - Another Java Decompiler
+- [JD](https://java-decompiler.github.io) - Yet another fast Java decompiler
+- [Procyon](https://github.com/mstrobel/procyon) - A suite of Java metaprogramming tools
+- [Vineflower](https://vineflower.org) - A modern Java decompiler aiming to be as accurate as possible
 
 ## Languages
 
@@ -73,7 +73,7 @@ To launch the application from source with a demo JAR pre-loaded:
 
 ## Contributing
 
-Found a bug or have an idea? Open an [issue](https://github.com/sotasan/decompiler/issues) — pull requests are welcome too.
+Found a bug or have an idea? Open an [issue](https://github.com/sotasan/decompiler/issues) - pull requests are welcome too.
 
 ## License
 

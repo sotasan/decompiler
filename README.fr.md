@@ -26,18 +26,18 @@ Téléchargez le dernier JAR depuis la page des [releases](https://github.com/so
 java -jar decompiler-x.y.z.jar
 ```
 
-- **Ouvrir une archive** — `Fichier > Ouvrir un fichier` (`Ctrl/Cmd + O`), ou glissez-déposez-la dans la fenêtre.
-- **Changer de décompilateur** — via la liste déroulante en haut à droite.
-- **Comparer ou multitâche** — `Fichier > Nouvelle instance` (`Ctrl/Cmd + N`) ouvre une nouvelle fenêtre pour comparer les décompilateurs côte à côte ou parcourir plusieurs archives à la fois.
+- **Ouvrir une archive** - `Fichier > Ouvrir un fichier` (`Ctrl/Cmd + O`), ou glissez-déposez-la dans la fenêtre.
+- **Changer de décompilateur** - via la liste déroulante en haut à droite.
+- **Comparer ou multitâche** - `Fichier > Nouvelle instance` (`Ctrl/Cmd + N`) ouvre une nouvelle fenêtre pour comparer les décompilateurs côte à côte ou parcourir plusieurs archives à la fois.
 
 ## Décompilateurs
 
 Les décompilateurs suivants sont pris en charge :
 
-- [CFR](https://github.com/FabricMC/cfr) — Un autre décompilateur Java
-- [JD](https://java-decompiler.github.io) — Encore un décompilateur Java rapide
-- [Procyon](https://github.com/mstrobel/procyon) — Une suite d'outils de métaprogrammation Java
-- [Vineflower](https://vineflower.org) — Un décompilateur Java moderne visant une précision maximale
+- [CFR](https://github.com/FabricMC/cfr) - Un autre décompilateur Java
+- [JD](https://java-decompiler.github.io) - Encore un décompilateur Java rapide
+- [Procyon](https://github.com/mstrobel/procyon) - Une suite d'outils de métaprogrammation Java
+- [Vineflower](https://vineflower.org) - Un décompilateur Java moderne visant une précision maximale
 
 ## Langues
 
@@ -73,7 +73,7 @@ Pour lancer l'application depuis les sources avec un JAR de démonstration préc
 
 ## Contribuer
 
-Un bug ou une idée ? Ouvrez une [issue](https://github.com/sotasan/decompiler/issues) — les pull requests sont également les bienvenues.
+Un bug ou une idée ? Ouvrez une [issue](https://github.com/sotasan/decompiler/issues) - les pull requests sont également les bienvenues.
 
 ## Licence
 

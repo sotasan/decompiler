@@ -26,18 +26,18 @@ Download de nieuwste JAR van de [releases](https://github.com/sotasan/decompiler
 java -jar decompiler-x.y.z.jar
 ```
 
-- **Een archief openen** — `Bestand > Bestand openen` (`Ctrl/Cmd + O`), of sleep het naar het venster.
-- **Van decompiler wisselen** — via de keuzelijst rechtsboven.
-- **Vergelijken of multitasken** — `Bestand > Nieuwe instantie` (`Ctrl/Cmd + N`) opent een extra venster om decompilers naast elkaar te bekijken of meerdere archieven tegelijk te doorbladeren.
+- **Een archief openen** - `Bestand > Bestand openen` (`Ctrl/Cmd + O`), of sleep het naar het venster.
+- **Van decompiler wisselen** - via de keuzelijst rechtsboven.
+- **Vergelijken of multitasken** - `Bestand > Nieuwe instantie` (`Ctrl/Cmd + N`) opent een extra venster om decompilers naast elkaar te bekijken of meerdere archieven tegelijk te doorbladeren.
 
 ## Decompilers
 
 De volgende decompilers worden ondersteund:
 
-- [CFR](https://github.com/FabricMC/cfr) — Nog een Java-decompiler
-- [JD](https://java-decompiler.github.io) — Alweer een snelle Java-decompiler
-- [Procyon](https://github.com/mstrobel/procyon) — Een verzameling Java-metaprogrammeertools
-- [Vineflower](https://vineflower.org) — Een moderne Java-decompiler die zo nauwkeurig mogelijk wil zijn
+- [CFR](https://github.com/FabricMC/cfr) - Nog een Java-decompiler
+- [JD](https://java-decompiler.github.io) - Alweer een snelle Java-decompiler
+- [Procyon](https://github.com/mstrobel/procyon) - Een verzameling Java-metaprogrammeertools
+- [Vineflower](https://vineflower.org) - Een moderne Java-decompiler die zo nauwkeurig mogelijk wil zijn
 
 ## Talen
 
@@ -73,7 +73,7 @@ Om de applicatie vanaf de broncode te starten met een vooraf geladen demo-JAR:
 
 ## Bijdragen
 
-Een bug gevonden of een idee? Open een [issue](https://github.com/sotasan/decompiler/issues) — pull requests zijn ook welkom.
+Een bug gevonden of een idee? Open een [issue](https://github.com/sotasan/decompiler/issues) - pull requests zijn ook welkom.
 
 ## Licentie
 
