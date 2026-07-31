@@ -93,22 +93,30 @@ private class WindowComponentAdapter(private val windowView: WindowView) : Compo
     }
 }
 
+private val EXTENSIONS = listOf(".jar", ".war", ".zip")
+
 private class WindowDropTarget : DropTarget() {
     override fun dragOver(event: DropTargetDragEvent) {
         event.acceptDrag(DnDConstants.ACTION_MOVE)
     }
 
     override fun drop(event: DropTargetDropEvent) {
+        if (!event.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+            event.rejectDrop()
+            return
+        }
+
         event.acceptDrop(DnDConstants.ACTION_MOVE)
 
-        if (!event.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) return
-
         val files = event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<*>
-        val file = files.firstOrNull() as File? ?: return
+        val file = files.firstOrNull() as File?
 
-        if (listOf(".jar", ".war", ".zip").any { file.name.endsWith(it, ignoreCase = true) }) {
-            LoaderService.load(file)
-            event.dropComplete(true)
+        if (file == null || EXTENSIONS.none { file.name.endsWith(it, ignoreCase = true) }) {
+            event.dropComplete(false)
+            return
         }
+
+        LoaderService.load(file)
+        event.dropComplete(true)
     }
 }
