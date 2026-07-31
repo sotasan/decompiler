@@ -13,5 +13,5 @@ class FileModel(private val jarFile: JarFile, private val jarEntry: JarEntry) :
     }
 
     val bytes: ByteArray
-        get() = jarFile.getInputStream(jarEntry).readBytes()
+        get() = jarFile.getInputStream(jarEntry).use { it.readBytes() }
 }
