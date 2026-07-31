@@ -14,7 +14,6 @@ import java.awt.dnd.DropTargetDropEvent
 import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent
 import java.io.File
-import java.util.Locale
 import javax.swing.BoxLayout
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -106,9 +105,8 @@ private class WindowDropTarget : DropTarget() {
 
         val files = event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<*>
         val file = files.firstOrNull() as File? ?: return
-        val name = file.name.lowercase(Locale.getDefault())
 
-        if (name.endsWith(".jar") || name.endsWith(".war") || name.endsWith(".zip")) {
+        if (listOf(".jar", ".war", ".zip").any { file.name.endsWith(it, ignoreCase = true) }) {
             LoaderService.load(file)
             event.dropComplete(true)
         }
