@@ -73,7 +73,7 @@ To launch the application from source with a demo JAR pre-loaded:
 
 ## Contributing
 
-Found a bug or have an idea? Open an [issue](https://github.com/sotasan/decompiler/issues) - pull requests are welcome too.
+Found a bug or have an idea? Open an [issue](https://github.com/sotasan/decompiler/issues). Pull requests are welcome too.
 
 ## License
 

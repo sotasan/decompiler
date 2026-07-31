@@ -73,7 +73,7 @@ Pour lancer l'application depuis les sources avec un JAR de démonstration préc
 
 ## Contribuer
 
-Un bug ou une idée ? Ouvrez une [issue](https://github.com/sotasan/decompiler/issues) - les pull requests sont également les bienvenues.
+Un bug ou une idée ? Ouvrez une [issue](https://github.com/sotasan/decompiler/issues). Les pull requests sont également les bienvenues.
 
 ## Licence
 

@@ -73,7 +73,7 @@ Om de applicatie vanaf de broncode te starten met een vooraf geladen demo-JAR:
 
 ## Bijdragen
 
-Een bug gevonden of een idee? Open een [issue](https://github.com/sotasan/decompiler/issues) - pull requests zijn ook welkom.
+Een bug gevonden of een idee? Open een [issue](https://github.com/sotasan/decompiler/issues). Pull requests zijn ook welkom.
 
 ## Licentie
 

@@ -73,7 +73,7 @@ mise install
 
 ## 贡献
 
-发现了 bug 或有想法？欢迎提交 [issue](https://github.com/sotasan/decompiler/issues) - 也欢迎 pull request。
+发现了 bug 或有想法？欢迎提交 [issue](https://github.com/sotasan/decompiler/issues)。也欢迎 pull request。
 
 ## 许可证
 

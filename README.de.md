@@ -73,7 +73,7 @@ Um die Anwendung aus dem Quellcode mit einem vorgeladenen Demo-JAR zu starten:
 
 ## Mitwirken
 
-Einen Fehler gefunden oder eine Idee? Erstelle ein [Issue](https://github.com/sotasan/decompiler/issues) - Pull Requests sind ebenfalls willkommen.
+Einen Fehler gefunden oder eine Idee? Erstelle ein [Issue](https://github.com/sotasan/decompiler/issues). Pull Requests sind ebenfalls willkommen.
 
 ## Lizenz
 

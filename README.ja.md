@@ -73,7 +73,7 @@ mise install
 
 ## 貢献
 
-バグの報告やアイデアがあれば[Issue](https://github.com/sotasan/decompiler/issues)を作成してください - プルリクエストも歓迎です。
+バグの報告やアイデアがあれば[Issue](https://github.com/sotasan/decompiler/issues)を作成してください。プルリクエストも歓迎です。
 
 ## ライセンス
 

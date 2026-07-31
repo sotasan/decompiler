@@ -73,7 +73,7 @@ Para iniciar la aplicación desde el código fuente con un JAR de demostración 
 
 ## Contribuir
 
-¿Has encontrado un error o tienes una idea? Abre un [issue](https://github.com/sotasan/decompiler/issues) - los pull requests también son bienvenidos.
+¿Has encontrado un error o tienes una idea? Abre un [issue](https://github.com/sotasan/decompiler/issues). Los pull requests también son bienvenidos.
 
 ## Licencia
 

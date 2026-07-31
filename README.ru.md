@@ -73,7 +73,7 @@ mise install
 
 ## Участие
 
-Нашли баг или есть идея? Создайте [issue](https://github.com/sotasan/decompiler/issues) - pull request'ы тоже приветствуются.
+Нашли баг или есть идея? Создайте [issue](https://github.com/sotasan/decompiler/issues). Pull request'ы тоже приветствуются.
 
 ## Лицензия
 
