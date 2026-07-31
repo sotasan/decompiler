@@ -26,18 +26,18 @@
 java -jar decompiler-x.y.z.jar
 ```
 
-- **アーカイブを開く** — `ファイル > ファイルを開く`(`Ctrl/Cmd + O`)、またはウィンドウにドラッグ&ドロップします。
-- **デコンパイラを切り替える** — 右上のコンボボックスで選択します。
-- **比較・並行作業** — `ファイル > 新しいインスタンス`(`Ctrl/Cmd + N`)で新しいウィンドウが開き、デコンパイラを並べて比較したり、複数のアーカイブを同時に閲覧できます。
+- **アーカイブを開く** - `ファイル > ファイルを開く`(`Ctrl/Cmd + O`)、またはウィンドウにドラッグ&ドロップします。
+- **デコンパイラを切り替える** - 右上のコンボボックスで選択します。
+- **比較・並行作業** - `ファイル > 新しいインスタンス`(`Ctrl/Cmd + N`)で新しいウィンドウが開き、デコンパイラを並べて比較したり、複数のアーカイブを同時に閲覧できます。
 
 ## デコンパイラ
 
 以下のデコンパイラに対応しています:
 
-- [CFR](https://github.com/FabricMC/cfr) — もうひとつのJavaデコンパイラ
-- [JD](https://java-decompiler.github.io) — 高速なJavaデコンパイラ
-- [Procyon](https://github.com/mstrobel/procyon) — Javaメタプログラミングツール群
-- [Vineflower](https://vineflower.org) — 精度を追求するモダンなJavaデコンパイラ
+- [CFR](https://github.com/FabricMC/cfr) - もうひとつのJavaデコンパイラ
+- [JD](https://java-decompiler.github.io) - 高速なJavaデコンパイラ
+- [Procyon](https://github.com/mstrobel/procyon) - Javaメタプログラミングツール群
+- [Vineflower](https://vineflower.org) - 精度を追求するモダンなJavaデコンパイラ
 
 ## 言語
 
@@ -73,7 +73,7 @@ mise install
 
 ## 貢献
 
-バグの報告やアイデアがあれば[Issue](https://github.com/sotasan/decompiler/issues)を作成してください — プルリクエストも歓迎です。
+バグの報告やアイデアがあれば[Issue](https://github.com/sotasan/decompiler/issues)を作成してください。プルリクエストも歓迎です。
 
 ## ライセンス
 

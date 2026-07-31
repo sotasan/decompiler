@@ -26,18 +26,18 @@ Lade die neueste JAR-Datei von der [Releases](https://github.com/sotasan/decompi
 java -jar decompiler-x.y.z.jar
 ```
 
-- **Archiv öffnen** — `Datei > Datei öffnen` (`Strg/Cmd + O`), oder einfach per Drag & Drop ins Fenster ziehen.
-- **Decompiler wechseln** — über die Combobox oben rechts.
-- **Vergleichen oder parallel arbeiten** — `Datei > Neue Instanz` (`Strg/Cmd + N`) öffnet ein weiteres Fenster, um Decompiler nebeneinander zu vergleichen oder mehrere Archive gleichzeitig zu durchstöbern.
+- **Archiv öffnen** - `Datei > Datei öffnen` (`Strg/Cmd + O`), oder einfach per Drag & Drop ins Fenster ziehen.
+- **Decompiler wechseln** - über die Combobox oben rechts.
+- **Vergleichen oder parallel arbeiten** - `Datei > Neue Instanz` (`Strg/Cmd + N`) öffnet ein weiteres Fenster, um Decompiler nebeneinander zu vergleichen oder mehrere Archive gleichzeitig zu durchstöbern.
 
 ## Decompiler
 
 Die folgenden Decompiler werden unterstützt:
 
-- [CFR](https://github.com/FabricMC/cfr) — Ein weiterer Java-Decompiler
-- [JD](https://java-decompiler.github.io) — Noch ein schneller Java-Decompiler
-- [Procyon](https://github.com/mstrobel/procyon) — Eine Suite von Java-Metaprogrammierungswerkzeugen
-- [Vineflower](https://vineflower.org) — Ein moderner Java-Decompiler mit dem Ziel größtmöglicher Genauigkeit
+- [CFR](https://github.com/FabricMC/cfr) - Ein weiterer Java-Decompiler
+- [JD](https://java-decompiler.github.io) - Noch ein schneller Java-Decompiler
+- [Procyon](https://github.com/mstrobel/procyon) - Eine Suite von Java-Metaprogrammierungswerkzeugen
+- [Vineflower](https://vineflower.org) - Ein moderner Java-Decompiler mit dem Ziel größtmöglicher Genauigkeit
 
 ## Sprachen
 
@@ -73,7 +73,7 @@ Um die Anwendung aus dem Quellcode mit einem vorgeladenen Demo-JAR zu starten:
 
 ## Mitwirken
 
-Einen Fehler gefunden oder eine Idee? Erstelle ein [Issue](https://github.com/sotasan/decompiler/issues) — Pull Requests sind ebenfalls willkommen.
+Einen Fehler gefunden oder eine Idee? Erstelle ein [Issue](https://github.com/sotasan/decompiler/issues). Pull Requests sind ebenfalls willkommen.
 
 ## Lizenz
 

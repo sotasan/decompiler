@@ -26,18 +26,18 @@
 java -jar decompiler-x.y.z.jar
 ```
 
-- **打开归档文件** — `文件 > 打开文件`（`Ctrl/Cmd + O`），或直接拖放到窗口中。
-- **切换反编译器** — 使用右上角的下拉框。
-- **对比或多任务** — `文件 > 打开新窗口`（`Ctrl/Cmd + N`）会打开一个新窗口，可以并排对比反编译器，或同时浏览多个归档文件。
+- **打开归档文件** - `文件 > 打开文件`（`Ctrl/Cmd + O`），或直接拖放到窗口中。
+- **切换反编译器** - 使用右上角的下拉框。
+- **对比或多任务** - `文件 > 打开新窗口`（`Ctrl/Cmd + N`）会打开一个新窗口，可以并排对比反编译器，或同时浏览多个归档文件。
 
 ## 反编译器
 
 支持以下反编译器：
 
-- [CFR](https://github.com/FabricMC/cfr) — 另一个 Java 反编译器
-- [JD](https://java-decompiler.github.io) — 又一个快速的 Java 反编译器
-- [Procyon](https://github.com/mstrobel/procyon) — 一套 Java 元编程工具
-- [Vineflower](https://vineflower.org) — 追求最高准确度的现代 Java 反编译器
+- [CFR](https://github.com/FabricMC/cfr) - 另一个 Java 反编译器
+- [JD](https://java-decompiler.github.io) - 又一个快速的 Java 反编译器
+- [Procyon](https://github.com/mstrobel/procyon) - 一套 Java 元编程工具
+- [Vineflower](https://vineflower.org) - 追求最高准确度的现代 Java 反编译器
 
 ## 语言
 
@@ -73,7 +73,7 @@ mise install
 
 ## 贡献
 
-发现了 bug 或有想法？欢迎提交 [issue](https://github.com/sotasan/decompiler/issues) — 也欢迎 pull request。
+发现了 bug 或有想法？欢迎提交 [issue](https://github.com/sotasan/decompiler/issues)。也欢迎 pull request。
 
 ## 许可证
 
