@@ -8,8 +8,8 @@ import moe.sota.decompiler.main
 class ProcessService {
     fun start() {
         val java = ProcessHandle.current().info().command().getOrNull() ?: return
+        val mainClass = ::main.javaMethod?.declaringClass?.canonicalName ?: return
         val classPath = ManagementFactory.getRuntimeMXBean().classPath
-        val mainClass = ::main.javaMethod?.declaringClass?.canonicalName
         ProcessBuilder(java, "-cp", classPath, mainClass).start()
     }
 }
