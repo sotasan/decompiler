@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     if (SystemInfo.isMacOS) {
         System.setProperty("apple.awt.application.appearance", "NSAppearanceNameDarkAqua")
         System.setProperty("apple.awt.application.name", "Decompiler")
-        System.setProperty("apple.laf.useScreenMenuBar", "${true}")
+        System.setProperty("apple.laf.useScreenMenuBar", "true")
     }
 
     startKoin { modules(controllersModule, menusModule, servicesModule, viewsModule) }

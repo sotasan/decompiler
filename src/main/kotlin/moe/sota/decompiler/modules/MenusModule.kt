@@ -1,7 +1,11 @@
 package moe.sota.decompiler.modules
 
 import moe.sota.decompiler.menus.MenuBar
-import moe.sota.decompiler.menus.file.*
+import moe.sota.decompiler.menus.file.File
+import moe.sota.decompiler.menus.file.FileCloseTab
+import moe.sota.decompiler.menus.file.FileExit
+import moe.sota.decompiler.menus.file.FileNewInstance
+import moe.sota.decompiler.menus.file.FileOpenFile
 import moe.sota.decompiler.menus.help.Help
 import moe.sota.decompiler.menus.help.HelpAbout
 import org.koin.core.module.dsl.singleOf

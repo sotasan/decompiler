@@ -16,36 +16,33 @@ import moe.sota.decompiler.models.FileModel
 import moe.sota.decompiler.models.PackageModel
 import moe.sota.decompiler.views.WindowView
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
+import org.koin.core.component.inject
 
 object LoaderService : KoinComponent {
     private val scope = MainScope()
 
+    private val tabsController: TabsController by inject()
+    private val treeController: TreeController by inject()
+    private val windowController: WindowController by inject()
+    private val windowView: WindowView by inject()
+
     fun load(file: File) {
         scope.launch {
-            val tabsController = get<TabsController>()
-            val treeController = get<TreeController>()
-            val windowController = get<WindowController>()
-            val windowView = get<WindowView>()
-
-            setProgressState(windowView, Taskbar.State.INDETERMINATE)
+            setProgressState(Taskbar.State.INDETERMINATE)
 
             try {
                 val archive =
                     withContext(Dispatchers.IO) {
                         val jar = JarFile(file)
-                        val entries = jar.entries()
-                        val archive = ArchiveModel(file.name)
 
-                        while (entries.hasMoreElements()) {
-                            val entry = entries.nextElement()
-                            val packageModel = getChildByPath(archive, entry.name)
-                            if (entry.isDirectory)
-                                packageModel.children.add(PackageModel(entry.name))
-                            else packageModel.children.add(FileModel(jar, entry))
+                        ArchiveModel(file.name).apply {
+                            for (entry in jar.entries()) {
+                                val child =
+                                    if (entry.isDirectory) PackageModel(entry.name)
+                                    else FileModel(jar, entry)
+                                getChildByPath(this, entry.name).children.add(child)
+                            }
                         }
-
-                        archive
                     }
 
                 windowController.activate()
@@ -54,23 +51,21 @@ object LoaderService : KoinComponent {
             } catch (e: Exception) {
                 e.printStackTrace(System.err)
             } finally {
-                setProgressState(windowView, Taskbar.State.OFF)
+                setProgressState(Taskbar.State.OFF)
             }
         }
     }
 
-    private fun setProgressState(windowView: WindowView, state: Taskbar.State) {
-        if (
-            Taskbar.isTaskbarSupported() &&
-                Taskbar.getTaskbar().isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW)
-        )
-            Taskbar.getTaskbar().setWindowProgressState(windowView, state)
+    private fun setProgressState(state: Taskbar.State) {
+        if (!Taskbar.isTaskbarSupported()) return
+
+        val taskbar = Taskbar.getTaskbar()
+        if (taskbar.isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW))
+            taskbar.setWindowProgressState(windowView, state)
     }
 
-    private fun getChildByPath(baseModel: BaseModel, path: String): BaseModel {
-        for (child in baseModel.children) if (child is PackageModel && path.startsWith(child.path))
-            return getChildByPath(child, path)
-
-        return baseModel
-    }
+    private fun getChildByPath(baseModel: BaseModel, path: String): BaseModel =
+        baseModel.children
+            .firstOrNull { it is PackageModel && path.startsWith(it.path) }
+            ?.let { getChildByPath(it, path) } ?: baseModel
 }

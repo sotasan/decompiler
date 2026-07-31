@@ -10,22 +10,19 @@ import org.benf.cfr.reader.api.OutputSinkFactory.SinkType
 import org.benf.cfr.reader.bytecode.analysis.parse.utils.Pair
 import org.benf.cfr.reader.util.getopt.OptionsImpl
 
-class CFRTransformer :
-    ITransformer, ClassFileSource, OutputSinkFactory, OutputSinkFactory.Sink<String> {
+class CFRTransformer : ITransformer, ClassFileSource, OutputSinkFactory, Sink<String> {
     private lateinit var fileModel: FileModel
     private lateinit var output: String
 
     override fun transform(fileModel: FileModel): String {
         this.fileModel = fileModel
-        val driver =
-            CfrDriver.Builder()
-                .withClassFileSource(this)
-                .withOptions(OPTIONS)
-                .withOutputSink(this)
-                .build()
-        driver.analyse(listOf(fileModel.path))
-        if (output.startsWith("/")) output = output.substring(31)
-        return output
+        CfrDriver.Builder()
+            .withClassFileSource(this)
+            .withOptions(OPTIONS)
+            .withOutputSink(this)
+            .build()
+            .analyse(listOf(fileModel.path))
+        return if (output.startsWith("/")) output.substring(31) else output
     }
 
     override fun getClassFileContent(path: String): Pair<ByteArray, String> =
@@ -52,10 +49,10 @@ class CFRTransformer :
     companion object {
         private val OPTIONS =
             mapOf(
-                OptionsImpl.DECOMPILE_INNER_CLASSES.name to false.toString(),
-                OptionsImpl.RELINK_CONSTANT_STRINGS.name to false.toString(),
-                OptionsImpl.REMOVE_INNER_CLASS_SYNTHETICS.name to false.toString(),
-                OptionsImpl.SHOW_CFR_VERSION.name to false.toString(),
+                OptionsImpl.DECOMPILE_INNER_CLASSES.name to "false",
+                OptionsImpl.RELINK_CONSTANT_STRINGS.name to "false",
+                OptionsImpl.REMOVE_INNER_CLASS_SYNTHETICS.name to "false",
+                OptionsImpl.SHOW_CFR_VERSION.name to "false",
             )
     }
 }

@@ -1,11 +1,10 @@
 package moe.sota.decompiler.services
 
-import java.util.*
+import java.util.Locale
+import java.util.ResourceBundle
 
 class LanguageService {
     private val resourceBundle = ResourceBundle.getBundle("langs/language", Locale.getDefault())
 
-    fun getString(key: String): String {
-        return resourceBundle.getString(key)
-    }
+    fun getString(key: String): String = resourceBundle.getString(key)
 }

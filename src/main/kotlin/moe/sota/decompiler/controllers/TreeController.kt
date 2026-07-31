@@ -1,6 +1,5 @@
 package moe.sota.decompiler.controllers
 
-import java.util.*
 import javax.swing.SwingUtilities
 import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.DefaultTreeModel
@@ -12,7 +11,7 @@ import moe.sota.decompiler.views.TreeView
 class TreeController(private val treeView: TreeView) {
     fun setArchive(archiveModel: ArchiveModel) {
         val treeModel = treeView.tree.model as DefaultTreeModel
-        val rootNode = treeModel.getRoot() as DefaultMutableTreeNode
+        val rootNode = treeModel.root as DefaultMutableTreeNode
         val treeNode = createTreeNode(archiveModel)
         rootNode.removeAllChildren()
         rootNode.add(treeNode)
@@ -23,9 +22,8 @@ class TreeController(private val treeView: TreeView) {
 
     private fun createTreeNode(baseModel: BaseModel): DefaultMutableTreeNode {
         val treeNode = DefaultMutableTreeNode(baseModel)
-        val children = baseModel.children
-        Collections.sort(children)
-        for (child in children) treeNode.add(createTreeNode(child))
+        baseModel.children.sort()
+        for (child in baseModel.children) treeNode.add(createTreeNode(child))
         return treeNode
     }
 }

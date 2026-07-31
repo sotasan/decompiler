@@ -4,30 +4,24 @@ import java.awt.Image
 import java.awt.Toolkit
 
 abstract class BaseModel(val path: String, directory: Boolean) : Comparable<BaseModel> {
-    val children: MutableList<BaseModel> = ArrayList()
+    val children = mutableListOf<BaseModel>()
 
-    var name: String =
-        (if (directory) path.substring(0, path.length - 1) else path).let {
-            it.substring(it.lastIndexOf('/') + 1)
-        }
+    val name = (if (directory) path.dropLast(1) else path).substringAfterLast('/')
 
     var icon: Image? = null
         private set
 
-    fun setIcon(path: String) {
+    protected fun loadIcon(path: String) {
         icon =
             Toolkit.getDefaultToolkit()
-                .createImage(javaClass.classLoader.getResourceAsStream(path)!!.readAllBytes())
+                .createImage(javaClass.classLoader.getResourceAsStream(path)!!.readBytes())
     }
 
-    override fun compareTo(other: BaseModel): Int {
-        val class1 = javaClass
-        val class2 = other.javaClass
-        return when {
-            class1 == class2 -> name.compareTo(other.name, ignoreCase = true)
-            class1 == FileModel::class.java -> 1
-            class2 == FileModel::class.java -> -1
+    override fun compareTo(other: BaseModel): Int =
+        when {
+            javaClass == other.javaClass -> name.compareTo(other.name, ignoreCase = true)
+            this is FileModel -> 1
+            other is FileModel -> -1
             else -> 0
         }
-    }
 }

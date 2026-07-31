@@ -13,7 +13,6 @@ class FileNewInstance(
     languageService: LanguageService,
     private val processService: ProcessService,
 ) : FlatMenuItem(), ActionListener {
-
     init {
         accelerator =
             KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)
