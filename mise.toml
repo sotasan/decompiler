@@ -1,3 +1,6 @@
 [tools]
 java = "zulu-26"
 lefthook = "2"
+
+[hooks]
+postinstall = "lefthook install"
