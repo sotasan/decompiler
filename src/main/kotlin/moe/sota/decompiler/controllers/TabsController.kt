@@ -2,9 +2,9 @@ package moe.sota.decompiler.controllers
 
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
+import java.awt.event.ContainerEvent
+import java.awt.event.ContainerListener
 import javax.swing.ImageIcon
-import javax.swing.event.ChangeEvent
-import javax.swing.event.ChangeListener
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import moe.sota.decompiler.menus.file.FileCloseTab
@@ -20,7 +20,7 @@ import org.koin.core.component.inject
 class TabsController(
     private val tabsView: TabsView,
     private val createTabController: (FileModel) -> TabController,
-) : ActionListener, ChangeListener, KoinComponent {
+) : ActionListener, ContainerListener, KoinComponent {
     private val fileCloseTab: FileCloseTab by inject()
     private val scope = MainScope()
 
@@ -35,7 +35,7 @@ class TabsController(
 
     init {
         tabsView.comboBox.addActionListener(this)
-        tabsView.model.addChangeListener(this)
+        tabsView.addContainerListener(this)
         PreferenceService.preferences.get("transformer", null)?.let {
             tabsView.comboBox.selectedItem = Transformer.valueOf(it)
         }
@@ -48,7 +48,11 @@ class TabsController(
             .forEach { scope.launch { it.update() } }
     }
 
-    override fun stateChanged(changeEvent: ChangeEvent?) {
+    override fun componentAdded(event: ContainerEvent) {
+        fileCloseTab.isEnabled = tabsView.tabCount > 0
+    }
+
+    override fun componentRemoved(event: ContainerEvent) {
         fileCloseTab.isEnabled = tabsView.tabCount > 0
     }
 
