@@ -13,7 +13,7 @@ ktorm = "4.2.1"
 miglayout = "11.4.3"
 procyon = "0.6.0"
 rsyntaxtextarea = "4.0.1"
-shadow = "9.6.0"
+shadow = "9.6.1"
 spotless = "8.8.0"
 vineflower = "1.12.0"
 
