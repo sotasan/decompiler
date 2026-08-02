@@ -1,9 +1,5 @@
 package moe.sota.decompiler.controllers
 
-import java.io.PrintWriter
-import java.io.StringWriter
-import java.nio.charset.StandardCharsets
-import javax.swing.JScrollPane
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -25,31 +21,26 @@ class TabController(
 
     suspend fun update() {
         if (fileModel.type is ImageType) {
-            val imageScrollPane = JScrollPane()
-            tabView.setScrollPane(imageScrollPane)
+            tabView.showImage()
             return
         }
 
         try {
             val transformer = tabsController.transformer
-            val text = withContext(Dispatchers.Default) { getText(transformer) }
-            tabView.textArea.text = text
-            val type = fileModel.type
-            if (type != null) tabView.textArea.setSyntaxEditingStyle(type.syntax)
+            tabView.textArea.text = withContext(Dispatchers.Default) { getText(transformer) }
+            fileModel.type?.let { tabView.textArea.syntaxEditingStyle = it.syntax }
         } catch (e: CancellationException) {
             throw e
         } catch (e: Throwable) {
-            val stringWriter = StringWriter()
-            e.printStackTrace(PrintWriter(stringWriter))
-            tabView.textArea.text = stringWriter.toString().trim { it <= ' ' }
-            tabView.textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE)
+            tabView.textArea.text = e.stackTraceToString().trim()
+            tabView.textArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_NONE
         }
 
-        tabView.scrollPane.getHorizontalScrollBar().setValue(0)
-        tabView.scrollPane.getVerticalScrollBar().setValue(0)
+        tabView.scrollPane.horizontalScrollBar.value = 0
+        tabView.scrollPane.verticalScrollBar.value = 0
     }
 
     private fun getText(transformer: Transformer?): String =
         if (fileModel.type is ClassType) transformer!!.newInstance().transform(fileModel)
-        else String(fileModel.bytes, StandardCharsets.UTF_8)
+        else fileModel.bytes.decodeToString()
 }

@@ -14,41 +14,48 @@ import moe.sota.decompiler.transformers.Transformer
 import moe.sota.decompiler.types.ClassType
 import moe.sota.decompiler.views.TabView
 import moe.sota.decompiler.views.TabsView
-import org.koin.java.KoinJavaComponent.get
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class TabsController(
     private val tabsView: TabsView,
     private val createTabController: (FileModel) -> TabController,
-) : ActionListener, ChangeListener {
+) : ActionListener, ChangeListener, KoinComponent {
+    private val fileCloseTab: FileCloseTab by inject()
     private val scope = MainScope()
 
     val transformer: Transformer?
         get() = tabsView.comboBox.selectedItem as Transformer?
 
+    private val controllers: List<TabController>
+        get() =
+            (0..<tabsView.tabCount).mapNotNull {
+                (tabsView.getComponentAt(it) as TabView).tabController
+            }
+
     init {
         tabsView.comboBox.addActionListener(this)
-        tabsView.getModel().addChangeListener(this)
-        val transformer = PreferenceService.PREFERENCES.get("transformer", null)
-        if (transformer != null) tabsView.comboBox.setSelectedItem(Transformer.valueOf(transformer))
-    }
-
-    override fun actionPerformed(event: ActionEvent?) {
-        PreferenceService.PREFERENCES.put("transformer", this.transformer?.name)
-        for (i in 0..<tabsView.tabCount) {
-            val controller: TabController? = (tabsView.getComponentAt(i) as TabView).tabController
-            if (controller?.fileModel?.type is ClassType) scope.launch { controller.update() }
+        tabsView.model.addChangeListener(this)
+        PreferenceService.preferences.get("transformer", null)?.let {
+            tabsView.comboBox.selectedItem = Transformer.valueOf(it)
         }
     }
 
+    override fun actionPerformed(event: ActionEvent?) {
+        PreferenceService.preferences.put("transformer", transformer?.name)
+        controllers
+            .filter { it.fileModel.type is ClassType }
+            .forEach { scope.launch { it.update() } }
+    }
+
     override fun stateChanged(changeEvent: ChangeEvent?) {
-        val fileCloseTab = get<FileCloseTab>(FileCloseTab::class.java)
-        fileCloseTab.setEnabled(tabsView.tabCount > 0)
+        fileCloseTab.isEnabled = tabsView.tabCount > 0
     }
 
     fun addTab(fileModel: FileModel) {
         val existing = getController(fileModel)
         if (existing != null) {
-            tabsView.setSelectedComponent(existing.tabView)
+            tabsView.selectedComponent = existing.tabView
             return
         }
 
@@ -59,7 +66,7 @@ class TabsController(
             controller.update()
             if (getController(fileModel) == null) {
                 tabsView.addTab(fileModel.name, icon, component)
-                tabsView.setSelectedComponent(component)
+                tabsView.selectedComponent = component
             }
         }
     }
@@ -72,14 +79,7 @@ class TabsController(
         tabsView.removeAll()
     }
 
-    private fun getController(fileModel: FileModel?): TabController? {
-        var controller: TabController? = null
-
-        for (i in 0..<tabsView.tabCount) {
-            val current: TabController? = (tabsView.getComponentAt(i) as TabView).tabController
-            if (fileModel === current?.fileModel) controller = current
-        }
-
-        return controller
+    private fun getController(fileModel: FileModel) = controllers.lastOrNull {
+        it.fileModel === fileModel
     }
 }

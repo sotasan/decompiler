@@ -12,7 +12,5 @@ class WindowController(private val windowView: WindowView) {
         windowView.validate()
     }
 
-    fun dispose() {
-        windowView.dispose()
-    }
+    fun dispose() = windowView.dispose()
 }

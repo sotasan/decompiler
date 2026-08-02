@@ -11,7 +11,6 @@ import moe.sota.decompiler.services.LanguageService
 
 class FileCloseTab(languageService: LanguageService, private val tabsController: TabsController) :
     FlatMenuItem(), ActionListener {
-
     init {
         accelerator =
             KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().menuShortcutKeyMaskEx)

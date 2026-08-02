@@ -10,107 +10,88 @@ import java.awt.event.ActionEvent
 import java.lang.management.ManagementFactory
 import java.net.URI
 import java.time.Year
-import java.util.*
-import javax.swing.*
+import java.util.Properties
+import javax.swing.BorderFactory
+import javax.swing.Box
+import javax.swing.BoxLayout
+import javax.swing.ImageIcon
+import javax.swing.JDialog
+import javax.swing.JLabel
+import javax.swing.JPanel
 import javax.swing.border.EmptyBorder
 import moe.sota.decompiler.services.LanguageService
 import net.miginfocom.swing.MigLayout
 
 class AboutView(languageService: LanguageService, windowView: WindowView) : JDialog(windowView) {
-    val root: JPanel
-    val content: JPanel
-    val logo: FlatLabel
-    val header: FlatLabel
-    val copyright: FlatLabel
-    val version: FlatLabel
-    val vm: JPanel
-    val vmName: FlatLabel
-    val vmVendor: FlatLabel
-    val vmVersion: FlatLabel
-    val controls: JPanel
-    val github: FlatButton
-    val ok: FlatButton
-
     init {
         isModal = true
         isResizable = false
         title = languageService.getString("about")
-        getRootPane().putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICON, false)
+        rootPane.putClientProperty(FlatClientProperties.TITLE_BAR_SHOW_ICON, false)
 
-        root =
+        val root =
             JPanel().apply {
                 border = EmptyBorder(16, 16, 16, 16)
                 layout = BorderLayout()
             }
         contentPane = root
 
-        content =
+        val content =
             JPanel().apply {
                 border = EmptyBorder(0, 0, 16, 0)
                 layout = MigLayout()
             }
         root.add(content, BorderLayout.CENTER)
 
-        logo =
+        val logo =
             FlatLabel().apply {
                 border = EmptyBorder(0, 0, 0, 16)
-                icon =
-                    ImageIcon(
-                        owner.getIconImages()[0].getScaledInstance(64, 64, Image.SCALE_SMOOTH)
-                    )
+                icon = ImageIcon(owner.iconImages[0].getScaledInstance(64, 64, Image.SCALE_SMOOTH))
                 verticalAlignment = JLabel.TOP
             }
         content.add(logo, "dock west")
 
-        header =
+        val header =
             FlatLabel().apply {
                 styleClass = "h1"
                 text = "Decompiler"
             }
         content.add(header, "wrap")
 
-        version =
+        val version =
             FlatLabel().apply {
                 val properties = Properties()
                 properties.load(javaClass.classLoader.getResourceAsStream("application.properties"))
                 text =
-                    String.format(
-                        languageService.getString("about.version"),
-                        properties.getProperty("version"),
-                    )
+                    languageService
+                        .getString("about.version")
+                        .format(properties.getProperty("version"))
             }
         content.add(version, "wrap")
 
-        copyright =
-            FlatLabel().apply {
-                text = String.format("\u00a9 2022 - %s S\u014Dta", Year.now().value)
-            }
+        val copyright = FlatLabel().apply { text = "© 2022 - ${Year.now().value} Sōta" }
         content.add(copyright, "wrap")
 
-        vm =
+        val vm =
             JPanel().apply {
                 border = BorderFactory.createTitledBorder(languageService.getString("about.vm"))
                 layout = MigLayout()
             }
         content.add(vm, "wrap, gapy 16px")
 
-        vmName = FlatLabel().apply { text = ManagementFactory.getRuntimeMXBean().vmName }
-        vm.add(vmName, "wrap")
+        val runtime = ManagementFactory.getRuntimeMXBean()
+        vm.add(FlatLabel().apply { text = runtime.vmName }, "wrap")
+        vm.add(FlatLabel().apply { text = runtime.vmVendor }, "wrap")
+        vm.add(FlatLabel().apply { text = runtime.vmVersion }, "wrap")
 
-        vmVendor = FlatLabel().apply { text = ManagementFactory.getRuntimeMXBean().vmVendor }
-        vm.add(vmVendor, "wrap")
-
-        vmVersion = FlatLabel().apply { text = ManagementFactory.getRuntimeMXBean().vmVersion }
-        vm.add(vmVersion, "wrap")
-
-        controls =
+        val controls =
             JPanel().apply {
                 layout = BoxLayout(this, BoxLayout.X_AXIS)
                 add(Box.createHorizontalGlue())
             }
         root.add(controls, BorderLayout.SOUTH)
 
-        github =
+        val github =
             FlatButton().apply {
                 isFocusable = false
                 text = "GitHub"
@@ -120,24 +101,22 @@ class AboutView(languageService: LanguageService, windowView: WindowView) : JDia
 
         controls.add(Box.createHorizontalStrut(8))
 
-        ok =
+        val ok =
             FlatButton().apply {
                 text = languageService.getString("about.ok")
                 addActionListener(::onOkAction)
             }
         controls.add(ok)
-        getRootPane().setDefaultButton(ok)
+        rootPane.defaultButton = ok
 
         pack()
         setLocationRelativeTo(owner)
     }
 
-    private fun onGitHubAction(event: ActionEvent?) {
+    private fun onGitHubAction(event: ActionEvent) {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
             Desktop.getDesktop().browse(URI("https://github.com/sotasan/decompiler"))
     }
 
-    private fun onOkAction(event: ActionEvent?) {
-        dispose()
-    }
+    private fun onOkAction(event: ActionEvent) = dispose()
 }

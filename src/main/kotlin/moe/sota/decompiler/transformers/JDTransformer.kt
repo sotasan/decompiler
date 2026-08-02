@@ -13,12 +13,11 @@ class JDTransformer : ITransformer, Loader, Printer {
     override fun transform(fileModel: FileModel): String {
         this.fileModel = fileModel
         builder = StringBuilder()
-        if (fileModel.path.contains("/")) {
-            val pkg = fileModel.path.substring(0, fileModel.path.lastIndexOf('/')).replace('/', '.')
+        if ('/' in fileModel.path) {
+            val pkg = fileModel.path.substringBeforeLast('/').replace('/', '.')
             builder.append("package $pkg;\n\n")
         }
-        val decompiler = ClassFileToJavaSourceDecompiler()
-        decompiler.decompile(this, this, "")
+        ClassFileToJavaSourceDecompiler().decompile(this, this, "")
         return builder.toString()
     }
 

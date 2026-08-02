@@ -4,8 +4,16 @@ import com.formdev.flatlaf.extras.components.FlatScrollPane
 import com.formdev.flatlaf.extras.components.FlatTree
 import java.awt.BorderLayout
 import java.awt.Component
-import java.awt.event.*
-import javax.swing.*
+import java.awt.event.InputEvent
+import java.awt.event.KeyAdapter
+import java.awt.event.KeyEvent
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
+import javax.swing.BorderFactory
+import javax.swing.ImageIcon
+import javax.swing.JPanel
+import javax.swing.JTree
+import javax.swing.ToolTipManager
 import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.DefaultTreeCellRenderer
 import javax.swing.tree.DefaultTreeModel
@@ -15,35 +23,32 @@ import moe.sota.decompiler.models.BaseModel
 import moe.sota.decompiler.models.FileModel
 
 class TreeView(private val tabsController: TabsController) : JPanel(BorderLayout()) {
-    val tree: FlatTree
-    val scrollPane: FlatScrollPane
+    // TODO: only one root node
+    val tree =
+        FlatTree().apply {
+            addKeyListener(TreeKeyListener(this@TreeView))
+            addMouseListener(TreeMouseAdapter(this@TreeView))
+            selectionModel.selectionMode = TreeSelectionModel.SINGLE_TREE_SELECTION
+            cellRenderer = TreeCellRenderer()
+            model = DefaultTreeModel(DefaultMutableTreeNode())
+            isRootVisible = false
+            showsRootHandles = true
+        }
 
     init {
-        // TODO: only one root node
-        tree = FlatTree()
-        tree.addKeyListener(TreeKeyListener(this))
-        tree.addMouseListener(TreeMouseAdapter(this))
-        tree.getSelectionModel().selectionMode = TreeSelectionModel.SINGLE_TREE_SELECTION
-        tree.setCellRenderer(TreeCellRenderer())
-        tree.setModel(DefaultTreeModel(DefaultMutableTreeNode()))
-        tree.setRootVisible(false)
-        tree.setShowsRootHandles(true)
         ToolTipManager.sharedInstance().registerComponent(tree)
 
-        scrollPane = FlatScrollPane()
-        scrollPane.setBorder(BorderFactory.createEmptyBorder())
-        scrollPane.setViewportView(tree)
+        val scrollPane =
+            FlatScrollPane().apply {
+                border = BorderFactory.createEmptyBorder()
+                setViewportView(tree)
+            }
         add(scrollPane)
     }
 
     fun addTab(event: InputEvent) {
-        val path = (event.getSource() as JTree).selectionPath
-        if (path == null) return
-
-        val node = path.lastPathComponent as DefaultMutableTreeNode
-        if (node.getUserObject() == null) return
-
-        val model = node.getUserObject() as BaseModel?
+        val path = (event.source as JTree).selectionPath ?: return
+        val model = (path.lastPathComponent as DefaultMutableTreeNode).userObject
         if (model is FileModel) tabsController.addTab(model)
     }
 }
@@ -60,31 +65,24 @@ private class TreeCellRenderer : DefaultTreeCellRenderer() {
     ): Component? {
         val component =
             super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, focused)
-        val node = value as DefaultMutableTreeNode
-        if (node.getUserObject() is BaseModel) {
-            val model = node.getUserObject() as BaseModel
-            setText(model.name)
-            setIcon(ImageIcon(model.icon))
-            setToolTipText(model.name)
+        val model = (value as DefaultMutableTreeNode).userObject
+        if (model is BaseModel) {
+            text = model.name
+            icon = ImageIcon(model.icon)
+            toolTipText = model.name
         }
         return component
     }
 }
 
 private class TreeMouseAdapter(private val treeView: TreeView) : MouseAdapter() {
-
     override fun mousePressed(event: MouseEvent) {
-        if (event.getClickCount() % 2 == 0) treeView.addTab(event)
+        if (event.clickCount % 2 == 0) treeView.addTab(event)
     }
 }
 
-private class TreeKeyListener(private val treeView: TreeView) : KeyListener {
-
+private class TreeKeyListener(private val treeView: TreeView) : KeyAdapter() {
     override fun keyPressed(keyEvent: KeyEvent) {
         if (keyEvent.extendedKeyCode == KeyEvent.VK_ENTER) treeView.addTab(keyEvent)
     }
-
-    override fun keyReleased(keyEvent: KeyEvent?) {}
-
-    override fun keyTyped(keyEvent: KeyEvent?) {}
 }

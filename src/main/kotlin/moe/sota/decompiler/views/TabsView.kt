@@ -9,12 +9,10 @@ import java.awt.event.MouseEvent
 import javax.swing.BorderFactory
 import javax.swing.Box
 import javax.swing.DefaultComboBoxModel
-import javax.swing.JTabbedPane
 import moe.sota.decompiler.transformers.Transformer
 
 class TabsView : FlatTabbedPane() {
     val comboBox: FlatComboBox<Transformer>
-    val toolBar: FlatToolBar
 
     init {
         isHasFullBorder = true
@@ -23,9 +21,9 @@ class TabsView : FlatTabbedPane() {
         tabLayoutPolicy = SCROLL_TAB_LAYOUT
         tabType = TabType.card
         addMouseListener(TabMouseAdapter())
-        setTabCloseCallback(::onTabClose)
+        setTabCloseCallback { _, tabIndex -> remove(tabIndex) }
 
-        toolBar =
+        val toolBar =
             FlatToolBar().apply {
                 border = BorderFactory.createEmptyBorder(0, 5, 0, 5)
                 add(Box.createHorizontalGlue())
@@ -37,15 +35,11 @@ class TabsView : FlatTabbedPane() {
                 val dimension = Dimension(150, 25)
                 isFocusable = false
                 maximumSize = dimension
-                model = DefaultComboBoxModel<Transformer>(Transformer.entries.toTypedArray())
+                model = DefaultComboBoxModel(Transformer.entries.toTypedArray())
                 preferredSize = dimension
                 selectedItem = Transformer.Vineflower
             }
         toolBar.add(comboBox)
-    }
-
-    private fun onTabClose(tabPane: JTabbedPane?, tabIndex: Int) {
-        remove(tabIndex)
     }
 }
 
@@ -53,13 +47,12 @@ private class TabMouseAdapter : MouseAdapter() {
     private var index = 0
 
     override fun mousePressed(event: MouseEvent) {
-        val tabbedPane = event.getSource() as FlatTabbedPane
-        if (event.getButton() == MouseEvent.BUTTON2)
-            index = tabbedPane.indexAtLocation(event.getX(), event.getY())
+        val tabbedPane = event.source as FlatTabbedPane
+        if (event.button == MouseEvent.BUTTON2) index = tabbedPane.indexAtLocation(event.x, event.y)
     }
 
     override fun mouseReleased(event: MouseEvent) {
-        val tabbedPane = event.getSource() as FlatTabbedPane
-        if (event.getButton() == MouseEvent.BUTTON2 && index != -1) tabbedPane.remove(index)
+        if (event.button == MouseEvent.BUTTON2 && index != -1)
+            (event.source as FlatTabbedPane).remove(index)
     }
 }

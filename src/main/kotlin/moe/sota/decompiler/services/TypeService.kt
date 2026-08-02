@@ -7,7 +7,7 @@ import moe.sota.decompiler.types.ManifestType
 import moe.sota.decompiler.types.Type
 
 object TypeService {
-    private val TYPES = listOf(ClassType(), ImageType(), ManifestType())
+    private val types = listOf(ClassType, ImageType, ManifestType)
 
-    fun getType(fileModel: FileModel): Type? = TYPES.firstOrNull { it.isFormat(fileModel) }
+    fun getType(fileModel: FileModel): Type? = types.firstOrNull { it.isFormat(fileModel) }
 }

@@ -14,7 +14,6 @@ import java.awt.dnd.DropTargetDropEvent
 import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent
 import java.io.File
-import java.util.*
 import javax.swing.BoxLayout
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -25,7 +24,7 @@ import moe.sota.decompiler.services.LoaderService
 class WindowView(menuBar: MenuBar, startView: StartView, tabsView: TabsView, treeView: TreeView) :
     JFrame() {
     val splitPane: FlatSplitPane
-    var macos: JPanel? = null
+    internal var macos: JPanel? = null
 
     init {
         contentPane = startView
@@ -43,7 +42,7 @@ class WindowView(menuBar: MenuBar, startView: StartView, tabsView: TabsView, tre
             Taskbar.isTaskbarSupported() &&
                 Taskbar.getTaskbar().isSupported(Taskbar.Feature.ICON_IMAGE)
         )
-            Taskbar.getTaskbar().setIconImage(image)
+            Taskbar.getTaskbar().iconImage = image
         iconImage = image
 
         splitPane =
@@ -57,12 +56,12 @@ class WindowView(menuBar: MenuBar, startView: StartView, tabsView: TabsView, tre
                 layout = BoxLayout(this, BoxLayout.Y_AXIS)
                 minimumSize = Dimension(100, 0)
             }
-        splitPane.setLeftComponent(panel)
+        splitPane.leftComponent = panel
 
         if (SystemInfo.isMacFullWindowContentSupported) {
-            getRootPane().putClientProperty("apple.awt.fullWindowContent", true)
-            getRootPane().putClientProperty("apple.awt.transparentTitleBar", true)
-            getRootPane().putClientProperty("apple.awt.windowTitleVisible", false)
+            rootPane.putClientProperty("apple.awt.fullWindowContent", true)
+            rootPane.putClientProperty("apple.awt.transparentTitleBar", true)
+            rootPane.putClientProperty("apple.awt.windowTitleVisible", false)
 
             macos =
                 JPanel().apply {
@@ -86,7 +85,7 @@ class WindowView(menuBar: MenuBar, startView: StartView, tabsView: TabsView, tre
 }
 
 private class WindowComponentAdapter(private val windowView: WindowView) : ComponentAdapter() {
-    override fun componentResized(event: ComponentEvent?) {
+    override fun componentResized(event: ComponentEvent) {
         if (SystemInfo.isMacOS && windowView.macos != null)
             windowView.isVisible =
                 windowView.height <
@@ -94,27 +93,30 @@ private class WindowComponentAdapter(private val windowView: WindowView) : Compo
     }
 }
 
+private val EXTENSIONS = listOf(".jar", ".war", ".zip")
+
 private class WindowDropTarget : DropTarget() {
     override fun dragOver(event: DropTargetDragEvent) {
         event.acceptDrag(DnDConstants.ACTION_MOVE)
     }
 
     override fun drop(event: DropTargetDropEvent) {
+        if (!event.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+            event.rejectDrop()
+            return
+        }
+
         event.acceptDrop(DnDConstants.ACTION_MOVE)
 
-        if (event.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
-            val files =
-                event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as MutableList<*>
+        val files = event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<*>
+        val file = files.firstOrNull() as File?
 
-            if (!files.isEmpty()) {
-                val file = files[0] as File
-                val name = file.getName().lowercase(Locale.getDefault())
-
-                if (name.endsWith(".jar") || name.endsWith(".war") || name.endsWith(".zip")) {
-                    LoaderService.load(file)
-                    event.dropComplete(true)
-                }
-            }
+        if (file == null || EXTENSIONS.none { file.name.endsWith(it, ignoreCase = true) }) {
+            event.dropComplete(false)
+            return
         }
+
+        LoaderService.load(file)
+        event.dropComplete(true)
     }
 }

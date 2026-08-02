@@ -16,9 +16,10 @@ class VineflowerTransformer : IFernflowerLogger(), ITransformer, IBytecodeProvid
     override fun transform(fileModel: FileModel): String {
         this.fileModel = fileModel
         // TODO: Refactor
-        val fernflower = Fernflower(this, this, IFernflowerPreferences.getDefaults(), this)
-        fernflower.addSource(File(".class"))
-        fernflower.decompileContext()
+        Fernflower(this, this, IFernflowerPreferences.getDefaults(), this).apply {
+            addSource(File(".class"))
+            decompileContext()
+        }
         return content.replace("   ", "    ")
     }
 
