@@ -3,6 +3,7 @@
 package moe.sota.decompiler
 
 import com.formdev.flatlaf.util.SystemInfo
+import javax.swing.SwingUtilities
 import moe.sota.decompiler.modules.controllersModule
 import moe.sota.decompiler.modules.menusModule
 import moe.sota.decompiler.modules.servicesModule
@@ -18,5 +19,5 @@ fun main(args: Array<String>) {
 
     startKoin { modules(controllersModule, menusModule, servicesModule, viewsModule) }
 
-    Application.run(args)
+    SwingUtilities.invokeLater { Application.run(args) }
 }

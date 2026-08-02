@@ -2,11 +2,9 @@ package moe.sota.decompiler.controllers
 
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
+import java.awt.event.ContainerEvent
+import java.awt.event.ContainerListener
 import javax.swing.ImageIcon
-import javax.swing.event.ChangeEvent
-import javax.swing.event.ChangeListener
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import moe.sota.decompiler.menus.file.FileCloseTab
 import moe.sota.decompiler.models.FileModel
 import moe.sota.decompiler.services.PreferenceService
@@ -20,9 +18,8 @@ import org.koin.core.component.inject
 class TabsController(
     private val tabsView: TabsView,
     private val createTabController: (FileModel) -> TabController,
-) : ActionListener, ChangeListener, KoinComponent {
+) : ActionListener, ContainerListener, KoinComponent {
     private val fileCloseTab: FileCloseTab by inject()
-    private val scope = MainScope()
 
     val transformer: Transformer?
         get() = tabsView.comboBox.selectedItem as Transformer?
@@ -35,7 +32,7 @@ class TabsController(
 
     init {
         tabsView.comboBox.addActionListener(this)
-        tabsView.model.addChangeListener(this)
+        tabsView.addContainerListener(this)
         PreferenceService.preferences.get("transformer", null)?.let {
             tabsView.comboBox.selectedItem = Transformer.valueOf(it)
         }
@@ -43,12 +40,15 @@ class TabsController(
 
     override fun actionPerformed(event: ActionEvent?) {
         PreferenceService.preferences.put("transformer", transformer?.name)
-        controllers
-            .filter { it.fileModel.type is ClassType }
-            .forEach { scope.launch { it.update() } }
+        controllers.filter { it.fileModel.type is ClassType }.forEach { it.update() }
     }
 
-    override fun stateChanged(changeEvent: ChangeEvent?) {
+    override fun componentAdded(event: ContainerEvent) {
+        fileCloseTab.isEnabled = tabsView.tabCount > 0
+    }
+
+    override fun componentRemoved(event: ContainerEvent) {
+        (event.child as? TabView)?.tabController?.dispose()
         fileCloseTab.isEnabled = tabsView.tabCount > 0
     }
 
@@ -60,15 +60,9 @@ class TabsController(
         }
 
         val controller = createTabController(fileModel)
-        val icon = ImageIcon(fileModel.icon)
-        val component = controller.tabView
-        scope.launch {
-            controller.update()
-            if (getController(fileModel) == null) {
-                tabsView.addTab(fileModel.name, icon, component)
-                tabsView.selectedComponent = component
-            }
-        }
+        tabsView.addTab(fileModel.name, ImageIcon(fileModel.icon), controller.tabView)
+        tabsView.selectedComponent = controller.tabView
+        controller.update()
     }
 
     fun closeTab() {
