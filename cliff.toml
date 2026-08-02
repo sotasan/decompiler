@@ -1,0 +1,6 @@
+[changelog]
+body = """
+{% for commit in commits -%}
+- {{ commit.message | upper_first }} by @{{ commit.remote.username | default(value=commit.author.name) }} in {{ commit.id | truncate(length=7, end="") }}
+{% endfor %}
+"""

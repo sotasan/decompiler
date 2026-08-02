@@ -1,4 +1,5 @@
 [tools]
+git-cliff = "latest"
 java = "zulu-26"
 lefthook = "latest"
 
