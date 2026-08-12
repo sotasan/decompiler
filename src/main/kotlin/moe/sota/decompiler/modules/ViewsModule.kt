@@ -7,6 +7,7 @@ import org.koin.dsl.module
 
 val viewsModule = module {
     singleOf(::AboutView)
+    singleOf(::SearchView)
     singleOf(::StartView)
     singleOf(::TabsView)
     singleOf(::TreeView)

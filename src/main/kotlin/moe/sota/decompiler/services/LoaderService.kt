@@ -10,6 +10,7 @@ import kotlinx.coroutines.withContext
 import moe.sota.decompiler.controllers.TabsController
 import moe.sota.decompiler.controllers.TreeController
 import moe.sota.decompiler.controllers.WindowController
+import moe.sota.decompiler.menus.edit.EditFind
 import moe.sota.decompiler.models.ArchiveModel
 import moe.sota.decompiler.models.BaseModel
 import moe.sota.decompiler.models.FileModel
@@ -23,6 +24,8 @@ object LoaderService : KoinComponent {
 
     fun load(file: File) {
         scope.launch {
+            val editFind = get<EditFind>()
+            val searchService = get<SearchService>()
             val tabsController = get<TabsController>()
             val treeController = get<TreeController>()
             val windowController = get<WindowController>()
@@ -45,12 +48,14 @@ object LoaderService : KoinComponent {
                             else packageModel.children.add(FileModel(jar, entry))
                         }
 
+                        searchService.load(archive)
                         archive
                     }
 
                 windowController.activate()
                 tabsController.clearTabs()
                 treeController.setArchive(archive)
+                editFind.setEnabled(true)
             } catch (e: Exception) {
                 e.printStackTrace(System.err)
             } finally {

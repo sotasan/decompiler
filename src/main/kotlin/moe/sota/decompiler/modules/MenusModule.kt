@@ -1,6 +1,8 @@
 package moe.sota.decompiler.modules
 
 import moe.sota.decompiler.menus.MenuBar
+import moe.sota.decompiler.menus.edit.Edit
+import moe.sota.decompiler.menus.edit.EditFind
 import moe.sota.decompiler.menus.file.*
 import moe.sota.decompiler.menus.help.Help
 import moe.sota.decompiler.menus.help.HelpAbout
@@ -8,6 +10,9 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val menusModule = module {
+    singleOf(::Edit)
+    singleOf(::EditFind)
+
     singleOf(::File)
     singleOf(::FileCloseTab)
     singleOf(::FileExit)
