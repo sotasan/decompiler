@@ -6,7 +6,6 @@ import java.awt.BorderLayout
 import java.awt.Component
 import javax.swing.BorderFactory
 import javax.swing.DefaultListModel
-import javax.swing.ImageIcon
 import javax.swing.JDialog
 import javax.swing.JLabel
 import javax.swing.JList
@@ -18,10 +17,12 @@ import javax.swing.border.EmptyBorder
 import moe.sota.decompiler.models.SearchEntry
 import moe.sota.decompiler.services.LanguageService
 
+private val HEADER_BORDER = EmptyBorder(8, 8, 2, 8)
+private val RESULT_BORDER = EmptyBorder(2, 8, 2, 8)
+
 class SearchView(languageService: LanguageService, windowView: WindowView) : JDialog(windowView) {
     val listModel = DefaultListModel<SearchEntry>()
     val list: JList<SearchEntry>
-    val scrollPane: FlatScrollPane
     val textField: FlatTextField
 
     init {
@@ -43,20 +44,34 @@ class SearchView(languageService: LanguageService, windowView: WindowView) : JDi
 
         list =
             JList(listModel).apply {
-                cellRenderer = SearchCellRenderer()
+                cellRenderer = SearchCellRenderer(languageService)
                 selectionMode = ListSelectionModel.SINGLE_SELECTION
             }
 
-        scrollPane =
+        val scrollPane =
             FlatScrollPane().apply {
                 border = BorderFactory.createEmptyBorder()
                 setViewportView(list)
             }
         root.add(scrollPane, BorderLayout.CENTER)
     }
+
+    override fun setVisible(visible: Boolean) {
+        listModel.clear()
+
+        if (visible) {
+            textField.text = ""
+            setSize(maxOf(owner.width * 2 / 5, 400), owner.height / 2)
+            setLocationRelativeTo(owner)
+        }
+
+        super.setVisible(visible)
+        if (visible) textField.requestFocusInWindow()
+    }
 }
 
-private class SearchCellRenderer : JPanel(BorderLayout(8, 0)), ListCellRenderer<SearchEntry> {
+private class SearchCellRenderer(private val languageService: LanguageService) :
+    JPanel(BorderLayout(8, 0)), ListCellRenderer<SearchEntry> {
     private val label = JLabel()
     private val detail = JLabel()
 
@@ -76,15 +91,15 @@ private class SearchCellRenderer : JPanel(BorderLayout(8, 0)), ListCellRenderer<
 
         when (value) {
             is SearchEntry.Header -> {
-                border = EmptyBorder(8, 8, 2, 8)
+                border = HEADER_BORDER
                 label.icon = null
-                label.text = value.text
+                label.text = languageService.getString(value.key)
                 label.foreground = disabled
                 detail.text = null
             }
             is SearchEntry.Result -> {
-                border = EmptyBorder(2, 8, 2, 8)
-                label.icon = ImageIcon(value.fileModel.icon)
+                border = RESULT_BORDER
+                label.icon = value.fileModel.icon
                 label.text = value.label
                 label.foreground = if (selected) list.selectionForeground else list.foreground
                 detail.text = value.detail

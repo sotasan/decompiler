@@ -7,10 +7,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import moe.sota.decompiler.controllers.SearchController
 import moe.sota.decompiler.controllers.TabsController
 import moe.sota.decompiler.controllers.TreeController
 import moe.sota.decompiler.controllers.WindowController
-import moe.sota.decompiler.menus.edit.EditFind
 import moe.sota.decompiler.models.ArchiveModel
 import moe.sota.decompiler.models.BaseModel
 import moe.sota.decompiler.models.FileModel
@@ -24,7 +24,7 @@ object LoaderService : KoinComponent {
 
     fun load(file: File) {
         scope.launch {
-            val editFind = get<EditFind>()
+            val searchController = get<SearchController>()
             val searchService = get<SearchService>()
             val tabsController = get<TabsController>()
             val treeController = get<TreeController>()
@@ -55,7 +55,7 @@ object LoaderService : KoinComponent {
                 windowController.activate()
                 tabsController.clearTabs()
                 treeController.setArchive(archive)
-                editFind.setEnabled(true)
+                searchController.activate()
             } catch (e: Exception) {
                 e.printStackTrace(System.err)
             } finally {

@@ -1,7 +1,7 @@
 package moe.sota.decompiler.models
 
-import java.awt.Image
 import java.awt.Toolkit
+import javax.swing.ImageIcon
 
 abstract class BaseModel(val path: String, directory: Boolean) : Comparable<BaseModel> {
     val children: MutableList<BaseModel> = ArrayList()
@@ -11,13 +11,14 @@ abstract class BaseModel(val path: String, directory: Boolean) : Comparable<Base
             it.substring(it.lastIndexOf('/') + 1)
         }
 
-    var icon: Image? = null
+    var icon: ImageIcon? = null
         private set
 
     fun setIcon(path: String) {
-        icon =
+        val image =
             Toolkit.getDefaultToolkit()
                 .createImage(javaClass.classLoader.getResourceAsStream(path)!!.readAllBytes())
+        icon = ImageIcon(image)
     }
 
     override fun compareTo(other: BaseModel): Int {

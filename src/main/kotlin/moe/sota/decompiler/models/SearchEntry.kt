@@ -1,7 +1,7 @@
 package moe.sota.decompiler.models
 
 sealed class SearchEntry {
-    class Header(val text: String) : SearchEntry()
+    class Header(val key: String) : SearchEntry()
 
     class Result(
         val kind: SearchKind,

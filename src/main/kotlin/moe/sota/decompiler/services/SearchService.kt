@@ -8,15 +8,14 @@ import moe.sota.decompiler.models.BaseModel
 import moe.sota.decompiler.models.FileModel
 import moe.sota.decompiler.models.SearchEntry
 import moe.sota.decompiler.models.SearchKind
+import moe.sota.decompiler.models.SearchSymbol
 import moe.sota.decompiler.types.ClassType
-import moe.sota.decompiler.types.ImageType
 import org.ktorm.database.Database
 import org.ktorm.dsl.and
 import org.ktorm.dsl.asc
 import org.ktorm.dsl.batchInsert
 import org.ktorm.dsl.eq
 import org.ktorm.dsl.from
-import org.ktorm.dsl.innerJoin
 import org.ktorm.dsl.like
 import org.ktorm.dsl.limit
 import org.ktorm.dsl.mapNotNull
@@ -27,7 +26,6 @@ import org.ktorm.schema.Table
 import org.ktorm.schema.int
 import org.ktorm.schema.varchar
 import org.ktorm.support.mysql.MySqlDialect
-import org.objectweb.asm.ClassReader
 
 private const val LIMIT = 10
 private const val MAX_TEXT_SIZE = 1024 * 1024
@@ -39,8 +37,6 @@ private val SYMBOL_KINDS =
 
 private object Files : Table<Nothing>("files") {
     val id = int("id").primaryKey()
-    val path = varchar("path")
-    val name = varchar("name")
     val nameLower = varchar("name_lower")
 }
 
@@ -61,37 +57,32 @@ class SearchService {
             "jdbc:h2:mem:search;DB_CLOSE_DELAY=-1;CASE_INSENSITIVE_IDENTIFIERS=TRUE",
             dialect = MySqlDialect(),
         )
-    private val fileModels = HashMap<Int, FileModel>()
+    private val fileModels = ArrayList<FileModel>()
 
     init {
         execute(
-            "create table if not exists files (" +
-                "id int primary key, path varchar, name varchar, name_lower varchar)",
+            "create table if not exists files (id int primary key, name_lower varchar)",
             "create table if not exists symbols (" +
                 "file_id int, kind varchar, symbol varchar, symbol_lower varchar)",
+            "create index if not exists symbols_kind on symbols (kind, symbol_lower)",
         )
     }
 
     fun load(archive: ArchiveModel) {
         dispose()
 
-        val files = ArrayList<FileModel>()
-        collect(archive, files)
-        if (files.isEmpty()) return
-
-        files.forEachIndexed { id, fileModel -> fileModels[id] = fileModel }
+        collect(archive, fileModels)
+        if (fileModels.isEmpty()) return
 
         database.batchInsert(Files) {
-            for ((id, fileModel) in files.withIndex()) item {
+            for ((id, fileModel) in fileModels.withIndex()) item {
                 set(Files.id, id)
-                set(Files.path, fileModel.path)
-                set(Files.name, fileModel.name)
                 set(Files.nameLower, fileModel.name.lowercase())
             }
         }
 
         val symbols =
-            files
+            fileModels
                 .withIndex()
                 .filter { it.value.type is ClassType }
                 .flatMap { (id, fileModel) ->
@@ -113,30 +104,35 @@ class SearchService {
         if (query.isBlank()) return emptyList()
 
         val pattern = "%${query.lowercase()}%"
-        val files =
-            database
-                .from(Files)
-                .select(Files.id, Files.path, Files.name)
-                .where { Files.nameLower like pattern }
-                .orderBy(Files.nameLower.asc())
-                .limit(LIMIT)
-                .mapNotNull { row ->
-                    result(SearchKind.FILE, row[Files.name]!!, row[Files.path]!!, row[Files.id]!!)
-                }
 
-        return files + SYMBOL_KINDS.flatMap { symbols(it, pattern) }
+        return database.useTransaction {
+            val files =
+                database
+                    .from(Files)
+                    .select(Files.id)
+                    .where { Files.nameLower like pattern }
+                    .orderBy(Files.nameLower.asc())
+                    .limit(LIMIT)
+                    .mapNotNull { row ->
+                        val fileModel = fileModels.getOrNull(row[Files.id]!!)
+                        fileModel?.let {
+                            SearchEntry.Result(SearchKind.FILE, it.name, it.path, it)
+                        }
+                    }
+
+            files + SYMBOL_KINDS.flatMap { symbols(it, pattern) }
+        }
     }
 
     suspend fun searchContents(query: String): List<SearchEntry.Result> {
         if (query.isBlank()) return emptyList()
 
-        val needle = query.lowercase()
         val results = ArrayList<SearchEntry.Result>()
 
-        for (fileModel in fileModels.values.sortedBy { it.path }) {
+        for (fileModel in fileModels) {
             currentCoroutineContext().ensureActive()
             if (results.size >= LIMIT) break
-            if (fileModel.type is ClassType || fileModel.type is ImageType) continue
+            if (fileModel.type?.text == false || fileModel.size > MAX_TEXT_SIZE) continue
 
             val bytes =
                 try {
@@ -145,11 +141,14 @@ class SearchService {
                     e.printStackTrace(System.err)
                     continue
                 }
-            if (bytes.size > MAX_TEXT_SIZE || isBinary(bytes)) continue
+            if (isBinary(bytes)) continue
+
+            val text = String(bytes, StandardCharsets.UTF_8)
+            if (!text.contains(query, ignoreCase = true)) continue
 
             val line =
-                String(bytes, StandardCharsets.UTF_8).lineSequence().withIndex().firstOrNull {
-                    it.value.lowercase().contains(needle)
+                text.lineSequence().withIndex().firstOrNull {
+                    it.value.contains(query, ignoreCase = true)
                 } ?: continue
 
             results.add(
@@ -173,31 +172,20 @@ class SearchService {
     private fun symbols(kind: SearchKind, pattern: String): List<SearchEntry.Result> =
         database
             .from(Symbols)
-            .innerJoin(Files, on = Symbols.fileId eq Files.id)
-            .select(Symbols.fileId, Symbols.symbol, Files.path)
+            .select(Symbols.fileId, Symbols.symbol)
             .where { (Symbols.kind eq kind.name) and (Symbols.symbolLower like pattern) }
             .orderBy(Symbols.symbolLower.asc())
             .limit(LIMIT)
             .mapNotNull { row ->
-                result(kind, row[Symbols.symbol]!!, row[Files.path]!!, row[Symbols.fileId]!!)
+                val fileModel = fileModels.getOrNull(row[Symbols.fileId]!!)
+                fileModel?.let {
+                    SearchEntry.Result(kind, row[Symbols.symbol]!!, it.path, it)
+                }
             }
-
-    private fun result(
-        kind: SearchKind,
-        label: String,
-        detail: String,
-        id: Int,
-    ): SearchEntry.Result? {
-        val fileModel = fileModels[id] ?: return null
-        return SearchEntry.Result(kind, label, detail, fileModel)
-    }
 
     private fun index(fileModel: FileModel): List<SearchSymbol> =
         try {
-            val indexer = SearchIndexer()
-            ClassReader(fileModel.bytes)
-                .accept(indexer, ClassReader.SKIP_DEBUG or ClassReader.SKIP_FRAMES)
-            indexer.symbols
+            indexSymbols(fileModel.bytes)
         } catch (e: Exception) {
             e.printStackTrace(System.err)
             emptyList()

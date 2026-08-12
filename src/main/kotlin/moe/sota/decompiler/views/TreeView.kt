@@ -64,7 +64,7 @@ private class TreeCellRenderer : DefaultTreeCellRenderer() {
         if (node.getUserObject() is BaseModel) {
             val model = node.getUserObject() as BaseModel
             setText(model.name)
-            setIcon(ImageIcon(model.icon))
+            setIcon(model.icon)
             setToolTipText(model.name)
         }
         return component

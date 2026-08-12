@@ -14,16 +14,16 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import moe.sota.decompiler.menus.edit.EditFind
 import moe.sota.decompiler.models.SearchEntry
 import moe.sota.decompiler.models.SearchKind
-import moe.sota.decompiler.services.LanguageService
 import moe.sota.decompiler.services.SearchService
 import moe.sota.decompiler.views.SearchView
 
 private const val DEBOUNCE = 150L
 
 class SearchController(
-    private val languageService: LanguageService,
+    private val editFind: EditFind,
     private val searchService: SearchService,
     private val searchView: SearchView,
     private val tabsController: TabsController,
@@ -38,13 +38,12 @@ class SearchController(
         searchView.textField.document.addDocumentListener(this)
     }
 
+    fun activate() {
+        editFind.isEnabled = true
+    }
+
     fun show() {
-        val owner = searchView.owner
-        searchView.setSize(maxOf(owner.width * 2 / 5, 400), owner.height / 2)
-        searchView.setLocationRelativeTo(owner)
-        searchView.textField.text = ""
         searchView.isVisible = true
-        searchView.textField.requestFocusInWindow()
     }
 
     fun open() {
@@ -89,32 +88,34 @@ class SearchController(
         job?.cancel()
         job = scope.launch {
             delay(DEBOUNCE)
+            if (query.isBlank()) {
+                searchView.listModel.clear()
+                return@launch
+            }
+
             val results = withContext(Dispatchers.IO) { searchService.search(query) }
-            setEntries(query, results, query.isNotBlank())
-            if (query.isBlank()) return@launch
+            setEntries(results, "search.searching")
 
             val contents = withContext(Dispatchers.IO) { searchService.searchContents(query) }
-            setEntries(query, results + contents, false)
+            val all = results + contents
+            setEntries(all, if (all.isEmpty()) "search.empty" else null)
         }
     }
 
-    private fun setEntries(query: String, results: List<SearchEntry.Result>, searching: Boolean) {
-        val listModel = searchView.listModel
-        listModel.clear()
+    private fun setEntries(results: List<SearchEntry.Result>, footer: String?) {
+        val groups = results.groupBy { it.kind }
+        val entries = ArrayList<SearchEntry>()
 
         for (kind in SearchKind.entries) {
-            val group = results.filter { it.kind == kind }
-            if (group.isEmpty()) continue
-
-            listModel.addElement(SearchEntry.Header(languageService.getString(kind.key)))
-            for (result in group) listModel.addElement(result)
+            val group = groups[kind] ?: continue
+            entries.add(SearchEntry.Header(kind.key))
+            entries.addAll(group)
         }
 
-        if (searching)
-            listModel.addElement(SearchEntry.Header(languageService.getString("search.searching")))
-        else if (listModel.isEmpty && query.isNotBlank())
-            listModel.addElement(SearchEntry.Header(languageService.getString("search.empty")))
+        if (footer != null) entries.add(SearchEntry.Header(footer))
 
+        searchView.listModel.clear()
+        searchView.listModel.addAll(entries)
         select(0, 1)
     }
 

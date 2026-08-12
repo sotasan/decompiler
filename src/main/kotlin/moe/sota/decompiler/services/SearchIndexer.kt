@@ -1,21 +1,46 @@
 package moe.sota.decompiler.services
 
 import moe.sota.decompiler.models.SearchKind
+import moe.sota.decompiler.models.SearchSymbol
+import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.FieldVisitor
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 
+private const val CONSTANT_STRING = 8
 private const val MAX_VALUE_LENGTH = 200
 
-class SearchSymbol(val kind: SearchKind, val value: String)
+fun indexSymbols(bytes: ByteArray): List<SearchSymbol> {
+    val reader = ClassReader(bytes)
+    val indexer = SearchIndexer()
+    reader.accept(
+        indexer,
+        ClassReader.SKIP_CODE or ClassReader.SKIP_DEBUG or ClassReader.SKIP_FRAMES,
+    )
 
-class SearchIndexer : ClassVisitor(Opcodes.ASM9) {
-    private val declarations = ArrayList<SearchSymbol>()
-    private val strings = LinkedHashSet<String>()
+    return indexer.declarations + readStrings(reader)
+}
 
-    val symbols: List<SearchSymbol>
-        get() = declarations + strings.map { SearchSymbol(SearchKind.STRING, it) }
+// Reading the constant pool costs the pool's size, while visiting every method body to catch the
+// same constants costs the size of the bytecode.
+private fun readStrings(reader: ClassReader): List<SearchSymbol> {
+    val buffer = CharArray(reader.maxStringLength)
+    val strings = LinkedHashSet<String>()
+
+    for (item in 1..<reader.itemCount) {
+        val offset = reader.getItem(item)
+        if (offset == 0 || reader.readByte(offset - 1) != CONSTANT_STRING) continue
+
+        val value = reader.readConst(item, buffer) as String
+        if (value.isNotBlank()) strings.add(value.take(MAX_VALUE_LENGTH))
+    }
+
+    return strings.map { SearchSymbol(SearchKind.STRING, it) }
+}
+
+private class SearchIndexer : ClassVisitor(Opcodes.ASM9) {
+    val declarations = ArrayList<SearchSymbol>()
 
     override fun visit(
         version: Int,
@@ -36,7 +61,6 @@ class SearchIndexer : ClassVisitor(Opcodes.ASM9) {
         value: Any?,
     ): FieldVisitor? {
         declarations.add(SearchSymbol(SearchKind.FIELD, name))
-        addString(value)
         return null
     }
 
@@ -46,18 +70,10 @@ class SearchIndexer : ClassVisitor(Opcodes.ASM9) {
         descriptor: String?,
         signature: String?,
         exceptions: Array<out String>?,
-    ): MethodVisitor {
+    ): MethodVisitor? {
         if (name != "<init>" && name != "<clinit>")
             declarations.add(SearchSymbol(SearchKind.METHOD, name))
 
-        return object : MethodVisitor(Opcodes.ASM9) {
-            override fun visitLdcInsn(value: Any?) {
-                addString(value)
-            }
-        }
-    }
-
-    private fun addString(value: Any?) {
-        if (value is String && value.isNotBlank()) strings.add(value.take(MAX_VALUE_LENGTH))
+        return null
     }
 }
