@@ -57,7 +57,9 @@ class SearchService {
             "jdbc:h2:mem:search;DB_CLOSE_DELAY=-1;CASE_INSENSITIVE_IDENTIFIERS=TRUE",
             dialect = MySqlDialect(),
         )
-    private val fileModels = ArrayList<FileModel>()
+    // A scan reads this list while a second archive may be replacing it, so loading swaps the
+    // reference instead of clearing the list a scan is walking.
+    @Volatile private var fileModels: List<FileModel> = emptyList()
 
     init {
         execute(
@@ -71,18 +73,21 @@ class SearchService {
     fun load(archive: ArchiveModel) {
         dispose()
 
-        collect(archive, fileModels)
-        if (fileModels.isEmpty()) return
+        val files = ArrayList<FileModel>()
+        collect(archive, files)
+        if (files.isEmpty()) return
+
+        fileModels = files
 
         database.batchInsert(Files) {
-            for ((id, fileModel) in fileModels.withIndex()) item {
+            for ((id, fileModel) in files.withIndex()) item {
                 set(Files.id, id)
                 set(Files.nameLower, fileModel.name.lowercase())
             }
         }
 
         val symbols =
-            fileModels
+            files
                 .withIndex()
                 .filter { it.value.type is ClassType }
                 .flatMap { (id, fileModel) ->
@@ -128,8 +133,9 @@ class SearchService {
         if (query.isBlank()) return emptyList()
 
         val results = ArrayList<SearchEntry.Result>()
+        val files = fileModels
 
-        for (fileModel in fileModels) {
+        for (fileModel in files) {
             currentCoroutineContext().ensureActive()
             if (results.size >= LIMIT) break
             if (fileModel.type?.text == false || fileModel.size > MAX_TEXT_SIZE) continue
@@ -165,7 +171,7 @@ class SearchService {
     }
 
     fun dispose() {
-        fileModels.clear()
+        fileModels = emptyList()
         execute("truncate table files", "truncate table symbols")
     }
 
