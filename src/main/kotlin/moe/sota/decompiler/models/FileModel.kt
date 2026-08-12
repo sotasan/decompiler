@@ -15,4 +15,7 @@ class FileModel(private val jarFile: JarFile, private val jarEntry: JarEntry) :
 
     val bytes: ByteArray
         get() = jarFile.getInputStream(jarEntry).readAllBytes()
+
+    val size: Long
+        get() = jarEntry.size
 }

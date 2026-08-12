@@ -2,7 +2,6 @@ package moe.sota.decompiler.controllers
 
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
-import javax.swing.ImageIcon
 import javax.swing.event.ChangeEvent
 import javax.swing.event.ChangeListener
 import kotlinx.coroutines.MainScope
@@ -53,7 +52,7 @@ class TabsController(
         }
 
         val controller = createTabController(fileModel)
-        val icon = ImageIcon(fileModel.icon)
+        val icon = fileModel.icon
         val component = controller.tabView
         scope.launch {
             controller.update()

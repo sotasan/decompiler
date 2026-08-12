@@ -8,6 +8,7 @@ import org.koin.dsl.module
 
 val controllersModule = module {
     singleOf(::AboutController)
+    singleOf(::SearchController)
     singleOf(::TreeController)
     singleOf(::StartController)
     singleOf(::WindowController)

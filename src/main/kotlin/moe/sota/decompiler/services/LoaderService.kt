@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import moe.sota.decompiler.controllers.SearchController
 import moe.sota.decompiler.controllers.TabsController
 import moe.sota.decompiler.controllers.TreeController
 import moe.sota.decompiler.controllers.WindowController
@@ -23,6 +24,8 @@ object LoaderService : KoinComponent {
 
     fun load(file: File) {
         scope.launch {
+            val searchController = get<SearchController>()
+            val searchService = get<SearchService>()
             val tabsController = get<TabsController>()
             val treeController = get<TreeController>()
             val windowController = get<WindowController>()
@@ -45,12 +48,14 @@ object LoaderService : KoinComponent {
                             else packageModel.children.add(FileModel(jar, entry))
                         }
 
+                        searchService.load(archive)
                         archive
                     }
 
                 windowController.activate()
                 tabsController.clearTabs()
                 treeController.setArchive(archive)
+                searchController.activate()
             } catch (e: Exception) {
                 e.printStackTrace(System.err)
             } finally {
