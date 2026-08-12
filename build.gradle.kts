@@ -32,10 +32,13 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.swing)
     implementation(libs.ktorm.core)
+    implementation(libs.ktorm.support.mysql)
     implementation(libs.miglayout.swing)
     implementation(libs.procyon)
     implementation(libs.rsyntaxtextarea)
     implementation(libs.vineflower)
+
+    testImplementation(kotlin("test"))
 }
 
 spotless {
@@ -62,6 +65,17 @@ tasks {
     }
 
     startScripts { dependsOn(shadowJar) }
+
+    test {
+        useJUnitPlatform()
+        val demoFiles: FileCollection = demoJar
+        inputs.files(demoFiles)
+        jvmArgumentProviders.add(
+            CommandLineArgumentProvider {
+                listOf("-Ddemo.jar=${demoFiles.singleFile.absolutePath}")
+            }
+        )
+    }
 
     named<JavaExec>("run") {
         val demoFiles: FileCollection = demoJar
